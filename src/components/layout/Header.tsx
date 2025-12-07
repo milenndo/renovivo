@@ -52,8 +52,8 @@ const Header = () => {
       <div className="bg-background shadow-sm sticky top-0 z-50">
         <div className="container-custom flex justify-between items-center py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="Renovivo - Every Detail Matters" className="h-20 md:h-24 w-auto" />
+          <Link to="/" className="flex items-center py-1">
+            <img src={logo} alt="Renovivo - Every Detail Matters" className="h-14 md:h-16 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
