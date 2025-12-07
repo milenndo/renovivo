@@ -50,10 +50,10 @@ const Header = () => {
 
       {/* Main header */}
       <div className="bg-background shadow-sm sticky top-0 z-50">
-        <div className="container-custom flex justify-between items-center py-4">
+        <div className="container-custom flex flex-col lg:flex-row justify-between items-center py-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center py-1">
-            <img src={logo} alt="Renovivo - Every Detail Matters" className="h-16 md:h-36 w-auto md:-translate-y-[30%] md:-ml-5" />
+          <Link to="/" className="flex items-center justify-center lg:justify-start w-full lg:w-auto py-1">
+            <img src={logo} alt="Renovivo - Every Detail Matters" className="h-24 md:h-28 lg:h-36 w-auto lg:-translate-y-[30%] lg:-ml-5" />
           </Link>
 
           {/* Desktop Navigation */}
