@@ -5,6 +5,7 @@ import Services from "@/components/home/Services";
 import About from "@/components/home/About";
 import Projects from "@/components/home/Projects";
 import WhyUs from "@/components/home/WhyUs";
+import BlogPreview from "@/components/home/BlogPreview";
 import CTA from "@/components/home/CTA";
 
 const Index = () => {
@@ -40,6 +41,7 @@ const Index = () => {
         <About />
         <Projects />
         <WhyUs />
+        <BlogPreview />
         <CTA />
       </Layout>
     </>
