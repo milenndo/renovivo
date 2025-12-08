@@ -70,7 +70,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Layout */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-end gap-8">
             {/* Logo - far left */}
             <Link to="/" className="flex items-center shrink-0">
               <img src={logo} alt="Renovivo - Every Detail Matters" className="h-32 w-auto" />
