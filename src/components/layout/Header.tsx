@@ -14,6 +14,7 @@ const Header = () => {
     { name: "Услуги", path: "/services" },
     { name: "Цени", path: "/prices" },
     { name: "Портфолио", path: "/portfolio" },
+    { name: "Блог", path: "/blog" },
     { name: "За нас", path: "/about" },
     { name: "Контакти", path: "/contact" },
   ];
