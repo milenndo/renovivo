@@ -1,0 +1,301 @@
+import { Helmet } from "react-helmet-async";
+import Layout from "@/components/layout/Layout";
+import { services } from "@/data/services";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
+import { Phone, Sparkles, Check, ArrowRight, Shield, Droplets, Clock, Palette } from "lucide-react";
+
+const innovativeServices = services.filter(s => s.isInnovative);
+
+const comparisonData = [
+  {
+    feature: "Дебелина",
+    microcement: "2-3 мм",
+    terrazzo: "15-25 мм",
+    flakeFloor: "3-5 мм",
+    stoneCarpet: "8-12 мм"
+  },
+  {
+    feature: "Водоустойчивост",
+    microcement: "Отлична",
+    terrazzo: "Много добра",
+    flakeFloor: "Отлична",
+    stoneCarpet: "Пропусклив"
+  },
+  {
+    feature: "Приложение",
+    microcement: "Интериор",
+    terrazzo: "Интериор",
+    flakeFloor: "Интериор/Гаражи",
+    stoneCarpet: "Екстериор"
+  },
+  {
+    feature: "Подово отопление",
+    microcement: "Да",
+    terrazzo: "Да",
+    flakeFloor: "Да",
+    stoneCarpet: "Да"
+  },
+  {
+    feature: "Издръжливост",
+    microcement: "15+ години",
+    terrazzo: "75+ години",
+    flakeFloor: "10+ години",
+    stoneCarpet: "20+ години"
+  },
+  {
+    feature: "Време за полагане",
+    microcement: "5-7 дни",
+    terrazzo: "7-10 дни",
+    flakeFloor: "2-3 дни",
+    stoneCarpet: "1-2 дни"
+  }
+];
+
+const benefits = [
+  {
+    icon: Shield,
+    title: "Дълготрайност",
+    description: "Издръжливи покрития с гаранция до 75 години"
+  },
+  {
+    icon: Palette,
+    title: "Безкрайни възможности",
+    description: "Над 50 цвята и текстури за уникален дизайн"
+  },
+  {
+    icon: Droplets,
+    title: "Лесна поддръжка",
+    description: "Безшевни повърхности - лесно почистване"
+  },
+  {
+    icon: Clock,
+    title: "Бързо полагане",
+    description: "От 1 до 10 дни в зависимост от покритието"
+  }
+];
+
+const InnovativeCoatings = () => {
+  return (
+    <Layout>
+      <Helmet>
+        <title>Иновативни покрития | Renovivo</title>
+        <meta name="description" content="Микроцимент, Terrazzo, Flake Floor и Каменен килим - модерни безшевни покрития за вашия дом и бизнес." />
+      </Helmet>
+
+      {/* Hero Section */}
+      <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary/10 via-background to-accent/10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm">
+              <Sparkles className="w-4 h-4 mr-2" />
+              Иновативни решения
+            </Badge>
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+              Модерни покрития за
+              <span className="text-primary"> бъдещето</span>
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Открийте иновативни безшевни покрития, които трансформират пространства с минималистична елегантност и изключителна издръжливост.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" asChild>
+                <a href="tel:+359888123456">
+                  <Phone className="mr-2 h-5 w-5" />
+                  Безплатна консултация
+                </a>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <a href="#comparison">
+                  Сравни покрития
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {benefits.map((benefit, index) => (
+              <Card key={index} className="text-center border-none bg-background/50 backdrop-blur">
+                <CardContent className="pt-6">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                    <benefit.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">{benefit.title}</h3>
+                  <p className="text-sm text-muted-foreground">{benefit.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Gallery */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Нашите иновативни покрития
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Всяко покритие има своите уникални характеристики и приложения
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {innovativeServices.map((service) => (
+              <Card key={service.id} className="group overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <Badge className="absolute top-4 left-4 bg-primary">
+                    <Sparkles className="w-3 h-3 mr-1" />
+                    Иновация
+                  </Badge>
+                </div>
+                <CardContent className="p-6">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <service.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground mb-2">{service.title}</h3>
+                      <p className="text-muted-foreground text-sm">{service.shortDescription}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-2 mb-6">
+                    {service.features.slice(0, 4).map((feature, index) => (
+                      <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                        <span className="truncate">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <Button variant="outline" className="w-full group/btn" asChild>
+                    <Link to={`/services/${service.id}`}>
+                      Научете повече
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Comparison Table */}
+      <section id="comparison" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Сравнение на покрития
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Изберете идеалното покритие според вашите нужди
+            </p>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full bg-background rounded-lg overflow-hidden shadow-lg">
+              <thead>
+                <tr className="bg-primary text-primary-foreground">
+                  <th className="px-6 py-4 text-left font-semibold">Характеристика</th>
+                  <th className="px-6 py-4 text-center font-semibold">Микроцимент</th>
+                  <th className="px-6 py-4 text-center font-semibold">Terrazzo</th>
+                  <th className="px-6 py-4 text-center font-semibold">Flake Floor</th>
+                  <th className="px-6 py-4 text-center font-semibold">Каменен килим</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonData.map((row, index) => (
+                  <tr key={index} className={index % 2 === 0 ? "bg-muted/30" : "bg-background"}>
+                    <td className="px-6 py-4 font-medium text-foreground">{row.feature}</td>
+                    <td className="px-6 py-4 text-center text-muted-foreground">{row.microcement}</td>
+                    <td className="px-6 py-4 text-center text-muted-foreground">{row.terrazzo}</td>
+                    <td className="px-6 py-4 text-center text-muted-foreground">{row.flakeFloor}</td>
+                    <td className="px-6 py-4 text-center text-muted-foreground">{row.stoneCarpet}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Галерия проекти
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Вижте как иновативните покрития трансформират пространства
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {innovativeServices.flatMap(service => 
+              service.gallery.map((img, index) => (
+                <div 
+                  key={`${service.id}-${index}`} 
+                  className="relative aspect-square rounded-lg overflow-hidden group cursor-pointer"
+                >
+                  <img
+                    src={img}
+                    alt={`${service.title} галерия`}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-colors duration-300 flex items-center justify-center">
+                    <Badge className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {service.title}
+                    </Badge>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Готови за иновация?
+          </h2>
+          <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-8">
+            Свържете се с нас за безплатна консултация и оферта за вашия проект с иновативни покрития.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" variant="secondary" asChild>
+              <a href="tel:+359888123456">
+                <Phone className="mr-2 h-5 w-5" />
+                Обадете се сега
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
+              <Link to="/contact">
+                Форма за контакт
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default InnovativeCoatings;

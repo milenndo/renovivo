@@ -10,6 +10,7 @@ const Header = () => {
 
   const navLinks = [
     { name: "Начало", path: "/" },
+    { name: "Иновации", path: "/innovative-coatings" },
     { name: "Услуги", path: "/services" },
     { name: "Портфолио", path: "/portfolio" },
     { name: "За нас", path: "/about" },
