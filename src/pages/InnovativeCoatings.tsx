@@ -182,48 +182,103 @@ const InnovativeCoatings = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {innovativeServices.map((service) => (
-              <Card key={service.id} className="group overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300">
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <Badge className="absolute top-4 left-4 bg-primary">
-                    <Sparkles className="w-3 h-3 mr-1" />
-                    Иновация
-                  </Badge>
-                </div>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <service.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-foreground mb-2">{service.title}</h3>
-                      <p className="text-muted-foreground text-sm">{service.shortDescription}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-2 mb-6">
-                    {service.features.slice(0, 4).map((feature, index) => (
-                      <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <Check className="w-4 h-4 text-primary flex-shrink-0" />
-                        <span className="truncate">{feature}</span>
+            {innovativeServices.map((service) => {
+              // Technical specs for blueprint overlay
+              const techSpecs: Record<string, { thickness: string; adhesion: string; grade: string; durability: string }> = {
+                microcement: { thickness: "2-3mm", adhesion: "High", grade: "A+", durability: "15+ yrs" },
+                terrazzo: { thickness: "15-25mm", adhesion: "Very High", grade: "A++", durability: "75+ yrs" },
+                "flake-floor": { thickness: "3-5mm", adhesion: "High", grade: "A+", durability: "10+ yrs" },
+                "stone-carpet": { thickness: "8-12mm", adhesion: "Medium", grade: "B+", durability: "20+ yrs" },
+              };
+              const specs = techSpecs[service.id] || { thickness: "3mm", adhesion: "High", grade: "A+", durability: "10+ yrs" };
+
+              return (
+                <Card key={service.id} className="group overflow-hidden border-border/50 hover:border-primary/50 transition-all duration-300">
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    
+                    {/* Technical Blueprint Overlay - appears on hover */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                      {/* Grid overlay */}
+                      <div 
+                        className="absolute inset-0"
+                        style={{
+                          backgroundImage: `
+                            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+                          `,
+                          backgroundSize: '30px 30px'
+                        }}
+                      />
+                      {/* Gradient overlay for readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/30 to-transparent" />
+                      
+                      {/* Technical specs in monospace font */}
+                      <div className="absolute bottom-4 left-4 right-4 font-mono text-xs text-primary-foreground/90 space-y-1">
+                        <div className="flex justify-between border-b border-primary-foreground/20 pb-1">
+                          <span className="opacity-70">THICKNESS:</span>
+                          <span className="font-medium">{specs.thickness}</span>
+                        </div>
+                        <div className="flex justify-between border-b border-primary-foreground/20 pb-1">
+                          <span className="opacity-70">ADHESION:</span>
+                          <span className="font-medium">{specs.adhesion}</span>
+                        </div>
+                        <div className="flex justify-between border-b border-primary-foreground/20 pb-1">
+                          <span className="opacity-70">CLASS:</span>
+                          <span className="font-medium text-primary">{specs.grade}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="opacity-70">DURABILITY:</span>
+                          <span className="font-medium">{specs.durability}</span>
+                        </div>
                       </div>
-                    ))}
+                      
+                      {/* Corner technical markers */}
+                      <div className="absolute top-4 right-4 font-mono text-[10px] text-primary-foreground/60 text-right">
+                        <div>REF: {service.id.toUpperCase()}</div>
+                        <div>SPEC v2.0</div>
+                      </div>
+                    </div>
+                    
+                    <Badge className="absolute top-4 left-4 bg-primary z-10">
+                      <Sparkles className="w-3 h-3 mr-1" />
+                      Иновация
+                    </Badge>
                   </div>
-                  
-                  <Button variant="outline" className="w-full group/btn" asChild>
-                    <Link to={`/services/${service.id}`}>
-                      Научете повече
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <service.icon className="w-6 h-6 text-primary" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-foreground mb-2">{service.title}</h3>
+                        <p className="text-muted-foreground text-sm">{service.shortDescription}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-2 mb-6">
+                      {service.features.slice(0, 4).map((feature, index) => (
+                        <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                          <span className="truncate">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <Button variant="outline" className="w-full" asChild>
+                      <Link to={`/services/${service.id}`}>
+                        Научете повече
+                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
