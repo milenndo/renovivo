@@ -110,6 +110,67 @@ const ServiceDetail = () => {
                   </div>
                 </div>
 
+                {/* VS Tiles Comparison - only for innovative services */}
+                {service.vsTiles && (
+                  <div className="space-y-8">
+                    <h2 className="text-2xl font-bold">Защо да изберете {service.title} вместо плочки?</h2>
+                    
+                    {/* Advantages */}
+                    <div className="bg-green-50 dark:bg-green-950/20 rounded-xl p-6">
+                      <h3 className="font-bold text-green-700 dark:text-green-400 mb-4 flex items-center gap-2">
+                        <Check className="h-5 w-5" />
+                        Предимства пред плочките
+                      </h3>
+                      <ul className="space-y-2">
+                        {service.vsTiles.advantages.map((adv, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                            <span>{adv}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Disadvantages */}
+                    <div className="bg-amber-50 dark:bg-amber-950/20 rounded-xl p-6">
+                      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-4">Какво да имате предвид</h3>
+                      <ul className="space-y-2">
+                        {service.vsTiles.disadvantages.map((dis, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm">
+                            <span className="text-amber-600">•</span>
+                            <span>{dis}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Comparison Table */}
+                    <div>
+                      <h3 className="font-bold mb-4">Детайлно сравнение</h3>
+                      <div className="overflow-x-auto rounded-xl border">
+                        <table className="w-full text-sm">
+                          <thead className="bg-muted">
+                            <tr>
+                              <th className="px-4 py-3 text-left font-semibold">Аспект</th>
+                              <th className="px-4 py-3 text-left font-semibold text-primary">{service.title}</th>
+                              <th className="px-4 py-3 text-left font-semibold">Плочки</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {service.vsTiles.comparison.map((row, i) => (
+                              <tr key={i} className={i % 2 === 0 ? "bg-background" : "bg-muted/30"}>
+                                <td className="px-4 py-3 font-medium">{row.aspect}</td>
+                                <td className="px-4 py-3 text-primary">{row.innovative}</td>
+                                <td className="px-4 py-3 text-muted-foreground">{row.tiles}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Gallery */}
                 <div>
                   <h2 className="text-2xl font-bold mb-6">Галерия</h2>
