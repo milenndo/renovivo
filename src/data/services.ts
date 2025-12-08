@@ -1,4 +1,4 @@
-import { Home, Bath, ChefHat, Paintbrush, Layers, Wrench, Zap, Droplets } from "lucide-react";
+import { Home, Bath, ChefHat, Paintbrush, Layers, Wrench, Zap, Droplets, Square, Sparkles, Hexagon, Mountain } from "lucide-react";
 
 // Import images
 import fullRenovationImg from "@/assets/images/services/full-renovation.jpg";
@@ -9,6 +9,10 @@ import flooringImg from "@/assets/images/services/flooring.jpg";
 import electricalImg from "@/assets/images/services/electrical.jpg";
 import plumbingImg from "@/assets/images/services/plumbing.jpg";
 import smallRepairsImg from "@/assets/images/services/small-repairs.jpg";
+import microcementImg from "@/assets/images/services/microcement.jpg";
+import terrazzoImg from "@/assets/images/services/terrazzo.jpg";
+import flakeFloorImg from "@/assets/images/services/flake-floor.jpg";
+import stoneCarpetImg from "@/assets/images/services/stone-carpet.jpg";
 
 export interface Service {
   id: string;
@@ -158,6 +162,74 @@ export const services: Service[] = [
     ],
     image: smallRepairsImg,
     gallery: [smallRepairsImg, electricalImg, plumbingImg],
+  },
+  {
+    id: "microcement",
+    icon: Square,
+    title: "Микроцимент",
+    shortDescription: "Иновативно безшевно покритие за стени и подове с индустриален минималистичен вид.",
+    fullDescription: "Микроциментът е съвременно декоративно покритие с дебелина 2-3 мм, което се полага директно върху съществуващи повърхности. Създава елегантен безшевен ефект, идеален за модерни интериори. Изключително издръжлив, водоустойчив и лесен за поддръжка.",
+    features: ["Безшевна повърхност", "Водоустойчивост", "Приложение върху стени и подове", "Над 50 цветови варианта", "Устойчивост на натоварване", "Съвместимост с подово отопление", "Минимална поддръжка", "Дълготрайност над 20 години"],
+    process: [
+      { step: 1, title: "Подготовка", description: "Почистване и грундиране на основата." },
+      { step: 2, title: "Първи слой", description: "Нанасяне на базов слой микроцимент." },
+      { step: 3, title: "Втори слой", description: "Финишен слой за текстура и цвят." },
+      { step: 4, title: "Запечатване", description: "Нанасяне на защитен лак." },
+      { step: 5, title: "Полиране", description: "Финално полиране за перфектен завършек." },
+    ],
+    image: microcementImg,
+    gallery: [microcementImg, bathroomImg, kitchenImg],
+  },
+  {
+    id: "terrazzo",
+    icon: Sparkles,
+    title: "Terrazzo",
+    shortDescription: "Класическа венецианска техника с модерен прочит - мозаечни подове от мрамор и камък.",
+    fullDescription: "Terrazzo е луксозно подово покритие с вековна традиция от Венеция. Съчетава мраморни, гранитни или стъклени парчета в циментова или епоксидна основа. Резултатът е уникален, издръжлив и изключително красив под, който може да се персонализира напълно.",
+    features: ["Уникален дизайн за всеки проект", "Безкрайни цветови комбинации", "Изключителна издръжливост", "Еко-приятелски материали", "Лесна поддръжка", "Антиалергичен", "Съвместим с подово отопление", "Дълготрайност над 75 години"],
+    process: [
+      { step: 1, title: "Дизайн", description: "Избор на камъни, цветове и шарки." },
+      { step: 2, title: "Подготовка", description: "Изравняване и грундиране на основата." },
+      { step: 3, title: "Полагане", description: "Изливане на смес с декоративни камъни." },
+      { step: 4, title: "Шлифоване", description: "Многоетапно шлифоване за гладка повърхност." },
+      { step: 5, title: "Полиране", description: "Финално полиране и запечатване." },
+    ],
+    image: terrazzoImg,
+    gallery: [terrazzoImg, flooringImg, fullRenovationImg],
+  },
+  {
+    id: "flake-floor",
+    icon: Hexagon,
+    title: "Flake Floor",
+    shortDescription: "Декоративно епоксидно покритие с флейки - идеално за гаражи, складове и търговски площи.",
+    fullDescription: "Flake Floor е високоустойчиво епоксидно подово покритие с декоративни цветни флейки (люспи). Перфектно за гаражи, складове, магазини и индустриални помещения. Комбинира изключителна здравина с атрактивен външен вид и антихлъзгащи свойства.",
+    features: ["Екстремна устойчивост на натоварване", "Химическа устойчивост", "Антихлъзгаща повърхност", "Лесно почистване", "UV стабилност", "Богата цветова гама", "Бързо изсъхване", "Гаранция 10+ години"],
+    process: [
+      { step: 1, title: "Подготовка", description: "Шлайфане и почистване на бетона." },
+      { step: 2, title: "Грунд", description: "Нанасяне на епоксиден грунд." },
+      { step: 3, title: "Базов слой", description: "Полагане на цветен епоксиден слой." },
+      { step: 4, title: "Флейки", description: "Разпръскване на декоративни флейки." },
+      { step: 5, title: "Топ слой", description: "Финишно полиуретаново покритие." },
+    ],
+    image: flakeFloorImg,
+    gallery: [flakeFloorImg, fullRenovationImg, electricalImg],
+  },
+  {
+    id: "stone-carpet",
+    icon: Mountain,
+    title: "Каменен килим",
+    shortDescription: "Естествено каменно покритие с отлична дренажна способност за тераси и екстериор.",
+    fullDescription: "Каменният килим е декоративно покритие от естествени заоблени камъчета, свързани с прозрачна смола. Създава елегантна, издръжлива и напълно водопропусклива повърхност. Идеален за тераси, балкони, алеи, басейни и входни зони.",
+    features: ["Естествен природен вид", "Отлична дренажност", "UV устойчивост", "Морозоустойчивост", "Антихлъзгаща повърхност", "Богата цветова палитра", "Екологично чист", "Минимална поддръжка"],
+    process: [
+      { step: 1, title: "Подготовка", description: "Почистване и грундиране на основата." },
+      { step: 2, title: "Смесване", description: "Смесване на камъчета със смола." },
+      { step: 3, title: "Полагане", description: "Разстилане и изравняване на материала." },
+      { step: 4, title: "Уплътняване", description: "Валиране за плътна структура." },
+      { step: 5, title: "Втвърдяване", description: "Пълно втвърдяване за 24 часа." },
+    ],
+    image: stoneCarpetImg,
+    gallery: [stoneCarpetImg, flooringImg, fullRenovationImg],
   },
 ];
 
