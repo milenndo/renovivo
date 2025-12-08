@@ -84,10 +84,13 @@ const Services = () => {
         {/* Innovative Services Section - Blue Ocean */}
         <div className="mb-20">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
+            <Link 
+              to="/innovative-coatings"
+              className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4 hover:bg-primary/20 transition-colors"
+            >
               <Sparkle className="h-4 w-4" />
               <span className="font-medium text-sm uppercase tracking-wider">Иновативни решения</span>
-            </div>
+            </Link>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
               Специализирани декоративни покрития
             </h2>
