@@ -43,6 +43,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { name: "Начало", path: "/" },
+                { name: "Иновации", path: "/innovative-coatings" },
                 { name: "Услуги", path: "/services" },
                 { name: "Портфолио", path: "/portfolio" },
                 { name: "За нас", path: "/about" },
@@ -65,19 +66,19 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-6">Услуги</h3>
             <ul className="space-y-3">
               {[
-                "Цялостен ремонт",
-                "Ремонт на баня",
-                "Ремонт на кухня",
-                "Боядисване",
-                "Подови настилки",
-                "Електро и ВиК",
+                { name: "Микроцимент", path: "/services/microcement" },
+                { name: "Тераццо", path: "/services/terrazzo" },
+                { name: "Флейк подове", path: "/services/flake-floor" },
+                { name: "Каменен килим", path: "/services/stone-carpet" },
+                { name: "Цялостен ремонт", path: "/services/full-renovation" },
+                { name: "Ремонт на баня", path: "/services/bathroom" },
               ].map((service) => (
-                <li key={service}>
+                <li key={service.path}>
                   <Link
-                    to="/services"
+                    to={service.path}
                     className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
-                    {service}
+                    {service.name}
                   </Link>
                 </li>
               ))}

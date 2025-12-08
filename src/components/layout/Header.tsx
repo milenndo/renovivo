@@ -51,33 +51,48 @@ const Header = () => {
 
       {/* Main header */}
       <div className="bg-background shadow-sm sticky top-0 z-50">
-        <div className="container-custom flex flex-col lg:flex-row justify-between items-center py-4">
-          {/* Logo */}
-          <Link to="/" className="flex items-center justify-center lg:justify-start w-full lg:w-auto py-1">
-            <img src={logo} alt="Renovivo - Every Detail Matters" className="h-24 md:h-28 lg:h-32 w-auto" />
-          </Link>
+        <div className="container-custom py-4">
+          {/* Mobile Layout */}
+          <div className="flex lg:hidden items-center justify-between">
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="Renovivo - Every Detail Matters" className="h-28 w-auto" />
+            </Link>
+            <button
+              className="p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+            </button>
+          </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`text-base font-medium transition-colors relative py-2 ${
-                  isActive(link.path)
-                    ? "text-primary"
-                    : "text-foreground hover:text-primary"
-                } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${
-                  isActive(link.path) ? "after:scale-x-100" : ""
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
+          {/* Desktop Layout */}
+          <div className="hidden lg:flex items-center justify-between">
+            {/* Logo - far left */}
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="Renovivo - Every Detail Matters" className="h-32 w-auto" />
+            </Link>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
+            {/* Navigation */}
+            <nav className="flex items-center gap-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`text-base font-medium transition-colors relative py-2 ${
+                    isActive(link.path)
+                      ? "text-primary"
+                      : "text-foreground hover:text-primary"
+                  } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${
+                    isActive(link.path) ? "after:scale-x-100" : ""
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+
+            {/* CTA Button */}
             <a href="tel:+359888123456">
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
                 <Phone className="h-4 w-4 mr-2" />
@@ -85,15 +100,6 @@ const Header = () => {
               </Button>
             </a>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
         </div>
 
         {/* Mobile Navigation */}
