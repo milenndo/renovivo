@@ -9,13 +9,149 @@ const corsHeaders = {
 // BNB fixed rate: 1 EUR = 1.95583 BGN
 const BGN_TO_EUR = 1.95583;
 
+// Rate limiting configuration
+const RATE_LIMIT_WINDOW_MS = 60000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 15; // 15 requests per minute
+const rateLimitStore = new Map<string, { count: number; resetTime: number }>();
+
+// Message validation constants
+const MAX_MESSAGE_LENGTH = 2000;
+const MAX_MESSAGES_COUNT = 20;
+const VALID_ROLES = ["user", "assistant", "system"];
+
+// Clean up old rate limit entries periodically
+function cleanupRateLimitStore() {
+  const now = Date.now();
+  for (const [key, value] of rateLimitStore.entries()) {
+    if (now > value.resetTime) {
+      rateLimitStore.delete(key);
+    }
+  }
+}
+
+// Get client IP for rate limiting
+function getClientIP(req: Request): string {
+  const forwarded = req.headers.get("x-forwarded-for");
+  if (forwarded) {
+    return forwarded.split(",")[0].trim();
+  }
+  const realIP = req.headers.get("x-real-ip");
+  if (realIP) {
+    return realIP;
+  }
+  return "unknown";
+}
+
+// Check rate limit
+function checkRateLimit(clientIP: string): { allowed: boolean; retryAfter?: number } {
+  cleanupRateLimitStore();
+  const now = Date.now();
+  const record = rateLimitStore.get(clientIP);
+
+  if (!record || now > record.resetTime) {
+    rateLimitStore.set(clientIP, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+    return { allowed: true };
+  }
+
+  if (record.count >= MAX_REQUESTS_PER_WINDOW) {
+    const retryAfter = Math.ceil((record.resetTime - now) / 1000);
+    return { allowed: false, retryAfter };
+  }
+
+  record.count++;
+  return { allowed: true };
+}
+
+// Validate message structure
+interface ChatMessage {
+  role: string;
+  content: string;
+}
+
+function validateMessages(messages: unknown): { valid: boolean; error?: string; messages?: ChatMessage[] } {
+  if (!Array.isArray(messages)) {
+    return { valid: false, error: "Messages must be an array" };
+  }
+
+  if (messages.length === 0) {
+    return { valid: false, error: "Messages array cannot be empty" };
+  }
+
+  if (messages.length > MAX_MESSAGES_COUNT) {
+    return { valid: false, error: `Too many messages. Maximum allowed: ${MAX_MESSAGES_COUNT}` };
+  }
+
+  const validatedMessages: ChatMessage[] = [];
+
+  for (let i = 0; i < messages.length; i++) {
+    const msg = messages[i];
+
+    if (typeof msg !== "object" || msg === null) {
+      return { valid: false, error: `Message at index ${i} must be an object` };
+    }
+
+    const { role, content } = msg as Record<string, unknown>;
+
+    if (typeof role !== "string" || !VALID_ROLES.includes(role)) {
+      return { valid: false, error: `Invalid role at index ${i}. Must be one of: ${VALID_ROLES.join(", ")}` };
+    }
+
+    if (typeof content !== "string") {
+      return { valid: false, error: `Content at index ${i} must be a string` };
+    }
+
+    if (content.length > MAX_MESSAGE_LENGTH) {
+      return { valid: false, error: `Message at index ${i} exceeds maximum length of ${MAX_MESSAGE_LENGTH} characters` };
+    }
+
+    // Sanitize content - trim whitespace
+    validatedMessages.push({
+      role,
+      content: content.trim()
+    });
+  }
+
+  return { valid: true, messages: validatedMessages };
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { messages } = await req.json();
+    // Rate limiting check
+    const clientIP = getClientIP(req);
+    const rateLimitResult = checkRateLimit(clientIP);
+
+    if (!rateLimitResult.allowed) {
+      console.log(`Rate limit exceeded for IP: ${clientIP}`);
+      return new Response(
+        JSON.stringify({ error: "Твърде много заявки. Моля, опитайте отново след малко." }),
+        {
+          status: 429,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+            "Retry-After": String(rateLimitResult.retryAfter || 60),
+          },
+        }
+      );
+    }
+
+    const body = await req.json();
+    
+    // Validate messages
+    const validation = validateMessages(body.messages);
+    if (!validation.valid) {
+      console.log(`Validation error: ${validation.error}`);
+      return new Response(
+        JSON.stringify({ error: validation.error }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const messages = validation.messages!;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     
     if (!LOVABLE_API_KEY) {
