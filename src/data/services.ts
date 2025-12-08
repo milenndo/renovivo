@@ -1,5 +1,15 @@
 import { Home, Bath, ChefHat, Paintbrush, Layers, Wrench, Zap, Droplets } from "lucide-react";
 
+// Import images
+import fullRenovationImg from "@/assets/images/services/full-renovation.jpg";
+import bathroomImg from "@/assets/images/services/bathroom.jpg";
+import kitchenImg from "@/assets/images/services/kitchen.jpg";
+import paintingImg from "@/assets/images/services/painting.jpg";
+import flooringImg from "@/assets/images/services/flooring.jpg";
+import electricalImg from "@/assets/images/services/electrical.jpg";
+import plumbingImg from "@/assets/images/services/plumbing.jpg";
+import smallRepairsImg from "@/assets/images/services/small-repairs.jpg";
+
 export interface Service {
   id: string;
   icon: typeof Home;
@@ -27,12 +37,8 @@ export const services: Service[] = [
       { step: 4, title: "Изпълнение", description: "Професионално изпълнение с ежедневен контрол." },
       { step: 5, title: "Предаване", description: "Финална проверка и почистване." },
     ],
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
-    ],
+    image: fullRenovationImg,
+    gallery: [fullRenovationImg, bathroomImg, kitchenImg],
   },
   {
     id: "bathroom",
@@ -48,12 +54,8 @@ export const services: Service[] = [
       { step: 4, title: "Инсталации", description: "ВиК и електро инсталации." },
       { step: 5, title: "Довършване", description: "Плочки, сантехника и финални детайли." },
     ],
-    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=800&q=80",
-    ],
+    image: bathroomImg,
+    gallery: [bathroomImg, plumbingImg, electricalImg],
   },
   {
     id: "kitchen",
@@ -69,12 +71,8 @@ export const services: Service[] = [
       { step: 4, title: "Монтаж", description: "Монтаж на мебели и плотове." },
       { step: 5, title: "Завършване", description: "Уреди, осветление и аксесоари." },
     ],
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600566752734-2a0cd66c42b9?auto=format&fit=crop&w=800&q=80",
-    ],
+    image: kitchenImg,
+    gallery: [kitchenImg, electricalImg, plumbingImg],
   },
   {
     id: "painting",
@@ -90,12 +88,8 @@ export const services: Service[] = [
       { step: 4, title: "Детайли", description: "Первази, рамки и корнизи." },
       { step: 5, title: "Финализиране", description: "Почистване и проверка." },
     ],
-    image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80",
-    ],
+    image: paintingImg,
+    gallery: [paintingImg, fullRenovationImg, flooringImg],
   },
   {
     id: "flooring",
@@ -111,12 +105,8 @@ export const services: Service[] = [
       { step: 4, title: "Монтаж", description: "Професионално полагане." },
       { step: 5, title: "Довършване", description: "Первази и преходи." },
     ],
-    image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
-    ],
+    image: flooringImg,
+    gallery: [flooringImg, fullRenovationImg, paintingImg],
   },
   {
     id: "electrical",
@@ -132,12 +122,8 @@ export const services: Service[] = [
       { step: 4, title: "Аксесоари", description: "Контакти, ключове, осветление." },
       { step: 5, title: "Тестване", description: "Проверка и сертификат." },
     ],
-    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
-    ],
+    image: electricalImg,
+    gallery: [electricalImg, fullRenovationImg, kitchenImg],
   },
   {
     id: "plumbing",
@@ -153,12 +139,8 @@ export const services: Service[] = [
       { step: 4, title: "Монтаж", description: "Полагане на нови тръби." },
       { step: 5, title: "Тестване", description: "Проверка за течове." },
     ],
-    image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=80",
-    ],
+    image: plumbingImg,
+    gallery: [plumbingImg, bathroomImg, kitchenImg],
   },
   {
     id: "small-repairs",
@@ -174,12 +156,8 @@ export const services: Service[] = [
       { step: 4, title: "Изпълнение", description: "Бързо и качествено." },
       { step: 5, title: "Готово", description: "Почистваме след себе си." },
     ],
-    image: "https://images.unsplash.com/photo-1581783898377-1c85bf937427?auto=format&fit=crop&w=800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1581783898377-1c85bf937427?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
-    ],
+    image: smallRepairsImg,
+    gallery: [smallRepairsImg, electricalImg, plumbingImg],
   },
 ];
 

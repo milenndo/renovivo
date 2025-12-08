@@ -2,6 +2,8 @@ import { Helmet } from "react-helmet-async";
 import { Check, Award, Users, Shield, Target, Heart } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
+import aboutTeamImg from "@/assets/images/about-team.jpg";
+import qualityWorkImg from "@/assets/images/quality-work.jpg";
 
 const values = [
   {
@@ -67,7 +69,7 @@ const AboutPage = () => {
               {/* Image */}
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80"
+                  src={aboutTeamImg}
                   alt="Renovivo екип"
                   className="rounded-2xl shadow-xl w-full"
                 />
@@ -200,7 +202,7 @@ const AboutPage = () => {
 
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80"
+                  src={qualityWorkImg}
                   alt="Качествена работа"
                   className="rounded-2xl"
                 />

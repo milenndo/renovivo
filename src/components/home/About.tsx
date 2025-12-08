@@ -1,6 +1,7 @@
 import { Check, Award, Users, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import aboutTeamImg from "@/assets/images/about-team.jpg";
 
 const features = [
   "Над 10 години опит в бранша",
@@ -20,7 +21,7 @@ const About = () => {
           <div className="relative">
             <div className="relative z-10">
               <img
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80"
+                src={aboutTeamImg}
                 alt="Renovivo екип на работа"
                 className="rounded-2xl shadow-xl w-full"
               />
