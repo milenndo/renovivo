@@ -29,7 +29,7 @@ const WhyUs = () => {
       <div className="container-custom">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">Защо да изберете нас</span>
+          <span className="text-amber-700 font-medium text-sm uppercase tracking-wider">Защо да изберете нас</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
             Вашето доверие е наш приоритет
           </h2>

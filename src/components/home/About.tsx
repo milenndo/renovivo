@@ -46,7 +46,7 @@ const About = () => {
 
           {/* Content Side */}
           <div>
-            <span className="text-primary font-medium text-sm uppercase tracking-wider">За нас</span>
+            <span className="text-amber-700 font-medium text-sm uppercase tracking-wider">За нас</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-6">
               Вашият надежден партньор за перфектен ремонт
             </h2>
@@ -92,7 +92,7 @@ const About = () => {
             </div>
 
             <Link to="/about">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
+              <Button size="lg" className="bg-amber-700 hover:bg-amber-800 text-white font-semibold">
                 Научете повече за нас
               </Button>
             </Link>

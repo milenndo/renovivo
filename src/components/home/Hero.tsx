@@ -52,13 +52,13 @@ const Hero = () => {
           {/* CTAs */}
           <div className="flex flex-wrap gap-4">
             <a href="tel:+359893712919">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base">
-                <Phone className="h-5 w-5 mr-2" />
+              <Button size="lg" className="bg-amber-700 hover:bg-amber-800 text-white font-semibold text-base">
+                <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
                 Обадете се сега
               </Button>
             </a>
             <Link to="/portfolio">
-              <Button size="lg" variant="outline" className="border-background/30 text-primary hover:bg-background/10 font-semibold text-base">
+              <Button size="lg" variant="outline" className="border-background/30 text-background hover:bg-background/10 font-semibold text-base">
                 Вижте нашите проекти
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
