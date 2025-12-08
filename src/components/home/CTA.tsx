@@ -28,14 +28,14 @@ const CTA = () => {
         <div className="flex flex-wrap justify-center gap-4">
           <a href="tel:+359893712919">
             <Button size="lg" className="bg-background text-foreground hover:bg-background/90 font-semibold">
-              <Phone className="h-5 w-5 mr-2" />
+              <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
               Обадете се сега
             </Button>
           </a>
           <Link to="/contact">
-            <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 font-semibold">
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold">
               Изпратете запитване
-              <ArrowRight className="h-5 w-5 ml-2" />
+              <ArrowRight className="h-5 w-5 ml-2" aria-hidden="true" />
             </Button>
           </Link>
         </div>

@@ -86,9 +86,9 @@ const Services = () => {
           <div className="text-center mb-12">
             <Link 
               to="/innovative-coatings"
-              className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4 hover:bg-primary/20 transition-colors"
+              className="inline-flex items-center gap-2 bg-amber-600/10 text-amber-700 px-4 py-2 rounded-full mb-4 hover:bg-amber-600/20 transition-colors"
             >
-              <Sparkle className="h-4 w-4" />
+              <Sparkle className="h-4 w-4" aria-hidden="true" />
               <span className="font-medium text-sm uppercase tracking-wider">Иновативни решения</span>
             </Link>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
@@ -116,8 +116,8 @@ const Services = () => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/20 to-transparent" />
-                  <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground">
-                    <Sparkle className="h-3 w-3 mr-1" />
+                  <Badge className="absolute top-3 right-3 bg-amber-700 text-white">
+                    <Sparkle className="h-3 w-3 mr-1" aria-hidden="true" />
                     Иновация
                   </Badge>
                   <div className="absolute bottom-3 left-3">
@@ -137,10 +137,10 @@ const Services = () => {
                   </p>
                   <Link
                     to={`/services/${service.id}`}
-                    className="inline-flex items-center text-primary font-medium text-sm hover:gap-2 transition-all"
+                    className="inline-flex items-center text-amber-700 font-medium text-sm hover:gap-2 transition-all"
                   >
                     Научете повече
-                    <ArrowRight className="h-4 w-4 ml-1" />
+                    <ArrowRight className="h-4 w-4 ml-1" aria-hidden="true" />
                   </Link>
                 </CardContent>
               </Card>
@@ -151,7 +151,7 @@ const Services = () => {
         {/* Traditional Services Section */}
         <div>
           <div className="text-center mb-12">
-            <span className="text-primary font-medium text-sm uppercase tracking-wider">Ремонтни услуги</span>
+            <span className="text-amber-700 font-medium text-sm uppercase tracking-wider">Ремонтни услуги</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
               Професионални ремонти
             </h2>
@@ -193,10 +193,10 @@ const Services = () => {
                   </p>
                   <Link
                     to={`/services/${service.id}`}
-                    className="inline-flex items-center text-primary font-medium text-sm hover:gap-2 transition-all"
+                    className="inline-flex items-center text-amber-700 font-medium text-sm hover:gap-2 transition-all"
                   >
                     Научете повече
-                    <ArrowRight className="h-4 w-4 ml-1" />
+                    <ArrowRight className="h-4 w-4 ml-1" aria-hidden="true" />
                   </Link>
                 </CardContent>
               </Card>

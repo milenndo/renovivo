@@ -40,11 +40,11 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-              <Facebook className="h-4 w-4" />
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" aria-label="Последвайте ни във Facebook">
+              <Facebook className="h-4 w-4" aria-hidden="true" />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
-              <Instagram className="h-4 w-4" />
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" aria-label="Последвайте ни в Instagram">
+              <Instagram className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -85,8 +85,8 @@ const Header = () => {
                   to={link.path}
                   className={`text-base font-medium transition-colors relative py-2 ${
                     isActive(link.path)
-                      ? "text-primary"
-                      : "text-foreground hover:text-primary"
+                      ? "text-amber-600"
+                      : "text-foreground hover:text-amber-600"
                   } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${
                     isActive(link.path) ? "after:scale-x-100" : ""
                   }`}
@@ -97,8 +97,8 @@ const Header = () => {
             </nav>
 
             {/* Phone CTA - pushed right */}
-            <a href="tel:+359893712919" className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold">
-              <Phone className="h-5 w-5" />
+            <a href="tel:+359893712919" className="ml-auto flex items-center gap-2 text-amber-600 hover:text-amber-700 transition-colors font-semibold">
+              <Phone className="h-5 w-5" aria-hidden="true" />
               <span>+359 89 371 29 19</span>
             </a>
           </div>
@@ -121,8 +121,8 @@ const Header = () => {
                 </Link>
               ))}
               <a href="tel:+359893712919" className="mt-4">
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
-                  <Phone className="h-4 w-4 mr-2" />
+                <Button className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold">
+                  <Phone className="h-4 w-4 mr-2" aria-hidden="true" />
                   Обадете се
                 </Button>
               </a>
