@@ -53,7 +53,7 @@ const Header = () => {
         <div className="container-custom flex flex-col lg:flex-row justify-between items-center py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center justify-center lg:justify-start w-full lg:w-auto py-1">
-            <img src={logo} alt="Renovivo - Every Detail Matters" className="h-24 md:h-28 lg:h-36 w-auto lg:-translate-y-[30%] lg:-ml-5" />
+            <img src={logo} alt="Renovivo - Every Detail Matters" className="h-24 md:h-28 lg:h-32 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
