@@ -53,27 +53,30 @@ const Header = () => {
       <div className="bg-background shadow-sm sticky top-0 z-50">
         <div className="container-custom py-4">
           {/* Mobile Layout */}
-          <div className="flex lg:hidden items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="Renovivo - Every Detail Matters" className="h-28 w-auto" />
-            </Link>
+          <div className="flex lg:hidden items-center justify-center relative">
+            {/* Menu button - absolute right */}
             <button
-              className="p-2"
+              className="absolute right-0 p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
               {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
             </button>
+            
+            {/* Centered Logo */}
+            <Link to="/" className="flex items-center">
+              <img src={logo} alt="Renovivo - Every Detail Matters" className="h-28 w-auto" />
+            </Link>
           </div>
 
           {/* Desktop Layout */}
-          <div className="hidden lg:flex items-center justify-between">
+          <div className="hidden lg:flex items-center gap-12">
             {/* Logo - far left */}
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center shrink-0">
               <img src={logo} alt="Renovivo - Every Detail Matters" className="h-32 w-auto" />
             </Link>
 
-            {/* Navigation */}
+            {/* Navigation Menu */}
             <nav className="flex items-center gap-8">
               {navLinks.map((link) => (
                 <Link
@@ -92,12 +95,10 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* CTA Button */}
-            <a href="tel:+359888123456">
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
-                <Phone className="h-4 w-4 mr-2" />
-                Обадете се
-              </Button>
+            {/* Phone CTA - pushed right */}
+            <a href="tel:+359888123456" className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold">
+              <Phone className="h-5 w-5" />
+              <span>+359 888 123 456</span>
             </a>
           </div>
         </div>
