@@ -1,1 +1,4 @@
 project_id = "spwduzltlilwgzejjqdn"
+
+[functions.renovivo-chat]
+verify_jwt = false
