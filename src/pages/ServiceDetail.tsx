@@ -72,6 +72,32 @@ const ServiceDetail = () => {
                   </p>
                 </div>
 
+                {/* Color Variants - only for services with color options */}
+                {service.colorVariants && (
+                  <div>
+                    <h2 className="text-2xl font-bold mb-6">Цветови варианти</h2>
+                    <p className="text-muted-foreground mb-4 text-sm">
+                      Съчетаването на пигменти и естествени камъни дава безкрайни възможности за цвят и дизайн, 
+                      като същевременно добавят визуален ефект и характер на проекта.
+                    </p>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {service.colorVariants.map((variant) => (
+                        <div 
+                          key={variant.name} 
+                          className="p-4 bg-secondary/50 rounded-lg border border-border/50 hover:border-primary/30 transition-colors"
+                        >
+                          <h4 className="font-semibold text-sm mb-1">{variant.name}</h4>
+                          <p className="text-xs text-muted-foreground">{variant.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-4 italic">
+                      * Действителните цветове може да се различават от представените. 
+                      Съветваме ви да видите физическа цветна мостра, за да потвърдите избора си.
+                    </p>
+                  </div>
+                )}
+
                 {/* Features */}
                 <div>
                   <h2 className="text-2xl font-bold mb-6">Какво включва</h2>
