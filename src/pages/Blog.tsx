@@ -8,6 +8,21 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 
+// Blog images
+import apartmentRenovationImg from "@/assets/images/blog/apartment-renovation.jpg";
+import bathroomRenovationImg from "@/assets/images/blog/bathroom-renovation.jpg";
+import microcementImg from "@/assets/images/blog/microcement-technology.jpg";
+import renovationMistakesImg from "@/assets/images/blog/renovation-mistakes.jpg";
+import bathroomCostImg from "@/assets/images/blog/bathroom-cost.jpg";
+
+const blogImages: Record<string, string> = {
+  "remont-na-apartament-sofia-2024": apartmentRenovationImg,
+  "remont-na-banya-sofia-cena": bathroomRenovationImg,
+  "microcement-moderna-tehnologiya": microcementImg,
+  "chesti-greshki-pri-remont": renovationMistakesImg,
+  "kolko-struva-remont-na-banya": bathroomCostImg,
+};
+
 const Blog = () => {
   const { data: posts, isLoading } = useQuery({
     queryKey: ["blog-posts"],
@@ -56,10 +71,14 @@ const Blog = () => {
       case "бани":
         return "bg-cyan-100 text-cyan-700";
       case "иновации":
-        return "bg-amber-100 text-amber-700";
+        return "bg-primary/20 text-primary";
       default:
         return "bg-muted text-muted-foreground";
     }
+  };
+
+  const getPostImage = (slug: string) => {
+    return blogImages[slug] || null;
   };
 
   return (
@@ -127,53 +146,67 @@ const Blog = () => {
               </div>
             ) : posts && posts.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {posts.map((post) => (
-                  <Card
-                    key={post.id}
-                    className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                  >
-                    {/* Image placeholder with gradient */}
-                    <div className="relative h-48 bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                      <BookOpen className="h-16 w-16 text-primary/30" />
-                      <Badge
-                        className={`absolute top-4 left-4 ${getCategoryColor(
-                          post.category
-                        )}`}
-                      >
-                        {post.category}
-                      </Badge>
-                    </div>
-
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="h-4 w-4" />
-                          {formatDate(post.created_at)}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="h-4 w-4" />
-                          {post.reading_time} мин.
-                        </span>
+                {posts.map((post) => {
+                  const postImage = getPostImage(post.slug);
+                  return (
+                    <Card
+                      key={post.id}
+                      className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                    >
+                      {/* Image */}
+                      <div className="relative h-48 overflow-hidden">
+                        {postImage ? (
+                          <img 
+                            src={postImage} 
+                            alt={post.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                            <BookOpen className="h-16 w-16 text-primary/30" />
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 to-transparent" />
+                        <Badge
+                          className={`absolute top-4 left-4 ${getCategoryColor(
+                            post.category
+                          )}`}
+                        >
+                          {post.category}
+                        </Badge>
                       </div>
 
-                      <h2 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                        {post.title}
-                      </h2>
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                          <span className="flex items-center gap-1">
+                            <Calendar className="h-4 w-4" />
+                            {formatDate(post.created_at)}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-4 w-4" />
+                            {post.reading_time} мин.
+                          </span>
+                        </div>
 
-                      <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                        {post.excerpt}
-                      </p>
+                        <h2 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                          {post.title}
+                        </h2>
 
-                      <Link
-                        to={`/blog/${post.slug}`}
-                        className="inline-flex items-center text-amber-700 font-medium text-sm hover:gap-2 transition-all"
-                      >
-                        Прочетете повече
-                        <ArrowRight className="h-4 w-4 ml-1" />
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ))}
+                        <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                          {post.excerpt}
+                        </p>
+
+                        <Link
+                          to={`/blog/${post.slug}`}
+                          className="inline-flex items-center text-primary font-medium text-sm hover:gap-2 transition-all"
+                        >
+                          Прочетете повече
+                          <ArrowRight className="h-4 w-4 ml-1" />
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
               </div>
             ) : (
               <div className="text-center py-12">
@@ -198,7 +231,7 @@ const Blog = () => {
             </p>
             <a
               href="tel:+359893712919"
-              className="inline-flex items-center gap-2 bg-amber-700 hover:bg-amber-800 text-white px-8 py-4 rounded-lg font-semibold transition-colors"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-colors"
             >
               +359 89 371 29 19
             </a>

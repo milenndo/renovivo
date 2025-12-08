@@ -10,9 +10,7 @@ const Header = () => {
 
   const navLinks = [
     { name: "Начало", path: "/" },
-    { name: "Иновации", path: "/innovative-coatings" },
     { name: "Услуги", path: "/services" },
-    { name: "Цени", path: "/prices" },
     { name: "Портфолио", path: "/portfolio" },
     { name: "Блог", path: "/blog" },
     { name: "За нас", path: "/about" },
@@ -86,8 +84,8 @@ const Header = () => {
                   to={link.path}
                   className={`text-base font-medium transition-colors relative py-2 ${
                     isActive(link.path)
-                      ? "text-amber-600"
-                      : "text-foreground hover:text-amber-600"
+                      ? "text-primary"
+                      : "text-foreground hover:text-primary"
                   } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${
                     isActive(link.path) ? "after:scale-x-100" : ""
                   }`}
@@ -98,7 +96,7 @@ const Header = () => {
             </nav>
 
             {/* Phone CTA - pushed right */}
-            <a href="tel:+359893712919" className="ml-auto flex items-center gap-2 text-amber-600 hover:text-amber-700 transition-colors font-semibold">
+            <a href="tel:+359893712919" className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold">
               <Phone className="h-5 w-5" aria-hidden="true" />
               <span>+359 89 371 29 19</span>
             </a>
@@ -122,7 +120,7 @@ const Header = () => {
                 </Link>
               ))}
               <a href="tel:+359893712919" className="mt-4">
-                <Button className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold">
+                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
                   <Phone className="h-4 w-4 mr-2" aria-hidden="true" />
                   Обадете се
                 </Button>

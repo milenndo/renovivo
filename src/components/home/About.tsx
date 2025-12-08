@@ -1,15 +1,15 @@
-import { Check, Award, Users, Shield } from "lucide-react";
+import { Check, Users, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import aboutTeamImg from "@/assets/images/about-team.jpg";
 
 const features = [
-  "Над 10 години опит в бранша",
-  "Висококачествени материали",
-  "Професионален екип",
-  "Гаранция за качество",
-  "Спазване на срокове",
-  "Конкурентни цени",
+  "Тясно специализирани експерти",
+  "Фокус върху детайла",
+  "Ясна комуникация",
+  "Предвидимост на бюджета",
+  "Спазване на сроковете",
+  "София и района",
 ];
 
 const About = () => {
@@ -29,35 +29,22 @@ const About = () => {
             {/* Decorative element */}
             <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-primary/10 rounded-2xl -z-10" />
             <div className="absolute -top-6 -left-6 w-32 h-32 bg-secondary rounded-2xl -z-10" />
-            
-            {/* Stats card */}
-            <div className="absolute -bottom-4 -left-4 md:bottom-8 md:-left-8 bg-background rounded-xl shadow-xl p-6 z-20">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Award className="h-7 w-7 text-primary" />
-                </div>
-                <div>
-                  <span className="text-2xl font-bold text-foreground">500+</span>
-                  <p className="text-muted-foreground text-sm">Завършени проекти</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Content Side */}
           <div>
-            <span className="text-amber-700 font-medium text-sm uppercase tracking-wider">За нас</span>
+            <span className="text-primary font-medium text-sm uppercase tracking-wider">За нас</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-6">
-              Вашият надежден партньор за перфектен ремонт
+              Вашият надежден партньор за ремонт в София
             </h2>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Renovivo е водеща компания в сферата на ремонтните услуги в София и страната. 
-              Със страст към детайлите и стремеж към съвършенство, ние трансформираме 
-              обикновените пространства в изключителни.
+              Renovivo е вашият партньор за цялостни ремонти в София и района. 
+              Със страст към детайлите и стремеж към качество, ние трансформираме 
+              вашите идеи в реалност – от първия оглед до последния щрих.
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              Нашият екип от опитни професионалисти работи с най-съвременни техники 
-              и висококачествени материали, за да гарантира резултати, които надминават 
+              Нашият екип от тясно специализирани експерти във всяко звено на ремонтните 
+              дейности работи координирано, за да гарантира резултати, които надминават 
               вашите очаквания.
             </p>
 
@@ -78,8 +65,8 @@ const About = () => {
               <div className="flex items-center gap-3">
                 <Users className="h-8 w-8 text-primary" />
                 <div>
-                  <span className="font-semibold block">Професионален екип</span>
-                  <span className="text-sm text-muted-foreground">Сертифицирани майстори</span>
+                  <span className="font-semibold block">Специализиран екип</span>
+                  <span className="text-sm text-muted-foreground">Експерти във всяко звено</span>
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -92,7 +79,7 @@ const About = () => {
             </div>
 
             <Link to="/about">
-              <Button size="lg" className="bg-amber-700 hover:bg-amber-800 text-white font-semibold">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
                 Научете повече за нас
               </Button>
             </Link>

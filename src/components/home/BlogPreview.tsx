@@ -7,6 +7,21 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 
+// Blog images
+import apartmentRenovationImg from "@/assets/images/blog/apartment-renovation.jpg";
+import bathroomRenovationImg from "@/assets/images/blog/bathroom-renovation.jpg";
+import microcementImg from "@/assets/images/blog/microcement-technology.jpg";
+import renovationMistakesImg from "@/assets/images/blog/renovation-mistakes.jpg";
+import bathroomCostImg from "@/assets/images/blog/bathroom-cost.jpg";
+
+const blogImages: Record<string, string> = {
+  "remont-na-apartament-sofia-2024": apartmentRenovationImg,
+  "remont-na-banya-sofia-cena": bathroomRenovationImg,
+  "microcement-moderna-tehnologiya": microcementImg,
+  "chesti-greshki-pri-remont": renovationMistakesImg,
+  "kolko-struva-remont-na-banya": bathroomCostImg,
+};
+
 const BlogPreview = () => {
   const { data: posts, isLoading } = useQuery({
     queryKey: ["blog-posts-preview"],
@@ -37,10 +52,14 @@ const BlogPreview = () => {
       case "бани":
         return "bg-cyan-100 text-cyan-700";
       case "иновации":
-        return "bg-amber-100 text-amber-700";
+        return "bg-primary/20 text-primary";
       default:
         return "bg-muted text-muted-foreground";
     }
+  };
+
+  const getPostImage = (slug: string) => {
+    return blogImages[slug] || null;
   };
 
   if (isLoading) {
@@ -95,53 +114,67 @@ const BlogPreview = () => {
 
         {/* Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <Card
-              key={post.id}
-              className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-            >
-              {/* Image placeholder */}
-              <div className="relative h-40 bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                <BookOpen className="h-12 w-12 text-primary/30" />
-                <Badge
-                  className={`absolute top-3 left-3 ${getCategoryColor(
-                    post.category
-                  )}`}
-                >
-                  {post.category}
-                </Badge>
-              </div>
-
-              <CardContent className="p-5">
-                <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3" />
-                    {formatDate(post.created_at)}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="h-3 w-3" />
-                    {post.reading_time} мин.
-                  </span>
+          {posts.map((post) => {
+            const postImage = getPostImage(post.slug);
+            return (
+              <Card
+                key={post.id}
+                className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                {/* Image */}
+                <div className="relative h-40 overflow-hidden">
+                  {postImage ? (
+                    <img 
+                      src={postImage} 
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                      <BookOpen className="h-12 w-12 text-primary/30" />
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 to-transparent" />
+                  <Badge
+                    className={`absolute top-3 left-3 ${getCategoryColor(
+                      post.category
+                    )}`}
+                  >
+                    {post.category}
+                  </Badge>
                 </div>
 
-                <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                  {post.title}
-                </h3>
+                <CardContent className="p-5">
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="h-3 w-3" />
+                      {formatDate(post.created_at)}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      {post.reading_time} мин.
+                    </span>
+                  </div>
 
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                  {post.excerpt}
-                </p>
+                  <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
 
-                <Link
-                  to={`/blog/${post.slug}`}
-                  className="inline-flex items-center text-amber-700 font-medium text-sm hover:gap-2 transition-all"
-                >
-                  Прочетете повече
-                  <ArrowRight className="h-4 w-4 ml-1" />
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
+                  <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                    {post.excerpt}
+                  </p>
+
+                  <Link
+                    to={`/blog/${post.slug}`}
+                    className="inline-flex items-center text-primary font-medium text-sm hover:gap-2 transition-all"
+                  >
+                    Прочетете повече
+                    <ArrowRight className="h-4 w-4 ml-1" />
+                  </Link>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* CTA */}
