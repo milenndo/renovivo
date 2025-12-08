@@ -14,7 +14,86 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      service_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon: string | null
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon?: string | null
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      service_prices: {
+        Row: {
+          category_id: string
+          created_at: string
+          id: string
+          includes_materials: boolean | null
+          notes: string | null
+          price_max: number | null
+          price_min: number | null
+          price_text: string | null
+          service_name: string
+          source: string | null
+          unit: string
+          updated_at: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          id?: string
+          includes_materials?: boolean | null
+          notes?: string | null
+          price_max?: number | null
+          price_min?: number | null
+          price_text?: string | null
+          service_name: string
+          source?: string | null
+          unit: string
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          id?: string
+          includes_materials?: boolean | null
+          notes?: string | null
+          price_max?: number | null
+          price_min?: number | null
+          price_text?: string | null
+          service_name?: string
+          source?: string | null
+          unit?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_prices_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "service_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
