@@ -70,14 +70,14 @@ const Header = () => {
           </div>
 
           {/* Desktop Layout */}
-          <div className="hidden lg:flex items-center gap-12">
+          <div className="hidden lg:flex items-center gap-8">
             {/* Logo - far left */}
             <Link to="/" className="flex items-center shrink-0">
               <img src={logo} alt="Renovivo - Every Detail Matters" className="h-32 w-auto" />
             </Link>
 
             {/* Navigation Menu */}
-            <nav className="flex items-center gap-8">
+            <nav className="flex items-center gap-6">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
