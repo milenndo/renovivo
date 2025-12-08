@@ -183,7 +183,17 @@ const RenovivoChat = () => {
                         : "bg-muted"
                     }`}
                   >
-                    {message.content}
+                    <div className="whitespace-pre-wrap [&>strong]:font-semibold [&_strong]:font-semibold">
+                      {message.content.split('\n').map((line, i) => (
+                        <p key={i} className={line.startsWith('•') || line.startsWith('-') ? 'pl-2' : ''}>
+                          {line.split(/(\*\*[^*]+\*\*)/).map((part, j) => 
+                            part.startsWith('**') && part.endsWith('**') 
+                              ? <strong key={j}>{part.slice(2, -2)}</strong>
+                              : part
+                          )}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                   {message.role === "user" && (
                     <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center shrink-0">
