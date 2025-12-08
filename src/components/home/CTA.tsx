@@ -26,7 +26,7 @@ const CTA = () => {
           Нашият екип е готов да превърне вашите идеи в реалност.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <a href="tel:+359888123456">
+          <a href="tel:+359893712919">
             <Button size="lg" className="bg-background text-foreground hover:bg-background/90 font-semibold">
               <Phone className="h-5 w-5 mr-2" />
               Обадете се сега

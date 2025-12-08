@@ -33,7 +33,7 @@ const NotFound = () => {
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <a href="tel:+359888123456">
+              <a href="tel:+359893712919">
                 <Phone className="h-4 w-4 mr-2" />
                 Обадете се
               </a>

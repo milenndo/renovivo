@@ -12,8 +12,8 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Телефон",
-    value: "+359 888 123 456",
-    href: "tel:+359888123456",
+    value: "+359 89 371 29 19",
+    href: "tel:+359893712919",
   },
   {
     icon: Mail,
@@ -76,7 +76,7 @@ const ContactPage = () => {
     "mainEntity": {
       "@type": "LocalBusiness",
       "name": "Renovivo",
-      "telephone": "+359888123456",
+      "telephone": "+359893712919",
       "email": "info@renovivo.bg",
       "address": {
         "@type": "PostalAddress",
@@ -92,12 +92,12 @@ const ContactPage = () => {
         <title>Контакти | Renovivo - Безплатна консултация за ремонт София</title>
         <meta 
           name="description" 
-          content="Свържете се с Renovivo за безплатна консултация и оглед. ☎️ +359 888 123 456. Ремонтни услуги в София и околността. Работно време: Пон-Пет 08:00-18:00." 
+          content="Свържете се с Renovivo за безплатна консултация и оглед. ☎️ +359 89 371 29 19. Ремонтни услуги в София и околността. Работно време: Пон-Пет 08:00-18:00." 
         />
         <meta name="keywords" content="контакти Renovivo, ремонт София телефон, безплатен оглед ремонт, консултация ремонт, ремонтна фирма контакт" />
         <link rel="canonical" href="https://renovivo.bg/contact" />
         <meta property="og:title" content="Контакти | Renovivo" />
-        <meta property="og:description" content="Свържете се за безплатна консултация. ☎️ +359 888 123 456" />
+        <meta property="og:description" content="Свържете се за безплатна консултация. ☎️ +359 89 371 29 19" />
         <meta property="og:url" content="https://renovivo.bg/contact" />
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(contactSchema)}</script>
@@ -156,9 +156,9 @@ const ContactPage = () => {
                   <p className="text-primary-foreground/90 text-sm mb-4">
                     За бърза връзка и консултация
                   </p>
-                  <a href="tel:+359888123456">
+                  <a href="tel:+359893712919">
                     <Button className="bg-background text-foreground hover:bg-background/90 font-semibold w-full">
-                      +359 888 123 456
+                      +359 89 371 29 19
                     </Button>
                   </a>
                 </div>
@@ -211,7 +211,7 @@ const ContactPage = () => {
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          placeholder="+359 888 123 456"
+                          placeholder="+359 89 371 29 19"
                         />
                       </div>
 
