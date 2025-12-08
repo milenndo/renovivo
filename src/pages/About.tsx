@@ -37,14 +37,44 @@ const timeline = [
 ];
 
 const AboutPage = () => {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Начало", "item": "https://renovivo.bg" },
+      { "@type": "ListItem", "position": 2, "name": "За нас", "item": "https://renovivo.bg/about" }
+    ]
+  };
+
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "За Renovivo",
+    "description": "Над 10 години опит в ремонтните услуги в София",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Renovivo",
+      "foundingDate": "2014",
+      "numberOfEmployees": "15+",
+      "slogan": "Every Detail Matters"
+    }
+  };
+
   return (
     <>
       <Helmet>
-        <title>За нас | Renovivo - Вашият надежден партньор за ремонт</title>
+        <title>За нас | Renovivo - Ремонтна фирма София с 10+ години опит</title>
         <meta 
           name="description" 
-          content="Научете повече за Renovivo - над 10 години опит в ремонтните услуги, екип от професионалисти и стотици доволни клиенти." 
+          content="Renovivo е водеща ремонтна фирма в София с над 10 години опит. Екип от 15+ професионалисти, 500+ завършени проекта. Качество и гаранция на всяка услуга." 
         />
+        <meta name="keywords" content="ремонтна фирма София, Renovivo, строителна фирма София, професионални майстори, ремонти с гаранция" />
+        <link rel="canonical" href="https://renovivo.bg/about" />
+        <meta property="og:title" content="За нас | Renovivo - Ремонтна фирма София" />
+        <meta property="og:description" content="Над 10 години опит в ремонтните услуги. 500+ завършени проекта." />
+        <meta property="og:url" content="https://renovivo.bg/about" />
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(aboutSchema)}</script>
       </Helmet>
       <Layout>
         {/* Hero */}

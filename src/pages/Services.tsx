@@ -7,14 +7,55 @@ import { Card, CardContent } from "@/components/ui/card";
 import { services } from "@/data/services";
 
 const ServicesPage = () => {
+  const servicesSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Ремонтни услуги",
+    "description": "Професионални ремонтни услуги в София",
+    "itemListElement": services.map((service, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Service",
+        "name": service.title,
+        "description": service.shortDescription,
+        "url": `https://renovivo.bg/services/${service.id}`,
+        "provider": {
+          "@type": "LocalBusiness",
+          "name": "Renovivo"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "София"
+        }
+      }
+    }))
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Начало", "item": "https://renovivo.bg" },
+      { "@type": "ListItem", "position": 2, "name": "Услуги", "item": "https://renovivo.bg/services" }
+    ]
+  };
+
   return (
     <>
       <Helmet>
-        <title>Услуги | Renovivo - Професионални ремонтни услуги в София</title>
+        <title>Ремонтни услуги София | Renovivo - Цялостен ремонт, бани, кухни</title>
         <meta 
           name="description" 
-          content="Пълен спектър ремонтни услуги - цялостен ремонт, бани, кухни, боядисване, подови настилки, електро и ВиК. Качество и гаранция." 
+          content="Професионални ремонтни услуги в София - цялостен ремонт на апартаменти, ремонт на бани и кухни, боядисване, подови настилки, ВиК и електро. Гаранция за качество!" 
         />
+        <meta name="keywords" content="ремонтни услуги София, ремонт апартамент, ремонт баня, ремонт кухня, боядисване, подови настилки, ВиК услуги, електро услуги, микроцимент" />
+        <link rel="canonical" href="https://renovivo.bg/services" />
+        <meta property="og:title" content="Ремонтни услуги София | Renovivo" />
+        <meta property="og:description" content="Пълен спектър ремонтни услуги - цялостен ремонт, бани, кухни, боядисване, подови настилки." />
+        <meta property="og:url" content="https://renovivo.bg/services" />
+        <script type="application/ld+json">{JSON.stringify(servicesSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
       <Layout>
         {/* Hero */}

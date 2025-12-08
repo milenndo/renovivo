@@ -55,14 +55,38 @@ const Prices = () => {
     return prices?.filter((price) => price.category_id === categoryId) || [];
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Начало", "item": "https://renovivo.bg" },
+      { "@type": "ListItem", "position": 2, "name": "Ценоразпис", "item": "https://renovivo.bg/prices" }
+    ]
+  };
+
+  const priceListSchema = {
+    "@context": "https://schema.org",
+    "@type": "PriceSpecification",
+    "name": "Ценоразпис за ремонтни услуги",
+    "priceCurrency": "EUR",
+    "description": "Ориентировъчни цени за ремонтни услуги в София"
+  };
+
   return (
     <Layout>
       <Helmet>
-        <title>Ценоразпис | Renovivo - Ремонтни услуги</title>
+        <title>Цени ремонт София | Renovivo - Ценоразпис ремонтни услуги 2024</title>
         <meta
           name="description"
-          content="Прозрачни цени за всички ремонтни услуги. Вижте нашия подробен ценоразпис за плочки, ВиК, електро, баня и кухня."
+          content="Актуални цени за ремонт в София 2024. Ценоразпис: плочки от €8/м², боядисване от €4/м², ремонт баня от €2500. Прозрачно ценообразуване без скрити такси!"
         />
+        <meta name="keywords" content="цени ремонт София, ценоразпис ремонти, колко струва ремонт, цена ремонт баня, цена ремонт кухня, цени боядисване, цени плочки" />
+        <link rel="canonical" href="https://renovivo.bg/prices" />
+        <meta property="og:title" content="Цени ремонт София | Renovivo" />
+        <meta property="og:description" content="Прозрачни цени за ремонтни услуги. Без скрити такси." />
+        <meta property="og:url" content="https://renovivo.bg/prices" />
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(priceListSchema)}</script>
       </Helmet>
 
       <section className="py-16 md:py-24">

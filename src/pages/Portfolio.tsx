@@ -13,14 +13,38 @@ const PortfolioPage = () => {
     ? projects 
     : projects.filter(p => p.categoryId === activeCategory);
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Начало", "item": "https://renovivo.bg" },
+      { "@type": "ListItem", "position": 2, "name": "Портфолио", "item": "https://renovivo.bg/portfolio" }
+    ]
+  };
+
+  const gallerySchema = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": "Renovivo Портфолио - Завършени ремонти в София",
+    "description": "Галерия със завършени ремонтни проекти - бани, кухни, апартаменти",
+    "numberOfItems": projects.length
+  };
+
   return (
     <>
       <Helmet>
-        <title>Портфолио | Renovivo - Нашите завършени проекти</title>
+        <title>Портфолио | Renovivo - Завършени ремонти София, снимки преди и след</title>
         <meta 
           name="description" 
-          content="Разгледайте нашето портфолио от завършени ремонтни проекти - бани, кухни, апартаменти и още. Качество, което говори само за себе си." 
+          content="Разгледайте 500+ завършени ремонти в София - бани, кухни, апартаменти. Снимки преди и след ремонт. Вижте качеството на нашата работа!" 
         />
+        <meta name="keywords" content="портфолио ремонти, снимки ремонт, ремонт преди след, завършени проекти София, ремонт баня снимки, ремонт апартамент галерия" />
+        <link rel="canonical" href="https://renovivo.bg/portfolio" />
+        <meta property="og:title" content="Портфолио | Renovivo - Завършени ремонти" />
+        <meta property="og:description" content="Галерия със завършени ремонтни проекти в София." />
+        <meta property="og:url" content="https://renovivo.bg/portfolio" />
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(gallerySchema)}</script>
       </Helmet>
       <Layout>
         {/* Hero */}

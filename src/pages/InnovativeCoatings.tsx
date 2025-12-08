@@ -78,11 +78,44 @@ const benefits = [
 ];
 
 const InnovativeCoatings = () => {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Начало", "item": "https://renovivo.bg" },
+      { "@type": "ListItem", "position": 2, "name": "Иновативни покрития", "item": "https://renovivo.bg/innovative-coatings" }
+    ]
+  };
+
+  const coatingsSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Иновативни покрития",
+    "description": "Модерни безшевни покрития - микроцимент, Terrazzo, Flake Floor, каменен килим",
+    "itemListElement": innovativeServices.map((service, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Product",
+        "name": service.title,
+        "description": service.shortDescription,
+        "url": `https://renovivo.bg/services/${service.id}`
+      }
+    }))
+  };
+
   return (
     <Layout>
       <Helmet>
-        <title>Иновативни покрития | Renovivo</title>
-        <meta name="description" content="Микроцимент, Terrazzo, Flake Floor и Каменен килим - модерни безшевни покрития за вашия дом и бизнес." />
+        <title>Иновативни покрития София | Микроцимент, Terrazzo, Flake Floor - Renovivo</title>
+        <meta name="description" content="Модерни безшевни покрития в София - микроцимент, Terrazzo, Flake Floor и каменен килим. Иновативни решения за под и стени. Дълготрайност до 75 години!" />
+        <meta name="keywords" content="микроцимент София, Terrazzo под, Flake Floor, каменен килим, безшевни подове, декоративни покрития, иновативни настилки" />
+        <link rel="canonical" href="https://renovivo.bg/innovative-coatings" />
+        <meta property="og:title" content="Иновативни покрития София | Renovivo" />
+        <meta property="og:description" content="Микроцимент, Terrazzo, Flake Floor и каменен килим - модерни безшевни покрития." />
+        <meta property="og:url" content="https://renovivo.bg/innovative-coatings" />
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(coatingsSchema)}</script>
       </Helmet>
 
       {/* Hero Section */}

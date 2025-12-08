@@ -18,11 +18,59 @@ const ServiceDetail = () => {
   const prevService = currentIndex > 0 ? services[currentIndex - 1] : null;
   const nextService = currentIndex < services.length - 1 ? services[currentIndex + 1] : null;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Начало", "item": "https://renovivo.bg" },
+      { "@type": "ListItem", "position": 2, "name": "Услуги", "item": "https://renovivo.bg/services" },
+      { "@type": "ListItem", "position": 3, "name": service.title, "item": `https://renovivo.bg/services/${id}` }
+    ]
+  };
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": service.title,
+    "description": service.fullDescription,
+    "url": `https://renovivo.bg/services/${id}`,
+    "image": service.image,
+    "provider": {
+      "@type": "LocalBusiness",
+      "name": "Renovivo",
+      "telephone": "+359888123456",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "София",
+        "addressCountry": "BG"
+      }
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "София"
+    },
+    "serviceType": service.isInnovative ? "Иновативни покрития" : "Ремонтни услуги"
+  };
+
+  const seoTitle = service.isInnovative 
+    ? `${service.title} София | Renovivo - Модерни покрития`
+    : `${service.title} София | Renovivo - Професионални услуги`;
+  
+  const seoDescription = `${service.shortDescription} Професионално изпълнение в София. Гаранция за качество. ☎️ Безплатна консултация!`;
+
   return (
     <>
       <Helmet>
-        <title>{service.title} | Renovivo - Ремонтни услуги</title>
-        <meta name="description" content={service.shortDescription} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content={`${service.title}, ${service.title} София, ${service.title} цена, ремонт ${service.title}`} />
+        <link rel="canonical" href={`https://renovivo.bg/services/${id}`} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={service.shortDescription} />
+        <meta property="og:url" content={`https://renovivo.bg/services/${id}`} />
+        <meta property="og:image" content={service.image} />
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
       </Helmet>
       <Layout>
         {/* Hero */}
