@@ -43,18 +43,22 @@ const ServicesPage = () => {
                 >
                   <div className={`grid grid-cols-1 lg:grid-cols-2 ${index % 2 === 1 ? '' : ''}`}>
                     {/* Image */}
-                    <div className={`relative h-64 lg:h-auto min-h-[300px] ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                    <Link 
+                      to={`/services/${service.id}`}
+                      className={`relative h-64 lg:h-auto min-h-[300px] block cursor-pointer overflow-hidden group ${index % 2 === 1 ? 'lg:order-2' : ''}`}
+                    >
                       <img
                         src={service.image}
                         alt={service.title}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
+                      <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300" />
                       <div className="absolute top-4 left-4">
                         <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center">
                           <service.icon className="h-7 w-7 text-primary-foreground" />
                         </div>
                       </div>
-                    </div>
+                    </Link>
 
                     {/* Content */}
                     <CardContent className={`p-8 lg:p-12 flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
