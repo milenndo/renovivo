@@ -50,7 +50,7 @@ const Hero = () => {
               </Button>
             </a>
             <Link to="/portfolio">
-              <Button size="lg" variant="outline" className="border-background/30 text-background hover:bg-background/10 font-semibold text-base">
+              <Button size="lg" variant="outline" className="border-background/30 text-primary hover:bg-background/10 font-semibold text-base">
                 Вижте нашите проекти
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
