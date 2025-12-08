@@ -142,7 +142,7 @@ const ProjectDetail = () => {
                     <p className="text-muted-foreground text-sm mb-6">
                       Свържете се с нас, за да обсъдим как можем да реализираме вашата идея.
                     </p>
-                    <a href="tel:+359888123456" className="block mb-4">
+                    <a href="tel:+359893712919" className="block mb-4">
                       <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
                         <Phone className="h-4 w-4 mr-2" />
                         Обадете се

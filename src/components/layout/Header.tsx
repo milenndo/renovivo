@@ -26,9 +26,9 @@ const Header = () => {
       <div className="bg-foreground text-background py-2">
         <div className="container-custom flex flex-wrap justify-between items-center text-sm">
           <div className="flex items-center gap-6">
-            <a href="tel:+359888123456" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <a href="tel:+359893712919" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Phone className="h-4 w-4" />
-              <span className="hidden sm:inline">+359 888 123 456</span>
+              <span className="hidden sm:inline">+359 89 371 29 19</span>
             </a>
             <a href="mailto:info@renovivo.bg" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Mail className="h-4 w-4" />
@@ -97,9 +97,9 @@ const Header = () => {
             </nav>
 
             {/* Phone CTA - pushed right */}
-            <a href="tel:+359888123456" className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold">
+            <a href="tel:+359893712919" className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold">
               <Phone className="h-5 w-5" />
-              <span>+359 888 123 456</span>
+              <span>+359 89 371 29 19</span>
             </a>
           </div>
         </div>
@@ -120,7 +120,7 @@ const Header = () => {
                   {link.name}
                 </Link>
               ))}
-              <a href="tel:+359888123456" className="mt-4">
+              <a href="tel:+359893712919" className="mt-4">
                 <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
                   <Phone className="h-4 w-4 mr-2" />
                   Обадете се

@@ -38,7 +38,7 @@ const ServiceDetail = () => {
     "provider": {
       "@type": "LocalBusiness",
       "name": "Renovivo",
-      "telephone": "+359888123456",
+      "telephone": "+359893712919",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "София",
@@ -270,7 +270,7 @@ const ServiceDetail = () => {
                     <p className="text-muted-foreground text-sm mb-6">
                       Свържете се с нас за безплатна консултация и индивидуална оферта.
                     </p>
-                    <a href="tel:+359888123456" className="block mb-4">
+                    <a href="tel:+359893712919" className="block mb-4">
                       <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
                         <Phone className="h-4 w-4 mr-2" />
                         Обадете се

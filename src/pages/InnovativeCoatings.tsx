@@ -135,7 +135,7 @@ const InnovativeCoatings = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
-                <a href="tel:+359888123456">
+                <a href="tel:+359893712919">
                   <Phone className="mr-2 h-5 w-5" />
                   Безплатна консултация
                 </a>
@@ -314,7 +314,7 @@ const InnovativeCoatings = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
-              <a href="tel:+359888123456">
+              <a href="tel:+359893712919">
                 <Phone className="mr-2 h-5 w-5" />
                 Обадете се сега
               </a>

@@ -130,7 +130,7 @@ const ServicesPage = () => {
                             <ArrowRight className="h-4 w-4 ml-2" />
                           </Button>
                         </Link>
-                        <a href="tel:+359888123456">
+                        <a href="tel:+359893712919">
                           <Button variant="outline">
                             <Phone className="h-4 w-4 mr-2" />
                             Обадете се
@@ -154,10 +154,10 @@ const ServicesPage = () => {
             <p className="text-primary-foreground/90 mb-8 max-w-xl mx-auto">
               Свържете се с нас за безплатна консултация и индивидуална оферта за вашия проект.
             </p>
-            <a href="tel:+359888123456">
+            <a href="tel:+359893712919">
               <Button size="lg" className="bg-background text-foreground hover:bg-background/90 font-semibold">
                 <Phone className="h-5 w-5 mr-2" />
-                +359 888 123 456
+                +359 89 371 29 19
               </Button>
             </a>
           </div>
