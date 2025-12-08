@@ -5,6 +5,7 @@ import Services from "@/components/home/Services";
 import About from "@/components/home/About";
 import Projects from "@/components/home/Projects";
 import WhyUs from "@/components/home/WhyUs";
+import HowWeWork from "@/components/home/HowWeWork";
 import BlogPreview from "@/components/home/BlogPreview";
 import CTA from "@/components/home/CTA";
 
@@ -41,6 +42,7 @@ const Index = () => {
         <About />
         <Projects />
         <WhyUs />
+        <HowWeWork />
         <BlogPreview />
         <CTA />
       </Layout>
