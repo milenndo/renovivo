@@ -22,18 +22,18 @@ const CTA = () => {
           Готови ли сте да започнете?
         </h2>
         <p className="text-primary-foreground/90 text-lg max-w-2xl mx-auto mb-8">
-          Свържете се с нас днес за безплатна консултация и оферта. 
+          Свържете се с нас днес за безплатен оглед и оферта в София и района. 
           Нашият екип е готов да превърне вашите идеи в реалност.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <a href="tel:+359893712919">
             <Button size="lg" className="bg-background text-foreground hover:bg-background/90 font-semibold">
               <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
-              Обадете се сега
+              Заяви оглед
             </Button>
           </a>
           <Link to="/contact">
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold">
+            <Button size="lg" variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 font-semibold">
               Изпратете запитване
               <ArrowRight className="h-5 w-5 ml-2" aria-hidden="true" />
             </Button>

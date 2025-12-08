@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Phone, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -33,52 +33,36 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-primary text-sm font-medium">Професионални ремонтни услуги</span>
+            <span className="text-primary text-sm font-medium">Цялостни ремонти в София и района</span>
           </div>
 
           {/* Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-background leading-tight mb-6">
-            Трансформираме 
-            <span className="text-primary"> вашето пространство</span> 
-            <br />в мечтан дом
+            Вашият ремонт от 
+            <span className="text-primary"> А до Я</span>
+            <br />с един екип
           </h1>
 
           {/* Description */}
           <p className="text-lg text-background/80 mb-8 leading-relaxed max-w-xl">
-            С над 10 години опит и внимание към всеки детайл, ние превръщаме 
-            вашите идеи в реалност. Качество, прецизност и професионализъм.
+            Renovivo поема целия процес – от оглед и планиране до финални довършителни работи. 
+            Тясно специализирани експерти във всяко звено на ремонтните дейности.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-4">
             <a href="tel:+359893712919">
-              <Button size="lg" className="bg-amber-700 hover:bg-amber-800 text-white font-semibold text-base">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base">
                 <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
-                Обадете се сега
+                Заяви оглед
               </Button>
             </a>
             <Link to="/portfolio">
-              <Button size="lg" variant="outline" className="border-background/30 text-background hover:bg-background/10 font-semibold text-base">
+              <Button size="lg" variant="outline" className="border-primary/50 bg-transparent text-primary hover:bg-primary/10 font-semibold text-base">
                 Вижте нашите проекти
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
             </Link>
-          </div>
-
-          {/* Stats */}
-          <div className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-background/20">
-            <div>
-              <span className="text-3xl md:text-4xl font-bold text-primary">10+</span>
-              <p className="text-background/70 text-sm mt-1">Години опит</p>
-            </div>
-            <div>
-              <span className="text-3xl md:text-4xl font-bold text-primary">500+</span>
-              <p className="text-background/70 text-sm mt-1">Завършени проекти</p>
-            </div>
-            <div>
-              <span className="text-3xl md:text-4xl font-bold text-primary">100%</span>
-              <p className="text-background/70 text-sm mt-1">Доволни клиенти</p>
-            </div>
           </div>
         </div>
       </div>
