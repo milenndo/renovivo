@@ -11,8 +11,10 @@ const Hero = () => {
       {/* Background with video overlay */}
       <div className="absolute inset-0 z-0">
         {/* Fallback gradient background while video loads */}
-        <div className={`absolute inset-0 bg-gradient-to-br from-foreground via-foreground/95 to-foreground/90 transition-opacity duration-700 ${videoLoaded ? 'opacity-0' : 'opacity-100'}`} />
-        
+        <div
+          className={`absolute inset-0 bg-gradient-to-br from-foreground via-foreground/95 to-foreground/90 transition-opacity duration-700 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
+        />
+
         <video
           autoPlay
           muted
@@ -20,7 +22,7 @@ const Hero = () => {
           playsInline
           preload="auto"
           onCanPlay={() => setVideoLoaded(true)}
-          className={`w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
         >
           <source src="/videos/hero-background.mp4" type="video/mp4" />
         </video>
@@ -45,19 +47,26 @@ const Hero = () => {
 
           {/* Description */}
           <p className="text-lg text-background/80 mb-8 leading-relaxed max-w-xl">
-            Цялостни ремонти с личен проджект мениджър, фиксиран бюджет и железен договор.
+            Вашият дом заслужава безкомпромисно качество. Цялостни решения за ремонт и довършителни дейности с гаранция.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-4">
             <a href="tel:+359893712919">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base">
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base"
+              >
                 <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
                 Заявете безплатен оглед
               </Button>
             </a>
             <Link to="/portfolio">
-              <Button size="lg" variant="outline" className="border-primary/50 bg-transparent text-primary hover:bg-primary/10 font-semibold text-base">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-primary/50 bg-transparent text-primary hover:bg-primary/10 font-semibold text-base"
+              >
                 Вижте нашите проекти
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Button>
