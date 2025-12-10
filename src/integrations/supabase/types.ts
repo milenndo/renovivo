@@ -68,6 +68,42 @@ export type Database = {
         }
         Relationships: []
       }
+      inspection_requests: {
+        Row: {
+          address: string
+          client_email: string | null
+          client_name: string
+          client_phone: string
+          created_at: string | null
+          id: string
+          notes: string | null
+          preferred_datetime: string | null
+          status: string | null
+        }
+        Insert: {
+          address: string
+          client_email?: string | null
+          client_name: string
+          client_phone: string
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          preferred_datetime?: string | null
+          status?: string | null
+        }
+        Update: {
+          address?: string
+          client_email?: string | null
+          client_name?: string
+          client_phone?: string
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          preferred_datetime?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
       service_categories: {
         Row: {
           created_at: string
