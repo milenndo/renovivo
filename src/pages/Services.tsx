@@ -32,15 +32,50 @@ const serviceCategories = [
     ]
   },
   {
+    id: "preparation",
+    title: "Подготовка & Къртене",
+    description: "Демонтаж, къртене и подготвителни работи",
+    icon: Wrench,
+    items: [
+      { name: "Къртене", path: "/services/kartene", description: "Демонтаж на плочки, замазки и стени" },
+      { name: "Демонтаж на санитария", path: "/services/kartene", description: "Премахване на стара санитария" },
+      { name: "Извозване на отпадъци", path: "/services/kartene", description: "Транспорт до депо" },
+    ]
+  },
+  {
     id: "finishing",
     title: "Довършителни работи",
     description: "Шпакловка, боядисване, настилки",
     icon: Paintbrush,
     items: [
+      { name: "Шпакловка", path: "/services/shpaklovka", description: "Грундиране, шпакловане, шлайфане" },
       { name: "Боядисване", path: "/services/painting", description: "Професионално боядисване с качествени бои" },
-      { name: "Подови настилки", path: "/services/flooring", description: "Ламинат, паркет, теракота" },
-      { name: "Шпакловане", path: "/services/painting", description: "Гладки и перфектни стени" },
-      { name: "Декоративни техники", path: "/services/painting", description: "Уникални текстури и ефекти" },
+      { name: "Лепене на плочки", path: "/services/plochki", description: "Фаянс, теракота, гранитогрес" },
+      { name: "Декоративни мазилки", path: "/services/shpaklovka", description: "Уникални текстури и ефекти" },
+    ]
+  },
+  {
+    id: "flooring",
+    title: "Подови настилки",
+    description: "Всички видове подови покрития",
+    icon: Layers,
+    items: [
+      { name: "Ламинат и паркет", path: "/services/flooring", description: "Монтаж с подложка и первази" },
+      { name: "Сухи подове", path: "/services/suhi-podove", description: "OSB, фазер, сухи замазки" },
+      { name: "Теракота и гранитогрес", path: "/services/plochki", description: "Полагане и фугиране" },
+      { name: "Винилови настилки", path: "/services/flooring", description: "Модерни и практични решения" },
+    ]
+  },
+  {
+    id: "drywall",
+    title: "Сухо строителство",
+    description: "Гипсокартон, окачени тавани, преградни стени",
+    icon: Layers,
+    items: [
+      { name: "Преградни стени", path: "/services/suho-stroitelstvo", description: "Разделяне на помещения" },
+      { name: "Окачени тавани", path: "/services/suho-stroitelstvo", description: "Класически и LED кутии" },
+      { name: "Облицовки", path: "/services/suho-stroitelstvo", description: "Скриване на инсталации" },
+      { name: "Нива и елементи", path: "/services/suho-stroitelstvo", description: "Декоративни форми от гипсокартон" },
     ]
   },
   {
@@ -57,15 +92,15 @@ const serviceCategories = [
   },
   {
     id: "innovation",
-    title: "Специални иновативни покрития",
+    title: "Иновативни покрития",
     description: "Микроцимент, Terrazzo, Flake Floor, Каменен килим",
     icon: Sparkles,
     items: [
-      { name: "Микроцимент", path: "/services/microcement", description: "Безшевно покритие за стени и подове • 67 лв./кв.м" },
-      { name: "Terrazzo", path: "/services/terrazzo", description: "Мозаечни подове с естествени камъни • 133 лв./кв.м" },
-      { name: "Flake Floor", path: "/services/flake-floor", description: "Декоративна настилка с цветни флейки • 95 лв./кв.м" },
-      { name: "Каменен килим", path: "/services/stone-carpet", description: "Идеално за тераси и балкони • 114 лв./кв.м" },
-      { name: "Всички иновативни покрития →", path: "/innovative-coatings", description: "Сравнение, цени и галерия" },
+      { name: "Микроцимент", path: "/services/microcement", description: "Безшевно покритие • от 67 лв./кв.м" },
+      { name: "Terrazzo", path: "/services/terrazzo", description: "Мозаечни подове • от 133 лв./кв.м" },
+      { name: "Flake Floor", path: "/services/flake-floor", description: "Декоративна настилка • от 95 лв./кв.м" },
+      { name: "Каменен килим", path: "/services/stone-carpet", description: "За тераси и балкони • от 114 лв./кв.м" },
+      { name: "Всички иновативни покрития →", path: "/innovative-coatings", description: "Детайлно сравнение и галерия" },
     ]
   },
 ];

@@ -5,39 +5,39 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const mainServices = [
   {
-    id: "interior-design",
-    path: "/services/interior-design",
-    icon: Palette,
-    title: "Интериорен Дизайн",
-    description: "Цялостна концепция за вашия дом. От идея до реализация с внимание към всеки детайл.",
-  },
-  {
     id: "full-renovation",
     path: "/services/full-renovation",
     icon: Home,
     title: "Цялостен Ремонт",
-    description: "Пълна трансформация на стари жилища. Къртене, реконструкция и нови инсталации.",
+    description: "Пълна трансформация на жилища - от проект до реализация с фиксиран бюджет.",
   },
   {
     id: "finishing-works",
-    path: "/services/painting",
+    path: "/services/shpaklovka",
     icon: Paintbrush,
     title: "Довършителни Работи",
-    description: "Решения за ново строителство (БДС). Шпакловка, настилки и боядисване до съвършенство.",
-  },
-  {
-    id: "innovative-solutions",
-    path: "/innovative-coatings",
-    icon: Lightbulb,
-    title: "Иновативни Решения",
-    description: "Микроцимент, Terrazzo, каменен килим - модерни материали за уникален интериор.",
+    description: "Шпакловка, боядисване, плочки и настилки с внимание към всеки детайл.",
   },
   {
     id: "installations",
     path: "/services/electrical",
     icon: PenTool,
-    title: "Инсталации & Детайли",
-    description: "Електро, ВиК, окачени тавани, осветление и внимание към всеки детайл.",
+    title: "Инсталации",
+    description: "Електро, ВиК, сухо строителство и окачени тавани от сертифицирани майстори.",
+  },
+  {
+    id: "innovative-solutions",
+    path: "/innovative-coatings",
+    icon: Lightbulb,
+    title: "Иновативни Покрития",
+    description: "Микроцимент, Terrazzo, Flake Floor, каменен килим - модерни решения.",
+  },
+  {
+    id: "interior-design",
+    path: "/services/interior-design",
+    icon: Palette,
+    title: "Интериорен Дизайн",
+    description: "Цялостна концепция за вашия дом с 3D визуализация.",
   },
 ];
 
