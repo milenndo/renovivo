@@ -5,6 +5,19 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getServiceById, services } from "@/data/services";
+import PriceTable from "@/components/PriceTable";
+
+// Mapping service IDs to price category slugs
+const serviceToPriceCategoryMap: Record<string, string> = {
+  "bathroom": "banya",
+  "kitchen": "kuhnya", 
+  "plumbing": "vik",
+  "electrical": "elektro",
+  "painting": "boyadisvane",
+  "flooring": "plochki",
+  "full-renovation": "banya", // Shows bathroom prices as example
+  "small-repairs": "elektro", // Shows electrical prices
+};
 
 const ServiceDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -263,6 +276,15 @@ const ServiceDetail = () => {
 
               {/* Sidebar */}
               <div className="space-y-6">
+                {/* Price Table */}
+                {id && serviceToPriceCategoryMap[id] && (
+                  <PriceTable 
+                    categorySlug={serviceToPriceCategoryMap[id]} 
+                    title="Ориентировъчни цени"
+                    limit={8}
+                  />
+                )}
+
                 {/* CTA Card */}
                 <Card className="border-0 shadow-lg sticky top-24">
                   <CardContent className="p-6">
