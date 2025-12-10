@@ -14,8 +14,8 @@ const Footer = () => {
           <div className="space-y-6">
             <img src={logo} alt="Renovivo" className="h-10 w-auto brightness-0 invert" />
             <p className="text-background/70 text-sm leading-relaxed">
-              Професионални ремонтни услуги с внимание към всеки детайл. 
-              Трансформираме вашите пространства в мечтани домове.
+              Професионални ремонтни услуги с внимание към всеки детайл. Трансформираме вашите пространства в мечтани
+              домове.
             </p>
             <div className="flex items-center gap-4">
               <a
@@ -52,35 +52,8 @@ const Footer = () => {
                 { name: "Контакти", path: "/contact" },
               ].map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    className="text-background/70 hover:text-primary transition-colors text-sm"
-                  >
+                  <Link to={link.path} className="text-background/70 hover:text-primary transition-colors text-sm">
                     {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Услуги</h3>
-            <ul className="space-y-3">
-              {[
-                { name: "Микроцимент", path: "/services/microcement" },
-                { name: "Terrazzo", path: "/services/terrazzo" },
-                { name: "Flake Floor", path: "/services/flake-floor" },
-                { name: "Каменен килим", path: "/services/stone-carpet" },
-                { name: "Цялостен ремонт", path: "/services/full-renovation" },
-                { name: "Ремонт на баня", path: "/services/bathroom" },
-              ].map((service) => (
-                <li key={service.path}>
-                  <Link
-                    to={service.path}
-                    className="text-background/70 hover:text-primary transition-colors text-sm"
-                  >
-                    {service.name}
                   </Link>
                 </li>
               ))}
@@ -125,12 +98,8 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="border-t border-background/10">
         <div className="container-custom py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-background/70 text-sm">
-            © {currentYear} Renovivo. Всички права запазени.
-          </p>
-          <p className="text-background/70 text-sm">
-            Every Detail Matters
-          </p>
+          <p className="text-background/70 text-sm">© {currentYear} Renovivo. Всички права запазени.</p>
+          <p className="text-background/70 text-sm">Every Detail Matters</p>
         </div>
       </div>
     </footer>
