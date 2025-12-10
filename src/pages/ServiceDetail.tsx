@@ -14,9 +14,14 @@ const serviceToPriceCategoryMap: Record<string, string> = {
   "plumbing": "vik",
   "electrical": "elektro",
   "painting": "boyadisvane",
-  "flooring": "plochki",
+  "flooring": "podovi-nastilki",
   "full-renovation": "banya", // Shows bathroom prices as example
   "small-repairs": "elektro", // Shows electrical prices
+  // Innovative coatings
+  "microcement": "inovativni-pokritia",
+  "terrazzo": "inovativni-pokritia",
+  "flake-floor": "inovativni-pokritia",
+  "stone-carpet": "inovativni-pokritia",
 };
 
 const ServiceDetail = () => {

@@ -44,18 +44,6 @@ const serviceCategories = [
     ]
   },
   {
-    id: "innovation",
-    title: "Иновативни покрития",
-    description: "Модерни материали за уникален интериор",
-    icon: Sparkles,
-    items: [
-      { name: "Микроцимент", path: "/services/microcement", description: "Безшевно покритие за стени и подове" },
-      { name: "Terrazzo", path: "/services/terrazzo", description: "Мозаечни подове с естествени камъни" },
-      { name: "Flake Floor", path: "/services/flake-floor", description: "Декоративна настилка с цветни флейки" },
-      { name: "Каменен килим", path: "/services/stone-carpet", description: "Идеално за тераси и балкони" },
-    ]
-  },
-  {
     id: "installations",
     title: "Инсталации",
     description: "Електро, ВиК и техническо оборудване",
@@ -65,6 +53,19 @@ const serviceCategories = [
       { name: "ВиК услуги", path: "/services/plumbing", description: "Водопровод и канализация" },
       { name: "Отопление", path: "/services/plumbing", description: "Отоплителни системи" },
       { name: "Смарт инсталации", path: "/services/electrical", description: "Умен дом и автоматизация" },
+    ]
+  },
+  {
+    id: "innovation",
+    title: "Специални иновативни покрития",
+    description: "Микроцимент, Terrazzo, Flake Floor, Каменен килим",
+    icon: Sparkles,
+    items: [
+      { name: "Микроцимент", path: "/services/microcement", description: "Безшевно покритие за стени и подове • 67 лв./кв.м" },
+      { name: "Terrazzo", path: "/services/terrazzo", description: "Мозаечни подове с естествени камъни • 133 лв./кв.м" },
+      { name: "Flake Floor", path: "/services/flake-floor", description: "Декоративна настилка с цветни флейки • 95 лв./кв.м" },
+      { name: "Каменен килим", path: "/services/stone-carpet", description: "Идеално за тераси и балкони • 114 лв./кв.м" },
+      { name: "Всички иновативни покрития →", path: "/innovative-coatings", description: "Сравнение, цени и галерия" },
     ]
   },
 ];
@@ -197,25 +198,6 @@ const ServicesPage = () => {
             </div>
             <div className="max-w-4xl mx-auto">
               <PriceTable showAll={true} title="Всички услуги" />
-            </div>
-          </div>
-        </section>
-
-        {/* Quick Access - Innovative Solutions */}
-        <section className="py-12">
-          <div className="container-custom">
-            <div className="text-center mb-8">
-              <span className="text-primary font-medium text-sm uppercase tracking-wider">Препоръчано</span>
-              <h2 className="text-2xl md:text-3xl font-bold mt-2">Иновативни покрития</h2>
-              <p className="text-muted-foreground mt-2">Модерни материали за уникален интериор и екстериор</p>
-            </div>
-            <div className="flex justify-center">
-              <Link to="/innovative-coatings">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
-                  Разгледайте иновациите
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
             </div>
           </div>
         </section>
