@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Phone, Sparkles, Check, ArrowRight, Shield, Droplets, Clock, Palette } from "lucide-react";
+import { Phone, Sparkles, Check, ArrowRight, Shield, Droplets, Clock, Palette, Layers, ThermometerSun, Paintbrush, Hammer } from "lucide-react";
+import PriceTable from "@/components/PriceTable";
 
 const innovativeServices = services.filter(s => s.isInnovative);
 
@@ -51,6 +52,13 @@ const comparisonData = [
     terrazzo: "7-10 дни",
     flakeFloor: "2-3 дни",
     stoneCarpet: "1-2 дни"
+  },
+  {
+    feature: "Ориентировъчна цена",
+    microcement: "67 лв./кв.м",
+    terrazzo: "133 лв./кв.м",
+    flakeFloor: "95 лв./кв.м",
+    stoneCarpet: "114 лв./кв.м"
   }
 ];
 
@@ -74,6 +82,16 @@ const benefits = [
     icon: Clock,
     title: "Бързо полагане",
     description: "От 1 до 10 дни в зависимост от покритието"
+  },
+  {
+    icon: ThermometerSun,
+    title: "Подово отопление",
+    description: "Съвместимост с всички отоплителни системи"
+  },
+  {
+    icon: Layers,
+    title: "Без демонтаж",
+    description: "Полагане директно върху съществуващи покрития"
   }
 ];
 
@@ -283,8 +301,28 @@ const InnovativeCoatings = () => {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section className="py-16 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <Badge variant="outline" className="mb-4 px-4 py-2">
+              Ценоразпис
+            </Badge>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Цени на иновативни покрития
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Прозрачни цени за всички видове безшевни покрития
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <PriceTable categorySlug="inovativni-pokritia" title="Иновативни покрития" />
+          </div>
+        </div>
+      </section>
+
       {/* Comparison Table */}
-      <section id="comparison" className="py-20 bg-muted/30">
+      <section id="comparison" className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
