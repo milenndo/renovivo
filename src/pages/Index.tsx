@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
+import PeaceOfMind from "@/components/home/PeaceOfMind";
 import Services from "@/components/home/Services";
 import About from "@/components/home/About";
 import Projects from "@/components/home/Projects";
@@ -46,6 +47,7 @@ const Index = () => {
       </Helmet>
       <Layout>
         <Hero />
+        <PeaceOfMind />
         <Services />
         <About />
         <Projects />
