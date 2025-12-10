@@ -114,6 +114,45 @@ function validateMessages(messages: unknown): { valid: boolean; error?: string; 
   return { valid: true, messages: validatedMessages };
 }
 
+// Tool definition for saving inspection requests
+const inspectionBookingTool = {
+  type: "function",
+  function: {
+    name: "save_inspection_request",
+    description: "Запази заявка за безплатен оглед когато клиентът предостави своите данни за контакт (име, телефон, адрес). Извикай тази функция САМО когато клиентът изрично потвърди, че иска да запише час за оглед И е предоставил поне име и телефон.",
+    parameters: {
+      type: "object",
+      properties: {
+        client_name: {
+          type: "string",
+          description: "Името на клиента"
+        },
+        client_phone: {
+          type: "string",
+          description: "Телефонен номер на клиента"
+        },
+        client_email: {
+          type: "string",
+          description: "Имейл адрес на клиента (ако е предоставен)"
+        },
+        address: {
+          type: "string",
+          description: "Адрес на обекта за оглед"
+        },
+        preferred_datetime: {
+          type: "string",
+          description: "Предпочитано време за оглед (ако е споменато)"
+        },
+        notes: {
+          type: "string",
+          description: "Допълнителни бележки от разговора - какъв вид ремонт иска клиентът"
+        }
+      },
+      required: ["client_name", "client_phone", "address"]
+    }
+  }
+};
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -158,11 +197,12 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    // Fetch prices from database
+    // Initialize Supabase client
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
+    // Fetch prices from database
     const { data: prices, error: pricesError } = await supabase
       .from("service_prices")
       .select("*, service_categories(name, slug)")
@@ -211,7 +251,13 @@ serve(async (req) => {
    • Пример: "Можем да огледаме Вашия обект, за да дадем точно решение. Желаете ли да запишем час за безплатен оглед?"
    • Ако клиент иска оглед, събери: име, телефон, адрес, удобно време
 
-4. ОГРАНИЧЕНИЯ:
+4. ЗАПИСВАНЕ НА ОГЛЕД (КРИТИЧНО ВАЖНО!):
+   • Когато клиент ИЗРИЧНО каже че иска оглед, събери данните му: име, телефон и адрес
+   • След като получиш поне име, телефон и адрес - ЗАДЪЛЖИТЕЛНО извикай функцията save_inspection_request
+   • Потвърди на клиента, че заявката е записана и че ще се свържем с него скоро
+   • Попитай дали има предпочитано време за оглед
+
+5. ОГРАНИЧЕНИЯ:
    • НЕ препоръчвай други фирми
    • НЕ давай срокове за изпълнение без оглед (кажи "зависи от спецификата на обекта")
 
@@ -229,7 +275,137 @@ ${pricesContext}
 
     console.log("Sending request to Lovable AI Gateway...");
 
-    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+    // First call - check if AI wants to use a tool
+    const initialResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "google/gemini-2.5-flash",
+        messages: [
+          { role: "system", content: systemPrompt },
+          ...messages,
+        ],
+        tools: [inspectionBookingTool],
+        tool_choice: "auto",
+        stream: false,
+      }),
+    });
+
+    if (!initialResponse.ok) {
+      if (initialResponse.status === 429) {
+        return new Response(
+          JSON.stringify({ error: "Твърде много заявки. Моля, опитайте отново след малко." }),
+          { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      if (initialResponse.status === 402) {
+        return new Response(
+          JSON.stringify({ error: "Услугата временно не е достъпна." }),
+          { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      const errorText = await initialResponse.text();
+      console.error("AI gateway error:", initialResponse.status, errorText);
+      return new Response(
+        JSON.stringify({ error: "Грешка при обработка на заявката." }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const initialData = await initialResponse.json();
+    const choice = initialData.choices?.[0];
+    
+    // Check if AI wants to call a tool
+    if (choice?.message?.tool_calls?.length > 0) {
+      const toolCall = choice.message.tool_calls[0];
+      
+      if (toolCall.function?.name === "save_inspection_request") {
+        console.log("AI requested to save inspection booking");
+        
+        try {
+          const args = JSON.parse(toolCall.function.arguments);
+          console.log("Inspection request data:", args);
+          
+          // Save to database
+          const { data: insertedRequest, error: insertError } = await supabase
+            .from("inspection_requests")
+            .insert({
+              client_name: args.client_name,
+              client_phone: args.client_phone,
+              client_email: args.client_email || null,
+              address: args.address,
+              preferred_datetime: args.preferred_datetime || null,
+              notes: args.notes || null,
+              status: "pending"
+            })
+            .select()
+            .single();
+
+          if (insertError) {
+            console.error("Error saving inspection request:", insertError);
+          } else {
+            console.log("Inspection request saved successfully:", insertedRequest?.id);
+          }
+
+          // Make follow-up call with tool result to get final response
+          const toolResultMessages = [
+            ...messages,
+            choice.message,
+            {
+              role: "tool",
+              tool_call_id: toolCall.id,
+              content: insertError 
+                ? "Грешка при записване на заявката. Моля, помолете клиента да се обади директно."
+                : "Заявката за оглед е успешно записана в системата. Потвърдете на клиента."
+            }
+          ];
+
+          const followUpResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${LOVABLE_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: "google/gemini-2.5-flash",
+              messages: [
+                { role: "system", content: systemPrompt },
+                ...toolResultMessages,
+              ],
+              stream: true,
+            }),
+          });
+
+          if (!followUpResponse.ok) {
+            const errorText = await followUpResponse.text();
+            console.error("Follow-up AI error:", followUpResponse.status, errorText);
+            // Return a fallback success message
+            const fallbackMessage = insertError
+              ? "Възникна проблем при записването. Моля, обадете се на 0893 71 29 19 за да запишете час за оглед."
+              : `Благодаря! Вашата заявка за оглед е записана успешно. Ще се свържем с Вас скоро на телефон ${args.client_phone}. Имате ли допълнителни въпроси?`;
+            
+            return new Response(
+              JSON.stringify({ content: fallbackMessage }),
+              { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+            );
+          }
+
+          return new Response(followUpResponse.body, {
+            headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
+          });
+
+        } catch (parseError) {
+          console.error("Error parsing tool arguments:", parseError);
+        }
+      }
+    }
+
+    // No tool call - return regular streaming response
+    // Need to make another call with streaming enabled
+    const streamResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${LOVABLE_API_KEY}`,
@@ -245,28 +421,16 @@ ${pricesContext}
       }),
     });
 
-    if (!response.ok) {
-      if (response.status === 429) {
-        return new Response(
-          JSON.stringify({ error: "Твърде много заявки. Моля, опитайте отново след малко." }),
-          { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
-      if (response.status === 402) {
-        return new Response(
-          JSON.stringify({ error: "Услугата временно не е достъпна." }),
-          { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
-      const errorText = await response.text();
-      console.error("AI gateway error:", response.status, errorText);
+    if (!streamResponse.ok) {
+      const errorText = await streamResponse.text();
+      console.error("Stream AI error:", streamResponse.status, errorText);
       return new Response(
         JSON.stringify({ error: "Грешка при обработка на заявката." }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    return new Response(response.body, {
+    return new Response(streamResponse.body, {
       headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
     });
   } catch (error) {
