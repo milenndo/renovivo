@@ -1,10 +1,72 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight } from "lucide-react";
+import { Phone, ArrowRight, Home, Bath, ChefHat, Paintbrush, Layers, Wrench, Zap, Droplets, Square, Sparkles, Hexagon, Mountain, Palette } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { services } from "@/data/services";
+
+// Service categories with their items
+const serviceCategories = [
+  {
+    id: "design",
+    title: "Проект & Дизайн",
+    description: "Цялостна концепция за вашия интериор",
+    icon: Palette,
+    items: [
+      { name: "Интериорен дизайн", path: "/services/interior-design", description: "Концепция и визуализация" },
+      { name: "3D проектиране", path: "/services/full-renovation", description: "Реалистична визуализация на проекта" },
+      { name: "Консултации", path: "/contact", description: "Професионални съвети и насоки" },
+    ]
+  },
+  {
+    id: "renovation",
+    title: "Ремонтни дейности",
+    description: "Цялостни и частични ремонти",
+    icon: Home,
+    items: [
+      { name: "Цялостен ремонт", path: "/services/full-renovation", description: "Пълна трансформация на жилище" },
+      { name: "Ремонт на баня", path: "/services/bathroom", description: "Модерни бани с внимание към детайла" },
+      { name: "Ремонт на кухня", path: "/services/kitchen", description: "Функционални и стилни кухни" },
+      { name: "Малки ремонти", path: "/services/small-repairs", description: "Бързи и надеждни решения" },
+    ]
+  },
+  {
+    id: "finishing",
+    title: "Довършителни работи",
+    description: "Шпакловка, боядисване, настилки",
+    icon: Paintbrush,
+    items: [
+      { name: "Боядисване", path: "/services/painting", description: "Професионално боядисване с качествени бои" },
+      { name: "Подови настилки", path: "/services/flooring", description: "Ламинат, паркет, теракота" },
+      { name: "Шпакловане", path: "/services/painting", description: "Гладки и перфектни стени" },
+      { name: "Декоративни техники", path: "/services/painting", description: "Уникални текстури и ефекти" },
+    ]
+  },
+  {
+    id: "innovation",
+    title: "Иновативни покрития",
+    description: "Модерни материали за уникален интериор",
+    icon: Sparkles,
+    items: [
+      { name: "Микроцимент", path: "/services/microcement", description: "Безшевно покритие за стени и подове" },
+      { name: "Terrazzo", path: "/services/terrazzo", description: "Мозаечни подове с естествени камъни" },
+      { name: "Flake Floor", path: "/services/flake-floor", description: "Декоративна настилка с цветни флейки" },
+      { name: "Каменен килим", path: "/services/stone-carpet", description: "Идеално за тераси и балкони" },
+    ]
+  },
+  {
+    id: "installations",
+    title: "Инсталации",
+    description: "Електро, ВиК и техническо оборудване",
+    icon: Zap,
+    items: [
+      { name: "Електрически инсталации", path: "/services/electrical", description: "Ново окабеляване и ремонт" },
+      { name: "ВиК услуги", path: "/services/plumbing", description: "Водопровод и канализация" },
+      { name: "Отопление", path: "/services/plumbing", description: "Отоплителни системи" },
+      { name: "Смарт инсталации", path: "/services/electrical", description: "Умен дом и автоматизация" },
+    ]
+  },
+];
 
 const ServicesPage = () => {
   const servicesSchema = {
@@ -12,24 +74,26 @@ const ServicesPage = () => {
     "@type": "ItemList",
     "name": "Ремонтни услуги",
     "description": "Професионални ремонтни услуги в София",
-    "itemListElement": services.map((service, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "Service",
-        "name": service.title,
-        "description": service.shortDescription,
-        "url": `https://renovivo.bg/services/${service.id}`,
-        "provider": {
-          "@type": "LocalBusiness",
-          "name": "Renovivo"
-        },
-        "areaServed": {
-          "@type": "City",
-          "name": "София"
+    "itemListElement": serviceCategories.flatMap((category, catIndex) =>
+      category.items.map((item, itemIndex) => ({
+        "@type": "ListItem",
+        "position": catIndex * 10 + itemIndex + 1,
+        "item": {
+          "@type": "Service",
+          "name": item.name,
+          "description": item.description,
+          "url": `https://renovivo.bg${item.path}`,
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "Renovivo"
+          },
+          "areaServed": {
+            "@type": "City",
+            "name": "София"
+          }
         }
-      }
-    }))
+      }))
+    )
   };
 
   const breadcrumbSchema = {
@@ -62,85 +126,81 @@ const ServicesPage = () => {
         <section className="relative py-20 bg-foreground">
           <div className="container-custom relative z-10">
             <div className="max-w-2xl">
-              <span className="text-primary font-medium text-sm uppercase tracking-wider">Нашите услуги</span>
+              <span className="text-primary font-medium text-sm uppercase tracking-wider">Каталог услуги</span>
               <h1 className="text-4xl md:text-5xl font-bold text-background mt-3 mb-6">
-                Професионални ремонтни услуги
+                Всички услуги
               </h1>
               <p className="text-background/80 text-lg">
-                Предлагаме пълен спектър от ремонтни услуги с гаранция за качество и спазване на сроковете.
+                Разгледайте пълния спектър от ремонтни и строителни услуги, които предлагаме в София и региона.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Services */}
+        {/* Services Directory */}
         <section className="section-padding">
           <div className="container-custom">
-            <div className="space-y-8">
-              {services.map((service, index) => (
-                <Card 
-                  key={service.id} 
-                  className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow"
-                >
-                  <div className={`grid grid-cols-1 lg:grid-cols-2 ${index % 2 === 1 ? '' : ''}`}>
-                    {/* Image */}
-                    <Link 
-                      to={`/services/${service.id}`}
-                      className={`relative h-64 lg:h-auto min-h-[300px] block cursor-pointer overflow-hidden group ${index % 2 === 1 ? 'lg:order-2' : ''}`}
-                    >
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300" />
-                      <div className="absolute top-4 left-4">
-                        <div className="w-14 h-14 rounded-xl bg-primary flex items-center justify-center">
-                          <service.icon className="h-7 w-7 text-primary-foreground" />
-                        </div>
-                      </div>
-                    </Link>
-
-                    {/* Content */}
-                    <CardContent className={`p-8 lg:p-12 flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                      <h2 className="text-2xl md:text-3xl font-bold mb-4">{service.title}</h2>
-                      <p className="text-muted-foreground mb-6">{service.shortDescription}</p>
-                      
-                      {/* Features preview */}
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {service.features.slice(0, 4).map((feature) => (
-                          <span 
-                            key={feature}
-                            className="px-3 py-1 bg-secondary text-sm rounded-full"
-                          >
-                            {feature}
-                          </span>
-                        ))}
-                        {service.features.length > 4 && (
-                          <span className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full">
-                            +{service.features.length - 4} още
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="flex flex-wrap gap-4">
-                        <Link to={`/services/${service.id}`}>
-                          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
-                            Научете повече
-                            <ArrowRight className="h-4 w-4 ml-2" />
-                          </Button>
-                        </Link>
-                        <a href="tel:+359893712919">
-                          <Button variant="outline">
-                            <Phone className="h-4 w-4 mr-2" />
-                            Обадете се
-                          </Button>
-                        </a>
-                      </div>
-                    </CardContent>
+            <div className="grid gap-12">
+              {serviceCategories.map((category) => (
+                <div key={category.id} className="space-y-6">
+                  {/* Category Header */}
+                  <div className="flex items-center gap-4 border-b border-border pb-4">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <category.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold">{category.title}</h2>
+                      <p className="text-muted-foreground">{category.description}</p>
+                    </div>
                   </div>
-                </Card>
+
+                  {/* Category Items */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {category.items.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.path}
+                        className="group"
+                      >
+                        <Card className="h-full border hover:border-primary hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                          <CardContent className="p-5">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <h3 className="font-semibold group-hover:text-primary transition-colors mb-1">
+                                  {item.name}
+                                </h3>
+                                <p className="text-sm text-muted-foreground">
+                                  {item.description}
+                                </p>
+                              </div>
+                              <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0 ml-2" />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Quick Access - Innovative Solutions */}
+        <section className="py-12 bg-secondary/30">
+          <div className="container-custom">
+            <div className="text-center mb-8">
+              <span className="text-primary font-medium text-sm uppercase tracking-wider">Препоръчано</span>
+              <h2 className="text-2xl md:text-3xl font-bold mt-2">Иновативни покрития</h2>
+              <p className="text-muted-foreground mt-2">Модерни материали за уникален интериор и екстериор</p>
+            </div>
+            <div className="flex justify-center">
+              <Link to="/innovative-coatings">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
+                  Разгледайте иновациите
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
