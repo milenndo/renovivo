@@ -45,9 +45,9 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { name: "Начало", path: "/" },
-                { name: "Иновации", path: "/innovative-coatings" },
                 { name: "Услуги", path: "/services" },
                 { name: "Портфолио", path: "/portfolio" },
+                { name: "Блог", path: "/blog" },
                 { name: "За нас", path: "/about" },
                 { name: "Контакти", path: "/contact" },
               ].map((link) => (
@@ -69,8 +69,8 @@ const Footer = () => {
             <ul className="space-y-3">
               {[
                 { name: "Микроцимент", path: "/services/microcement" },
-                { name: "Тераццо", path: "/services/terrazzo" },
-                { name: "Флейк подове", path: "/services/flake-floor" },
+                { name: "Terrazzo", path: "/services/terrazzo" },
+                { name: "Flake Floor", path: "/services/flake-floor" },
                 { name: "Каменен килим", path: "/services/stone-carpet" },
                 { name: "Цялостен ремонт", path: "/services/full-renovation" },
                 { name: "Ремонт на баня", path: "/services/bathroom" },
