@@ -29,9 +29,9 @@ const Header = () => {
               <Phone className="h-4 w-4" />
               <span className="hidden sm:inline">+359 89 371 29 19</span>
             </a>
-            <a href="mailto:info@renovivo.bg" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <a href="mailto:renovivo.bg@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
               <Mail className="h-4 w-4" />
-              <span className="hidden sm:inline">info@renovivo.bg</span>
+              <span className="hidden sm:inline">renovivo.bg@gmail.com</span>
             </a>
             <div className="hidden md:flex items-center gap-2">
               <Clock className="h-4 w-4" />
