@@ -1,64 +1,39 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Home, Wrench, PenTool, Paintbrush, Phone } from "lucide-react";
+import { Home, Paintbrush, Lightbulb, PenTool, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-// 4 основни карти услуги по заданието
 const mainServices = [
   {
     id: "full-renovation",
     icon: Home,
-    title: "Цялостни ремонти",
-    description: "Поемаме ремонта от А до Я: планиране, координация, изпълнение и контрол. Един екип, един отговорник, един график.",
-    subcategories: [
-      "Цялостен ремонт на апартамент",
-      "Цялостен ремонт на къща",
-      "Ремонт на офис/търговски обект",
-      "Ремонт на баня като част от голям проект",
-    ],
-  },
-  {
-    id: "partial-renovation",
-    icon: Wrench,
-    title: "Частични ремонти",
-    description: "Освежаване на отделни помещения или системи. Когато не е нужен цялостен ремонт, а само конкретни подобрения.",
-    subcategories: [
-      "Ремонт на една стая / хол",
-      "Частичен ремонт на баня или кухня",
-      "Смяна на настилки и облицовки",
-      "Корекции след предишен ремонт",
-    ],
-  },
-  {
-    id: "custom-projects",
-    icon: PenTool,
-    title: "Индивидуални проекти",
-    description: "Работа по индивидуално задание или по проект от дизайнер/архитект. Специални решения за вашия уникален интериор.",
-    subcategories: [
-      "Работа по готов интериорен проект",
-      "Консултация и адаптиране спрямо бюджет",
-      "Ниши, осветление, окачени тавани",
-      "Скрити инсталации",
-    ],
+    title: "Цялостен Ремонт",
+    description: "Пълна трансформация на стари жилища. Къртене, реконструкция и нови инсталации.",
   },
   {
     id: "finishing-works",
     icon: Paintbrush,
-    title: "Довършителни дейности",
-    description: "Фокус върху визуален завършек и детайл. Перфектното довършване, което прави разликата.",
-    subcategories: [
-      "Боядисване и шпакловка",
-      "Монтаж на гипсокартон",
-      "Облицовки и настилки",
-      "Монтаж на врати, первази, лайсни",
-    ],
+    title: "Довършителни Работи",
+    description: "Решения за ново строителство (БДС). Шпакловка, настилки и боядисване до съвършенство.",
+  },
+  {
+    id: "innovative-solutions",
+    icon: Lightbulb,
+    title: "Иновативни Решения",
+    description: "Смарт инсталации, енергийна ефективност, шумоизолация и модерни материали.",
+  },
+  {
+    id: "interior-design",
+    icon: PenTool,
+    title: "Интериор & Дизайн",
+    description: "Окачени тавани, декоративни мазилки, осветление и внимание към детайла.",
   },
 ];
 
 const Services = () => {
   return (
-    <section className="section-padding bg-secondary/30">
-      <div className="container-custom">
+    <section className="py-16 md:py-24 bg-secondary/30">
+      <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12">
           <span className="text-primary font-medium text-sm uppercase tracking-wider">Услуги</span>
@@ -66,64 +41,44 @@ const Services = () => {
             Какво можем да направим за вас
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Изберете услугата, която отговаря на вашите нужди. Всяка категория е съобразена 
-            с различни ситуации и бюджети.
+            Изберете услугата, която отговаря на вашите нужди.
           </p>
         </div>
 
-        {/* Services Grid - 4 карти */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Services Grid - 2x2 on mobile, 4 in a row on desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {mainServices.map((service, index) => (
             <Card
               key={service.id}
               className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <CardContent className="p-8">
+              <CardContent className="p-5 md:p-6 text-center">
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary transition-colors duration-300">
-                  <service.icon className="h-7 w-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 mx-auto group-hover:bg-primary transition-colors duration-300">
+                  <service.icon className="h-6 w-6 md:h-7 md:w-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                 </div>
 
                 {/* Title & Description */}
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
+                <h3 className="text-base md:text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
+                <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
                   {service.description}
                 </p>
-
-                {/* Subcategories */}
-                <ul className="space-y-2 mb-6">
-                  {service.subcategories.map((sub) => (
-                    <li key={sub} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                      {sub}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center text-primary font-medium text-sm hover:gap-2 transition-all"
-                >
-                  Поискай оферта
-                  <ArrowRight className="h-4 w-4 ml-1" aria-hidden="true" />
-                </Link>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="text-center mt-12">
-          <a href="tel:+359893712919">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
-              <Phone className="h-5 w-5 mr-2" />
-              Заяви оглед
+        {/* Secondary Button */}
+        <div className="text-center mt-10">
+          <Link to="/services">
+            <Button variant="outline" size="lg" className="font-semibold">
+              Разгледайте всички услуги
+              <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
