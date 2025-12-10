@@ -9,8 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Phone, MapPin, Clock, User, Filter } from "lucide-react";
+import { Calendar, Phone, MapPin, Clock, User, Filter, LogOut, ShieldAlert } from "lucide-react";
 import { toast } from "sonner";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 
 type InspectionRequest = {
   id: string;
@@ -47,6 +48,7 @@ const statusLabels: Record<string, string> = {
 };
 
 const Admin = () => {
+  const { user, isAdmin, isLoading: authLoading, signOut } = useAdminAuth();
   const [statusFilter, setStatusFilter] = useState("all");
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
@@ -76,6 +78,7 @@ const Admin = () => {
       if (error) throw error;
       return data as InspectionRequest[];
     },
+    enabled: isAdmin,
   });
 
   const updateStatusMutation = useMutation({
@@ -101,17 +104,58 @@ const Admin = () => {
     setDateTo("");
   };
 
+  // Loading state
+  if (authLoading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4" />
+            <p className="text-muted-foreground">Зареждане...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  // Not admin state
+  if (!isAdmin) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center max-w-md">
+            <ShieldAlert className="h-16 w-16 text-destructive mx-auto mb-4" />
+            <h1 className="text-2xl font-bold text-foreground mb-2">Достъпът е отказан</h1>
+            <p className="text-muted-foreground mb-6">
+              Нямате права за достъп до тази страница. Само администратори могат да преглеждат заявките за оглед.
+            </p>
+            <Button onClick={signOut} variant="outline">
+              <LogOut className="h-4 w-4 mr-2" />
+              Изход
+            </Button>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <div className="min-h-screen bg-background py-8">
         <div className="container mx-auto px-4">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-foreground mb-2">
-              Заявки за оглед
-            </h1>
-            <p className="text-muted-foreground">
-              Преглед и управление на всички заявки за оглед
-            </p>
+          <div className="flex justify-between items-start mb-8">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground mb-2">
+                Заявки за оглед
+              </h1>
+              <p className="text-muted-foreground">
+                Преглед и управление на всички заявки за оглед
+              </p>
+            </div>
+            <Button onClick={signOut} variant="outline" size="sm">
+              <LogOut className="h-4 w-4 mr-2" />
+              Изход
+            </Button>
           </div>
 
           {/* Filters */}
