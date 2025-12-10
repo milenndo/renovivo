@@ -38,15 +38,14 @@ const Hero = () => {
 
           {/* Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-background leading-tight mb-6">
-            Вашият ремонт от 
-            <span className="text-primary"> А до Я</span>
-            <br />с един екип
+            Ремонти без изненади.
+            <br />
+            <span className="text-primary">От проект до ключ.</span>
           </h1>
 
           {/* Description */}
           <p className="text-lg text-background/80 mb-8 leading-relaxed max-w-xl">
-            Renovivo поема целия процес – от оглед и планиране до финални довършителни работи. 
-            Тясно специализирани експерти във всяко звено на ремонтните дейности.
+            Цялостни ремонти с личен проджект мениджър, фиксиран бюджет и железен договор.
           </p>
 
           {/* CTAs */}
@@ -54,7 +53,7 @@ const Hero = () => {
             <a href="tel:+359893712919">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base">
                 <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
-                Заяви оглед
+                Заявете безплатен оглед
               </Button>
             </a>
             <Link to="/portfolio">
