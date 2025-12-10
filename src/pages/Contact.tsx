@@ -18,8 +18,8 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Имейл",
-    value: "info@renovivo.bg",
-    href: "mailto:info@renovivo.bg",
+    value: "renovivo.bg@gmail.com",
+    href: "mailto:renovivo.bg@gmail.com",
   },
   {
     icon: MapPin,
@@ -77,7 +77,7 @@ const ContactPage = () => {
       "@type": "LocalBusiness",
       "name": "Renovivo",
       "telephone": "+359893712919",
-      "email": "info@renovivo.bg",
+      "email": "renovivo.bg@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "София",
