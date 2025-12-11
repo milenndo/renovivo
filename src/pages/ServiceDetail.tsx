@@ -9,14 +9,10 @@ import PriceTable from "@/components/PriceTable";
 
 // Mapping service IDs to price category slugs
 const serviceToPriceCategoryMap: Record<string, string> = {
-  "bathroom": "banya",
-  "kitchen": "kuhnya", 
   "plumbing": "vik",
   "electrical": "elektro",
   "painting": "boyadisvane",
   "flooring": "podovi-nastilki",
-  "full-renovation": "banya",
-  "small-repairs": "elektro",
   // Innovative coatings
   "microcement": "inovativni-pokritia",
   "terrazzo": "inovativni-pokritia",
@@ -27,8 +23,26 @@ const serviceToPriceCategoryMap: Record<string, string> = {
   "suho-stroitelstvo": "suho-stroitelstvo",
   "kartene": "kartene",
   "plochki": "plochki",
-  "suhi-podove": "suhi-podove",
+  "suhi-podove": "suho-stroitelstvo",
 };
+
+// Services that should NOT show price tables (individual projects)
+const servicesWithoutPrices = [
+  "full-renovation",
+  "bathroom", 
+  "kitchen",
+  "interior-design",
+];
+
+// Related services for full renovation
+const relatedServicesForFullRenovation = [
+  { name: "Електрически инсталации", path: "/services/electrical" },
+  { name: "ВиК услуги", path: "/services/plumbing" },
+  { name: "Шпакловка", path: "/services/shpaklovka" },
+  { name: "Боядисване", path: "/services/painting" },
+  { name: "Подови настилки", path: "/services/flooring" },
+  { name: "Лепене на плочки", path: "/services/plochki" },
+];
 
 const ServiceDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -287,13 +301,67 @@ const ServiceDetail = () => {
 
               {/* Sidebar */}
               <div className="space-y-6">
-                {/* Price Table */}
-                {id && serviceToPriceCategoryMap[id] && (
+                {/* Price Table - only for services with pricing */}
+                {id && serviceToPriceCategoryMap[id] && !servicesWithoutPrices.includes(id) && (
                   <PriceTable 
                     categorySlug={serviceToPriceCategoryMap[id]} 
                     title="Ориентировъчни цени"
                     limit={8}
                   />
+                )}
+
+                {/* Custom content for individual project services */}
+                {id && servicesWithoutPrices.includes(id) && (
+                  <Card className="border-0 shadow-lg">
+                    <CardContent className="p-6">
+                      <h3 className="text-lg font-bold mb-4">Защо не посочваме цена?</h3>
+                      <p className="text-muted-foreground text-sm mb-4">
+                        Всеки проект е уникален и изисква индивидуален подход. Цената зависи от множество фактори:
+                      </p>
+                      <ul className="text-sm text-muted-foreground space-y-2 mb-4">
+                        <li className="flex items-start gap-2">
+                          <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                          <span>Квадратура и сложност на обекта</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                          <span>Избрани материали и оборудване</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                          <span>Текущо състояние на помещението</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                          <span>Специфични изисквания и желания</span>
+                        </li>
+                      </ul>
+                      <p className="text-sm font-medium text-primary">
+                        Заявете безплатен оглед за точна оферта!
+                      </p>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Related services for full renovation */}
+                {id === "full-renovation" && (
+                  <Card className="border-0 shadow-lg">
+                    <CardContent className="p-6">
+                      <h3 className="font-bold mb-4">Свързани услуги</h3>
+                      <div className="space-y-3">
+                        {relatedServicesForFullRenovation.map((service) => (
+                          <Link
+                            key={service.path}
+                            to={service.path}
+                            className="flex items-center gap-3 p-2 rounded-lg hover:bg-secondary transition-colors"
+                          >
+                            <ArrowRight className="h-4 w-4 text-primary" />
+                            <span className="text-sm">{service.name}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
                 )}
 
                 {/* CTA Card */}

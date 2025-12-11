@@ -14,8 +14,7 @@ const serviceCategories = [
     description: "Цялостна концепция за вашия интериор",
     icon: Palette,
     items: [
-      { name: "Интериорен дизайн", path: "/services/interior-design", description: "Концепция и визуализация" },
-      { name: "3D проектиране", path: "/services/full-renovation", description: "Реалистична визуализация на проекта" },
+      { name: "Интериорен дизайн и 3D проектиране", path: "/services/interior-design", description: "Концепция, визуализация и реализация" },
       { name: "Консултации", path: "/contact", description: "Професионални съвети и насоки" },
     ]
   },
@@ -28,7 +27,6 @@ const serviceCategories = [
       { name: "Цялостен ремонт", path: "/services/full-renovation", description: "Пълна трансформация на жилище" },
       { name: "Ремонт на баня", path: "/services/bathroom", description: "Модерни бани с внимание към детайла" },
       { name: "Ремонт на кухня", path: "/services/kitchen", description: "Функционални и стилни кухни" },
-      { name: "Малки ремонти", path: "/services/small-repairs", description: "Бързи и надеждни решения" },
     ]
   },
   {
@@ -61,7 +59,6 @@ const serviceCategories = [
     icon: Layers,
     items: [
       { name: "Ламинат и паркет", path: "/services/flooring", description: "Монтаж с подложка и первази" },
-      { name: "Сухи подове", path: "/services/suhi-podove", description: "OSB, фазер, сухи замазки" },
       { name: "Теракота и гранитогрес", path: "/services/plochki", description: "Полагане и фугиране" },
       { name: "Винилови настилки", path: "/services/flooring", description: "Модерни и практични решения" },
     ]
@@ -74,8 +71,8 @@ const serviceCategories = [
     items: [
       { name: "Преградни стени", path: "/services/suho-stroitelstvo", description: "Разделяне на помещения" },
       { name: "Окачени тавани", path: "/services/suho-stroitelstvo", description: "Класически и LED кутии" },
-      { name: "Облицовки", path: "/services/suho-stroitelstvo", description: "Скриване на инсталации" },
-      { name: "Нива и елементи", path: "/services/suho-stroitelstvo", description: "Декоративни форми от гипсокартон" },
+      { name: "Сухи подове", path: "/services/suhi-podove", description: "Система Knauf с Nivogran BT" },
+      { name: "Дизайнерски решения от гипсокартон", path: "/services/suho-stroitelstvo", description: "Декоративни форми и нива" },
     ]
   },
   {
@@ -86,7 +83,7 @@ const serviceCategories = [
     items: [
       { name: "Електрически инсталации", path: "/services/electrical", description: "Ново окабеляване и ремонт" },
       { name: "ВиК услуги", path: "/services/plumbing", description: "Водопровод и канализация" },
-      { name: "Отопление", path: "/services/plumbing", description: "Отоплителни системи" },
+      { name: "Отопление и климатизация", path: "/services/plumbing", description: "Отоплителни и климатични системи" },
       { name: "Смарт инсталации", path: "/services/electrical", description: "Умен дом и автоматизация" },
     ]
   },
