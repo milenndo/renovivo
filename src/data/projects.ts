@@ -1,7 +1,7 @@
 // Import images
 import fullRenovationImg from "@/assets/images/services/full-renovation.jpg";
 import bathroomImg from "@/assets/images/services/bathroom.jpg";
-import kitchenImg from "@/assets/images/services/kitchen.jpg";
+import kitchenImg from "@/assets/images/services/minimalistchna_byala_kuhniya.png";
 import bedroomImg from "@/assets/images/projects/bedroom.jpg";
 import livingRoomImg from "@/assets/images/projects/living-room.jpg";
 import flooringImg from "@/assets/images/services/flooring.jpg";
