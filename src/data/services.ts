@@ -7,7 +7,7 @@ export const getServiceById = (id: string): Service | undefined => {
 // Import images
 import fullRenovationImg from "@/assets/images/services/full-renovation.jpg";
 import bathroomImg from "@/assets/images/services/bathroom.jpg";
-import kitchenImg from "@/assets/images/services/kitchen.jpg";
+import kitchenImg from "@/assets/images/services/minimalistchna_byala_kuhniya.png";
 import paintingImg from "@/assets/images/services/painting.jpg";
 import flooringImg from "@/assets/images/services/flooring.jpg";
 import electricalImg from "@/assets/images/services/electrical.jpg";
