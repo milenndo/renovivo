@@ -65,7 +65,7 @@ const Hero = () => {
             <Button
               size="lg"
               onClick={openModal}
-              className="bg-primary text-primary-foreground font-semibold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+              className="hero-cta-button bg-primary text-primary-foreground font-semibold text-base"
             >
               <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
               Заявете безплатен оглед
@@ -75,7 +75,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-primary/50 bg-transparent text-primary font-semibold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                className="hero-cta-button border-primary/50 bg-transparent text-primary font-semibold text-base"
               >
                 Вижте нашите проекти
                 <ArrowRight className="h-5 w-5 ml-2" />
