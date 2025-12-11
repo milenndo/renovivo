@@ -65,16 +65,17 @@ const Hero = () => {
             <Button
               size="lg"
               onClick={openModal}
-              className="bg-primary text-primary-foreground font-semibold text-base"
+              className="bg-primary text-primary-foreground font-semibold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
             >
               <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
               Заявете безплатен оглед
             </Button>
+
             <Link to="/portfolio">
               <Button
                 size="lg"
                 variant="outline"
-                className="border-primary/50 bg-transparent text-primary font-semibold text-base"
+                className="border-primary/50 bg-transparent text-primary font-semibold text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               >
                 Вижте нашите проекти
                 <ArrowRight className="h-5 w-5 ml-2" />
