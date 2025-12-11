@@ -179,7 +179,7 @@ export const PriceTable = ({ categorySlug, title = "Ценоразпис", showA
         ))}
         <div className="px-4 py-3 bg-muted/30 border-t">
           <p className="text-xs text-muted-foreground">
-            * Цените са ориентировъчни и могат да варират в зависимост от спецификата на обекта.
+            * Всички цени са без ДДС и са ориентировъчни. Могат да варират в зависимост от спецификата на обекта.
             <br />
             * Курс: 1 EUR = 1.95583 лв. (фиксинг на БНБ)
           </p>

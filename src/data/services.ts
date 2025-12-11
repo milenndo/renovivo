@@ -12,7 +12,7 @@ import paintingImg from "@/assets/images/services/painting.jpg";
 import flooringImg from "@/assets/images/services/flooring.jpg";
 import electricalImg from "@/assets/images/services/electrical.jpg";
 import plumbingImg from "@/assets/images/services/plumbing.jpg";
-import smallRepairsImg from "@/assets/images/services/small-repairs.jpg";
+
 import microcementImg from "@/assets/images/services/microcement.jpg";
 import microcementKitchenImg from "@/assets/images/services/microcement-kitchen.jpg";
 import terrazzoImg from "@/assets/images/services/terrazzo.jpg";
@@ -395,24 +395,6 @@ export const services: Service[] = [
     gallery: [plumbingImg, bathroomImg, kitchenImg],
     isInnovative: false,
   },
-  {
-    id: "small-repairs",
-    icon: Wrench,
-    title: "Малки ремонти",
-    shortDescription: "Бързи и надеждни решения за малки домашни проблеми.",
-    fullDescription: "Не всеки ремонт изисква голям екип. За малки, но важни задачи сме готови да помогнем бързо и ефективно. От поправка на врата до монтаж на аксесоари.",
-    features: ["Ремонт на врати", "Смяна на брави", "Монтаж на карнизи", "Закрепване на рафтове", "Поправка на мебели", "Смяна на контакти", "Уплътнения", "Силиконови фуги"],
-    process: [
-      { step: 1, title: "Заявка", description: "Описание на проблема по телефон или онлайн." },
-      { step: 2, title: "Оценка", description: "Бърза оценка на място ако е необходимо." },
-      { step: 3, title: "Материали", description: "Осигуряване на нужните материали." },
-      { step: 4, title: "Ремонт", description: "Бързо и качествено изпълнение." },
-      { step: 5, title: "Готово", description: "Проверка и почистване." },
-    ],
-    image: smallRepairsImg,
-    gallery: [smallRepairsImg, electricalImg, plumbingImg],
-    isInnovative: false,
-  },
   // ============= НОВИ УСЛУГИ ОТ ЦЕНОРАЗПИСА =============
   {
     id: "shpaklovka",
@@ -490,15 +472,24 @@ export const services: Service[] = [
     id: "suhi-podove",
     icon: Layers,
     title: "Сухи подове",
-    shortDescription: "Изравняване с OSB, фазер и леки замазки за бърз и чист монтаж.",
-    fullDescription: "Сухите подове са идеално решение за бързо изравняване без мокри процеси. Използваме OSB плоскости, фазер и леки сухи замазки за постигане на перфектно равна основа за всякакви подови настилки.",
-    features: ["Изравняване с OSB", "Полагане на фазер", "Леки сухи замазки", "Комбинирани системи", "Изолация под подове", "Подготовка за ламинат", "Подготовка за паркет", "Шумоизолация"],
+    shortDescription: "Професионална система за изравняване на подове без мокри процеси по технологията на Knauf.",
+    fullDescription: "Сухите подове по системата на Knauf са революционно решение за бързо и чисто изравняване на подове. Системата използва специализирани гипсофазерни плоскости върху насипен материал Nivogran BT (топлоизолиращ перлит), което позволява изравняване без мокри процеси, шум и прах. Идеално решение за апартаменти, офиси и помещения, където е необходима минимална височина на конструкцията и бърз монтаж.",
+    features: [
+      "Система Knauf с Nivogran BT",
+      "Без мокри процеси - бързо и чисто",
+      "Отлична топло и звукоизолация",
+      "Минимална височина на конструкцията",
+      "Лек товар върху конструкцията",
+      "Готов за настилка след 24 часа",
+      "Съвместим с подово отопление",
+      "Идеален за апартаменти и офиси"
+    ],
     process: [
-      { step: 1, title: "Оценка", description: "Проверка на нивелацията и състоянието на основата." },
-      { step: 2, title: "Подготовка", description: "Почистване и грундиране на основата." },
-      { step: 3, title: "Изолация", description: "Полагане на изолационен слой при необходимост." },
-      { step: 4, title: "Монтаж", description: "Полагане на избраната система за сух под." },
-      { step: 5, title: "Завършване", description: "Шлайфане на съединенията и подготовка за настилка." },
+      { step: 1, title: "Оценка", description: "Проверка на нивелацията и изготвяне на план за изравняване." },
+      { step: 2, title: "Подготовка", description: "Почистване на основата и полагане на пароизолационно фолио." },
+      { step: 3, title: "Nivogran BT", description: "Насипване и нивелиране на топлоизолиращия перлит Nivogran BT." },
+      { step: 4, title: "Плоскости", description: "Монтаж на гипсофазерни плоскости Knauf с фиксиране по фуги." },
+      { step: 5, title: "Завършване", description: "Шпакловане на фуги и подготовка за финална настилка." },
     ],
     image: flooringImg,
     gallery: [flooringImg, fullRenovationImg],
