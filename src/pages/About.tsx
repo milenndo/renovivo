@@ -170,32 +170,7 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* Timeline */}
-        <section className="section-padding">
-          <div className="container-custom">
-            <div className="text-center mb-12">
-              <span className="text-primary font-medium text-sm uppercase tracking-wider">Нашият път</span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-3">Развитие през годините</h2>
-            </div>
-
-            <div className="max-w-3xl mx-auto">
-              {timeline.map((item, index) => (
-                <div key={item.year} className="flex gap-6 mb-8 last:mb-0">
-                  <div className="flex flex-col items-center">
-                    <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
-                      {item.year}
-                    </div>
-                    {index < timeline.length - 1 && <div className="w-0.5 flex-grow bg-border mt-4" />}
-                  </div>
-                  <div className="pt-2 pb-8">
-                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+       
 
         {/* Why Choose Us */}
         <section className="section-padding bg-foreground text-background">
