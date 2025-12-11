@@ -28,12 +28,7 @@ const values = [
   },
 ];
 
-const timeline = [
-  { year: "2025", title: "Основаване", description: "Renovivo стартира с екип от 3 души." },
-  { year: "2016", title: "100 проекта", description: "Завършихме първите 100 проекта." },
-  { year: "2018", title: "Разширяване", description: "Екипът нарасна на 15 души." },
-  { year: "2020", title: "300 проекта", description: "Преминахме 300 успешни проекта." },
-  { year: "2024", title: "500+ проекта", description: "Продължаваме да растем." },
+
 ];
 
 const AboutPage = () => {
