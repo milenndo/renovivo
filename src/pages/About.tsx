@@ -79,14 +79,17 @@ const AboutPage = () => {
         {/* Hero */}
         <section className="relative py-20 bg-foreground">
           <div className="container-custom relative z-10">
-            <div className="max-w-2xl">
+            <div className="max-w-3xl">
               <span className="text-primary font-medium text-sm uppercase tracking-wider">За нас</span>
-              <h1 className="text-4xl md:text-5xl font-bold text-background mt-3 mb-6">
-                RENOVIVO е нова фирма за ремонти и довършителни работи изградена от екип с дългогодишен опит в
+              <h1 className="text-3xl md:text-4xl font-bold text-background mt-3 mb-6">
+                Вашият надежден партньор за ремонти в София
+              </h1>
+              <p className="text-background/90 text-lg leading-relaxed mb-4">
+                RENOVIVO е нова фирма за ремонти и довършителни работи, изградена от екип с дългогодишен опит в
                 строителния бранш. Специализирани сме в изпълнението на качествени ремонти на жилищни и офис помещения в
                 град София и региона.
-              </h1>
-              <p className="text-background/80 text-lg">
+              </p>
+              <p className="text-background/70 text-base leading-relaxed">
                 Ние сме екип от отдадени професионалисти, които могат да реализират всеки проект независимо от
                 сложността.
               </p>
@@ -112,7 +115,7 @@ const AboutPage = () => {
                 </h2>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   Renovivo е основана през 2025 година с една проста мисия - да предоставяме ремонтни услуги с качество,
-                  което надминава очакванията. Специализирани сме визпълнението на качествени ремонти на жилищни и офис
+                  което надминава очакванията. Специализирани сме в изпълнението на качествени ремонти на жилищни и офис
                   помещения в град София и региона.
                 </p>
                 <p className="text-muted-foreground mb-8 leading-relaxed">
