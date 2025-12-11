@@ -14,7 +14,9 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         {/* Fallback gradient background while video loads */}
         <div
-          className={`absolute inset-0 bg-gradient-to-br from-foreground via-foreground/95 to-foreground/90 transition-opacity duration-700 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
+          className={`absolute inset-0 bg-gradient-to-br from-foreground via-foreground/95 to-foreground/90 transition-opacity duration-700 ${
+            videoLoaded ? "opacity-0" : "opacity-100"
+          }`}
         />
 
         <video
@@ -24,7 +26,9 @@ const Hero = () => {
           playsInline
           preload="auto"
           onCanPlay={() => setVideoLoaded(true)}
-          className={`w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+          className={`w-full h-full object-cover transition-opacity duration-700 ${
+            videoLoaded ? "opacity-100" : "opacity-0"
+          }`}
         >
           <source src="/videos/hero-background.webm" type="video/webm" />
         </video>
@@ -37,7 +41,9 @@ const Hero = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-primary text-sm font-medium">Цялостни ремонти в София и района</span>
+            <span className="text-primary text-sm font-medium">
+              Цялостни ремонти в София и района
+            </span>
           </div>
 
           {/* Heading */}
@@ -49,7 +55,8 @@ const Hero = () => {
 
           {/* Description */}
           <p className="text-lg text-background/80 mb-8 leading-relaxed max-w-xl">
-            Вашият дом заслужава безкомпромисно качество. Цялостни решения за ремонт и довършителни дейности с гаранция.
+            Вашият дом заслужава безкомпромисно качество. Цялостни решения за
+            ремонт и довършителни дейности с гаранция.
           </p>
 
           {/* CTAs */}
@@ -77,7 +84,7 @@ const Hero = () => {
       </div>
 
       {/* Decorative elements */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
     </section>
   );
 };
