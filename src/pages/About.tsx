@@ -40,38 +40,44 @@ const AboutPage = () => {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Начало", "item": "https://renovivo.bg" },
-      { "@type": "ListItem", "position": 2, "name": "За нас", "item": "https://renovivo.bg/about" }
-    ]
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Начало", item: "https://renovivo.bg" },
+      { "@type": "ListItem", position: 2, name: "За нас", item: "https://renovivo.bg/about" },
+    ],
   };
 
   const aboutSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "name": "За Renovivo",
-    "description": "Над 10 години опит в ремонтните услуги в София",
-    "mainEntity": {
+    name: "За Renovivo",
+    description: "Над 10 години опит в ремонтните услуги в София",
+    mainEntity: {
       "@type": "Organization",
-      "name": "Renovivo",
-      "foundingDate": "2014",
-      "numberOfEmployees": "15+",
-      "slogan": "Every Detail Matters"
-    }
+      name: "Renovivo",
+      foundingDate: "2014",
+      numberOfEmployees: "15+",
+      slogan: "Every Detail Matters",
+    },
   };
 
   return (
     <>
       <Helmet>
         <title>За нас | Renovivo - Ремонтна фирма София с 10+ години опит</title>
-        <meta 
-          name="description" 
-          content="Renovivo е водеща ремонтна фирма в София с над 10 години опит. Екип от 15+ професионалисти, 500+ завършени проекта. Качество и гаранция на всяка услуга." 
+        <meta
+          name="description"
+          content="Renovivo фирма основа през 2025 г. в София. Екип от 15+ професионалисти с над 10 години опит всеки тесен специалист в своята област , 200+ завършени проекта от екипа. Качество и гаранция на всяка услуга."
         />
-        <meta name="keywords" content="ремонтна фирма София, Renovivo, строителна фирма София, професионални майстори, ремонти с гаранция" />
+        <meta
+          name="keywords"
+          content="ремонтна фирма София, Renovivo, строителна фирма София, професионални майстори, ремонти с гаранция"
+        />
         <link rel="canonical" href="https://renovivo.bg/about" />
         <meta property="og:title" content="За нас | Renovivo - Ремонтна фирма София" />
-        <meta property="og:description" content="Над 10 години опит в ремонтните услуги. 500+ завършени проекта." />
+        <meta
+          property="og:description"
+          content="Над 10 години опит на екипа в ремонтните услуги. 200+ завършени проекта."
+        />
         <meta property="og:url" content="https://renovivo.bg/about" />
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(aboutSchema)}</script>
@@ -82,11 +88,10 @@ const AboutPage = () => {
           <div className="container-custom relative z-10">
             <div className="max-w-2xl">
               <span className="text-primary font-medium text-sm uppercase tracking-wider">За нас</span>
-              <h1 className="text-4xl md:text-5xl font-bold text-background mt-3 mb-6">
-                Every Detail Matters
-              </h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-background mt-3 mb-6">Every Detail Matters</h1>
               <p className="text-background/80 text-lg">
-                Ние сме екип от професионалисти, които превръщат обикновените пространства в изключителни.
+                Ние сме екип от отдадени професионалисти, които могат да реализират всеки проект независимо от
+                сложността.
               </p>
             </div>
           </div>
@@ -98,11 +103,7 @@ const AboutPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               {/* Image */}
               <div className="relative">
-                <img
-                  src={aboutTeamImg}
-                  alt="Renovivo екип"
-                  className="rounded-2xl shadow-xl w-full"
-                />
+                <img src={aboutTeamImg} alt="Renovivo екип" className="rounded-2xl shadow-xl w-full" />
                 <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-primary/10 rounded-2xl -z-10" />
               </div>
 
@@ -113,15 +114,14 @@ const AboutPage = () => {
                   Над 10 години опит в създаването на мечтани домове
                 </h2>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Renovivo е основана през 2014 година с една проста мисия - да предоставяме 
-                  ремонтни услуги с качество, което надминава очакванията. Започнахме като 
-                  малък екип от трима ентусиазирани майстори, а днес сме едни от водещите 
-                  компании в бранша.
+                  Renovivo е основана през 2025 година с една проста мисия - да предоставяме ремонтни услуги с качество,
+                  което надминава очакванията. Започнахме като малък екип от трима ентусиазирани майстори все повече се
+                  развиваме.
                 </p>
                 <p className="text-muted-foreground mb-8 leading-relaxed">
-                  Нашият подход е прост - слушаме внимателно нуждите на клиентите, 
-                  планираме детайлно всеки проект и изпълняваме с прецизност всяка задача. 
-                  "Every Detail Matters" не е просто слоган - това е нашата философия.
+                  Нашият подход е прост - слушаме внимателно нуждите на клиентите, планираме детайлно всеки проект и
+                  изпълняваме с прецизност всяка задача. "Every Detail Matters" не е просто слоган - това е нашата
+                  философия.
                 </p>
 
                 {/* Stats */}
@@ -131,7 +131,7 @@ const AboutPage = () => {
                     <p className="text-muted-foreground text-sm mt-1">Години опит</p>
                   </div>
                   <div>
-                    <span className="text-3xl font-bold text-primary">500+</span>
+                    <span className="text-3xl font-bold text-primary">200+</span>
                     <p className="text-muted-foreground text-sm mt-1">Проекти</p>
                   </div>
                   <div>
@@ -183,9 +183,7 @@ const AboutPage = () => {
                     <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
                       {item.year}
                     </div>
-                    {index < timeline.length - 1 && (
-                      <div className="w-0.5 flex-grow bg-border mt-4" />
-                    )}
+                    {index < timeline.length - 1 && <div className="w-0.5 flex-grow bg-border mt-4" />}
                   </div>
                   <div className="pt-2 pb-8">
                     <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
@@ -203,12 +201,9 @@ const AboutPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <span className="text-primary font-medium text-sm uppercase tracking-wider">Защо да изберете нас</span>
-                <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-6">
-                  Качество, на което можете да разчитате
-                </h2>
+                <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-6">Качество, на което можете да разчитате</h2>
                 <p className="text-background/80 mb-8">
-                  Избирайки Renovivo, вие избирате партньор, който се грижи за вашия проект 
-                  като за свой собствен.
+                  Избирайки Renovivo, вие избирате партньор, който се грижи за вашия проект като за свой собствен.
                 </p>
 
                 <div className="space-y-4">
@@ -231,14 +226,10 @@ const AboutPage = () => {
               </div>
 
               <div className="relative">
-                <img
-                  src={qualityWorkImg}
-                  alt="Качествена работа"
-                  className="rounded-2xl"
-                />
+                <img src={qualityWorkImg} alt="Качествена работа" className="rounded-2xl" />
                 <div className="absolute -bottom-4 -left-4 bg-primary rounded-xl p-6">
                   <Award className="h-8 w-8 text-primary-foreground mb-2" />
-                  <span className="text-primary-foreground font-bold text-2xl block">100%</span>
+                  <span className="text-primary-foreground font-bold text-2xl block">98%</span>
                   <span className="text-primary-foreground/90 text-sm">Доволни клиенти</span>
                 </div>
               </div>
