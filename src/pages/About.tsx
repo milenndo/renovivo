@@ -29,7 +29,7 @@ const values = [
 ];
 
 const timeline = [
-  { year: "2014", title: "Основаване", description: "Renovivo стартира с екип от 3 души." },
+  { year: "2025", title: "Основаване", description: "Renovivo стартира с екип от 3 души." },
   { year: "2016", title: "100 проекта", description: "Завършихме първите 100 проекта." },
   { year: "2018", title: "Разширяване", description: "Екипът нарасна на 15 души." },
   { year: "2020", title: "300 проекта", description: "Преминахме 300 успешни проекта." },
@@ -50,20 +50,20 @@ const AboutPage = () => {
     "@context": "https://schema.org",
     "@type": "AboutPage",
     name: "За Renovivo",
-    description: "Над 10 години опит в ремонтните услуги в София",
+    description: "Над 10 години опит na екипа в ремонтните услуги в София и района",
     mainEntity: {
       "@type": "Organization",
       name: "Renovivo",
-      foundingDate: "2014",
+      foundingDate: "2025",
       numberOfEmployees: "15+",
-      slogan: "Every Detail Matters",
+      slogan: "Every Deta Matters",
     },
   };
 
   return (
     <>
       <Helmet>
-        <title>За нас | Renovivo - Ремонтна фирма София с 10+ години опит</title>
+        <title>За нас | Renovivo - Ремонтна фирма София изградена от екип с над 10 години опит</title>
         <meta
           name="description"
           content="Renovivo фирма основа през 2025 г. в София. Екип от 15+ професионалисти с над 10 години опит всеки тесен специалист в своята област , 200+ завършени проекта от екипа. Качество и гаранция на всяка услуга."
@@ -88,7 +88,11 @@ const AboutPage = () => {
           <div className="container-custom relative z-10">
             <div className="max-w-2xl">
               <span className="text-primary font-medium text-sm uppercase tracking-wider">За нас</span>
-              <h1 className="text-4xl md:text-5xl font-bold text-background mt-3 mb-6">Every Detail Matters</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-background mt-3 mb-6">
+                RENOVIVO е нова фирма за ремонти и довършителни работи изградена от екип с дългогодишен опит в
+                строителния бранш. Специализирани сме в изпълнението на качествени ремонти на жилищни и офис помещения в
+                град София и региона.
+              </h1>
               <p className="text-background/80 text-lg">
                 Ние сме екип от отдадени професионалисти, които могат да реализират всеки проект независимо от
                 сложността.
@@ -115,13 +119,16 @@ const AboutPage = () => {
                 </h2>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   Renovivo е основана през 2025 година с една проста мисия - да предоставяме ремонтни услуги с качество,
-                  което надминава очакванията. Започнахме като малък екип от трима ентусиазирани майстори все повече се
-                  развиваме.
+                  което надминава очакванията. Специализирани сме визпълнението на качествени ремонти на жилищни и офис
+                  помещения в град София и региона.
                 </p>
                 <p className="text-muted-foreground mb-8 leading-relaxed">
                   Нашият подход е прост - слушаме внимателно нуждите на клиентите, планираме детайлно всеки проект и
                   изпълняваме с прецизност всяка задача. "Every Detail Matters" не е просто слоган - това е нашата
-                  философия.
+                  философия. Визията ни е да станем водеща компания за ремонти и довършителни работи в София и района,
+                  познаваема с нашия професионализъм, качество и отношение към клиентите. Нашата цел е да превърнем
+                  ремонта в приятно, гладко и безпроблемно преживяване, от което клиентът да остане напълно удовлетворен
+                  и спокоен.
                 </p>
 
                 {/* Stats */}
