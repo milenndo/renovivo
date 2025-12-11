@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
+import { InspectionRequestProvider } from "./contexts/InspectionRequestContext";
+import InspectionRequestModal from "./components/InspectionRequestModal";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
@@ -26,27 +28,30 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/services/interior-design" element={<InteriorDesign />} />
-            <Route path="/services/:id" element={<ServiceDetail />} />
-            <Route path="/innovative-coatings" element={<InnovativeCoatings />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/portfolio/:id" element={<ProjectDetail />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <InspectionRequestProvider>
+          <Toaster />
+          <Sonner />
+          <InspectionRequestModal />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/interior-design" element={<InteriorDesign />} />
+              <Route path="/services/:id" element={<ServiceDetail />} />
+              <Route path="/innovative-coatings" element={<InnovativeCoatings />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/portfolio/:id" element={<ProjectDetail />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </InspectionRequestProvider>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>

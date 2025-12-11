@@ -1,6 +1,7 @@
 import { Phone, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 import ctaBackground from "@/assets/images/cta-background.jpg";
 
 // Hand-drawn sketchy arrow SVG component
@@ -48,6 +49,8 @@ const SketchyArrow = () => (
 );
 
 const CTA = () => {
+  const { openModal } = useInspectionRequest();
+
   return (
     <section className="relative py-20 overflow-hidden">
       {/* Background */}
@@ -73,12 +76,14 @@ const CTA = () => {
           {/* Button with hand-drawn arrow pointing to it */}
           <div className="relative">
             <SketchyArrow />
-            <a href="tel:+359893712919">
-              <Button size="lg" className="bg-background text-foreground hover:bg-background/90 font-semibold">
-                <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
-                Заяви оглед
-              </Button>
-            </a>
+            <Button
+              size="lg"
+              onClick={openModal}
+              className="bg-background text-foreground hover:bg-background/90 font-semibold"
+            >
+              <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
+              Заяви оглед
+            </Button>
           </div>
           <Link to="/contact">
             <Button size="lg" variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 font-semibold">

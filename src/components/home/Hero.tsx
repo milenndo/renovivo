@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Phone, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 
 const Hero = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const { openModal } = useInspectionRequest();
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
@@ -52,15 +54,14 @@ const Hero = () => {
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-4">
-            <a href="tel:+359893712919">
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base"
-              >
-                <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
-                Заявете безплатен оглед
-              </Button>
-            </a>
+            <Button
+              size="lg"
+              onClick={openModal}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-base"
+            >
+              <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
+              Заявете безплатен оглед
+            </Button>
             <Link to="/portfolio">
               <Button
                 size="lg"
