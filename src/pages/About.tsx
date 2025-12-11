@@ -29,8 +29,6 @@ const values = [
 ];
 
 
-];
-
 const AboutPage = () => {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
