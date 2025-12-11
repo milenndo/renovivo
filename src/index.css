@@ -205,3 +205,11 @@
     transform: translateX(0);
   }
 }
+
+/* Скриване на белия правоъгълник зад hero бутоните */
+.hero-cta-button::before,
+.hero-cta-button::after {
+  content: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
