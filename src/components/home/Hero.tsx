@@ -26,7 +26,7 @@ const Hero = () => {
           onCanPlay={() => setVideoLoaded(true)}
           className={`w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
         >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
+          <source src="/videos/hero-background.webm" type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/90 via-foreground/70 to-foreground/40" />
       </div>
