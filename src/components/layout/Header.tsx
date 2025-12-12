@@ -69,10 +69,10 @@ const Header = () => {
 
       {/* Main header */}
       <div className="bg-background shadow-sm sticky top-0 z-50">
-        <div className="container-custom py-4">
+        <div className="container-custom py-2">
           {/* Mobile Layout */}
-          <div className="relative lg:hidden flex items-center justify-center py-2">
-            {/* Центрирано голямо лого */}
+          <div className="relative lg:hidden flex items-center justify-center py-1">
+            {/* Центрирано, двойно по-голямо лого */}
             <Link to="/" className="flex items-center justify-center">
               <img
                 src={logo}
