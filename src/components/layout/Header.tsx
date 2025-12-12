@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Phone, Mail, Clock, Menu, X, Facebook, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/Renovivo_logover.2.svg";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
