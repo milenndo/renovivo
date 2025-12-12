@@ -14,7 +14,7 @@ const serviceCategories = [
     description: "Цялостна концепция за вашия интериор",
     icon: Palette,
     items: [
-      { name: "Интериорен дизайн и 3D проектиране", path: "/services/interior-design", description: "Концепция, визуализация и реализация" },
+      { name: "Проект и Интериорен Дизайн", path: "/services/interior-design", description: "3D визуализации и техническа документация" },
       { name: "Консултации", path: "/contact", description: "Професионални съвети и насоки" },
     ]
   },
@@ -71,8 +71,8 @@ const serviceCategories = [
     items: [
       { name: "Преградни стени", path: "/services/suho-stroitelstvo", description: "Разделяне на помещения" },
       { name: "Окачени тавани", path: "/services/suho-stroitelstvo", description: "Класически и LED кутии" },
-      { name: "Сухи подове", path: "/services/suhi-podove", description: "Система Knauf с Nivogran BT" },
-      { name: "Дизайнерски решения от гипсокартон", path: "/services/suho-stroitelstvo", description: "Декоративни форми и нива" },
+      { name: "Сухи подове (Knauf)", path: "/services/suhi-podove", description: "Система Knauf с Nivogran BT" },
+      { name: "Дизайнерски решения от гипсокартон", path: "/services/gipsokarton-design", description: "Декоративни форми и нива" },
     ]
   },
   {
@@ -83,7 +83,7 @@ const serviceCategories = [
     items: [
       { name: "Електрически инсталации", path: "/services/electrical", description: "Ново окабеляване и ремонт" },
       { name: "ВиК услуги", path: "/services/plumbing", description: "Водопровод и канализация" },
-      { name: "Отопление и климатизация", path: "/services/plumbing", description: "Отоплителни и климатични системи" },
+      { name: "Отопление и климатизация", path: "/services/heating-ac", description: "Отоплителни и климатични системи" },
       { name: "Смарт инсталации", path: "/services/electrical", description: "Умен дом и автоматизация" },
     ]
   },

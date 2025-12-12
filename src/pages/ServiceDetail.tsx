@@ -24,6 +24,7 @@ const serviceToPriceCategoryMap: Record<string, string> = {
   "kartene": "kartene",
   "plochki": "plochki",
   "suhi-podove": "suho-stroitelstvo",
+  "heating-ac": "vik",
 };
 
 // Services that should NOT show price tables (individual projects)
@@ -32,16 +33,41 @@ const servicesWithoutPrices = [
   "bathroom", 
   "kitchen",
   "interior-design",
+  "gipsokarton-design",
 ];
+
+// Custom content for services without prices
+const customServiceContent: Record<string, { title: string; content: string; showRelated?: boolean }> = {
+  "kitchen": {
+    title: "Ремонт на кухня по поръчка",
+    content: "Кухнята е сърцето на дома и изисква безкомпромисно планиране. Ние не предлагаме стандартни решения, а цялостна изработка на кухни по поръчка, съобразени с ергономията и спецификата на Вашето помещение. Поемаме целия процес: от демонтаж и корекция на ВиК и Ел. инсталации до прецизния монтаж на мебелите и уредите. Цената се формира индивидуално след оглед и избор на материали и механизми."
+  },
+  "bathroom": {
+    title: "Комплексен ремонт на баня",
+    content: "Превръщаме банята в спа зона. Извършваме комплексно изпълнение: къртене, подмяна на инсталации, професионална хидроизолация, монтаж на структури за вграждане и линейни сифони. Специализирани сме в сложни изпълнения като герунг рязане на плочки (45 градуса), изработка на ниши и скриване на тръби. Гарантираме водоплътност и дълготрайна естетика."
+  },
+  "full-renovation": {
+    title: "Цялостен ремонт - процес",
+    content: "Цялостният ремонт е сложен логистичен и технически процес, който ние управляваме вместо Вас.\n\nЕтапи на работа:\n1. Оглед и заснемане на обекта.\n2. Изготвяне на подробен бюджет и график.\n3. Демонтаж и подготовка на основата.\n4. Изграждане на нови инсталации (ВиК, Ел, ОВК).\n5. Довършителни работи (шпакловка, замазка, настилки, боя).\n6. Монтаж и почистване.\n\nНие координираме всички екипи, за да спазим сроковете и качеството.",
+    showRelated: true
+  },
+  "interior-design": {
+    title: "Проект и Интериорен Дизайн",
+    content: "Всеки дом носи духа на своите обитатели. Услугата 'Проект и Дизайн' е създадена, за да визуализира Вашите мечти преди старта на ремонта. Ние създаваме функционално зониране, 3D визуализации и пълна техническа документация. Тъй като всеки стил и квадратура са различни, цената за проект се определя строго индивидуално след среща и обсъждане на Вашите нужди."
+  },
+  "gipsokarton-design": {
+    title: "Дизайнерски решения от гипсокартон",
+    content: "Гипсокартонът позволява създаването на уникални форми, скрито осветление и декоративни тавани. Цената за тези изпълнения не може да бъде фиксирана, тъй като зависи от сложността на кривите, детайлите и височината на изпълнение. Свържете се с нас за индивидуална оферта."
+  }
+};
 
 // Related services for full renovation
 const relatedServicesForFullRenovation = [
-  { name: "Електрически инсталации", path: "/services/electrical" },
-  { name: "ВиК услуги", path: "/services/plumbing" },
+  { name: "Ел. Услуги", path: "/services/electrical" },
+  { name: "ВиК", path: "/services/plumbing" },
+  { name: "Отопление и Климатизация", path: "/services/heating-ac" },
   { name: "Шпакловка", path: "/services/shpaklovka" },
-  { name: "Боядисване", path: "/services/painting" },
-  { name: "Подови настилки", path: "/services/flooring" },
-  { name: "Лепене на плочки", path: "/services/plochki" },
+  { name: "Настилки", path: "/services/flooring" },
 ];
 
 const ServiceDetail = () => {
@@ -95,6 +121,9 @@ const ServiceDetail = () => {
     : `${service.title} София | Renovivo - Професионални услуги`;
   
   const seoDescription = `${service.shortDescription} Професионално изпълнение в София. Гаранция за качество. ☎️ Безплатна консултация!`;
+
+  const customContent = id ? customServiceContent[id] : null;
+  const showPriceTable = id && serviceToPriceCategoryMap[id] && !servicesWithoutPrices.includes(id);
 
   return (
     <>
@@ -150,12 +179,14 @@ const ServiceDetail = () => {
                   className="w-full h-80 md:h-96 object-cover rounded-xl"
                 />
 
-                {/* Description */}
+                {/* Description - use custom content if available */}
                 <div>
-                  <h2 className="text-2xl font-bold mb-4">Описание</h2>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {service.fullDescription}
-                  </p>
+                  <h2 className="text-2xl font-bold mb-4">
+                    {customContent?.title || "Описание"}
+                  </h2>
+                  <div className="text-muted-foreground leading-relaxed whitespace-pre-line">
+                    {customContent?.content || service.fullDescription}
+                  </div>
                 </div>
 
                 {/* Color Variants - only for services with color options */}
@@ -302,9 +333,9 @@ const ServiceDetail = () => {
               {/* Sidebar */}
               <div className="space-y-6">
                 {/* Price Table - only for services with pricing */}
-                {id && serviceToPriceCategoryMap[id] && !servicesWithoutPrices.includes(id) && (
+                {showPriceTable && (
                   <PriceTable 
-                    categorySlug={serviceToPriceCategoryMap[id]} 
+                    categorySlug={serviceToPriceCategoryMap[id!]} 
                     title="Ориентировъчни цени"
                     limit={8}
                   />
@@ -344,7 +375,7 @@ const ServiceDetail = () => {
                 )}
 
                 {/* Related services for full renovation */}
-                {id === "full-renovation" && (
+                {(id === "full-renovation" || customContent?.showRelated) && (
                   <Card className="border-0 shadow-lg">
                     <CardContent className="p-6">
                       <h3 className="font-bold mb-4">Свързани услуги</h3>
@@ -371,55 +402,30 @@ const ServiceDetail = () => {
                     <p className="text-muted-foreground text-sm mb-6">
                       Свържете се с нас за безплатна консултация и индивидуална оферта.
                     </p>
-                    <a href="tel:+359893712919" className="block mb-4">
-                      <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
-                        <Phone className="h-4 w-4 mr-2" />
-                        Обадете се
+                    <a href="tel:+359893712919" className="block">
+                      <Button className="w-full" size="lg">
+                        <Phone className="h-5 w-5 mr-2" />
+                        Обадете се сега
                       </Button>
                     </a>
-                    <Link to="/contact">
-                      <Button variant="outline" className="w-full">
-                        Изпратете запитване
-                      </Button>
-                    </Link>
-
-                    <div className="mt-6 pt-6 border-t">
-                      <p className="text-sm text-muted-foreground mb-2">Работно време:</p>
-                      <p className="font-medium text-sm">Пон - Пет: 08:00 - 18:00</p>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Other Services */}
-                <Card className="border-0 shadow-lg">
-                  <CardContent className="p-6">
-                    <h3 className="font-bold mb-4">Други услуги</h3>
-                    <div className="space-y-3">
-                      {services
-                        .filter((s) => s.id !== id)
-                        .slice(0, 5)
-                        .map((s) => (
-                          <Link
-                            key={s.id}
-                            to={`/services/${s.id}`}
-                            className="flex items-center gap-3 p-2 rounded-lg hover:bg-secondary transition-colors"
-                          >
-                            <s.icon className="h-5 w-5 text-primary" />
-                            <span className="text-sm">{s.title}</span>
-                          </Link>
-                        ))}
-                    </div>
+                    <p className="text-center text-muted-foreground text-xs mt-4">
+                      Пон-Пет: 8:00 - 18:00
+                    </p>
                   </CardContent>
                 </Card>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Navigation */}
-            <div className="flex justify-between items-center mt-16 pt-8 border-t">
+        {/* Navigation */}
+        <section className="py-8 border-t">
+          <div className="container-custom">
+            <div className="flex justify-between items-center">
               {prevService ? (
                 <Link
                   to={`/services/${prevService.id}`}
-                  className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   <span className="text-sm">{prevService.title}</span>
@@ -430,7 +436,7 @@ const ServiceDetail = () => {
               {nextService && (
                 <Link
                   to={`/services/${nextService.id}`}
-                  className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <span className="text-sm">{nextService.title}</span>
                   <ArrowRight className="h-4 w-4" />

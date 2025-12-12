@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, X, Send, Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ const inspectionSchema = z.object({
 
 const InspectionRequestModal = () => {
   const { isOpen, closeModal } = useInspectionRequest();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     client_name: "",
@@ -29,6 +31,19 @@ const InspectionRequestModal = () => {
     notes: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handleClose = () => {
+    // Reset form state
+    setFormData({
+      client_name: "",
+      client_phone: "",
+      client_email: "",
+      address: "",
+      notes: "",
+    });
+    setErrors({});
+    closeModal();
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -74,14 +89,7 @@ const InspectionRequestModal = () => {
       });
 
       // Reset form and close modal
-      setFormData({
-        client_name: "",
-        client_phone: "",
-        client_email: "",
-        address: "",
-        notes: "",
-      });
-      closeModal();
+      handleClose();
     } catch (error) {
       toast.error("Грешка при изпращане на заявката", {
         description: "Моля, опитайте отново или се свържете с нас по телефона.",
@@ -92,11 +100,20 @@ const InspectionRequestModal = () => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && closeModal()}>
-      <DialogContent className="sm:max-w-4xl p-0 overflow-hidden">
+    <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
+      <DialogContent className="sm:max-w-4xl p-0 overflow-hidden max-h-[90vh] overflow-y-auto">
+        {/* Close Button - visible on all screen sizes */}
+        <button
+          onClick={handleClose}
+          className="absolute right-4 top-4 z-50 rounded-full p-2 bg-background/80 hover:bg-background border border-border shadow-sm transition-colors"
+          aria-label="Затвори"
+        >
+          <X className="h-5 w-5" />
+        </button>
+
         <div className="grid grid-cols-1 md:grid-cols-5">
           {/* Form Section */}
-          <div className="md:col-span-3 p-6 md:p-8">
+          <div className="md:col-span-3 p-6 md:p-8 pt-12 md:pt-8">
             <DialogHeader className="mb-6">
               <DialogTitle className="text-2xl font-bold">Заявете безплатен оглед</DialogTitle>
               <p className="text-muted-foreground text-sm mt-2">
@@ -212,6 +229,17 @@ const InspectionRequestModal = () => {
                     Изпратете заявка
                   </>
                 )}
+              </Button>
+
+              {/* Cancel button for mobile */}
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                className="w-full md:hidden"
+                onClick={handleClose}
+              >
+                Отказ
               </Button>
             </form>
           </div>
