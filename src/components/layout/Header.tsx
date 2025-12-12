@@ -25,11 +25,17 @@ const Header = () => {
       <div className="bg-foreground text-background py-2">
         <div className="container-custom flex flex-wrap justify-between items-center text-sm">
           <div className="flex items-center gap-6">
-            <a href="tel:+359893712919" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <a
+              href="tel:+359893712919"
+              className="flex items-center gap-2 hover:text-primary transition-colors"
+            >
               <Phone className="h-4 w-4" />
               <span className="hidden sm:inline">+359 89 371 29 19</span>
             </a>
-            <a href="mailto:renovivo.bg@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors">
+            <a
+              href="mailto:renovivo.bg@gmail.com"
+              className="flex items-center gap-2 hover:text-primary transition-colors"
+            >
               <Mail className="h-4 w-4" />
               <span className="hidden sm:inline">renovivo.bg@gmail.com</span>
             </a>
@@ -39,10 +45,22 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" aria-label="Последвайте ни във Facebook">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors"
+              aria-label="Последвайте ни във Facebook"
+            >
               <Facebook className="h-4 w-4" aria-hidden="true" />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors" aria-label="Последвайте ни в Instagram">
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors"
+              aria-label="Последвайте ни в Instagram"
+            >
               <Instagram className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
@@ -53,27 +71,39 @@ const Header = () => {
       <div className="bg-background shadow-sm sticky top-0 z-50">
         <div className="container-custom py-4">
           {/* Mobile Layout */}
-          <div className="flex lg:hidden items-center justify-center relative">
-            {/* Menu button - absolute right */}
+          <div className="flex lg:hidden items-center justify-between px-2">
+            {/* Logo */}
+            <Link to="/" className="flex items-center">
+              <img
+                src={logo}
+                alt="Renovivo - Every Detail Matters"
+                className="h-12 w-auto"
+              />
+            </Link>
+
+            {/* Menu button - right */}
             <button
-              className="absolute right-0 p-2"
+              className="p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+              {isMenuOpen ? (
+                <X className="h-7 w-7" />
+              ) : (
+                <Menu className="h-7 w-7" />
+              )}
             </button>
-            
-            {/* Centered Logo */}
-            <Link to="/" className="flex items-center">
-              <img src={logo} alt="Renovivo - Every Detail Matters" className="h-28 w-auto" />
-            </Link>
           </div>
 
           {/* Desktop Layout */}
           <div className="hidden lg:flex items-end gap-8">
             {/* Logo - far left */}
             <Link to="/" className="flex items-center shrink-0">
-              <img src={logo} alt="Renovivo - Every Detail Matters" className="h-32 w-auto" />
+              <img
+                src={logo}
+                alt="Renovivo - Every Detail Matters"
+                className="h-32 w-auto"
+              />
             </Link>
 
             {/* Navigation Menu */}
@@ -96,7 +126,10 @@ const Header = () => {
             </nav>
 
             {/* Phone CTA - pushed right */}
-            <a href="tel:+359893712919" className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold">
+            <a
+              href="tel:+359893712919"
+              className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold"
+            >
               <Phone className="h-5 w-5" aria-hidden="true" />
               <span>+359 89 371 29 19</span>
             </a>
