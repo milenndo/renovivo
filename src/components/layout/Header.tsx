@@ -77,7 +77,7 @@ const Header = () => {
               <img
                 src={logo}
                 alt="Renovivo - Every Detail Matters"
-                className="h-20 w-auto"
+                className="h-32 w-auto"
               />
             </Link>
 
