@@ -71,19 +71,19 @@ const Header = () => {
       <div className="bg-background shadow-sm sticky top-0 z-50">
         <div className="container-custom py-4">
           {/* Mobile Layout */}
-          <div className="flex lg:hidden items-center justify-between px-2">
-            {/* Logo */}
-            <Link to="/" className="flex items-center">
+          <div className="relative lg:hidden flex items-center justify-center py-2">
+            {/* Центрирано голямо лого */}
+            <Link to="/" className="flex items-center justify-center">
               <img
                 src={logo}
                 alt="Renovivo - Every Detail Matters"
-                className="h-12 w-auto"
+                className="h-20 w-auto"
               />
             </Link>
 
-            {/* Menu button - right */}
+            {/* Бутон за меню вдясно, на същата хоризонтала */}
             <button
-              className="p-2"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
