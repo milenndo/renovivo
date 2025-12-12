@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Facebook, Instagram, Clock } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/Renovivo_logover.2.svg";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
