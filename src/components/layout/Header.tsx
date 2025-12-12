@@ -149,7 +149,7 @@ const Header = () => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`text-sm font-medium py-2 ${
+                  className={`text-xl font-medium py-2 ${
                     isActive(link.path) ? "text-primary" : "text-foreground"
                   }`}
                 >
