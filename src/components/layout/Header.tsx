@@ -69,11 +69,9 @@ const Header = () => {
 
       {/* Main header */}
       <div className="bg-background shadow-sm sticky top-0 z-50">
-        {/* намален общ padding за по-малко бяла зона */}
         <div className="container-custom py-1">
           {/* Mobile Layout */}
           <div className="relative lg:hidden flex items-center justify-center h-16">
-            {/* Лого – голямо, но центрирано вертикално в по-нисък контейнер */}
             <Link to="/" className="flex items-center justify-center">
               <img
                 src={logo}
@@ -82,7 +80,6 @@ const Header = () => {
               />
             </Link>
 
-            {/* Бутон – подравнен по вертикала с логото */}
             <button
               className="absolute right-4 top-1/2 -translate-y-1/2 p-1"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -97,49 +94,55 @@ const Header = () => {
           </div>
 
           {/* Desktop / Tablet Layout */}
-          <div className="hidden lg:flex items-center gap-8 py-2">
-            {/* Logo - left */}
-            <Link to="/" className="flex items-center shrink-0">
-              <img
-                src={logo}
-                alt="Renovivo - Every Detail Matters"
-                className="h-20 w-auto"
-              />
-            </Link>
+          <div className="hidden lg:flex items-center py-2">
+            {/* Лого вляво – ~30% по-голямо (от h-20 → h-24/26) */}
+            <div className="flex items-center shrink-0">
+              <Link to="/" className="flex items-center">
+                <img
+                  src={logo}
+                  alt="Renovivo - Every Detail Matters"
+                  className="h-24 w-auto"
+                />
+              </Link>
+            </div>
 
-            {/* Navigation Menu */}
-            <nav className="flex items-center gap-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`text-base whitespace-nowrap font-medium transition-colors relative py-1 ${
-                    isActive(link.path)
-                      ? "text-primary"
-                      : "text-foreground hover:text-primary"
-                  } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${
-                    isActive(link.path) ? "after:scale-x-100" : ""
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
+            {/* Навигация центрирана спрямо екрана */}
+            <nav className="flex-1 flex justify-center">
+              <div className="flex items-center gap-6">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`text-base whitespace-nowrap font-medium transition-colors relative py-1 ${
+                      isActive(link.path)
+                        ? "text-primary"
+                        : "text-foreground hover:text-primary"
+                    } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left ${
+                      isActive(link.path) ? "after:scale-x-100" : ""
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
             </nav>
 
-            {/* Phone CTA - right, на един ред */}
-            <a
-              href="tel:+359893712919"
-              className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold whitespace-nowrap"
-            >
-              <Phone className="h-5 w-5" aria-hidden="true" />
-              <span>+359 89 371 29 19</span>
-            </a>
+            {/* Телефон вдясно, на един ред */}
+            <div className="flex items-center shrink-0">
+              <a
+                href="tel:+359893712919"
+                className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold whitespace-nowrap"
+              >
+                <Phone className="h-5 w-5" aria-hidden="true" />
+                <span>+359 89 371 29 19</span>
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-background border-top animate-fade-in">
+          <div className="lg:hidden bg-background border-t animate-fade-in">
             <nav className="container-custom py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
