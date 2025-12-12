@@ -95,7 +95,7 @@ const Header = () => {
 
           {/* Desktop / Tablet Layout */}
           <div className="hidden lg:flex items-center py-2">
-            {/* Лого вляво – ~30% по-голямо (от h-20 → h-24/26) */}
+            {/* Лого вляво – ~30% по-голямо */}
             <div className="flex items-center shrink-0">
               <Link to="/" className="flex items-center">
                 <img
@@ -106,8 +106,8 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Навигация центрирана спрямо екрана */}
-            <nav className="flex-1 flex justify-center">
+            {/* Навигация – центрирана между ляво и дясно */}
+            <nav className="flex-1 flex justify-center items-center">
               <div className="flex items-center gap-6">
                 {navLinks.map((link) => (
                   <Link
