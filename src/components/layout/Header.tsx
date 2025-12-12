@@ -69,40 +69,41 @@ const Header = () => {
 
       {/* Main header */}
       <div className="bg-background shadow-sm sticky top-0 z-50">
-        <div className="container-custom py-2">
+        {/* намален общ padding за по-малко бяла зона */}
+        <div className="container-custom py-1">
           {/* Mobile Layout */}
-          <div className="relative lg:hidden flex items-center justify-center py-1">
-            {/* Центрирано, двойно по-голямо лого */}
+          <div className="relative lg:hidden flex items-center justify-center h-16">
+            {/* Лого – голямо, но центрирано вертикално в по-нисък контейнер */}
             <Link to="/" className="flex items-center justify-center">
               <img
                 src={logo}
                 alt="Renovivo - Every Detail Matters"
-                className="h-32 w-auto"
+                className="h-12 w-auto"
               />
             </Link>
 
-            {/* Бутон за меню вдясно, на същата хоризонтала */}
+            {/* Бутон – подравнен по вертикала с логото */}
             <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-2"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-1"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
-                <X className="h-7 w-7" />
+                <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-7 w-7" />
+                <Menu className="h-6 w-6" />
               )}
             </button>
           </div>
 
-          {/* Desktop Layout */}
-          <div className="hidden lg:flex items-end gap-8">
-            {/* Logo - far left */}
+          {/* Desktop / Tablet Layout */}
+          <div className="hidden lg:flex items-center gap-8 py-2">
+            {/* Logo - left */}
             <Link to="/" className="flex items-center shrink-0">
               <img
                 src={logo}
                 alt="Renovivo - Every Detail Matters"
-                className="h-32 w-auto"
+                className="h-20 w-auto"
               />
             </Link>
 
@@ -112,7 +113,7 @@ const Header = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`text-base font-medium transition-colors relative py-2 ${
+                  className={`text-base whitespace-nowrap font-medium transition-colors relative py-1 ${
                     isActive(link.path)
                       ? "text-primary"
                       : "text-foreground hover:text-primary"
@@ -125,10 +126,10 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Phone CTA - pushed right */}
+            {/* Phone CTA - right, на един ред */}
             <a
               href="tel:+359893712919"
-              className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold"
+              className="ml-auto flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-semibold whitespace-nowrap"
             >
               <Phone className="h-5 w-5" aria-hidden="true" />
               <span>+359 89 371 29 19</span>
@@ -138,7 +139,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-background border-t animate-fade-in">
+          <div className="lg:hidden bg-background border-top animate-fade-in">
             <nav className="container-custom py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
                 <Link
