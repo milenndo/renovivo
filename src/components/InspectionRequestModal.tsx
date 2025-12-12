@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, X, Send, Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -14,14 +13,19 @@ import { z } from "zod";
 const inspectionSchema = z.object({
   client_name: z.string().trim().min(2, "Името трябва да е поне 2 символа").max(100, "Името е твърде дълго"),
   client_phone: z.string().trim().min(8, "Невалиден телефонен номер").max(20, "Телефонният номер е твърде дълъг"),
-  client_email: z.string().trim().email("Невалиден имейл адрес").max(255, "Имейлът е твърде дълъг").optional().or(z.literal("")),
+  client_email: z
+    .string()
+    .trim()
+    .email("Невалиден имейл адрес")
+    .max(255, "Имейлът е твърде дълъг")
+    .optional()
+    .or(z.literal("")),
   address: z.string().trim().min(5, "Адресът трябва да е поне 5 символа").max(255, "Адресът е твърде дълъг"),
   notes: z.string().trim().max(1000, "Описанието е твърде дълго").optional().or(z.literal("")),
 });
 
 const InspectionRequestModal = () => {
   const { isOpen, closeModal } = useInspectionRequest();
-  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     client_name: "",
@@ -33,7 +37,6 @@ const InspectionRequestModal = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleClose = () => {
-    // Reset form state
     setFormData({
       client_name: "",
       client_phone: "",
@@ -48,7 +51,7 @@ const InspectionRequestModal = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: "" }));
     }
@@ -58,7 +61,6 @@ const InspectionRequestModal = () => {
     e.preventDefault();
     setErrors({});
 
-    // Validate form data
     const result = inspectionSchema.safeParse(formData);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
@@ -88,7 +90,6 @@ const InspectionRequestModal = () => {
         description: "Ще се свържем с вас възможно най-скоро.",
       });
 
-      // Reset form and close modal
       handleClose();
     } catch (error) {
       toast.error("Грешка при изпращане на заявката", {
@@ -100,9 +101,9 @@ const InspectionRequestModal = () => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && handleClose()}>
+    <Dialog open={isOpen} onOpenChange={open => !open && handleClose()}>
       <DialogContent className="sm:max-w-4xl p-0 overflow-hidden max-h-[90vh] overflow-y-auto">
-        {/* Close Button - visible on all screen sizes */}
+        {/* Close Button */}
         <button
           onClick={handleClose}
           className="absolute right-4 top-4 z-50 rounded-full p-2 bg-background/80 hover:bg-background border border-border shadow-sm transition-colors"
@@ -295,9 +296,7 @@ const InspectionRequestModal = () => {
                 </div>
                 <div>
                   <p className="font-semibold">Офис в София</p>
-                  <p className="text-primary-foreground/90">
-                    София и района
-                  </p>
+                  <p className="text-primary-foreground/90">София и района</p>
                 </div>
               </div>
             </div>
