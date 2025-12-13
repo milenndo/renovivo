@@ -1,242 +1,218 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { MessageCircle, X, Send, Loader2, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { MessageCircle, X, Send, Bot, User, Loader2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Textarea } from "@/components/ui/textarea";
+import { supabase } from "@/integrations/supabase/client";
+import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 
-type Message = {
-  role: "user" | "assistant";
+type ChatMessage = {
+  id: string;
+  role: "user" | "assistant" | "system";
   content: string;
+  created_at?: string;
 };
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/renovivo-chat`;
+const INITIAL_MESSAGE: ChatMessage = {
+  id: "welcome",
+  role: "assistant",
+  content:
+    "Здравейте! Аз съм виртуалният асистент на Renovivo. Разкажете ми накратко за вашия ремонт – стая, баня, квадратура – и ще ви помогна с идеи, срокове и ориентировъчен бюджет.",
+};
 
 const RenovivoChat = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: "assistant",
-      content: "Здравейте! Аз съм виртуален асистент на Renovivo - вашият експерт по ремонти. Мога да ви помогна с въпроси за услуги, цени и технически съвети. Как мога да съм ви полезен днес?",
-    },
-  ]);
+  const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
+  const [isSending, setIsSending] = useState(false);
+  const { openModal } = useInspectionRequest();
+  const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages]);
+    if (!isOpen) return;
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [isOpen, messages.length]);
 
-  const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+  const handleToggle = () => {
+    setIsOpen(prev => !prev);
+  };
 
-    const userMessage: Message = { role: "user", content: input.trim() };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
-    setIsLoading(true);
+  const handleOpenInspection = () => {
+    openModal();
+  };
 
-    let assistantContent = "";
+  const handleSend = async () => {
+    if (!input.trim() || isSending) return;
 
-    const updateAssistant = (chunk: string) => {
-      assistantContent += chunk;
-      setMessages((prev) => {
-        const last = prev[prev.length - 1];
-        if (last?.role === "assistant" && prev.length > 1) {
-          return prev.map((m, i) =>
-            i === prev.length - 1 ? { ...m, content: assistantContent } : m
-          );
-        }
-        return [...prev, { role: "assistant", content: assistantContent }];
-      });
+    const userMessage: ChatMessage = {
+      id: crypto.randomUUID(),
+      role: "user",
+      content: input.trim(),
     };
 
+    setMessages(prev => [...prev, userMessage]);
+    setInput("");
+    setIsSending(true);
+
     try {
-      const resp = await fetch(CHAT_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-        },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].filter((m) => m.role !== "assistant" || messages.indexOf(m as Message) !== 0),
-        }),
+      const { data, error } = await supabase.functions.invoke("renovivo-chat", {
+        body: { messages: [...messages, userMessage] },
       });
 
-      if (!resp.ok) {
-        const errorData = await resp.json().catch(() => ({}));
-        throw new Error(errorData.error || "Грешка при изпращане на съобщението");
+      if (error) {
+        console.error("Chat function error:", error);
+        setMessages(prev => [
+          ...prev,
+          {
+            id: crypto.randomUUID(),
+            role: "assistant",
+            content:
+              "Възникна проблем с връзката към сървъра. Моля, опитайте отново след малко или заявете безплатен оглед от бутона по-долу.",
+          },
+        ]);
+        return;
       }
 
-      if (!resp.body) throw new Error("No response body");
-
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        buffer += decoder.decode(value, { stream: true });
-
-        let newlineIndex: number;
-        while ((newlineIndex = buffer.indexOf("\n")) !== -1) {
-          let line = buffer.slice(0, newlineIndex);
-          buffer = buffer.slice(newlineIndex + 1);
-
-          if (line.endsWith("\r")) line = line.slice(0, -1);
-          if (line.startsWith(":") || line.trim() === "") continue;
-          if (!line.startsWith("data: ")) continue;
-
-          const jsonStr = line.slice(6).trim();
-          if (jsonStr === "[DONE]") break;
-
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content;
-            if (content) updateAssistant(content);
-          } catch {
-            buffer = line + "\n" + buffer;
-            break;
-          }
-        }
+      if (data?.reply) {
+        const assistantMessage: ChatMessage = {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content: data.reply as string,
+        };
+        setMessages(prev => [...prev, assistantMessage]);
       }
-    } catch (error) {
-      console.error("Chat error:", error);
-      toast({
-        title: "Грешка",
-        description: error instanceof Error ? error.message : "Възникна грешка",
-        variant: "destructive",
-      });
-      setMessages((prev) => [
+    } catch (err) {
+      console.error("Chat error:", err);
+      setMessages(prev => [
         ...prev,
         {
+          id: crypto.randomUUID(),
           role: "assistant",
-          content: "Съжалявам, възникна грешка. Моля, опитайте отново или се обадете на +359 89 371 29 19.",
+          content:
+            "Възникна неочаквана грешка. Моля, опитайте отново или заявете оглед.",
         },
       ]);
     } finally {
-      setIsLoading(false);
+      setIsSending(false);
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      sendMessage();
+      handleSend();
     }
   };
 
   return (
     <>
-      {/* Chat Toggle Button */}
-      <Button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full shadow-lg bg-primary hover:bg-primary/90"
-        size="icon"
-        aria-label={isOpen ? "Затвори чата" : "Отвори чата"}
-      >
-        {isOpen ? (
-          <X className="h-6 w-6" aria-hidden="true" />
-        ) : (
-          <MessageCircle className="h-6 w-6" aria-hidden="true" />
-        )}
-      </Button>
+      {/* Chat toggle button */}
+      <div className="fixed bottom-4 right-4 z-40">
+        <Button
+          size="lg"
+          className="rounded-full shadow-lg px-4 py-2 flex items-center gap-2"
+          onClick={handleToggle}
+        >
+          {isOpen ? (
+            <>
+              <X className="h-5 w-5" />
+              Затвори чат
+            </>
+          ) : (
+            <>
+              <MessageCircle className="h-5 w-5" />
+              Чат с Renovivo
+            </>
+          )}
+        </Button>
+      </div>
 
-      {/* Chat Window */}
+      {/* Chat window */}
       {isOpen && (
-        <Card className="fixed bottom-24 right-6 z-50 w-[350px] md:w-[400px] h-[500px] flex flex-col shadow-2xl animate-fade-in">
-          {/* Header */}
-          <div className="flex items-center gap-3 p-4 border-b bg-primary text-primary-foreground rounded-t-lg">
-            <div className="h-10 w-10 rounded-full bg-primary-foreground/20 flex items-center justify-center">
-              <Bot className="h-6 w-6" />
-            </div>
+        <div className="fixed bottom-20 right-4 w-full max-w-md bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden z-40">
+          <div className="flex items-center justify-between px-4 py-3 border-b bg-primary text-primary-foreground">
             <div>
-              <h3 className="font-semibold">Renovivo AI</h3>
-              <p className="text-xs opacity-80">Онлайн • Готов да помогне</p>
+              <p className="font-semibold">Renovivo Асистент</p>
+              <p className="text-xs text-primary-foreground/80">
+                Отговори за секунди, идеи за вашия ремонт
+              </p>
             </div>
+            <button
+              onClick={handleToggle}
+              className="rounded-full p-1 hover:bg-primary-foreground/10 transition-colors"
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
 
-          {/* Messages */}
-          <ScrollArea ref={scrollRef} className="flex-1 p-4">
-            <div className="space-y-4">
-              {messages.map((message, index) => (
+          <div className="flex-1 px-4 py-3 space-y-3 overflow-y-auto max-h-96">
+            {messages.map(msg => (
+              <div
+                key={msg.id}
+                className={`flex ${
+                  msg.role === "user" ? "justify-end" : "justify-start"
+                }`}
+              >
                 <div
-                  key={index}
-                  className={`flex gap-2 ${
-                    message.role === "user" ? "justify-end" : "justify-start"
+                  className={`rounded-2xl px-3 py-2 text-sm max-w-[80%] whitespace-pre-wrap ${
+                    msg.role === "user"
+                      ? "bg-primary text-primary-foreground rounded-br-sm"
+                      : "bg-muted text-foreground rounded-bl-sm"
                   }`}
                 >
-                  {message.role === "assistant" && (
-                    <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                      <Bot className="h-4 w-4 text-primary" />
-                    </div>
-                  )}
-                  <div
-                    className={`max-w-[80%] rounded-lg px-3 py-2 text-sm ${
-                      message.role === "user"
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted"
-                    }`}
-                  >
-                    <div className="whitespace-pre-wrap [&>strong]:font-semibold [&_strong]:font-semibold">
-                      {message.content.split('\n').map((line, i) => (
-                        <p key={i} className={line.startsWith('•') || line.startsWith('-') ? 'pl-2' : ''}>
-                          {line.split(/(\*\*[^*]+\*\*)/).map((part, j) => 
-                            part.startsWith('**') && part.endsWith('**') 
-                              ? <strong key={j}>{part.slice(2, -2)}</strong>
-                              : part
-                          )}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                  {message.role === "user" && (
-                    <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center shrink-0">
-                      <User className="h-4 w-4" />
-                    </div>
-                  )}
+                  {msg.content}
                 </div>
-              ))}
-              {isLoading && messages[messages.length - 1]?.role === "user" && (
-                <div className="flex gap-2 justify-start">
-                  <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <Bot className="h-4 w-4 text-primary" />
-                  </div>
-                  <div className="bg-muted rounded-lg px-3 py-2">
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  </div>
-                </div>
-              )}
-            </div>
-          </ScrollArea>
+              </div>
+            ))}
 
-          {/* Input */}
-          <div className="p-4 border-t">
-            <div className="flex gap-2">
-              <Input
+            {isSending && (
+              <div className="flex justify-start">
+                <div className="rounded-2xl px-3 py-2 text-sm max-w-[80%] bg-muted text-foreground rounded-bl-sm flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Пишем отговор...
+                </div>
+              </div>
+            )}
+
+            <div ref={bottomRef} />
+          </div>
+
+          {/* CTA за оглед */}
+          <div className="px-4 pb-2">
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full mb-2 flex items-center justify-center gap-2 text-sm"
+              onClick={handleOpenInspection}
+            >
+              <Calendar className="h-4 w-4" />
+              Заявете безплатен оглед
+            </Button>
+          </div>
+
+          <div className="border-t px-3 py-2 bg-muted/50">
+            <div className="flex items-end gap-2">
+              <Textarea
                 value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Напишете съобщение..."
-                disabled={isLoading}
-                className="flex-1"
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Опишете накратко банята/помещението, квадратура и какво искате да постигнете..."
+                className="min-h-[48px] max-h-24 text-sm resize-none"
               />
               <Button
-                onClick={sendMessage}
-                disabled={!input.trim() || isLoading}
                 size="icon"
+                className="mb-1"
+                onClick={handleSend}
+                disabled={isSending || !input.trim()}
               >
-                <Send className="h-4 w-4" />
+                {isSending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
               </Button>
             </div>
           </div>
-        </Card>
+        </div>
       )}
     </>
   );

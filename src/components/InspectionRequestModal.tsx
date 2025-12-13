@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Phone, Mail, MapPin, Clock, X, Send, Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -9,10 +9,19 @@ import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { z } from "zod";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 const inspectionSchema = z.object({
-  client_name: z.string().trim().min(2, "Името трябва да е поне 2 символа").max(100, "Името е твърде дълго"),
-  client_phone: z.string().trim().min(8, "Невалиден телефонен номер").max(20, "Телефонният номер е твърде дълъг"),
+  client_name: z
+    .string()
+    .trim()
+    .min(2, "Името трябва да е поне 2 символа")
+    .max(100, "Името е твърде дълго"),
+  client_phone: z
+    .string()
+    .trim()
+    .min(8, "Невалиден телефонен номер")
+    .max(20, "Телефонният номер е твърде дълъг"),
   client_email: z
     .string()
     .trim()
@@ -20,9 +29,20 @@ const inspectionSchema = z.object({
     .max(255, "Имейлът е твърде дълъг")
     .optional()
     .or(z.literal("")),
-  address: z.string().trim().min(5, "Адресът трябва да е поне 5 символа").max(255, "Адресът е твърде дълъг"),
-  notes: z.string().trim().max(1000, "Описанието е твърде дълго").optional().or(z.literal("")),
+  address: z
+    .string()
+    .trim()
+    .min(5, "Адресът трябва да е поне 5 символа")
+    .max(255, "Адресът е твърде дълъг"),
+  notes: z
+    .string()
+    .trim()
+    .max(1000, "Описанието е твърде дълго")
+    .optional()
+    .or(z.literal("")),
 });
+
+const SITE_KEY = "f0f49628-5bd2-4a88-853e-db5a9758c6f2";
 
 const InspectionRequestModal = () => {
   const { isOpen, closeModal } = useInspectionRequest();
@@ -35,6 +55,8 @@ const InspectionRequestModal = () => {
     notes: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const captchaRef = useRef<HCaptcha | null>(null);
 
   const handleClose = () => {
     setFormData({
@@ -45,6 +67,8 @@ const InspectionRequestModal = () => {
       notes: "",
     });
     setErrors({});
+    setCaptchaToken(null);
+    captchaRef.current?.resetCaptcha();
     closeModal();
   };
 
@@ -55,6 +79,17 @@ const InspectionRequestModal = () => {
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: "" }));
     }
+  };
+
+  const handleCaptchaVerify = (token: string) => {
+    setCaptchaToken(token);
+    if (errors["captcha"]) {
+      setErrors(prev => ({ ...prev, captcha: "" }));
+    }
+  };
+
+  const handleCaptchaExpire = () => {
+    setCaptchaToken(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,6 +105,14 @@ const InspectionRequestModal = () => {
         }
       });
       setErrors(fieldErrors);
+      return;
+    }
+
+    if (!captchaToken) {
+      setErrors(prev => ({
+        ...prev,
+        captcha: "Моля, потвърдете, че не сте робот.",
+      }));
       return;
     }
 
@@ -97,13 +140,14 @@ const InspectionRequestModal = () => {
       });
     } finally {
       setIsSubmitting(false);
+      setCaptchaToken(null);
+      captchaRef.current?.resetCaptcha();
     }
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={open => !open && handleClose()}>
       <DialogContent className="sm:max-w-4xl p-0 overflow-hidden max-h-[90vh] overflow-y-auto">
-        {/* Close Button */}
         <button
           onClick={handleClose}
           className="absolute right-4 top-4 z-50 rounded-full p-2 bg-background/80 hover:bg-background border border-border shadow-sm transition-colors"
@@ -113,7 +157,6 @@ const InspectionRequestModal = () => {
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-5">
-          {/* Form Section */}
           <div className="md:col-span-3 p-6 md:p-8 pt-12 md:pt-8">
             <DialogHeader className="mb-6">
               <DialogTitle className="text-2xl font-bold">Заявете безплатен оглед</DialogTitle>
@@ -123,7 +166,6 @@ const InspectionRequestModal = () => {
             </DialogHeader>
 
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Name and Phone Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="client_name">
@@ -160,7 +202,6 @@ const InspectionRequestModal = () => {
                 </div>
               </div>
 
-              {/* Email */}
               <div className="space-y-2">
                 <Label htmlFor="client_email">Имейл (по избор)</Label>
                 <Input
@@ -177,7 +218,6 @@ const InspectionRequestModal = () => {
                 )}
               </div>
 
-              {/* Address */}
               <div className="space-y-2">
                 <Label htmlFor="address">
                   Адрес в София <span className="text-destructive">*</span>
@@ -195,7 +235,6 @@ const InspectionRequestModal = () => {
                 )}
               </div>
 
-              {/* Notes */}
               <div className="space-y-2">
                 <Label htmlFor="notes">Разкажете за проекта (по избор)</Label>
                 <Textarea
@@ -212,7 +251,20 @@ const InspectionRequestModal = () => {
                 )}
               </div>
 
-              {/* Submit Button */}
+              {/* hCaptcha */}
+              <div className="space-y-2">
+                <Label>Сигурност</Label>
+                <HCaptcha
+                  ref={captchaRef}
+                  sitekey={SITE_KEY}
+                  onVerify={handleCaptchaVerify}
+                  onExpire={handleCaptchaExpire}
+                />
+                {errors.captcha && (
+                  <p className="text-destructive text-xs">{errors.captcha}</p>
+                )}
+              </div>
+
               <Button
                 type="submit"
                 size="lg"
@@ -232,7 +284,6 @@ const InspectionRequestModal = () => {
                 )}
               </Button>
 
-              {/* Cancel button for mobile */}
               <Button
                 type="button"
                 variant="outline"
@@ -245,12 +296,10 @@ const InspectionRequestModal = () => {
             </form>
           </div>
 
-          {/* Contact Info Section */}
           <div className="md:col-span-2 bg-primary p-6 md:p-8 text-primary-foreground">
             <h3 className="text-xl font-bold mb-6">Или се свържете директно</h3>
 
             <div className="space-y-6">
-              {/* Phone */}
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-primary-foreground/20 flex items-center justify-center flex-shrink-0">
                   <Phone className="h-5 w-5" />
@@ -270,7 +319,6 @@ const InspectionRequestModal = () => {
                 </div>
               </div>
 
-              {/* Email */}
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-primary-foreground/20 flex items-center justify-center flex-shrink-0">
                   <Mail className="h-5 w-5" />
@@ -289,7 +337,6 @@ const InspectionRequestModal = () => {
                 </div>
               </div>
 
-              {/* Address */}
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-full bg-primary-foreground/20 flex items-center justify-center flex-shrink-0">
                   <MapPin className="h-5 w-5" />
