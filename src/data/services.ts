@@ -13,7 +13,6 @@ import flooringImg from "@/assets/images/services/flooring.jpg";
 import karteneImg from "@/assets/images/services/kartene.png";
 import electricalImg from "@/assets/images/services/electrical.jpg";
 import plumbingImg from "@/assets/images/services/plumbing.jpg";
-
 import microcementImg from "@/assets/images/services/microcement.jpg";
 import microcementKitchenImg from "@/assets/images/services/microcement-kitchen.jpg";
 import terrazzoImg from "@/assets/images/services/terrazzo.jpg";
