@@ -10,6 +10,7 @@ import bathroomImg from "@/assets/images/services/bathroom.jpg";
 import kitchenImg from "@/assets/images/services/minimalistchna_byala_kuhniya.png";
 import paintingImg from "@/assets/images/services/painting.jpg";
 import flooringImg from "@/assets/images/services/flooring.jpg";
+import karteneImg from "@/assets/images/services/kartene.png";
 import electricalImg from "@/assets/images/services/electrical.jpg";
 import plumbingImg from "@/assets/images/services/plumbing.jpg";
 
