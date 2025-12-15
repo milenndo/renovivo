@@ -447,8 +447,8 @@ export const services: Service[] = [
       { step: 4, title: "Почистване", description: "Събиране и пакетиране на отпадъци." },
       { step: 5, title: "Извозване", description: "Транспорт до депо за строителни отпадъци." },
     ],
-    image: fullRenovationImg,
-    gallery: [fullRenovationImg, bathroomImg],
+    image: karteneImg,
+gallery: [karteneImg, bathroomImg],
     isInnovative: false,
   },
   {
