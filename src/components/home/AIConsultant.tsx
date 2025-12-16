@@ -1,6 +1,6 @@
 import { Bot, Send, Sparkles, Calculator, Lightbulb, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { useChat } from "@/contexts/ChatContext";
 
 const features = [
   {
@@ -45,6 +45,8 @@ const mockConversation = [
 ];
 
 const AIConsultant = () => {
+  const { openChat } = useChat();
+
   return (
     <section className="py-16 md:py-24 bg-gradient-to-b from-background to-muted/30">
       <div className="container mx-auto px-4">
@@ -92,12 +94,14 @@ const AIConsultant = () => {
             </div>
 
             <div className="pt-4">
-              <Link to="/contact">
-                <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
-                  <Bot className="h-5 w-5 mr-2" />
-                  Започнете консултация
-                </Button>
-              </Link>
+              <Button 
+                size="lg" 
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
+                onClick={openChat}
+              >
+                <Bot className="h-5 w-5 mr-2" />
+                Започнете консултация
+              </Button>
             </div>
           </div>
 
@@ -126,10 +130,11 @@ const AIConsultant = () => {
 
               {/* Chat Messages */}
               <div className="p-4 space-y-4 max-h-[400px] overflow-y-auto bg-muted/20">
-                {mockConversation.map((message, index) => (
+              {mockConversation.map((message, index) => (
                   <div
                     key={index}
-                    className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                    className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} animate-fade-in`}
+                    style={{ animationDelay: `${index * 0.4}s`, animationFillMode: 'backwards' }}
                   >
                     <div
                       className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
