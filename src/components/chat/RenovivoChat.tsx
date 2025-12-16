@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
+import { useChat } from "@/contexts/ChatContext";
 
 type ChatMessage = {
   id: string;
@@ -20,7 +21,7 @@ const INITIAL_MESSAGE: ChatMessage = {
 };
 
 const RenovivoChat = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, toggleChat } = useChat();
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -33,7 +34,7 @@ const RenovivoChat = () => {
   }, [isOpen, messages.length]);
 
   const handleToggle = () => {
-    setIsOpen(prev => !prev);
+    toggleChat();
   };
 
   const handleOpenInspection = () => {
