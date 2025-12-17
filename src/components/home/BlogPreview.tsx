@@ -8,11 +8,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 
 // Blog images
-import apartmentRenovationImg from "@/assets/images/blog/apartment-renovation.jpg";
-import bathroomRenovationImg from "@/assets/images/blog/bathroom-renovation.jpg";
-import microcementImg from "@/assets/images/blog/microcement-technology.jpg";
-import renovationMistakesImg from "@/assets/images/blog/renovation-mistakes.jpg";
-import bathroomCostImg from "@/assets/images/blog/bathroom-cost.jpg";
+
+const apartmentRenovationImg = "/images/blog/apartment-renovation.jpg";
+const bathroomRenovationImg = "/images/blog/bathroom-renovation.jpg";
+const microcementImg = "/images/blog/microcement-technology.jpg";
+const renovationMistakesImg = "/images/blog/renovation-mistakes.jpg";
+const bathroomCostImg = "/images/blog/bathroom-cost.jpg";
 
 const blogImages: Record<string, string> = {
   "remont-na-apartament-sofia-2024": apartmentRenovationImg,
