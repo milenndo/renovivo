@@ -16,7 +16,7 @@ const renovationMistakesImg = "/images/blog/renovation-mistakes.jpg";
 const bathroomCostImg = "/images/blog/bathroom-cost.jpg";
 
 const blogImages: Record<string, string> = {
-  "remont-na-apartament-sofia-2024": apartmentRenovationImg,
+  "kak-da-planirate-remont-na-apartament-sofia-2025": apartmentRenovationImg,
   "remont-na-banya-sofia-cena": bathroomRenovationImg,
   "microcement-moderna-tehnologiya": microcementImg,
   "chesti-greshki-pri-remont": renovationMistakesImg,
