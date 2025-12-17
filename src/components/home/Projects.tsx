@@ -7,25 +7,25 @@ const projects = [
     id: 1,
     title: "Модерен апартамент",
     category: "Цялостен ремонт",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 2,
     title: "Луксозна баня",
     category: "Баня",
-    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=fhttps://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 3,
     title: "Минималистична кухня",
     category: "Кухня",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 4,
     title: "Уютна спалня",
     category: "Спалня",
-    image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?authttps://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80"
   },
 ];
 
