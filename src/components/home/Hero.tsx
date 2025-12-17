@@ -48,7 +48,7 @@ const Hero = () => {
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-background uppercase tracking-tight leading-[1.1] mb-8">
             От ХАОС<br />
             <span className="block text-primary mt-3">на строежа</span>
-            <span className="block text-background mt-3">ИДЕАЛЕН ДОМ</span>
+            <span className="block text-background mt-3">ДО ИДЕАЛЕН ДОМ</span>
             <span className="block text-primary/80 text-4xl sm:text-5xl md:text-6xl mt-4 font-semibold">za 45 dne</span>
           </h1>
 
