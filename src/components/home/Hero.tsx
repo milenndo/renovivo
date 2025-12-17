@@ -40,7 +40,7 @@ const Hero = () => {
           <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm px-4 py-2 rounded-full mb-8 border border-primary/30">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
             <span className="text-primary text-sm font-medium tracking-wide">
-              Цълостни ремонти в София и района
+              Цялостни ремонти в София и района
             </span>
           </div>
 
@@ -113,7 +113,7 @@ const Hero = () => {
             <div className="flex flex-col items-center">
               <div className="flex items-center gap-2 mb-2">
                 <Shield className="h-6 w-6 text-primary" />
-                <span className="text-3xl font-bold text-primary">10 години</span>
+                <span className="text-3xl font-bold text-primary">5 години</span>
               </div>
               <p className="text-background/70 text-sm font-medium">Гаранция</p>
             </div>
