@@ -54,7 +54,7 @@ const Hero = () => {
 
           {/* NEW: Power Subheading - Addresses Main Fear */}
           <p className="text-lg md:text-xl text-background/80 mb-12 leading-relaxed max-w-3xl mx-auto font-medium">
-            Без разорени нерви, без скрити такси. Само резултати с пълна гаранция.
+            Без нерви, без скрити такси. Само резултати с пълна гаранция.
           </p>
 
           {/* CTA Buttons - WITHOUT BRACKETS */}
