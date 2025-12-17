@@ -49,7 +49,7 @@ const Hero = () => {
             От ХАОС<br />
             <span className="block text-primary mt-3">на строежа</span>
             <span className="block text-background mt-3">ДО ИДЕАЛЕН ДОМ</span>
-            <span className="block text-primary/80 text-4xl sm:text-5xl md:text-6xl mt-4 font-semibold">za 45 dne</span>
+            <span className="block text-primary/80 text-4xl sm:text-5xl md:text-6xl mt-4 font-semibold"</span>
           </h1>
 
           {/* NEW: Power Subheading - Addresses Main Fear */}
