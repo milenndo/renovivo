@@ -4,8 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 const reasons = [
   {
     icon: User,
-    title: "Личен Проджект Мениджър",
-    description: "Един човек отговаря за целия обект и комуникацията. Край на разваления телефон.",
+title: "Личен Управител на Проект",    description: "Един човек отговаря за целия обект и комуникацията. Край на разваления телефон.",
   },
   {
     icon: Calculator,
@@ -25,8 +24,7 @@ const reasons = [
   {
     icon: Shield,
     title: "Писмена Гаранция",
-    description: "Пълна гаранция за вложените труд и материали.",
-  },
+description: "Пълна гаранция за вся извършена работа и материали.",  },
 ];
 
 const PeaceOfMind = () => {
