@@ -284,7 +284,7 @@ export const services: Service[] = [
       { step: 5, title: "Предаване", description: "Финална проверка и почистване." },
     ],
     image: fullRenovationImg,
-    gallery: [fullRenovationImg, bathroomImg, kitchenImg],
+    gallery: [fullRenovationImg, bathroomImg ],
     isInnovative: false,
   },
   {
