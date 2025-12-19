@@ -8,6 +8,7 @@ import flooringImg from "@/assets/images/services/flooring.jpg";
 import paintingImg from "@/assets/images/services/painting.jpg";
 import livingRoomBeforeImg from "@/assets/images/projects/living-room-before.png";
 import livingRoomAfterImg from "@/assets/images/projects/living-room-after.png";
+import livingRoomDetailImg from "@/assets/images/projects/living-room-detail.png";
 
 export interface Project {
   id: string;
@@ -103,14 +104,14 @@ export const projects: Project[] = [
     category: "Дневна",
     categoryId: "living",
     location: "София, кв. Изток",
-    duration: "2 седмици",
-    area: "35 кв.м.",
-    description: "Просторна дневна с отворен план, минималистичен дизайн и акцент върху естествената светлина. Включва зона за телевизор с вградени шкафове.",
-    challenge: "Голямо пространство, което трябваше да се зонира без физически прегради.",
-    solution: "Използвахме различни подови настилки и осветление за зониране. Добавихме вградена TV стена с биокамина и скрито осветление.",
-    mainImage: livingRoomImg,
-    gallery: [livingRoomImg, fullRenovationImg, kitchenImg],
-    features: ["Open-space", "Вградена TV стена", "Биокамина", "Зониране с осветление", "Панорамни прозорци"],
+    duration: "3 седмици",
+    area: "60 кв.м.",
+    description: "Цялостна трансформация на просторна дневна от 60 кв.м. – от остаряло пространство към модерен, светъл интериор. Новият дизайн включва елегантна мека мебел в неутрални тонове, акцентна стена с топла текстура, и минималистично обзавеждане, което създава усещане за простор и уют.",
+    challenge: "Старомоден интериор с тъмни мебели и неефективно използване на пространството. Клиентът искаше съвременен, светъл и функционален дизайн.",
+    solution: "Премахнахме старите мебели и приложихме светла цветова палитра. Добавихме модерен секционен диван, акцентна стена с дървена текстура, и стратегическо осветление за максимален ефект.",
+    mainImage: livingRoomAfterImg,
+    gallery: [livingRoomAfterImg, livingRoomBeforeImg, livingRoomDetailImg],
+    features: ["Цялостна трансформация", "Модерен секционен диван", "Акцентна стена", "Неутрална палитра", "Минималистичен дизайн", "Оптимизирано осветление"],
     beforeImage: livingRoomBeforeImg,
     afterImage: livingRoomAfterImg,
   },
