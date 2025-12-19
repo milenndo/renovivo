@@ -6,6 +6,8 @@ import bedroomImg from "@/assets/images/projects/bedroom.jpg";
 import livingRoomImg from "@/assets/images/projects/living-room.jpg";
 import flooringImg from "@/assets/images/services/flooring.jpg";
 import paintingImg from "@/assets/images/services/painting.jpg";
+import livingRoomBeforeImg from "@/assets/images/projects/living-room-before.png";
+import livingRoomAfterImg from "@/assets/images/projects/living-room-after.png";
 
 export interface Project {
   id: string;
@@ -21,6 +23,8 @@ export interface Project {
   mainImage: string;
   gallery: string[];
   features: string[];
+  beforeImage?: string;
+  afterImage?: string;
 }
 
 export const categories = [
@@ -107,6 +111,8 @@ export const projects: Project[] = [
     mainImage: livingRoomImg,
     gallery: [livingRoomImg, fullRenovationImg, kitchenImg],
     features: ["Open-space", "Вградена TV стена", "Биокамина", "Зониране с осветление", "Панорамни прозорци"],
+    beforeImage: livingRoomBeforeImg,
+    afterImage: livingRoomAfterImg,
   },
   {
     id: "geometric-bathroom",

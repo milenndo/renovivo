@@ -86,6 +86,31 @@ const ProjectDetail = () => {
                   </p>
                 </div>
 
+                {/* Before & After */}
+                {project.beforeImage && project.afterImage && (
+                  <div>
+                    <h2 className="text-2xl font-bold mb-6">Преди и След</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <div className="text-sm font-medium text-muted-foreground mb-2 uppercase tracking-wider">Преди</div>
+                        <img
+                          src={project.beforeImage}
+                          alt={`${project.title} - преди`}
+                          className="w-full h-64 object-cover rounded-lg"
+                        />
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-primary mb-2 uppercase tracking-wider">След</div>
+                        <img
+                          src={project.afterImage}
+                          alt={`${project.title} - след`}
+                          className="w-full h-64 object-cover rounded-lg"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Challenge & Solution */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Card className="border-0 shadow-md">
