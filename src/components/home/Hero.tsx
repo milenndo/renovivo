@@ -31,7 +31,7 @@ const Hero = () => {
           <source src="/videos/Magical_Penthouse_Transformation_Video.mp4" type="video/mp4" />
         </video>
         {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-foreground/80" />
+        <div className="absolute inset-0 bg-foreground/40" />
       </div>
 
       {/* Centered Content */}
