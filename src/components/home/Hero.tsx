@@ -47,9 +47,9 @@ const Hero = () => {
 
           {/* NEW: Transformation Headline - PSYCHOLOGICAL POWER */}
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-background uppercase tracking-tight leading-[1.1] mb-8">
-            От ХАОС<br />
+            <span className="text-primary">От ХАОС</span><br />
             <span className="block text-primary mt-3">на строежа</span>
-            <span className="block text-background mt-3">ДО ИДЕАЛЕН ДОМ</span>
+            <span className="block text-background mt-3"><span className="text-primary underline decoration-wavy decoration-4 decoration-yellow-400">ДО ИДЕАЛЕН ДОМ</span></span>
           </h1>
 
           {/* NEW: Power Subheading - Addresses Main Fear */}
