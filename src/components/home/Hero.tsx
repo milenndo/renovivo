@@ -1,4 +1,5 @@
-import { useState } from "react";
+48
+  import { useState } from "react";
 import { Bot, Calculator, FolderOpen, CheckCircle2, Award, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -27,7 +28,7 @@ const Hero = () => {
             videoLoaded ? "opacity-40" : "opacity-0"
           }`}
         >
-          <source src="/videos/hero-background.webm" type="video/webm" />
+          <source src="/videos/Magical_Penthouse_Transformation_Video.mp4" type="video/mp4" />
         </video>
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-foreground/80" />
