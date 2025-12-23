@@ -13,8 +13,8 @@ const Layout = ({ children }: LayoutProps) => {
       <Header />
       <main className="flex-grow">{children}</main>
       <Footer />
-      <RenovivoChat />
-    </div>
+     {/* TODO: Chat скрит временно за доизпипване на AI */}
+     {/* <RenovivoChat /> */}    </div>
   );
 };
 
