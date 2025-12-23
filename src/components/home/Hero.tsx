@@ -46,12 +46,11 @@ const Hero = () => {
           </div>
 
           {/* NEW: Transformation Headline - PSYCHOLOGICAL POWER */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-background uppercase tracking-tight leading-[1.1] mb-8">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-primary uppercase tracking-tight leading-[1.1] mb-8">
+
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-primary uppercase tracking-tight leading-[1.1] mb-8">
      РЕМОНТ БЕЗ ХАОС
      <span className="text-background block mt-3">САМО СПОКОЙСТВИЕ</span>
-     </h1>h1>
-
+     </h1>
           {/* NEW: Power Subheading - Addresses Main Fear */}
           <p className="text-lg md:text-xl text-background/80 mb-12 leading-relaxed max-w-3xl mx-auto font-medium">
 Цялостни ремонти в София и района. От планиране до завършение, с един экип от эксперти.          </p>
