@@ -50,8 +50,8 @@ const Index = () => {
         <Hero />
         <PeaceOfMind />
         <Services />
-        <AIConsultant />
-        <About />
+     {/* TODO: AI консултант - скрит за тестване и доизпипване. Активирај със SHOW_AI_CONSULTANT флаг */}
+     {/* <AIConsultant /> */}        <About />
         <Projects />
         <WhyUs />
         <HowWeWork />
