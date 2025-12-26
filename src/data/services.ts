@@ -1,4 +1,4 @@
-import { Home, Bath, ChefHat, Paintbrush, Layers, Wrench, Zap, Droplets, Square, Sparkles, Hexagon, Mountain } from "lucide-react";
+},,import { Home, Bath, ChefHat, Paintbrush, Layers, Wrench, Zap, Droplets, Square, Sparkles, Hexagon, Mountain } from "lucide-react";
 
 export const getServiceById = (id: string): Service | undefined => {
   return services.find(service => service.id === id);
@@ -494,7 +494,7 @@ gallery: [karteneImg, bathroomImg],
     image: flooringImg,
     gallery: [flooringImg, fullRenovationImg],
     isInnovative: false,
-  },,
+  },
   {
     id: "smart-installations",
     icon: Lightbulb,
