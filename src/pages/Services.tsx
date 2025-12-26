@@ -6,98 +6,57 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import PriceTable from "@/components/PriceTable";
 
-// Service categories with their items
+// Service categories restructured per user specifications
 const serviceCategories = [
   {
-    id: "design",
-    title: "Проект & Дизайн",
-    description: "Цялостна концепция за вашия интериор",
-    icon: Palette,
-    items: [
-      { name: "Проект и Интериорен Дизайн", path: "/services/interior-design", description: "3D визуализации и техническа документация" },
-      { name: "Консултации", path: "/contact", description: "Професионални съвети и насоки" },
-    ]
-  },
-  {
-    id: "renovation",
-    title: "Ремонтни дейности",
-    description: "Цялостни и частични ремонти",
+    id: "full-renovation",
+    title: "Цялостен ремонт на апартамент или къща",
+    description: "Пълна трансформация с внимание към всеки детайл",
     icon: Home,
     items: [
-      { name: "Цялостен ремонт", path: "/services/full-renovation", description: "Пълна трансформация на жилище" },
-      { name: "Ремонт на баня", path: "/services/bathroom", description: "Модерни бани с внимание към детайла" },
-      { name: "Ремонт на кухня", path: "/services/kitchen", description: "Функционални и стилни кухни" },
+      { name: "Панелни дома", path: "/services/full-renovation", description: "Специализирани решения за панелна конструкция" },
+      { name: "ЕПК (Еднофамилни жилища)", path: "/services/full-renovation", description: "Комплексна реновация на частни къщи" },
+      { name: "Тухлени сгради", path: "/services/full-renovation", description: "Ремонт на класически конструкции" },
+      { name: "Подмяна на инсталации", path: "/services/full-renovation", description: "Електро, ВиК, отопление - все в един проект" },
     ]
   },
   {
-    id: "preparation",
-    title: "Подготовка & Къртене",
-    description: "Демонтаж, къртене и подготвителни работи",
-    icon: Wrench,
-    items: [
-      { name: "Къртене", path: "/services/kartene", description: "Демонтаж на плочки, замазки и стени" },
-      { name: "Демонтаж на санитария", path: "/services/kartene", description: "Премахване на стара санитария" },
-      { name: "Извозване на отпадъци", path: "/services/kartene", description: "Транспорт до депо" },
-    ]
-  },
-  {
-    id: "finishing",
-    title: "Довършителни работи",
-    description: "Шпакловка, боядисване, настилки",
+    id: "finishing-works",
+    title: "Цялостни довършителни работи",
+    description: "Заново строителство - готови към обитаване",
     icon: Paintbrush,
     items: [
-      { name: "Шпакловка", path: "/services/shpaklovka", description: "Грундиране, шпакловане, шлайфане" },
-      { name: "Боядисване", path: "/services/painting", description: "Професионално боядисване с качествени бои" },
-      { name: "Лепене на плочки", path: "/services/plochki", description: "Фаянс, теракота, гранитогрес" },
-      { name: "Декоративни мазилки", path: "/services/shpaklovka", description: "Уникални текстури и ефекти" },
+      { name: "Подготовка и къртене", path: "/services/preparation", description: "Демонтаж на стари окончания и материали" },
+      { name: "Шпакловка и праймериране", path: "/services/finishing", description: "Перфектна подготовка на стени и тавани" },
+      { name: "Боядисване", path: "/services/painting", description: "Висококачествено боядисване с премиум бои" },
+      { name: "Подови настилки", path: "/services/flooring", description: "Ламинат, паркет, теракота, гранитогрес" },
+      { name: "Монтаж на санитария", path: "/services/sanitary", description: "Умивалници, тоалетни, вани, душ кабини" },
     ]
   },
   {
-    id: "flooring",
-    title: "Подови настилки",
-    description: "Всички видове подови покрития",
-    icon: Layers,
+    id: "partial-renovations",
+    title: "Частични ремонти",
+    description: "Целевни решения за отделни помещения и зони",
+    icon: Wrench,
     items: [
-      { name: "Ламинат и паркет", path: "/services/flooring", description: "Монтаж с подложка и первази" },
-      { name: "Теракота и гранитогрес", path: "/services/plochki", description: "Полагане и фугиране" },
-      { name: "Винилови настилки", path: "/services/flooring", description: "Модерни и практични решения" },
-    ]
-  },
-  {
-    id: "drywall",
-    title: "Сухо строителство",
-    description: "Гипсокартон, окачени тавани, преградни стени",
-    icon: Layers,
-    items: [
-      { name: "Преградни стени", path: "/services/suho-stroitelstvo", description: "Разделяне на помещения" },
-      { name: "Окачени тавани", path: "/services/suho-stroitelstvo", description: "Класически и LED кутии" },
-      { name: "Сухи подове (Knauf)", path: "/services/suhi-podove", description: "Система Knauf с Nivogran BT" },
-      { name: "Дизайнерски решения от гипсокартон", path: "/services/gipsokarton-design", description: "Декоративни форми и нива" },
-    ]
-  },
-  {
-    id: "installations",
-    title: "Инсталации",
-    description: "Електро, ВиК и техническо оборудване",
-    icon: Zap,
-    items: [
-      { name: "Електрически инсталации", path: "/services/electrical", description: "Ново окабеляване и ремонт" },
-      { name: "ВиК услуги", path: "/services/plumbing", description: "Водопровод и канализация" },
-      { name: "Отопление и климатизация", path: "/services/heating-ac", description: "Отоплителни и климатични системи" },
-      { name: "Смарт инсталации", path: "/services/electrical", description: "Умен дом и автоматизация" },
+      { name: "Ремонт на баня", path: "/services/bathroom", description: "Модернизиране на санитарни помещения" },
+      { name: "Ремонт на кухня", path: "/services/kitchen", description: "Функционални и стилни кухненски пространства" },
+      { name: "Ремонт на всекидневна", path: "/services/living-room", description: "Трансформация на жилищни зони" },
+      { name: "Монтаж на предстенни обшивки", path: "/services/wall-cladding", description: "Декоративни и функционални облицовки" },
+      { name: "Преграднистени и преустройства", path: "/services/partition-walls", description: "Преразпределение на пространството" },
     ]
   },
   {
     id: "innovation",
-    title: "Иновативни покрития",
-    description: "Микроцимент, Terrazzo, Flake Floor, Каменен килим",
+    title: "Специални иновативни решения",
+    description: "Висок клас финишни покрития и умни технологии",
     icon: Sparkles,
     items: [
-      { name: "Микроцимент", path: "/services/microcement", description: "Безшевно покритие • от 67 лв./кв.м" },
-      { name: "Terrazzo", path: "/services/terrazzo", description: "Мозаечни подове • от 133 лв./кв.м" },
-      { name: "Flake Floor", path: "/services/flake-floor", description: "Декоративна настилка • от 95 лв./кв.м" },
-      { name: "Каменен килим", path: "/services/stone-carpet", description: "За тераси и балкони • от 114 лв./кв.м" },
-      { name: "Всички иновативни покрития →", path: "/innovative-coatings", description: "Детайлно сравнение и галерия" },
+      { name: "Микроцимент", path: "/services/microcement", description: "Безшевно покритие с минималистичен дизайн" },
+      { name: "Terrazzo", path: "/services/terrazzo", description: "Класически мозаечни подове с модерен възглед" },
+      { name: "Flake Floor", path: "/services/flake-floor", description: "Декоративна и устойчива настилка" },
+      { name: "Каменен килим", path: "/services/stone-carpet", description: "За външни и вътрешни зони" },
+      { name: "Смарт инсталации 2025", path: "/services/smart-home", description: "Умен дом с Matter протокол и автоматизация" },
     ]
   },
 ];
@@ -142,15 +101,15 @@ const ServicesPage = () => {
   return (
     <>
       <Helmet>
-        <title>Ремонтни услуги София | Renovivo - Цялостен ремонт, бани, кухни</title>
+        <title>Ремонтни услуги София | Renovivo - Цялостен ремонт, бани, кухни, иновативни покрития</title>
         <meta 
           name="description" 
-          content="Професионални ремонтни услуги в София - цялостен ремонт на апартаменти, ремонт на бани и кухни, боядисване, подови настилки, ВиК и електро. Гаранция за качество!" 
+          content="Професионални ремонтни услуги в София - цялостен ремонт на апартаменти, частични ремонти, довършителни работи, микроцимент, terrazzo, flake floor. Гаранция за качество!" 
         />
-        <meta name="keywords" content="ремонтни услуги София, ремонт апартамент, ремонт баня, ремонт кухня, боядисване, подови настилки, ВиК услуги, електро услуги, микроцимент" />
+        <meta name="keywords" content="ремонтни услуги София, цялостен ремонт апартамент, ремонт баня, ремонт кухня, микроцимент, terrazzo, flake floor, смарт дом" />
         <link rel="canonical" href="https://renovivo.bg/services" />
         <meta property="og:title" content="Ремонтни услуги София | Renovivo" />
-        <meta property="og:description" content="Пълен спектър ремонтни услуги - цялостен ремонт, бани, кухни, боядисване, подови настилки." />
+        <meta property="og:description" content="Цялостен ремонт, частични ремонти, иновативни покрития - превърнете вашия дом в идеално място за живот." />
         <meta property="og:url" content="https://renovivo.bg/services" />
         <script type="application/ld+json">{JSON.stringify(servicesSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
@@ -165,7 +124,7 @@ const ServicesPage = () => {
                 Всички услуги
               </h1>
               <p className="text-background/80 text-lg">
-                Разгледайте пълния спектър от ремонтни и строителни услуги, които предлагаме в София и региона.
+                Разгледайте пълния спектър от ремонтни решения, от цялостни ремонти до специализирани иновативни покрития.
               </p>
             </div>
           </div>
@@ -187,7 +146,6 @@ const ServicesPage = () => {
                       <p className="text-muted-foreground">{category.description}</p>
                     </div>
                   </div>
-
                   {/* Category Items */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {category.items.map((item) => (
