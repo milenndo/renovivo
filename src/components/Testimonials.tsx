@@ -18,7 +18,7 @@ export default function Testimonials() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Отзиви от клиенти</h2>
-          <p className="text-xl text-gray-600">Задоволени клиенти говорят за качеството</p>
+          <p className="text-xl text-gray-600">доволни клиенти говорят за качеството</p>
         </div>
       </div>
     </section>
