@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Home, Bath, ChefHat, Paintbrush, Layers, Wrench, Zap, Droplets, Square, Sparkles, Hexagon, Mountain, Palette } from "lucide-react";
+import { Phone, ArrowRight, Home, Bath, ChefHat, Paintbrush, Layers, Wrench, Sparkles, Timer, Sofa, Frame, DoorOpen } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,41 +9,38 @@ import PriceTable from "@/components/PriceTable";
 // Service categories restructured per user specifications
 const serviceCategories = [
   {
-    id: "full-renovation",
-    title: "Цялостен ремонт на апартамент или къща",
-    description: "Пълна трансформация с внимание към всеки детайл",
-    icon: Home,
+    id: "finishing-works",
+    title: "Цялостни довършителни работи",
+    description: "Ново строителство - готови към обитаване",
+    icon: Paintbrush,
     items: [
-      { name: "Панелни дома", path: "/services/full-renovation", description: "Специализирани решения за панелна конструкция" },
-      { name: "ЕПК (Еднофамилни жилища)", path: "/services/full-renovation", description: "Комплексна реновация на частни къщи" },
-      { name: "Тухлени сгради", path: "/services/full-renovation", description: "Ремонт на класически конструкции" },
-      { name: "Подмяна на инсталации", path: "/services/full-renovation", description: "Електро, ВиК, отопление - все в един проект" },
+      { name: "Довършителни работи", path: "/services/finishing-works", description: "Пълен цикъл от грубо строителство до завършен дом" },
+      { name: "Сухо строителство", path: "/services/drywall-construction", description: "Гипсокартон, окачени тавани, преградни стени" },
+      { name: "Мебели по поръчка", path: "/services/custom-furniture", description: "Изработка по индивидуални размери и специфики" },
+      { name: "Смяна на дограма", path: "/services/windows-doors", description: "Демонтаж и монтаж на прозорци и врати" },
+      { name: "Монтаж на врати", path: "/services/doors-installation", description: "Интериорни, плъзгащи и входни врати" },
     ]
   },
   {
-    id: "finishing-works",
-    title: "Цялостни довършителни работи",
-    description: "Заново строителство - готови към обитаване",
-    icon: Paintbrush,
+    id: "full-renovation",
+    title: "Основен ремонт",
+    description: "Пълна реновация на жилища \"Старо строителство\"",
+    icon: Home,
     items: [
-      { name: "Подготовка и къртене", path: "/services/preparation", description: "Демонтаж на стари окончания и материали" },
-      { name: "Шпакловка и праймериране", path: "/services/finishing", description: "Перфектна подготовка на стени и тавани" },
-      { name: "Боядисване", path: "/services/painting", description: "Висококачествено боядисване с премиум бои" },
-      { name: "Подови настилки", path: "/services/flooring", description: "Ламинат, паркет, теракота, гранитогрес" },
-      { name: "Монтаж на санитария", path: "/services/sanitary", description: "Умивалници, тоалетни, вани, душ кабини" },
+      { name: "Апартамент (ЕПК, панел, тухла)", path: "/services/apartment-renovation", description: "Специализиран подход според типа конструкция" },
+      { name: "Къща", path: "/services/house-renovation", description: "Цялостна реновация на еднофамилни къщи" },
     ]
   },
   {
     id: "partial-renovations",
     title: "Частични ремонти",
-    description: "Целевни решения за отделни помещения и зони",
+    description: "Целеви решения за отделни помещения и зони",
     icon: Wrench,
     items: [
       { name: "Ремонт на баня", path: "/services/bathroom", description: "Модернизиране на санитарни помещения" },
       { name: "Ремонт на кухня", path: "/services/kitchen", description: "Функционални и стилни кухненски пространства" },
       { name: "Ремонт на всекидневна", path: "/services/living-room", description: "Трансформация на жилищни зони" },
-      { name: "Монтаж на предстенни обшивки", path: "/services/wall-cladding", description: "Декоративни и функционални облицовки" },
-      { name: "Преграднистени и преустройства", path: "/services/partition-walls", description: "Преразпределение на пространството" },
+      { name: "Бърз освежителен ремонт", path: "/services/quick-refresh", description: "До 1 седмица - боядисване, настилки, малки корекции" },
     ]
   },
   {
@@ -53,10 +50,10 @@ const serviceCategories = [
     icon: Sparkles,
     items: [
       { name: "Микроцимент", path: "/services/microcement", description: "Безшевно покритие с минималистичен дизайн" },
-      { name: "Terrazzo", path: "/services/terrazzo", description: "Класически мозаечни подове с модерен възглед" },
+      { name: "Terrazzo", path: "/services/terrazzo", description: "Класически мозаечни подове с модерен облик" },
       { name: "Flake Floor", path: "/services/flake-floor", description: "Декоративна и устойчива настилка" },
-      { name: "Каменен килим", path: "/services/stone-carpet", description: "За външни и вътрешни зони" },
-      { name: "Смарт инсталации 2025", path: "/services/smart-home", description: "Умен дом с Matter протокол и автоматизация" },
+      { name: "Каменен килим", path: "/services/stone-carpet", description: "За външни зони и басейни" },
+      { name: "Смарт инсталации 2025", path: "/services/smart-installations", description: "Умен дом с Matter протокол и автоматизация" },
     ]
   },
 ];
@@ -124,7 +121,7 @@ const ServicesPage = () => {
                 Всички услуги
               </h1>
               <p className="text-background/80 text-lg">
-                Разгледайте пълния спектър от ремонтни решения, от цялостни ремонти до специализирани иновативни покрития.
+                Разгледайте пълния спектър от ремонтни решения - от довършителни работи до специализирани иновативни покрития.
               </p>
             </div>
           </div>
@@ -174,20 +171,6 @@ const ServicesPage = () => {
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Pricing Section */}
-        <section className="py-12 bg-secondary/30">
-          <div className="container-custom">
-            <div className="text-center mb-8">
-              <span className="text-primary font-medium text-sm uppercase tracking-wider">Ценоразпис</span>
-              <h2 className="text-2xl md:text-3xl font-bold mt-2">Ориентировъчни цени</h2>
-              <p className="text-muted-foreground mt-2">Прозрачно ценообразуване за всички услуги</p>
-            </div>
-            <div className="max-w-4xl mx-auto">
-              <PriceTable showAll={true} title="Всички услуги" />
             </div>
           </div>
         </section>
