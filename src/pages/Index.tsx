@@ -10,6 +10,7 @@ import WhyUs from "@/components/home/WhyUs";
 import HowWeWork from "@/components/home/HowWeWork";
 import BlogPreview from "@/components/home/BlogPreview";
 import CTA from "@/components/home/CTA";
+import Testimonials from "@/components/Testimonials";
 
 const Index = () => {
   const breadcrumbSchema = {
@@ -56,6 +57,7 @@ const Index = () => {
         <WhyUs />
         <HowWeWork />
         <BlogPreview />
+              <Testimonials />
         <CTA />
       </Layout>
     </>
