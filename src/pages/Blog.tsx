@@ -14,6 +14,7 @@ import bathroomRenovationImg from "@/assets/images/blog/bathroom-renovation.jpg"
 import microcementImg from "@/assets/images/blog/microcement-technology.jpg";
 import renovationMistakesImg from "@/assets/images/blog/renovation-mistakes.jpg";
 import bathroomCostImg from "@/assets/images/blog/bathroom-cost.jpg";
+import interiorDesignTrends2026Img from "@/assets/images/blog/interior-design-trends-2026.png";
 
 const blogImages: Record<string, string> = {
   "remont-na-apartament-sofia-2024": apartmentRenovationImg,
@@ -21,6 +22,7 @@ const blogImages: Record<string, string> = {
   "microcement-moderna-tehnologiya": microcementImg,
   "chesti-greshki-pri-remont": renovationMistakesImg,
   "kolko-struva-remont-na-banya": bathroomCostImg,
+  "tendentsii-v-interiorniya-dizain-za-2026": interiorDesignTrends2026Img,
 };
 
 const Blog = () => {
