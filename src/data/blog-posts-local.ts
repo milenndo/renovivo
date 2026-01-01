@@ -94,5 +94,5 @@ export const planningRenovationPost = {
   reading_time: 12,
   meta_title: 'Как да планирате ремонт от край до край | Renovivo (2026)',
   meta_description: 'Практично ръководство за планиране на ремонта през 2026 г. - стъпка по стъпка.',
-  created_at: new Date().toISOString(),
+  created_at: '2026-01-01T19:00:00.000Z',
 };
