@@ -24,7 +24,7 @@ const BlogPost = () => {
         .maybeSingle();
 
       if (error) throw error;
-              if (!data && slug === planningRenovationPost.slug) {
+              if (! g === planningRenovationPost.slug) {
                           return planningRenovationPost as any;
                         }
               return data;
