@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
+import { planningRenovationPost, microcementPost } from "@/data/blog-posts-local";
 
 // Blog images
 
@@ -34,7 +35,20 @@ const BlogPreview = () => {
         .limit(3);
 
       if (error) throw error;
-      return data;
+
+      const allPosts = data || [];
+      const existingSlugs = new Set(allPosts.map((p: any) => p.slug));
+
+      if (!existingSlugs.has(planningRenovationPost.slug)) {
+        allPosts.push(planningRenovationPost as any);
+      }
+      if (!existingSlugs.has(microcementPost.slug)) {
+        allPosts.push(microcementPost as any);
+      }
+
+      return allPosts
+        .sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+        .slice(0, 3);
     },
   });
 
@@ -125,8 +139,8 @@ const BlogPreview = () => {
                 {/* Image */}
                 <div className="relative h-40 overflow-hidden">
                   {postImage ? (
-                    <img 
-                      src={postImage} 
+                    <img
+                      src={postImage}
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />

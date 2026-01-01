@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
-import { planningRenovationPost } from "@/data/blog-posts-local";
+import { planningRenovationPost, microcementPost } from "@/data/blog-posts-local";
 
 
 // Blog images
@@ -23,10 +23,11 @@ const blogImages: Record<string, string> = {
   "remont-na-apartament-sofia-2024": apartmentRenovationImg,
   "remont-na-banya-sofia-cena": bathroomRenovationImg,
   "microcement-moderna-tehnologiya": microcementImg,
+  "mikrociment-moderno-reshenie-steni-podove": microcementImg,
   "chesti-greshki-pri-remont": renovationMistakesImg,
   "kolko-struva-remont-na-banya": bathroomCostImg,
   "tendentsii-v-interiorniya-dizain-za-2026": interiorDesignTrends2026Img,
-//     "kak-da-planirate-remont-step-by-step-2026": planningRenovationImg,
+  //     "kak-da-planirate-remont-step-by-step-2026": planningRenovationImg,
 };
 
 const Blog = () => {
@@ -39,12 +40,15 @@ const Blog = () => {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-              const allPosts = data || [];
-              const existingSlugs = new Set(allPosts.map((p: any) => p.slug));
-              if (!existingSlugs.has(planningRenovationPost.slug)) {
-                          allPosts.push(planningRenovationPost as any);
-                        }
-              return allPosts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      const allPosts = data || [];
+      const existingSlugs = new Set(allPosts.map((p: any) => p.slug));
+      if (!existingSlugs.has(planningRenovationPost.slug)) {
+        allPosts.push(planningRenovationPost as any);
+      }
+      if (!existingSlugs.has(microcementPost.slug)) {
+        allPosts.push(microcementPost as any);
+      }
+      return allPosts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     },
   });
 
@@ -167,8 +171,8 @@ const Blog = () => {
                       {/* Image */}
                       <div className="relative h-48 overflow-hidden">
                         {postImage ? (
-                          <img 
-                            src={postImage} 
+                          <img
+                            src={postImage}
                             alt={post.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />

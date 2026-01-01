@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
-import { planningRenovationPost } from "@/data/blog-posts-local";
+import { planningRenovationPost, microcementPost } from "@/data/blog-posts-local";
 
 
 const BlogPost = () => {
@@ -24,10 +24,11 @@ const BlogPost = () => {
         .maybeSingle();
 
       if (error) throw error;
-              if (!data && slug === planningRenovationPost.slug) {
-                          return planningRenovationPost as any;
-                        }
-              return data;
+      if (!data) {
+        if (slug === planningRenovationPost.slug) return planningRenovationPost as any;
+        if (slug === microcementPost.slug) return microcementPost as any;
+      }
+      return data;
     },
     enabled: !!slug,
   });
