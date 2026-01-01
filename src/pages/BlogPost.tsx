@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
+import { planningRenovationPost } from "@/data/blog-posts-local";
+
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -22,7 +24,10 @@ const BlogPost = () => {
         .maybeSingle();
 
       if (error) throw error;
-      return data;
+              if (!data && slug === planningRenovationPost.slug) {
+                          return planningRenovationPost as any;
+                        }
+              return data;
     },
     enabled: !!slug,
   });
