@@ -57,7 +57,7 @@ const Hero = () => {
 
           {/* CTA Buttons - WITHOUT BRACKETS */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link to="/contact">
+            <Link to="/contact#contact-form">
               <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-base px-8 py-7 h-auto rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
