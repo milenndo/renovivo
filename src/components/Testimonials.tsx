@@ -1,24 +1,87 @@
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
 
 const testimonials = [
   {
     id: 1,
-    name: 'Иван Петров',
-    role: 'Собственик на апартамент',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
-    text: 'Невероятна работа! Препоръчвам ги.',
+    name: 'Мария Георгиева',
+    role: 'Апартамент в Лозенец',
+    text: 'Изключително доволна съм от работата на екипа! Ремонтът на банята беше завършен точно в срок, без скрити такси. Мениджърът беше на разположение през цялото време и отговаряше на всички мои въпроси. Горещо препоръчвам!',
+    rating: 5
+  },
+  {
+    id: 2,
+    name: 'Георги Димитров',
+    role: 'Цялостен ремонт, Младост',
+    text: 'Направиха ни пълен ремонт на тристаен апартамент. Впечатлени сме от професионализма и вниманието към детайла. Екипът работи чисто и организирано. Резултатът надмина очакванията ни.',
+    rating: 5
+  },
+  {
+    id: 3,
+    name: 'Елена Петрова',
+    role: 'Кухня и баня, Витоша',
+    text: 'Страхотен опит! Микроциментът в банята изглежда невероятно. Екипът беше много внимателен към моите изисквания и предложи отлични решения. Определено ще се обърна към тях отново.',
+    rating: 5
+  },
+  {
+    id: 4,
+    name: 'Иван Стоянов',
+    role: 'Освежителен ремонт, Център',
+    text: 'Бърз и качествен освежителен ремонт за една седмица! Боядисването е перфектно, подмениха ни контактите и осветлението. Отлично съотношение цена-качество.',
+    rating: 5
+  },
+  {
+    id: 5,
+    name: 'Надежда Василева',
+    role: 'Довършителни работи, Изток',
+    text: 'Довършиха ни апартамент в ново строителство. От замазка до готов за нанасяне дом. Всичко беше координирано перфектно. Личният проектен мениджър ни спести много нерви!',
+    rating: 5
+  },
+  {
+    id: 6,
+    name: 'Петър Николов',
+    role: 'Ремонт на къща, Бояна',
+    text: 'Реновирахме стара къща с екипа на Renovivo. Сложен проект с много предизвикателства, но те се справиха отлично. Комуникацията беше безупречна от начало до край.',
     rating: 5
   }
 ];
 
 export default function Testimonials() {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+    <section className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Отзиви от клиенти</h2>
-          <p className="text-xl text-gray-600">доволни клиенти говорят за качеството</p>
+          <span className="text-primary font-medium text-sm uppercase tracking-wider">Отзиви</span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Какво казват нашите клиенти</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Стотици доволни клиенти ни се довериха за своите проекти. Ето какво споделят за работата с нас.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((testimonial) => (
+            <Card key={testimonial.id} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="p-6">
+                <Quote className="h-8 w-8 text-primary/20 mb-4" />
+                
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                  ))}
+                </div>
+                
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  "{testimonial.text}"
+                </p>
+                
+                <div className="border-t pt-4">
+                  <p className="font-semibold text-foreground">{testimonial.name}</p>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </section>

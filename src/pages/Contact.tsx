@@ -166,7 +166,7 @@ const ContactPage = () => {
 
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <Card className="border-0 shadow-lg">
+                <Card id="contact-form" className="border-0 shadow-lg scroll-mt-24">
                   <CardContent className="p-8">
                     <h2 className="text-2xl font-bold mb-2">Изпратете запитване</h2>
                     <p className="text-muted-foreground mb-6">

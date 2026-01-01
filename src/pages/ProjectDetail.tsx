@@ -111,6 +111,34 @@ const ProjectDetail = () => {
                   </Card>
                 </div>
 
+                {/* Project Stages - Storytelling */}
+                {project.stages && project.stages.length > 0 && (
+                  <div>
+                    <h2 className="text-2xl font-bold mb-6">Етапи на изпълнение</h2>
+                    <div className="relative">
+                      {/* Timeline line */}
+                      <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-primary/20" />
+                      
+                      <div className="space-y-6">
+                        {project.stages.map((stage, index) => (
+                          <div key={index} className="relative pl-12">
+                            {/* Timeline dot */}
+                            <div className="absolute left-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm">
+                              {index + 1}
+                            </div>
+                            <Card className="border-0 shadow-md">
+                              <CardContent className="p-4">
+                                <h3 className="font-bold text-lg mb-2">{stage.title}</h3>
+                                <p className="text-muted-foreground text-sm">{stage.description}</p>
+                              </CardContent>
+                            </Card>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Features */}
                 <div>
                   <h2 className="text-2xl font-bold mb-6">Основни характеристики</h2>

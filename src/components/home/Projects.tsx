@@ -1,33 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { projects as allProjects } from "@/data/projects";
 
-const projects = [
-  {
-    id: 1,
-    title: "Модерен апартамент",
-    category: "Цялостен ремонт",
-    image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 2,
-    title: "Луксозна баня",
-    category: "Баня",
-    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=fhttps://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 3,
-    title: "Минималистична кухня",
-    category: "Кухня",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 4,
-    title: "Уютна спалня",
-    category: "Спалня",
-    image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?authttps://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=800&q=80"
-  },
-];
+// Вземаме първите 4 проекта от портфолиото за показване в Hero секцията
+const displayProjects = allProjects.slice(0, 4);
 
 const Projects = () => {
   return (
@@ -36,7 +13,7 @@ const Projects = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <span className="text-amber-700 font-medium text-sm uppercase tracking-wider">Портфолио</span>
+            <span className="text-primary font-medium text-sm uppercase tracking-wider">Портфолио</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
               Нашите скорошни проекти
             </h2>
@@ -54,15 +31,15 @@ const Projects = () => {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {projects.map((project, index) => (
+          {displayProjects.map((project, index) => (
             <Link
               key={project.id}
-              to="/portfolio"
+              to={`/portfolio/${project.id}`}
               className="group relative overflow-hidden rounded-xl aspect-[4/5] block"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <img
-                src={project.image}
+                src={project.mainImage}
                 alt={project.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
