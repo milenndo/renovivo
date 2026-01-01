@@ -7,6 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
+import { planningRenovationPost } from "@/data/blog-posts-local";
+
 
 // Blog images
 import apartmentRenovationImg from "@/assets/images/blog/apartment-renovation.jpg";
@@ -37,7 +39,12 @@ const Blog = () => {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      return data;
+              const allPosts = data || [];
+              const existingSlugs = new Set(allPosts.map((p: any) => p.slug));
+              if (!existingSlugs.has(planningRenovationPost.slug)) {
+                          allPosts.push(planningRenovationPost as any);
+                        }
+              return allPosts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     },
   });
 
