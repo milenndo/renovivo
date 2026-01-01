@@ -16,6 +16,10 @@ import terrazzoBathroomImg from "@/assets/images/services/terrazzo-bathroom.jpg"
 import electricalImg from "@/assets/images/services/electrical.jpg";
 import plumbingImg from "@/assets/images/services/plumbing.jpg";
 import karteneImg from "@/assets/images/services/kartene.png";
+import flakeFloorImg from "@/assets/images/services/flake-floor.jpg";
+import flakeFloorShowroomImg from "@/assets/images/services/flake-floor-showroom.jpg";
+import stoneCarpetImg from "@/assets/images/services/stone-carpet.jpg";
+import stoneCarpetPoolImg from "@/assets/images/services/stone-carpet-pool.jpg";
 
 export interface Project {
   id: string;
@@ -43,9 +47,122 @@ export const categories = [
   { id: "kitchen", name: "Кухня" },
   { id: "bedroom", name: "Спалня" },
   { id: "living", name: "Дневна" },
+  { id: "innovative", name: "Иновативни покрития" },
 ];
 
 export const projects: Project[] = [
+  // ========== ИНОВАТИВНИ ПОКРИТИЯ ==========
+  {
+    id: "terrazzo-living-room",
+    title: "Terrazzo под в дневна",
+    category: "Иновативни покрития",
+    categoryId: "innovative",
+    location: "София, кв. Витоша",
+    duration: "2 седмици",
+    area: "45 кв.м.",
+    description: "Луксозен Terrazzo под в просторна дневна с естествени камъни в топли тонове. Уникален дизайн, който превръща пода в произведение на изкуството с 75+ години издръжливост.",
+    challenge: "Клиентът искаше под, който да бъде централен елемент в интериора и да издържи десетилетия без износване.",
+    solution: "Приложихме автентична Terrazzo техника с внимателно подбрани естествени камъни. Многоетапно диамантено шлифоване за огледална гладкост.",
+    mainImage: terrazzoImg,
+    gallery: [terrazzoImg, terrazzoBathroomImg, livingRoomImg],
+    features: ["Естествени камъни", "75+ години издръжливост", "UV устойчивост", "Уникален дизайн", "Огледална гладкост"],
+    stages: [
+      { title: "Дизайн консултация", description: "Избор на камъни и цветова композиция." },
+      { title: "Подготовка", description: "Изравняване на основата до перфектна равнина." },
+      { title: "Смесване", description: "Прецизна комбинация от камъни и свързващо вещество." },
+      { title: "Полагане", description: "Ръчно разстилане с експертна техника." },
+      { title: "Шлифоване", description: "Многоетапно диамантено шлифоване за блясък." }
+    ]
+  },
+  {
+    id: "flake-floor-terrace",
+    title: "Flake Floor на тераса",
+    category: "Иновативни покрития",
+    categoryId: "innovative",
+    location: "София, кв. Драгалевци",
+    duration: "3 дни",
+    area: "28 кв.м.",
+    description: "Декоративно Flake Floor покритие на открита тераса с хидроизолация и UV защита. Модерно решение, което съчетава естетика с функционалност за външни пространства.",
+    challenge: "Терасата имаше проблеми с напукване на старата настилка при замръзване и нужда от хидроизолация.",
+    solution: "Приложихме Flake Floor система, която е морозоустойчива и водоотблъскваща. Цветните частици създават атрактивен декоративен ефект.",
+    mainImage: flakeFloorImg,
+    gallery: [flakeFloorImg, flakeFloorShowroomImg, stoneCarpetImg],
+    features: ["Хидроизолация", "Морозоустойчивост", "UV стабилност", "Декоративен ефект", "Бърз монтаж"],
+    stages: [
+      { title: "Оценка", description: "Консултация и избор на цветова гама." },
+      { title: "Подготовка", description: "Почистване и грундиране на основата." },
+      { title: "Покритие", description: "Полагане на еластична основа." },
+      { title: "Декориране", description: "Поръсване на цветни Flake частици." },
+      { title: "Защита", description: "Финална UV защитна обработка." }
+    ]
+  },
+  {
+    id: "stone-carpet-pool",
+    title: "Каменен килим около басейн",
+    category: "Иновативни покрития",
+    categoryId: "innovative",
+    location: "Бояна, София",
+    duration: "5 дни",
+    area: "65 кв.м.",
+    description: "Каменен килим около частен басейн с противохлъзгаща повърхност и дренаж. Естествени камъчета в бежови тонове, които не се нагряват от слънцето.",
+    challenge: "Зоната около басейна беше хлъзгава и водата застояваше, създавайки опасност и дискомфорт.",
+    solution: "Приложихме каменен килим с 100% водопропускливост. Противохлъзгащата текстура гарантира безопасност, а естествените камъчета остават хладни.",
+    mainImage: stoneCarpetPoolImg,
+    gallery: [stoneCarpetPoolImg, stoneCarpetImg, flakeFloorImg],
+    features: ["100% водопропускливост", "Противохлъзгаща повърхност", "Морозоустойчивост", "Хладна на допир", "Естествен вид"],
+    stages: [
+      { title: "Консултация", description: "Избор на размер и цвят на камъчетата." },
+      { title: "Подготовка", description: "Осигуряване на дренаж и грундиране." },
+      { title: "Полагане", description: "Ръчно разстилане на камъчетата." },
+      { title: "Оформяне", description: "Прецизна обработка около борда на басейна." },
+      { title: "Втвърдяване", description: "24-48 часа за пълно втвърдяване." }
+    ]
+  },
+  {
+    id: "microcement-entire-apartment",
+    title: "Микроцимент в целия апартамент",
+    category: "Иновативни покрития",
+    categoryId: "innovative",
+    location: "София, кв. Лозенец",
+    duration: "10 дни",
+    area: "85 кв.м.",
+    description: "Цялостно микроциментово покритие на под и стени в модерен апартамент. Безшевна елегантност в антрацитен цвят, която създава усещане за простор и лукс.",
+    challenge: "Клиентът искаше напълно безшевен интериор без традиционни плочки и фуги в целия апартамент.",
+    solution: "Приложихме микроцимент върху всички повърхности - подове и частични стени. Единният цвят създава визуална хармония и усещане за повече пространство.",
+    mainImage: microcementImg,
+    gallery: [microcementImg, microcementKitchenImg, livingRoomAfterImg],
+    features: ["Напълно безшевен", "Подове и стени", "Водоустойчив", "Лесна поддръжка", "Модерен вид"],
+    stages: [
+      { title: "Планиране", description: "Избор на цвят и зони за покритие." },
+      { title: "Подготовка", description: "Грундиране на всички повърхности." },
+      { title: "Базов слой", description: "Нанасяне на първи слой микроцимент." },
+      { title: "Декоративен слой", description: "Финишен слой с избрания цвят." },
+      { title: "Защита", description: "Полиуретанов лак за издръжливост." }
+    ]
+  },
+  {
+    id: "stone-carpet-balcony",
+    title: "Каменен килим на балкон",
+    category: "Иновативни покрития",
+    categoryId: "innovative",
+    location: "Пловдив",
+    duration: "2 дни",
+    area: "12 кв.м.",
+    description: "Каменен килим на балкон с перфектен дренаж и естетичен вид. Решение на проблема с локви и замръзване през зимата.",
+    challenge: "Балконът имаше стари плочки, които се напукваха всяка зима и задържаха вода.",
+    solution: "Приложихме каменен килим директно върху старите плочки. Водата се оттича моментално, а покритието издържа на екстремни температури.",
+    mainImage: stoneCarpetImg,
+    gallery: [stoneCarpetImg, stoneCarpetPoolImg, flakeFloorImg],
+    features: ["Директно върху стари плочки", "Перфектен дренаж", "Морозоустойчивост", "Естествени камъчета", "Минимална поддръжка"],
+    stages: [
+      { title: "Оглед", description: "Оценка на състоянието на старите плочки." },
+      { title: "Подготовка", description: "Почистване и грундиране." },
+      { title: "Полагане", description: "Нанасяне на каменен килим." },
+      { title: "Завършване", description: "Оформяне на ръбове и праг." }
+    ]
+  },
+
+  // ========== ЦЯЛОСТЕН РЕМОНТ ==========
   {
     id: "modern-apartment-sofia",
     title: "Модерен апартамент в София",
