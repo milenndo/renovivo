@@ -64,8 +64,7 @@ const Pricing = () => {
                 <Button className="w-full" variant="outline" asChild>
                   <a href="/contact">Заяви оглед</a>
                 </Button>
-              </div>
-
+от 92 до 143 €/м² (180-280 лв./м²)
               <div className="bg-white rounded-lg shadow-lg p-8 ring-2 ring-primary transform md:scale-105">
                 <div className="bg-primary text-white text-center py-2 -mx-8 -mt-8 mb-6 rounded-t-lg font-semibold">
                   Най-популярен
@@ -76,8 +75,7 @@ const Pricing = () => {
                 <div className="text-sm text-gray-600 mb-6">(без материали)</div>
                 <Button className="w-full" asChild>
                   <a href="/contact">Запази оглед</a>
-                </Button>
-              </div>
+от 230 до 332 €/м² (450-650 лв./м²)              </div>
 
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <h3 className="text-2xl font-bold mb-2">Renovivo Premium</h3>
@@ -86,8 +84,7 @@ const Pricing = () => {
                 <Button className="w-full" variant="outline" asChild>
                   <a href="/contact">Запази среща</a>
                 </Button>
-              </div>
-
+от 332 до 460+ €/м² (650-900+ лв./м²)
             </div>
           </div>
         </section>
