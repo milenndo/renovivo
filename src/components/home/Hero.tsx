@@ -66,7 +66,7 @@ const Hero = () => {
                 Получи безплатна оценка
               </Button>
             </Link>
-            <Link to="/services">
+            <Link to="//pricing">
               <Button
                 size="lg"
                 variant="outline"
