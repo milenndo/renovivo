@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Calendar, Clock, ArrowRight, BookOpen } from "lucide-react";
+import { Calendar, Clock, BookOpen } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,17 +17,18 @@ import microcementImg from "@/assets/images/blog/microcement-technology.jpg";
 import renovationMistakesImg from "@/assets/images/blog/renovation-mistakes.jpg";
 import bathroomCostImg from "@/assets/images/blog/bathroom-cost.jpg";
 import interiorDesignTrends2026Img from "@/assets/images/blog/interior-design-trends-2026.png";
-// import planningRenovationImg from "@/assets/images/blog/planning-renovation-2026.jpg";
+import planningRenovation2026Img from "@/assets/images/blog/planning-renovation-2026.jpg";
+import microcementBathroom2026Img from "@/assets/images/blog/microcement-bathroom-2026.jpg";
 
 const blogImages: Record<string, string> = {
   "remont-na-apartament-sofia-2024": apartmentRenovationImg,
   "remont-na-banya-sofia-cena": bathroomRenovationImg,
   "microcement-moderna-tehnologiya": microcementImg,
-  "mikrociment-moderno-reshenie-steni-podove": microcementImg,
+  "mikrociment-moderno-reshenie-steni-podove": microcementBathroom2026Img,
   "chesti-greshki-pri-remont": renovationMistakesImg,
   "kolko-struva-remont-na-banya": bathroomCostImg,
   "tendentsii-v-interiorniya-dizain-za-2026": interiorDesignTrends2026Img,
-  //     "kak-da-planirate-remont-step-by-step-2026": planningRenovationImg,
+  "kak-da-planirate-remont-step-by-step-2026": planningRenovation2026Img,
 };
 
 const Blog = () => {
@@ -65,7 +66,7 @@ const Blog = () => {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Блог",
+        name: "Полезно",
         item: "https://renovivo.bg/blog",
       },
     ],
@@ -99,17 +100,17 @@ const Blog = () => {
   return (
     <>
       <Helmet>
-        <title>Блог за ремонти | Съвети и полезна информация | Renovivo</title>
+        <title>Полезно | Съвети и информация за ремонти | Renovivo</title>
         <meta
           name="description"
-          content="Полезни статии и съвети за ремонт на апартаменти, бани и кухни в София. Научете за цени, материали и как да планирате успешен ремонт."
+          content="Полезни статии и съвети за ремонт на апартаменти, бани и кухни в София. Научете за цени, материали и как да планирате успешен ремонт през 2026 г."
         />
         <meta
           name="keywords"
-          content="блог ремонти, съвети ремонт, цени ремонт София, ремонт баня съвети, планиране ремонт"
+          content="полезни съвети ремонт, съвети ремонт 2026, цени ремонт София, ремонт баня съвети, планиране ремонт"
         />
         <link rel="canonical" href="https://renovivo.bg/blog" />
-        <meta property="og:title" content="Блог за ремонти | Renovivo" />
+        <meta property="og:title" content="Полезно | Renovivo" />
         <meta
           property="og:description"
           content="Полезни статии и съвети за ремонт на апартаменти, бани и кухни в София."
@@ -127,7 +128,7 @@ const Blog = () => {
               <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
                 <BookOpen className="h-4 w-4" />
                 <span className="font-medium text-sm uppercase tracking-wider">
-                  Блог
+                  Полезно
                 </span>
               </div>
               <h1 className="text-3xl md:text-5xl font-bold mb-6">
@@ -164,62 +165,57 @@ const Blog = () => {
                 {posts.map((post) => {
                   const postImage = getPostImage(post.slug);
                   return (
-                    <Card
+                    <Link
                       key={post.id}
-                      className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                      to={`/blog/${post.slug}`}
+                      className="group block"
                     >
-                      {/* Image */}
-                      <div className="relative h-48 overflow-hidden">
-                        {postImage ? (
-                          <img
-                            src={postImage}
-                            alt={post.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                            <BookOpen className="h-16 w-16 text-primary/30" />
-                          </div>
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 to-transparent" />
-                        <Badge
-                          className={`absolute top-4 left-4 ${getCategoryColor(
-                            post.category
-                          )}`}
-                        >
-                          {post.category}
-                        </Badge>
-                      </div>
-
-                      <CardContent className="p-6">
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                          <span className="flex items-center gap-1">
-                            <Calendar className="h-4 w-4" />
-                            {formatDate(post.created_at)}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            {post.reading_time} мин.
-                          </span>
+                      <Card className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
+                        {/* Image - кликваща */}
+                        <div className="relative h-48 overflow-hidden cursor-pointer">
+                          {postImage ? (
+                            <img
+                              src={postImage}
+                              alt={post.title}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                              <BookOpen className="h-16 w-16 text-primary/30" />
+                            </div>
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 to-transparent" />
+                          <Badge
+                            className={`absolute top-4 left-4 ${getCategoryColor(
+                              post.category
+                            )}`}
+                          >
+                            {post.category}
+                          </Badge>
                         </div>
 
-                        <h2 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                          {post.title}
-                        </h2>
+                        <CardContent className="p-6">
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                            <span className="flex items-center gap-1">
+                              <Calendar className="h-4 w-4" />
+                              {formatDate(post.created_at)}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              {post.reading_time} мин.
+                            </span>
+                          </div>
 
-                        <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
-                          {post.excerpt}
-                        </p>
+                          <h2 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                            {post.title}
+                          </h2>
 
-                        <Link
-                          to={`/blog/${post.slug}`}
-                          className="inline-flex items-center text-primary font-medium text-sm hover:gap-2 transition-all"
-                        >
-                          Прочетете повече
-                          <ArrowRight className="h-4 w-4 ml-1" />
-                        </Link>
-                      </CardContent>
-                    </Card>
+                          <p className="text-muted-foreground text-sm line-clamp-3">
+                            {post.excerpt}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   );
                 })}
               </div>
