@@ -60,7 +60,7 @@ const Pricing = () => {
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <h3 className="text-2xl font-bold mb-2">Renovivo Start</h3>
                 <p className="text-sm text-gray-600 mb-4">частичен ремонт / освежаване</p>
-                <div className="text-3xl font-bold text-primary mb-6">92-143 €/м² (180-280 лв./м²)./м²</div>
+                <div className="text-2xl font-bold text-primary mb-6">92–143 €/м²<br /><span className="text-lg text-muted-foreground">(180–280 лв./м²)</span></div>
                 <Button className="w-full" variant="outline" asChild>
                   <a href="/contact">Заяви оглед</a>
                 </Button>
@@ -72,7 +72,7 @@ const Pricing = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-2">Renovivo Comfort</h3>
                 <p className="text-sm text-gray-600 mb-4">цялостен ремонт на апартамент</p>
-                <div className="text-3xl font-bold text-primary mb-1">о230-332 €/м² (450-650 лв./м²)./м²</div>
+                <div className="text-2xl font-bold text-primary mb-1">230–332 €/м²<br /><span className="text-lg text-muted-foreground">(450–650 лв./м²)</span></div>
                 <div className="text-sm text-gray-600 mb-6">(без материали)</div>
                 <Button className="w-full" asChild>
                   <a href="/contact">Запази оглед</a>
@@ -82,7 +82,7 @@ const Pricing = () => {
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <h3 className="text-2xl font-bold mb-2">Renovivo Premium</h3>
                 <p className="text-sm text-gray-600 mb-4">пълна отговорност и инвеститорски контрол</p>
-                <div className="text-3xl font-bold text-primary mb-6">332-460+ €/м² (650-900+ лв./м²)/div>
+                <div className="text-2xl font-bold text-primary mb-6">332–460+ €/м²<br /><span className="text-lg text-muted-foreground">(650–900+ лв./м²)</span></div>
                 <Button className="w-full" variant="outline" asChild>
                   <a href="/contact">Запази среща</a>
                 </Button>
