@@ -11,6 +11,9 @@ import InspectionRequestModal from "./components/InspectionRequestModal";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Pricing from "./pages/Pricing";
+import PricingStart from "./pages/PricingStart";
+import PricingComfort from "./pages/PricingComfort";
+import PricingPremium from "./pages/PricingPremium";
 import ServiceDetail from "./pages/ServiceDetail";
 import InteriorDesign from "./pages/InteriorDesign";
 import Portfolio from "./pages/Portfolio";
@@ -44,7 +47,10 @@ const App = () => (
                 <Route path="/services/:id" element={<ServiceDetail />} />
                 <Route path="/innovative-coatings" element={<InnovativeCoatings />} />
                 <Route path="/portfolio" element={<Portfolio />} />
-                            <Route path="/pricing" element={<Pricing />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/pricing/start" element={<PricingStart />} />
+                <Route path="/pricing/comfort" element={<PricingComfort />} />
+                <Route path="/pricing/premium" element={<PricingPremium />} />
                 <Route path="/portfolio/:id" element={<ProjectDetail />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />

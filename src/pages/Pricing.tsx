@@ -1,7 +1,8 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 
 const Pricing = () => {
   return (
@@ -57,36 +58,42 @@ const Pricing = () => {
             <h2 className="text-3xl font-bold mb-12 text-center">Пакети и ценови диапазони</h2>
             <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
               
-              <div className="bg-white rounded-lg shadow-lg p-8">
-                <h3 className="text-2xl font-bold mb-2">Renovivo Start</h3>
-                <p className="text-sm text-gray-600 mb-4">частичен ремонт / освежаване</p>
-                <div className="text-2xl font-bold text-primary mb-6">92–143 €/м²<br /><span className="text-lg text-muted-foreground">(180–280 лв./м²)</span></div>
-                <Button className="w-full" variant="outline" asChild>
-                  <a href="/contact">Заяви оглед</a>
-                </Button>
-              </div>
-
-              <div className="bg-white rounded-lg shadow-lg p-8 ring-2 ring-primary transform md:scale-105">
-                <div className="bg-primary text-white text-center py-2 -mx-8 -mt-8 mb-6 rounded-t-lg font-semibold">
-                  Най-популярен
+              <Link to="/pricing/start" className="group">
+                <div className="bg-white rounded-lg shadow-lg p-8 h-full hover:shadow-xl transition-all hover:-translate-y-1 border-2 border-transparent hover:border-primary/20">
+                  <h3 className="text-2xl font-bold mb-2">Renovivo Start</h3>
+                  <p className="text-sm text-gray-600 mb-4">частичен ремонт / освежаване</p>
+                  <div className="text-2xl font-bold text-primary mb-6">92–143 €/м²<br /><span className="text-lg text-muted-foreground">(180–280 лв./м²)</span></div>
+                  <div className="flex items-center justify-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
+                    Научи повече <ArrowRight className="h-4 w-4" />
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold mb-2">Renovivo Comfort</h3>
-                <p className="text-sm text-gray-600 mb-4">цялостен ремонт на апартамент</p>
-                <div className="text-2xl font-bold text-primary mb-1">230–332 €/м²<br /><span className="text-lg text-muted-foreground">(450–650 лв./м²)</span></div>
-                <div className="text-sm text-gray-600 mb-6">(без материали)</div>
-                <Button className="w-full" asChild>
-                  <a href="/contact">Запази оглед</a>
-                </Button>
-              </div>
+              </Link>
 
-              <div className="bg-white rounded-lg shadow-lg p-8">
-                <h3 className="text-2xl font-bold mb-2">Renovivo Premium</h3>
-                <p className="text-sm text-gray-600 mb-4">пълна отговорност и инвеститорски контрол</p>
-                <div className="text-2xl font-bold text-primary mb-6">332–460+ €/м²<br /><span className="text-lg text-muted-foreground">(650–900+ лв./м²)</span></div>
-                <Button className="w-full" variant="outline" asChild>
-                  <a href="/contact">Запази среща</a>
-                </Button>
-              </div>
+              <Link to="/pricing/comfort" className="group">
+                <div className="bg-white rounded-lg shadow-lg p-8 ring-2 ring-primary transform md:scale-105 h-full hover:shadow-xl transition-all">
+                  <div className="bg-primary text-white text-center py-2 -mx-8 -mt-8 mb-6 rounded-t-lg font-semibold">
+                    Най-популярен
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2">Renovivo Comfort</h3>
+                  <p className="text-sm text-gray-600 mb-4">цялостен ремонт на апартамент</p>
+                  <div className="text-2xl font-bold text-primary mb-1">230–332 €/м²<br /><span className="text-lg text-muted-foreground">(450–650 лв./м²)</span></div>
+                  <div className="text-sm text-gray-600 mb-6">(без материали)</div>
+                  <div className="flex items-center justify-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
+                    Научи повече <ArrowRight className="h-4 w-4" />
+                  </div>
+                </div>
+              </Link>
+
+              <Link to="/pricing/premium" className="group">
+                <div className="bg-white rounded-lg shadow-lg p-8 h-full hover:shadow-xl transition-all hover:-translate-y-1 border-2 border-transparent hover:border-amber-300">
+                  <h3 className="text-2xl font-bold mb-2">Renovivo Premium</h3>
+                  <p className="text-sm text-gray-600 mb-4">пълна отговорност и инвеститорски контрол</p>
+                  <div className="text-2xl font-bold text-primary mb-6">332–460+ €/м²<br /><span className="text-lg text-muted-foreground">(650–900+ лв./м²)</span></div>
+                  <div className="flex items-center justify-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
+                    Научи повече <ArrowRight className="h-4 w-4" />
+                  </div>
+                </div>
+              </Link>
 
             </div>
             <p className="text-center text-sm text-muted-foreground mt-6">
