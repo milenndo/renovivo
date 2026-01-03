@@ -17,7 +17,7 @@ const INITIAL_MESSAGE: ChatMessage = {
   id: "welcome",
   role: "assistant",
   content:
-    "Здравейте! Аз съм виртуалният асистент на Renovivo. Разкажете ми накратко за вашия ремонт – стая, баня, квадратура – и ще ви помогна с идеи, срокове и ориентировъчен бюджет.",
+    "Здравейте! 👋 Аз съм виртуалният асистент на Renovivo. Разкажете ми накратко за вашия ремонт – какво помещение, квадратура и какво искате да постигнете – и ще ви помогна с идеи, срокове и ориентировъчен бюджет.",
 };
 
 const RenovivoChat = () => {
@@ -50,46 +50,88 @@ const RenovivoChat = () => {
       content: input.trim(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsSending(true);
 
     try {
+      // Build messages array for the API
+      const messagesForAPI = messages.map((m) => ({
+        role: m.role,
+        content: m.content,
+      }));
+      messagesForAPI.push({
+        role: "user",
+        content: userMessage.content,
+      });
+
+      console.log("Sending messages to AI:", messagesForAPI);
+
       const { data, error } = await supabase.functions.invoke("renovivo-chat", {
-        body: { messages: [...messages, userMessage] },
+        body: { messages: messagesForAPI },
       });
 
       if (error) {
         console.error("Chat function error:", error);
-        setMessages(prev => [
+        setMessages((prev) => [
           ...prev,
           {
             id: crypto.randomUUID(),
             role: "assistant",
             content:
-              "Възникна проблем с връзката към сървъра. Моля, опитайте отново след малко или заявете безплатен оглед от бутона по-долу.",
+              "😅 Възникна проблем с връзката към сървъра. Моля, опитайте отново след малко или заявете безплатен оглед от бутона по-долу. Телефон: 0893 71 29 19",
           },
         ]);
         return;
       }
 
-      if (data?.reply) {
+      console.log("Received data:", data);
+
+      // Handle both regular response and streaming response
+      let responseText = "";
+
+      if (data?.content) {
+        // Direct content response
+        responseText = data.content;
+      } else if (data?.reply) {
+        // Alternative field
+        responseText = data.reply;
+      } else if (typeof data === "string") {
+        // String response
+        responseText = data;
+      } else if (data && typeof data === "object") {
+        // Try to extract text from object
+        responseText = data.text || data.message || JSON.stringify(data);
+      }
+
+      if (responseText && responseText.trim()) {
         const assistantMessage: ChatMessage = {
           id: crypto.randomUUID(),
           role: "assistant",
-          content: data.reply as string,
+          content: responseText,
         };
-        setMessages(prev => [...prev, assistantMessage]);
+        setMessages((prev) => [...prev, assistantMessage]);
+      } else {
+        console.warn("No valid response content received");
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: crypto.randomUUID(),
+            role: "assistant",
+            content:
+              "Опитайте пак със свързан въпрос за ремонт. 🔧",
+          },
+        ]);
       }
     } catch (err) {
       console.error("Chat error:", err);
-      setMessages(prev => [
+      setMessages((prev) => [
         ...prev,
         {
           id: crypto.randomUUID(),
           role: "assistant",
           content:
-            "Възникна неочаквана грешка. Моля, опитайте отново или заявете оглед.",
+            "Възникна неочаквана грешка. Моля, обадете се на 0893 71 29 19 или опитайте отново.",
         },
       ]);
     } finally {
@@ -121,7 +163,7 @@ const RenovivoChat = () => {
           ) : (
             <>
               <MessageCircle className="h-5 w-5" />
-              Чат с Renovivo
+              💬 Чат с Renovivo
             </>
           )}
         </Button>
@@ -130,11 +172,11 @@ const RenovivoChat = () => {
       {/* Chat window */}
       {isOpen && (
         <div className="fixed bottom-20 right-4 w-full max-w-md bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden z-40">
-          <div className="flex items-center justify-between px-4 py-3 border-b bg-primary text-primary-foreground">
+          <div className="flex items-center justify-between px-4 py-3 border-b bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
             <div>
-              <p className="font-semibold">Renovivo Асистент</p>
-              <p className="text-xs text-primary-foreground/80">
-                Отговори за секунди, идеи за вашия ремонт
+              <p className="font-bold text-lg">🔨 Renovivo Асистент</p>
+              <p className="text-xs text-primary-foreground/90">
+                Експерт по ремонти - Отговори за секунди
               </p>
             </div>
             <button
@@ -146,7 +188,7 @@ const RenovivoChat = () => {
           </div>
 
           <div className="flex-1 px-4 py-3 space-y-3 overflow-y-auto max-h-96">
-            {messages.map(msg => (
+            {messages.map((msg) => (
               <div
                 key={msg.id}
                 className={`flex ${
@@ -154,10 +196,10 @@ const RenovivoChat = () => {
                 }`}
               >
                 <div
-                  className={`rounded-2xl px-3 py-2 text-sm max-w-[80%] whitespace-pre-wrap ${
+                  className={`rounded-2xl px-4 py-2 text-sm max-w-[85%] whitespace-pre-wrap leading-relaxed ${
                     msg.role === "user"
-                      ? "bg-primary text-primary-foreground rounded-br-sm"
-                      : "bg-muted text-foreground rounded-bl-sm"
+                      ? "bg-primary text-primary-foreground rounded-br-none font-medium"
+                      : "bg-muted text-foreground rounded-bl-none"
                   }`}
                 >
                   {msg.content}
@@ -167,41 +209,42 @@ const RenovivoChat = () => {
 
             {isSending && (
               <div className="flex justify-start">
-                <div className="rounded-2xl px-3 py-2 text-sm max-w-[80%] bg-muted text-foreground rounded-bl-sm flex items-center gap-2">
+                <div className="rounded-2xl px-4 py-2 text-sm max-w-[85%] bg-muted text-foreground rounded-bl-none flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Пишем отговор...
+                  <span>Пишем отговор...</span>
                 </div>
               </div>
             )}
-
             <div ref={bottomRef} />
           </div>
 
           {/* CTA за оглед */}
-          <div className="px-4 pb-2">
+          <div className="px-4 pb-2 bg-muted/50">
             <Button
               type="button"
               variant="outline"
-              className="w-full mb-2 flex items-center justify-center gap-2 text-sm"
+              className="w-full mb-2 flex items-center justify-center gap-2 text-sm font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
               onClick={handleOpenInspection}
             >
               <Calendar className="h-4 w-4" />
-              Заявете безплатен оглед
+              ✨ Заявете безплатен оглед
             </Button>
           </div>
 
-          <div className="border-t px-3 py-2 bg-muted/50">
+          {/* Input area */}
+          <div className="border-t px-3 py-2 bg-background">
             <div className="flex items-end gap-2">
               <Textarea
                 value={input}
-                onChange={e => setInput(e.target.value)}
+                onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Опишете накратко банята/помещението, квадратура и какво искате да постигнете..."
-                className="min-h-[48px] max-h-24 text-sm resize-none"
+                placeholder="Попишете про ремонта (баня, кухня, хол)..."
+                className="min-h-[44px] max-h-24 text-sm resize-none"
+                disabled={isSending}
               />
               <Button
                 size="icon"
-                className="mb-1"
+                className="mb-1 flex-shrink-0"
                 onClick={handleSend}
                 disabled={isSending || !input.trim()}
               >
@@ -212,6 +255,9 @@ const RenovivoChat = () => {
                 )}
               </Button>
             </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              💡 Shift + Enter за нов ред
+            </p>
           </div>
         </div>
       )}
