@@ -8,6 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { InspectionRequestProvider } from "./contexts/InspectionRequestContext";
 import { ChatProvider } from "./contexts/ChatContext";
 import InspectionRequestModal from "./components/InspectionRequestModal";
+import RenovivoChat from "./components/chat/RenovivoChat";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Pricing from "./pages/Pricing";
@@ -38,6 +39,7 @@ const App = () => (
             <Toaster />
             <Sonner />
             <InspectionRequestModal />
+            <RenovivoChat />
             <BrowserRouter>
               <ScrollToTop />
               <Routes>
