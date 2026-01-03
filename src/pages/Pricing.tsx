@@ -89,6 +89,9 @@ const Pricing = () => {
               </div>
 
             </div>
+            <p className="text-center text-sm text-muted-foreground mt-6">
+              * Цените са без ДДС. Курс: 1 EUR = 1.95583 лв. (фиксинг на БНБ)
+            </p>
           </div>
         </section>
 
