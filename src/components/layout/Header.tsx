@@ -47,7 +47,7 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/share/17eRc268rh/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
@@ -56,7 +56,7 @@ const Header = () => {
               <Facebook className="h-4 w-4" aria-hidden="true" />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/renovivo.bg"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
