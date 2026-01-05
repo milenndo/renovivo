@@ -5,11 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { z } from "zod";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+
+// Project types for qualifying form
+const projectTypes = [
+  { value: "full-renovation", label: "Цялостен ремонт" },
+  { value: "bathroom", label: "Ремонт на баня" },
+  { value: "kitchen", label: "Ремонт на кухня" },
+  { value: "innovative", label: "Иновативни покрития (микроцимент, terrazzo)" },
+  { value: "refresh", label: "Освежителен ремонт" },
+  { value: "other", label: "Друго" },
+];
+
+const startTimeOptions = [
+  { value: "asap", label: "Възможно най-скоро" },
+  { value: "1-month", label: "До 1 месец" },
+  { value: "3-months", label: "До 3 месеца" },
+  { value: "exploring", label: "Все още проучвам" },
+];
 
 const inspectionSchema = z.object({
   client_name: z
@@ -34,6 +52,15 @@ const inspectionSchema = z.object({
     .trim()
     .min(5, "Адресът трябва да е поне 5 символа")
     .max(255, "Адресът е твърде дълъг"),
+  project_type: z
+    .string()
+    .optional(),
+  approximate_area: z
+    .string()
+    .optional(),
+  desired_start: z
+    .string()
+    .optional(),
   notes: z
     .string()
     .trim()
@@ -52,6 +79,9 @@ const InspectionRequestModal = () => {
     client_phone: "",
     client_email: "",
     address: "",
+    project_type: "",
+    approximate_area: "",
+    desired_start: "",
     notes: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -64,6 +94,9 @@ const InspectionRequestModal = () => {
       client_phone: "",
       client_email: "",
       address: "",
+      project_type: "",
+      approximate_area: "",
+      desired_start: "",
       notes: "",
     });
     setErrors({});
@@ -119,12 +152,19 @@ const InspectionRequestModal = () => {
     setIsSubmitting(true);
 
     try {
+      const qualifyingInfo = [
+        formData.project_type ? `Тип проект: ${projectTypes.find(p => p.value === formData.project_type)?.label}` : '',
+        formData.approximate_area ? `Площ: ${formData.approximate_area} кв.м.` : '',
+        formData.desired_start ? `Желан старт: ${startTimeOptions.find(s => s.value === formData.desired_start)?.label}` : '',
+        formData.notes
+      ].filter(Boolean).join('\n');
+
       const { error } = await supabase.from("inspection_requests").insert({
         client_name: formData.client_name.trim(),
         client_phone: formData.client_phone.trim(),
         client_email: formData.client_email.trim() || null,
         address: formData.address.trim(),
-        notes: formData.notes.trim() || null,
+        notes: qualifyingInfo || null,
       });
 
       if (error) throw error;
@@ -235,13 +275,65 @@ const InspectionRequestModal = () => {
                 )}
               </div>
 
+              {/* Qualifying fields */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="project_type">Тип проект</Label>
+                  <Select
+                    value={formData.project_type}
+                    onValueChange={(value) => setFormData(prev => ({ ...prev, project_type: value }))}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Изберете тип" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {projectTypes.map((type) => (
+                        <SelectItem key={type.value} value={type.value}>
+                          {type.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="approximate_area">Приблизителна площ (кв.м.)</Label>
+                  <Input
+                    id="approximate_area"
+                    name="approximate_area"
+                    type="number"
+                    placeholder="напр. 80"
+                    value={formData.approximate_area}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
               <div className="space-y-2">
-                <Label htmlFor="notes">Разкажете за проекта (по избор)</Label>
+                <Label htmlFor="desired_start">Желан срок за начало</Label>
+                <Select
+                  value={formData.desired_start}
+                  onValueChange={(value) => setFormData(prev => ({ ...prev, desired_start: value }))}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Кога желаете да започнем?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {startTimeOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="notes">Допълнителна информация (по избор)</Label>
                 <Textarea
                   id="notes"
                   name="notes"
-                  placeholder="Каквито мисли имате - размер на банята, желан срок, специални изисквания..."
-                  rows={4}
+                  placeholder="Специални изисквания, въпроси, детайли..."
+                  rows={3}
                   value={formData.notes}
                   onChange={handleChange}
                   className={errors.notes ? "border-destructive" : ""}

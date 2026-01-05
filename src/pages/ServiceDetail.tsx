@@ -4,8 +4,9 @@ import { Phone, ArrowLeft, ArrowRight, Check } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getServiceById, services } from "@/data/services";
+import { getServiceById, services, serviceFAQs } from "@/data/services";
 import PriceTable from "@/components/PriceTable";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 // Mapping service IDs to price category slugs
 const serviceToPriceCategoryMap: Record<string, string> = {
@@ -116,6 +117,23 @@ const ServiceDetail = () => {
     "serviceType": service.isInnovative ? "Иновативни покрития" : "Ремонтни услуги"
   };
 
+  // Get FAQ for this service
+  const faq = id ? serviceFAQs[id] : null;
+
+  // FAQ Schema
+  const faqSchema = faq && faq.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq.map(item => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer
+      }
+    }))
+  } : null;
+
   const seoTitle = service.isInnovative 
     ? `${service.title} София | Renovivo - Модерни покрития`
     : `${service.title} София | Renovivo - Професионални услуги`;
@@ -138,6 +156,7 @@ const ServiceDetail = () => {
         <meta property="og:image" content={service.image} />
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+        {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
       </Helmet>
       <Layout>
         {/* Hero */}
@@ -311,6 +330,25 @@ const ServiceDetail = () => {
                         </table>
                       </div>
                     </div>
+                  </div>
+                )}
+
+                {/* FAQ Section */}
+                {faq && faq.length > 0 && (
+                  <div>
+                    <h2 className="text-2xl font-bold mb-6">Често задавани въпроси</h2>
+                    <Accordion type="single" collapsible className="w-full">
+                      {faq.map((item, index) => (
+                        <AccordionItem key={index} value={`faq-${index}`}>
+                          <AccordionTrigger className="text-left">
+                            {item.question}
+                          </AccordionTrigger>
+                          <AccordionContent className="text-muted-foreground">
+                            {item.answer}
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
                   </div>
                 )}
 
