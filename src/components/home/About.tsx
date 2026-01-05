@@ -64,14 +64,14 @@ const About = () => {
               <div className="flex items-center gap-3">
                 <Users className="h-8 w-8 text-primary" />
                 <div>
-                  <span className="font-semibold block">Специализиран екип</span>
-                  <span className="text-sm text-muted-foreground">Експерти във всяко звено</span>
+                  <span className="font-semibold block">127 завършени проекта</span>
+                  <span className="text-sm text-muted-foreground">94% ни препоръчват</span>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Shield className="h-8 w-8 text-primary" />
                 <div>
-                  <span className="font-semibold block">Гаранция</span>
+                  <span className="font-semibold block">5 години гаранция</span>
                   <span className="text-sm text-muted-foreground">На всички услуги</span>
                 </div>
               </div>
