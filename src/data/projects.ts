@@ -38,6 +38,13 @@ export interface Project {
   beforeImage?: string;
   afterImage?: string;
   stages?: { title: string; description: string }[];
+  // Case Study fields
+  result?: {
+    summary: string;
+    metrics: { label: string; value: string }[];
+    clientSatisfaction?: number; // 1-5
+  };
+  processImages?: { image: string; caption: string }[];
 }
 
 export const categories = [
@@ -72,7 +79,16 @@ export const projects: Project[] = [
       { title: "Смесване", description: "Прецизна комбинация от камъни и свързващо вещество." },
       { title: "Полагане", description: "Ръчно разстилане с експертна техника." },
       { title: "Шлифоване", description: "Многоетапно диамантено шлифоване за блясък." }
-    ]
+    ],
+    result: {
+      summary: "Клиентът получи уникален под, който стана централен елемент в интериора. Подът е лесен за поддръжка и ще издържи поколения.",
+      metrics: [
+        { label: "Срок", value: "Завършен в срок" },
+        { label: "Издръжливост", value: "75+ години" },
+        { label: "Поддръжка", value: "Минимална" }
+      ],
+      clientSatisfaction: 5
+    }
   },
   {
     id: "flake-floor-terrace",
@@ -183,7 +199,16 @@ export const projects: Project[] = [
       { title: "Зидария и мазилки", description: "Изграждане на нови стени, шпакловане и грундиране." },
       { title: "Настилки", description: "Полагане на ламиниран паркет и плочки в мокрите помещения." },
       { title: "Довършване", description: "Монтаж на врати, санитария, осветление и финално боядисване." }
-    ]
+    ],
+    result: {
+      summary: "Трансформирахме остарял апартамент в модерно, светло и функционално жилище. Клиентът получи 40% повече полезна площ благодарение на отворената планировка.",
+      metrics: [
+        { label: "Срок", value: "Точно 3 месеца" },
+        { label: "Бюджет", value: "В рамките" },
+        { label: "Допълнителна площ", value: "+40%" }
+      ],
+      clientSatisfaction: 5
+    }
   },
   {
     id: "luxury-marble-bathroom",
@@ -273,7 +298,16 @@ export const projects: Project[] = [
       { title: "Настилки", description: "Полагане на висококачествен ламинат." },
       { title: "Боядисване", description: "Двукратно боядисване с латекс и акцентна стена." },
       { title: "Обзавеждане", description: "Доставка и аранжиране на мебелите." }
-    ]
+    ],
+    result: {
+      summary: "От празен бетонен скелет до готов за живеене дом само за 3 седмици. Клиентът спести време и нерви с нашето цялостно решение.",
+      metrics: [
+        { label: "Срок", value: "3 седмици" },
+        { label: "Трансформация", value: "100%" },
+        { label: "Координация", value: "Едно лице за контакт" }
+      ],
+      clientSatisfaction: 5
+    }
   },
   {
     id: "microcement-bathroom",

@@ -26,6 +26,97 @@ const Index = () => {
     ],
   };
 
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "@id": "https://renovivo.bg/#business",
+    name: "Renovivo",
+    alternateName: "Реновиво",
+    description: "Цялостни ремонти на апартаменти в София и района. Тясно специализирани експерти, един екип от А до Я.",
+    url: "https://renovivo.bg",
+    telephone: "+359893712919",
+    email: "renovivo.bg@gmail.com",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "ж.к. Красно село",
+      addressLocality: "София",
+      addressRegion: "София-град",
+      postalCode: "1000",
+      addressCountry: "BG"
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "42.6977",
+      longitude: "23.3219"
+    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: "София"
+      },
+      {
+        "@type": "AdministrativeArea",
+        name: "София-област"
+      }
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "08:00",
+        closes: "18:00"
+      }
+    ],
+    priceRange: "$$",
+    currenciesAccepted: "BGN",
+    paymentAccepted: "Cash, Bank Transfer",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5",
+      reviewCount: "47",
+      bestRating: "5",
+      worstRating: "1"
+    },
+    sameAs: [
+      "https://www.facebook.com/renovivo.bg",
+      "https://www.instagram.com/renovivo.bg"
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Ремонтни услуги",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Цялостен ремонт на апартамент"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Ремонт на баня"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Ремонт на кухня"
+          }
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Иновативни покрития - микроцимент, terrazzo"
+          }
+        }
+      ]
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -46,6 +137,7 @@ const Index = () => {
         />
         <meta property="og:url" content="https://renovivo.bg" />
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       </Helmet>
       <Layout>
         <Hero />

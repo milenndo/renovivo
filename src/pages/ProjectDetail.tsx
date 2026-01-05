@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Phone, ArrowLeft, ArrowRight, MapPin, Clock, Maximize, Check } from "lucide-react";
+import { Phone, ArrowLeft, ArrowRight, MapPin, Clock, Maximize, Check, Star, TrendingUp, Trophy } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,11 +23,40 @@ const ProjectDetail = () => {
     .filter((p) => p.categoryId === project.categoryId && p.id !== project.id)
     .slice(0, 3);
 
+  // Case Study Schema
+  const caseStudySchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: project.title,
+    description: project.description,
+    image: project.mainImage,
+    author: {
+      "@type": "Organization",
+      name: "Renovivo"
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Renovivo",
+      url: "https://renovivo.bg"
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://renovivo.bg/portfolio/${id}`
+    },
+    about: {
+      "@type": "CreativeWork",
+      name: `Case Study: ${project.title}`,
+      abstract: project.description
+    }
+  };
+
   return (
     <>
       <Helmet>
-        <title>{project.title} | Renovivo - Портфолио</title>
-        <meta name="description" content={project.description} />
+        <title>{project.title} | Renovivo - Case Study</title>
+        <meta name="description" content={`${project.description} Вижте как решихме предизвикателството: ${project.challenge}`} />
+        <link rel="canonical" href={`https://renovivo.bg/portfolio/${id}`} />
+        <script type="application/ld+json">{JSON.stringify(caseStudySchema)}</script>
       </Helmet>
       <Layout>
         {/* Hero */}
@@ -95,20 +124,75 @@ const ProjectDetail = () => {
                   />
                 )}
 
-                {/* Challenge & Solution */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="border-0 shadow-md">
-                    <CardContent className="p-6">
-                      <h3 className="font-bold text-lg mb-3 text-destructive">Предизвикателство</h3>
-                      <p className="text-muted-foreground text-sm">{project.challenge}</p>
-                    </CardContent>
-                  </Card>
-                  <Card className="border-0 shadow-md">
-                    <CardContent className="p-6">
-                      <h3 className="font-bold text-lg mb-3 text-primary">Решение</h3>
-                      <p className="text-muted-foreground text-sm">{project.solution}</p>
-                    </CardContent>
-                  </Card>
+                {/* Challenge & Solution - Case Study Format */}
+                <div className="space-y-6">
+                  <h2 className="text-2xl font-bold flex items-center gap-2">
+                    <TrendingUp className="h-6 w-6 text-primary" />
+                    Проблем → Решение → Резултат
+                  </h2>
+                  
+                  <div className="grid grid-cols-1 gap-4">
+                    {/* Problem Card */}
+                    <Card className="border-l-4 border-l-destructive shadow-md">
+                      <CardContent className="p-6">
+                        <h3 className="font-bold text-lg mb-3 text-destructive flex items-center gap-2">
+                          <span className="w-8 h-8 rounded-full bg-destructive/10 flex items-center justify-center text-sm font-bold">1</span>
+                          Предизвикателство
+                        </h3>
+                        <p className="text-muted-foreground">{project.challenge}</p>
+                      </CardContent>
+                    </Card>
+                    
+                    {/* Solution Card */}
+                    <Card className="border-l-4 border-l-primary shadow-md">
+                      <CardContent className="p-6">
+                        <h3 className="font-bold text-lg mb-3 text-primary flex items-center gap-2">
+                          <span className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold">2</span>
+                          Нашето решение
+                        </h3>
+                        <p className="text-muted-foreground">{project.solution}</p>
+                      </CardContent>
+                    </Card>
+                    
+                    {/* Result Card - Only if result data exists */}
+                    {project.result && (
+                      <Card className="border-l-4 border-l-green-500 shadow-md bg-green-50/50 dark:bg-green-950/20">
+                        <CardContent className="p-6">
+                          <h3 className="font-bold text-lg mb-3 text-green-600 dark:text-green-400 flex items-center gap-2">
+                            <span className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center text-sm font-bold">3</span>
+                            <Trophy className="h-5 w-5" />
+                            Резултат
+                          </h3>
+                          <p className="text-muted-foreground mb-4">{project.result.summary}</p>
+                          
+                          {/* Metrics */}
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-4">
+                            {project.result.metrics.map((metric, idx) => (
+                              <div key={idx} className="bg-background rounded-lg p-3 text-center">
+                                <p className="text-xs text-muted-foreground">{metric.label}</p>
+                                <p className="font-bold text-primary">{metric.value}</p>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          {/* Client Satisfaction */}
+                          {project.result.clientSatisfaction && (
+                            <div className="flex items-center justify-center gap-2 mt-4 pt-4 border-t">
+                              <span className="text-sm text-muted-foreground">Клиентска оценка:</span>
+                              <div className="flex gap-0.5">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star 
+                                    key={i} 
+                                    className={`h-4 w-4 ${i < project.result!.clientSatisfaction! ? 'fill-primary text-primary' : 'text-muted'}`} 
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    )}
+                  </div>
                 </div>
 
                 {/* Project Stages - Storytelling */}
