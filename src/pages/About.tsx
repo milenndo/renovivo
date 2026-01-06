@@ -73,7 +73,7 @@ const AboutPage = () => {
                 Знаем колко притеснително може да бъде да поверите дома си на непознати. 
                 Точно затова създадохме Renovivo - за да имате партньор, на когото можете да разчитате.
               </p>
-              <p className="text-background/70 text-base leading-relaxed">
+              <p className="text-background/80 text-lg leading-relaxed font-medium">
                 Не обещаваме чудеса. Обещаваме честност, редовна комуникация и спазване на думата ни.
               </p>
             </div>
@@ -204,26 +204,23 @@ const AboutPage = () => {
           </div>
         </section>
 
-        {/* Simple CTA */}
+        {/* Strong CTA */}
         <section className="section-padding bg-foreground text-background">
           <div className="container-custom text-center">
             <div className="max-w-2xl mx-auto">
-              <Heart className="h-12 w-12 text-primary mx-auto mb-6" />
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Искаме да сме различни
-              </h2>
-              <p className="text-background/80 text-lg mb-8 leading-relaxed">
+              <Heart className="h-10 w-10 text-primary mx-auto mb-6" />
+              <p className="text-background/70 text-base mb-4 leading-relaxed">
                 Чували сме достатъчно истории за лош опит с ремонти. Нашата цел е да покажем, 
                 че може и по друг начин - с уважение, отговорност и внимание към детайла.
               </p>
-              <p className="text-background/60 mb-8">
+              <h2 className="text-3xl md:text-5xl font-bold mb-8 text-primary">
                 Ако това резонира с вас, нека поговорим.
-              </p>
+              </h2>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button
                   size="lg"
                   onClick={openModal}
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-lg px-8 py-6"
                 >
                   <Phone className="h-5 w-5 mr-2" />
                   Заявете безплатен оглед
@@ -232,7 +229,7 @@ const AboutPage = () => {
                   <Button 
                     size="lg" 
                     variant="outline" 
-                    className="border-background/30 bg-transparent text-background hover:bg-background/10 font-semibold"
+                    className="border-background/30 bg-transparent text-background hover:bg-background/10 font-semibold px-8 py-6"
                   >
                     Вижте нашите проекти
                   </Button>
