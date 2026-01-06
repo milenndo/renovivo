@@ -241,7 +241,7 @@ const RenovivoChat = () => {
 
       {/* Chat window */}
       {isOpen && (
-        <div className="fixed bottom-20 right-4 w-full max-w-md bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden z-40">
+        <div className="fixed inset-x-2 bottom-20 sm:inset-x-auto sm:right-4 sm:left-auto sm:w-full sm:max-w-md bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden z-40">
           <div className="flex items-center justify-between px-4 py-3 border-b bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
             <div>
               <p className="font-bold text-lg">🧠 Renovivo AI</p>

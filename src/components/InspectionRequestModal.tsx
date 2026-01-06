@@ -367,12 +367,15 @@ const InspectionRequestModal = () => {
               {/* hCaptcha */}
               <div className="space-y-2">
                 <Label>Сигурност</Label>
-                <HCaptcha
-                  ref={captchaRef}
-                  sitekey={SITE_KEY}
-                  onVerify={handleCaptchaVerify}
-                  onExpire={handleCaptchaExpire}
-                />
+                <div className="overflow-x-auto max-w-full">
+                  <HCaptcha
+                    ref={captchaRef}
+                    sitekey={SITE_KEY}
+                    size="compact"
+                    onVerify={handleCaptchaVerify}
+                    onExpire={handleCaptchaExpire}
+                  />
+                </div>
                 {errors.captcha && (
                   <p className="text-destructive text-xs">{errors.captcha}</p>
                 )}
