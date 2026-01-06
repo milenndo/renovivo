@@ -1,11 +1,12 @@
-48
-  import { useState } from "react";
+import { useState } from "react";
 import { Bot, Calculator, FolderOpen, CheckCircle2, Award, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 
 const Hero = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const { openModal } = useInspectionRequest();
 
   return (
     <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden">
@@ -57,15 +58,14 @@ const Hero = () => {
 
           {/* CTA Buttons - WITHOUT BRACKETS */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link to="/contact#contact-form">
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-base px-8 py-7 h-auto rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              >
-                <Bot className="h-5 w-5 mr-3" />
-                Получи безплатна оценка
-              </Button>
-            </Link>
+            <Button
+              size="lg"
+              onClick={openModal}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-base px-8 py-7 h-auto rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              <Bot className="h-5 w-5 mr-3" />
+              Получи безплатна оценка
+            </Button>
             <Link to="/pricing">
               <Button
                 size="lg"
