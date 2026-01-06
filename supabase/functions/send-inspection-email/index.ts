@@ -125,7 +125,7 @@ function generatePdfHtml(data: InspectionRequest): string {
 
   <div class="footer">
     <p>Получено на: ${date}</p>
-    <p><a href="https://renovivo.bg">renovivo.bg</a> | <a href="tel:+359893712919">+359 89 371 29 19</a></p>
+    <p>renovivo.bg | +359 89 371 29 19</p>
   </div>
 </body>
 </html>
@@ -161,8 +161,9 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email to office
     const emailResponse = await resend.emails.send({
-      from: "Renovivo Заявки <noreply@renovivo.bg>",
+      from: "Renovivo <zajavki@renovivo.bg>",
       to: ["office@renovivo.bg"],
+      reply_to: data.client_email || undefined,
       subject: `🏠 Нова заявка за оглед от ${data.client_name}`,
       html: htmlContent,
     });
