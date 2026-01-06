@@ -35,7 +35,7 @@ const Index = () => {
     description: "Цялостни ремонти на апартаменти в София и района. Тясно специализирани експерти, един екип от А до Я.",
     url: "https://renovivo.bg",
     telephone: "+359893712919",
-    email: "renovivo.bg@gmail.com",
+    email: "office@renovivo.bg",
     address: {
       "@type": "PostalAddress",
       streetAddress: "ж.к. Красно село",
