@@ -2,3 +2,6 @@ project_id = "spwduzltlilwgzejjqdn"
 
 [functions.renovivo-chat]
 verify_jwt = false
+
+[functions.send-inspection-email]
+verify_jwt = false

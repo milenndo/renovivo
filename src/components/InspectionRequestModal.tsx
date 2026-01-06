@@ -159,6 +159,7 @@ const InspectionRequestModal = () => {
         formData.notes
       ].filter(Boolean).join('\n');
 
+      // Save to database
       const { error } = await supabase.from("inspection_requests").insert({
         client_name: formData.client_name.trim(),
         client_phone: formData.client_phone.trim(),
@@ -168,6 +169,26 @@ const InspectionRequestModal = () => {
       });
 
       if (error) throw error;
+
+      // Send email notification via edge function
+      try {
+        await supabase.functions.invoke("send-inspection-email", {
+          body: {
+            client_name: formData.client_name.trim(),
+            client_phone: formData.client_phone.trim(),
+            client_email: formData.client_email.trim() || undefined,
+            address: formData.address.trim(),
+            project_type: formData.project_type || undefined,
+            approximate_area: formData.approximate_area || undefined,
+            desired_start: formData.desired_start || undefined,
+            notes: formData.notes || undefined,
+          },
+        });
+        console.log("Email notification sent successfully");
+      } catch (emailError) {
+        console.error("Failed to send email notification:", emailError);
+        // Don't throw - the form submission was successful even if email fails
+      }
 
       toast.success("Заявката е изпратена успешно!", {
         description: "Ще се свържем с вас възможно най-скоро.",
@@ -418,10 +439,10 @@ const InspectionRequestModal = () => {
                 <div>
                   <p className="font-semibold">Пишете ни</p>
                   <a
-                    href="mailto:renovivo.bg@gmail.com"
+                    href="mailto:office@renovivo.bg"
                     className="text-primary-foreground/90 hover:text-primary-foreground transition-colors"
                   >
-                    renovivo.bg@gmail.com
+                    office@renovivo.bg
                   </a>
                   <p className="text-primary-foreground/70 text-sm mt-1">
                     Отговаряме до 24 часа
