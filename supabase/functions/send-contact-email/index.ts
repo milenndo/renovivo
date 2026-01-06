@@ -112,14 +112,28 @@ const handler = async (req: Request): Promise<Response> => {
     // Generate HTML email content
     const htmlContent = generateContactEmailHtml(data);
 
-    // Send email to office
-    const emailResponse = await resend.emails.send({
-      from: "Renovivo <onboarding@resend.dev>",
+    const primaryFrom = "Renovivo <zajavki@renovivo.bg>";
+    const fallbackFrom = "Renovivo <onboarding@resend.dev>";
+
+    // Send email to office (prefer our domain; fallback if domain isn't verified in Resend yet)
+    let emailResponse = await resend.emails.send({
+      from: primaryFrom,
       to: ["office@renovivo.bg"],
       reply_to: data.email,
       subject: `✉️ Ново запитване от ${data.name}`,
       html: htmlContent,
     });
+
+    if (emailResponse.error) {
+      console.warn("Primary FROM failed, retrying with fallback FROM:", emailResponse.error);
+      emailResponse = await resend.emails.send({
+        from: fallbackFrom,
+        to: ["office@renovivo.bg"],
+        reply_to: data.email,
+        subject: `✉️ Ново запитване от ${data.name}`,
+        html: htmlContent,
+      });
+    }
 
     console.log("Contact email sent successfully:", emailResponse);
 
