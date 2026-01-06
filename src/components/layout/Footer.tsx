@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Facebook, Instagram, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Clock, Cookie } from "lucide-react";
 import logo from "@/assets/Renovivo_logover.2.svg";
+import { useCookieConsentContext } from "@/contexts/CookieConsentContext";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { openSettings } = useCookieConsentContext();
 
   return (
     <footer className="bg-foreground text-background">
@@ -99,7 +101,17 @@ const Footer = () => {
       <div className="border-t border-background/10">
         <div className="container-custom py-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-background/70 text-sm">© {currentYear} Renovivo. Всички права запазени.</p>
-          <p className="text-background/70 text-sm">Every Detail Matters</p>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={openSettings}
+              className="flex items-center gap-1.5 text-background/70 hover:text-primary transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-foreground rounded"
+              aria-label="Отворете настройките за бисквитки"
+            >
+              <Cookie className="h-4 w-4" aria-hidden="true" />
+              Настройки на бисквитките
+            </button>
+            <span className="text-background/70 text-sm">Every Detail Matters</span>
+          </div>
         </div>
       </div>
     </footer>

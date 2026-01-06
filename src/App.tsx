@@ -7,6 +7,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 import { InspectionRequestProvider } from "./contexts/InspectionRequestContext";
 import { ChatProvider } from "./contexts/ChatContext";
+import { CookieConsentProvider } from "./contexts/CookieConsentContext";
 import InspectionRequestModal from "./components/InspectionRequestModal";
 import RenovivoChat from "./components/chat/RenovivoChat";
 import Index from "./pages/Index";
@@ -34,37 +35,39 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <InspectionRequestProvider>
-          <ChatProvider>
-            <Toaster />
-            <Sonner />
-            <InspectionRequestModal />
-            <RenovivoChat />
-            <BrowserRouter>
-              <ScrollToTop />
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/services" element={<Services />} />
-                <Route path="/services/interior-design" element={<InteriorDesign />} />
-                <Route path="/services/:id" element={<ServiceDetail />} />
-                <Route path="/innovative-coatings" element={<InnovativeCoatings />} />
-                <Route path="/portfolio" element={<Portfolio />} />
-                <Route path="/pricing" element={<Pricing />} />
-                <Route path="/pricing/start" element={<PricingStart />} />
-                <Route path="/pricing/comfort" element={<PricingComfort />} />
-                <Route path="/pricing/premium" element={<PricingPremium />} />
-                <Route path="/portfolio/:id" element={<ProjectDetail />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:slug" element={<BlogPost />} />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
-          </ChatProvider>
-        </InspectionRequestProvider>
+        <CookieConsentProvider>
+          <InspectionRequestProvider>
+            <ChatProvider>
+              <Toaster />
+              <Sonner />
+              <InspectionRequestModal />
+              <RenovivoChat />
+              <BrowserRouter>
+                <ScrollToTop />
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/services" element={<Services />} />
+                  <Route path="/services/interior-design" element={<InteriorDesign />} />
+                  <Route path="/services/:id" element={<ServiceDetail />} />
+                  <Route path="/innovative-coatings" element={<InnovativeCoatings />} />
+                  <Route path="/portfolio" element={<Portfolio />} />
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/pricing/start" element={<PricingStart />} />
+                  <Route path="/pricing/comfort" element={<PricingComfort />} />
+                  <Route path="/pricing/premium" element={<PricingPremium />} />
+                  <Route path="/portfolio/:id" element={<ProjectDetail />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/:slug" element={<BlogPost />} />
+                  <Route path="/admin" element={<Admin />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </ChatProvider>
+          </InspectionRequestProvider>
+        </CookieConsentProvider>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
