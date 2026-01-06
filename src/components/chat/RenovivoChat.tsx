@@ -1,15 +1,17 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, Send, Loader2, Calendar } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, Calendar, Paperclip, Image as ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 import { useChat } from "@/contexts/ChatContext";
+import { toast } from "sonner";
 
 type ChatMessage = {
   id: string;
   role: "user" | "assistant" | "system";
   content: string;
+  imageUrl?: string;
   created_at?: string;
 };
 
@@ -17,7 +19,7 @@ const INITIAL_MESSAGE: ChatMessage = {
   id: "welcome",
   role: "assistant",
   content:
-    "🧠 Здравейте! Аз съм **Renovivo AI** - вашият интелигентен асистент за ремонти!\n\n🔍 Мога да ви помогна с:\n• 💰 Конкретни цени от нашия ценоразпис\n• 📐 Изчисления на бюджет по квадратура\n• 🏠 Препоръки за материали и услуги\n• 📍 Навигация в сайта\n• 📅 Записване на безплатен оглед\n\nКажете ми какво планирате - баня, кухня, цялостен ремонт? 🏗️",
+    "🧠 Здравейте! Аз съм **Renovivo AI** - вашият интелигентен асистент за ремонти!\n\n🔍 Мога да ви помогна с:\n• 💰 Конкретни цени от нашия ценоразпис\n• 📐 Изчисления на бюджет по квадратура\n• 📷 **Анализ на архитектурни планове** (качете снимка!)\n• 🏠 Препоръки за материали и услуги\n• 📍 Навигация в сайта\n• 📅 Записване на безплатен оглед\n\nКажете ми какво планирате или качете план/снимка! 🏗️",
 };
 
 const RenovivoChat = () => {
@@ -25,8 +27,11 @@ const RenovivoChat = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [pendingImage, setPendingImage] = useState<{ url: string; file: File } | null>(null);
   const { openModal } = useInspectionRequest();
   const bottomRef = useRef<HTMLDivElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -41,17 +46,75 @@ const RenovivoChat = () => {
     openModal();
   };
 
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const validTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!validTypes.includes(file.type)) {
+      toast.error("Моля, качете изображение (JPG, PNG, WebP или GIF)");
+      return;
+    }
+
+    // Validate file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error("Файлът е твърде голям. Максимум 10MB.");
+      return;
+    }
+
+    setIsUploading(true);
+    try {
+      const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+      
+      const { data, error } = await supabase.storage
+        .from("chat-uploads")
+        .upload(fileName, file, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (error) {
+        console.error("Upload error:", error);
+        toast.error("Грешка при качване на файла");
+        return;
+      }
+
+      const { data: urlData } = supabase.storage
+        .from("chat-uploads")
+        .getPublicUrl(data.path);
+
+      setPendingImage({ url: urlData.publicUrl, file });
+      toast.success("Изображението е готово за изпращане!");
+    } catch (err) {
+      console.error("Upload error:", err);
+      toast.error("Грешка при качване");
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
+
+  const handleRemovePendingImage = () => {
+    setPendingImage(null);
+  };
+
   const handleSend = async () => {
-    if (!input.trim() || isSending) return;
+    if ((!input.trim() && !pendingImage) || isSending) return;
 
     const userMessage: ChatMessage = {
       id: crypto.randomUUID(),
       role: "user",
-      content: input.trim(),
+      content: input.trim() || (pendingImage ? "Анализирай това изображение" : ""),
+      imageUrl: pendingImage?.url,
     };
 
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
+    const imageToSend = pendingImage;
+    setPendingImage(null);
     setIsSending(true);
 
     try {
@@ -59,10 +122,12 @@ const RenovivoChat = () => {
       const messagesForAPI = messages.map((m) => ({
         role: m.role,
         content: m.content,
+        imageUrl: m.imageUrl,
       }));
       messagesForAPI.push({
         role: "user",
         content: userMessage.content,
+        imageUrl: imageToSend?.url,
       });
 
       console.log("Sending messages to AI:", messagesForAPI);
@@ -91,16 +156,12 @@ const RenovivoChat = () => {
       let responseText = "";
 
       if (data?.content) {
-        // Direct content response
         responseText = data.content;
       } else if (data?.reply) {
-        // Alternative field
         responseText = data.reply;
       } else if (typeof data === "string") {
-        // String response
         responseText = data;
       } else if (data && typeof data === "object") {
-        // Try to extract text from object
         responseText = data.text || data.message || JSON.stringify(data);
       }
 
@@ -148,6 +209,15 @@ const RenovivoChat = () => {
 
   return (
     <>
+      {/* Hidden file input */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        className="hidden"
+        accept="image/jpeg,image/png,image/webp,image/gif"
+        onChange={handleFileSelect}
+      />
+
       {/* Chat toggle button */}
       <div className="fixed bottom-4 right-4 z-40">
         <Button
@@ -163,7 +233,7 @@ const RenovivoChat = () => {
           ) : (
             <>
               <MessageCircle className="h-5 w-5" />
-              💬 Renovivo AI
+              🧠 Renovivo AI
             </>
           )}
         </Button>
@@ -176,7 +246,7 @@ const RenovivoChat = () => {
             <div>
               <p className="font-bold text-lg">🧠 Renovivo AI</p>
               <p className="text-xs text-primary-foreground/90">
-                Супер интелигентен асистент • Цени • Калкулации • Навигация
+                Супер интелигентен асистент • Цени • Анализ на планове
               </p>
             </div>
             <button
@@ -202,6 +272,15 @@ const RenovivoChat = () => {
                       : "bg-muted text-foreground rounded-bl-none"
                   }`}
                 >
+                  {msg.imageUrl && (
+                    <div className="mb-2">
+                      <img
+                        src={msg.imageUrl}
+                        alt="Качено изображение"
+                        className="max-w-full max-h-40 rounded-lg object-cover"
+                      />
+                    </div>
+                  )}
                   {msg.content}
                 </div>
               </div>
@@ -211,12 +290,34 @@ const RenovivoChat = () => {
               <div className="flex justify-start">
                 <div className="rounded-2xl px-4 py-2 text-sm max-w-[85%] bg-muted text-foreground rounded-bl-none flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  <span>Пишем отговор...</span>
+                  <span>Анализирам...</span>
                 </div>
               </div>
             )}
             <div ref={bottomRef} />
           </div>
+
+          {/* Pending image preview */}
+          {pendingImage && (
+            <div className="px-4 py-2 bg-muted/50 border-t flex items-center gap-2">
+              <img
+                src={pendingImage.url}
+                alt="Preview"
+                className="h-12 w-12 rounded object-cover"
+              />
+              <span className="text-xs text-muted-foreground flex-1 truncate">
+                {pendingImage.file.name}
+              </span>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-6 w-6"
+                onClick={handleRemovePendingImage}
+              >
+                <X className="h-3 w-3" />
+              </Button>
+            </div>
+          )}
 
           {/* CTA за оглед */}
           <div className="px-4 pb-2 bg-muted/50">
@@ -234,11 +335,25 @@ const RenovivoChat = () => {
           {/* Input area */}
           <div className="border-t px-3 py-2 bg-background">
             <div className="flex items-end gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="mb-1 flex-shrink-0"
+                onClick={() => fileInputRef.current?.click()}
+                disabled={isSending || isUploading}
+                title="Качи снимка или план"
+              >
+                {isUploading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <ImageIcon className="h-4 w-4" />
+                )}
+              </Button>
               <Textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Попишете про ремонта (баня, кухня, хол)..."
+                placeholder="Попитайте за ремонт или качете план..."
                 className="min-h-[44px] max-h-24 text-sm resize-none"
                 disabled={isSending}
               />
@@ -246,7 +361,7 @@ const RenovivoChat = () => {
                 size="icon"
                 className="mb-1 flex-shrink-0"
                 onClick={handleSend}
-                disabled={isSending || !input.trim()}
+                disabled={isSending || (!input.trim() && !pendingImage)}
               >
                 {isSending ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -256,7 +371,7 @@ const RenovivoChat = () => {
               </Button>
             </div>
             <p className="text-xs text-muted-foreground mt-1">
-              💡 Shift + Enter за нов ред
+              📷 Качете план за анализ • Shift + Enter за нов ред
             </p>
           </div>
         </div>
