@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
+import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 import aboutTeamImg from "@/assets/images/about-team.jpg";
 import qualityWorkImg from "@/assets/images/quality-work.jpg";
 
@@ -58,6 +59,11 @@ const AboutPage = () => {
         {/* Hero */}
         <section className="relative py-20 bg-foreground">
           <div className="container-custom relative z-10">
+            {/* Breadcrumb */}
+            <VisualBreadcrumb 
+              items={[{ label: "За нас" }]} 
+              className="mb-6 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
+            />
             <div className="max-w-3xl">
               <span className="text-primary font-medium text-sm uppercase tracking-wider">За нас</span>
               <h1 className="text-3xl md:text-4xl font-bold text-background mt-3 mb-6">

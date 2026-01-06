@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getServiceById, services, serviceFAQs } from "@/data/services";
 import PriceTable from "@/components/PriceTable";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 
 // Mapping service IDs to price category slugs
 const serviceToPriceCategoryMap: Record<string, string> = {
@@ -162,13 +163,14 @@ const ServiceDetail = () => {
         {/* Hero */}
         <section className="relative py-20 bg-foreground">
           <div className="container-custom relative z-10">
-            <Link
-              to="/services"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-6 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Обратно към услугите
-            </Link>
+            {/* Breadcrumb */}
+            <VisualBreadcrumb 
+              items={[
+                { label: "Услуги", href: "/services" },
+                { label: service.title }
+              ]} 
+              className="mb-6 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
+            />
             <div className="flex items-start gap-6">
               <div className="w-16 h-16 rounded-xl bg-primary flex items-center justify-center flex-shrink-0">
                 <service.icon className="h-8 w-8 text-primary-foreground" />

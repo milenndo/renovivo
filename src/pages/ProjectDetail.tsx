@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getProjectById, projects, categories } from "@/data/projects";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
+import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -68,13 +69,14 @@ const ProjectDetail = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 container-custom pb-12">
-            <Link
-              to="/portfolio"
-              className="inline-flex items-center text-primary hover:text-primary/80 mb-4 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Обратно към портфолиото
-            </Link>
+            {/* Breadcrumb */}
+            <VisualBreadcrumb 
+              items={[
+                { label: "Портфолио", href: "/portfolio" },
+                { label: project.title }
+              ]} 
+              className="mb-4 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
+            />
             <span className="block text-primary font-medium text-sm mb-2">{project.category}</span>
             <h1 className="text-3xl md:text-5xl font-bold text-background">
               {project.title}
