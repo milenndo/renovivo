@@ -161,7 +161,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send email to office
     const emailResponse = await resend.emails.send({
-      from: "Renovivo <zajavki@renovivo.bg>",
+      from: "Renovivo <onboarding@resend.dev>",
       to: ["office@renovivo.bg"],
       reply_to: data.client_email || undefined,
       subject: `🏠 Нова заявка за оглед от ${data.client_name}`,
