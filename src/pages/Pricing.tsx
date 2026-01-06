@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "lucide-react";
+import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 
 const Pricing = () => {
   return (
@@ -11,13 +12,18 @@ const Pricing = () => {
         <title>Цени за ремонт | Renovivo</title>
       </Helmet>
       <Layout>
-        <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <section className="py-20 bg-gradient-to-b from-secondary/30 to-background">
           <div className="container-custom">
+            {/* Breadcrumb */}
+            <VisualBreadcrumb 
+              items={[{ label: "Цени" }]} 
+              className="mb-8"
+            />
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 Ремонт на апартамент без изненади, с ясен бюджет и контрол
               </h1>
-              <p className="text-xl text-gray-600 mb-8">
+              <p className="text-xl text-muted-foreground mb-8">
                 В Renovivo не продаваме „шпакловка и боя", а спокойствие, предвидимост и напълно завършен резултат в договорения срок.
               </p>
               <Button size="lg" asChild>

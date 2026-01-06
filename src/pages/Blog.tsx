@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { planningRenovationPost, microcementPost } from "@/data/blog-posts-local";
+import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 
 
 // Blog images
@@ -124,6 +125,11 @@ const Blog = () => {
         {/* Hero Section */}
         <section className="bg-gradient-to-b from-secondary/50 to-background py-16 md:py-24">
           <div className="container-custom">
+            {/* Breadcrumb */}
+            <VisualBreadcrumb 
+              items={[{ label: "Полезно" }]} 
+              className="mb-8"
+            />
             <div className="max-w-3xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
                 <BookOpen className="h-4 w-4" />

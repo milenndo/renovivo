@@ -5,6 +5,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import PriceTable from "@/components/PriceTable";
+import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 
 // Service categories restructured per user specifications
 const serviceCategories = [
@@ -115,6 +116,11 @@ const ServicesPage = () => {
         {/* Hero */}
         <section className="relative py-20 bg-foreground">
           <div className="container-custom relative z-10">
+            {/* Breadcrumb */}
+            <VisualBreadcrumb 
+              items={[{ label: "Услуги" }]} 
+              className="mb-6 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
+            />
             <div className="max-w-2xl">
               <span className="text-primary font-medium text-sm uppercase tracking-wider">Каталог услуги</span>
               <h1 className="text-4xl md:text-5xl font-bold text-background mt-3 mb-6">

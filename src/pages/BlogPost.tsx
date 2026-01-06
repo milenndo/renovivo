@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { planningRenovationPost, microcementPost } from "@/data/blog-posts-local";
+import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 
 
 const BlogPost = () => {
@@ -256,13 +257,14 @@ const BlogPost = () => {
         {/* Header */}
         <section className="bg-gradient-to-b from-secondary/50 to-background py-12 md:py-16">
           <div className="container-custom">
-            <Link
-              to="/blog"
-              className="inline-flex items-center text-muted-foreground hover:text-primary mb-6 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Обратно към блога
-            </Link>
+            {/* Breadcrumb */}
+            <VisualBreadcrumb 
+              items={[
+                { label: "Полезно", href: "/blog" },
+                { label: post.title }
+              ]} 
+              className="mb-6"
+            />
 
             <Badge className={`${getCategoryColor(post.category)} mb-4`}>
               {post.category}
