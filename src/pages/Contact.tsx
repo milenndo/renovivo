@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactInfo = [
   {
@@ -46,18 +47,38 @@ const ContactPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    setTimeout(() => {
+    try {
+      // Send email via edge function
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          message: formData.message,
+        },
+      });
+
+      if (error) throw error;
+
       toast({
         title: "Съобщението е изпратено!",
         description: "Ще се свържем с вас възможно най-скоро.",
       });
       setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      console.error("Error sending contact email:", error);
+      toast({
+        title: "Грешка при изпращане",
+        description: "Моля, опитайте отново или се свържете по телефона.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const breadcrumbSchema = {
