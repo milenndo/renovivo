@@ -132,6 +132,61 @@ function generatePdfHtml(data: InspectionRequest): string {
   `;
 }
 
+function generateClientConfirmationHtml(data: InspectionRequest): string {
+  const projectLabel = data.project_type ? (projectTypeLabels[data.project_type] || data.project_type) : "";
+  
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333; }
+    .header { background: linear-gradient(135deg, #D4A574 0%, #B8956B 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .header h1 { margin: 0; font-size: 28px; }
+    .header p { margin: 10px 0 0; opacity: 0.9; }
+    .content { background: #f9f9f9; padding: 30px; border: 1px solid #eee; }
+    .section { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .footer { background: #333; color: white; padding: 20px; text-align: center; border-radius: 0 0 8px 8px; font-size: 14px; }
+    .footer a { color: #D4A574; text-decoration: none; }
+    .cta-button { display: inline-block; background: #D4A574; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 15px; }
+    .details { background: #fff9e6; border-left: 4px solid #D4A574; padding: 15px; margin: 15px 0; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>✅ Renovivo</h1>
+    <p>Получихме вашата заявка за оглед</p>
+  </div>
+  
+  <div class="content">
+    <div class="section">
+      <p>Здравейте, <strong>${escapeHtml(data.client_name)}</strong>!</p>
+      <p>Благодарим ви, че избрахте Renovivo! Получихме вашата заявка за оглед и ще се свържем с вас възможно най-скоро, за да уточним удобно време.</p>
+      
+      <div class="details">
+        <p><strong>Детайли на заявката:</strong></p>
+        <p>📍 Адрес: ${escapeHtml(data.address)}</p>
+        ${projectLabel ? `<p>🔧 Тип проект: ${projectLabel}</p>` : ""}
+        ${data.approximate_area ? `<p>📐 Площ: ${escapeHtml(data.approximate_area)} кв.м.</p>` : ""}
+      </div>
+      
+      <p>Ако имате допълнителни въпроси, можете да ни се обадите директно:</p>
+      <p style="text-align: center;">
+        <a href="tel:+359893712919" class="cta-button">📞 +359 89 371 29 19</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>С уважение,<br>Екипът на Renovivo</p>
+    <p><a href="https://renovivo.bg">renovivo.bg</a> | +359 89 371 29 19</p>
+  </div>
+</body>
+</html>
+  `;
+}
+
 function escapeHtml(text: string): string {
   return text
     .replace(/&/g, "&amp;")
@@ -183,6 +238,18 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     console.log("Email sent successfully:", emailResponse);
+
+    // Send confirmation email to the client if they provided an email
+    if (data.client_email) {
+      const clientConfirmationHtml = generateClientConfirmationHtml(data);
+      const confirmationResponse = await resend.emails.send({
+        from: fallbackFrom,
+        to: [data.client_email],
+        subject: `✅ Получихме вашата заявка за оглед - Renovivo`,
+        html: clientConfirmationHtml,
+      });
+      console.log("Client confirmation email sent:", confirmationResponse);
+    }
 
     return new Response(
       JSON.stringify({ success: true, data: emailResponse.data }),
