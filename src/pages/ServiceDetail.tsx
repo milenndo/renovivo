@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Phone, ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { Phone, ArrowLeft, ArrowRight, Check, Calendar, Bot } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +8,8 @@ import { getServiceById, services, serviceFAQs } from "@/data/services";
 import PriceTable from "@/components/PriceTable";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
+import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
+import { useChat } from "@/contexts/ChatContext";
 
 // Mapping service IDs to price category slugs
 const serviceToPriceCategoryMap: Record<string, string> = {
@@ -75,6 +77,8 @@ const relatedServicesForFullRenovation = [
 const ServiceDetail = () => {
   const { id } = useParams<{ id: string }>();
   const service = id ? getServiceById(id) : undefined;
+  const { openModal } = useInspectionRequest();
+  const { toggleChat } = useChat();
 
   if (!service) {
     return <Navigate to="/services" replace />;
@@ -442,12 +446,37 @@ const ServiceDetail = () => {
                     <p className="text-muted-foreground text-sm mb-6">
                       Свържете се с нас за безплатна консултация и индивидуална оферта.
                     </p>
-                    <a href="tel:+359893712919" className="block">
+                    
+                    {/* Phone Button */}
+                    <a href="tel:+359893712919" className="block mb-3">
                       <Button className="w-full" size="lg">
                         <Phone className="h-5 w-5 mr-2" />
                         Обадете се сега
                       </Button>
                     </a>
+                    
+                    {/* Inspection Request Button */}
+                    <Button 
+                      variant="outline" 
+                      className="w-full mb-3" 
+                      size="lg"
+                      onClick={openModal}
+                    >
+                      <Calendar className="h-5 w-5 mr-2" />
+                      Заявка за оглед
+                    </Button>
+                    
+                    {/* Renovivo AI Button */}
+                    <Button 
+                      variant="secondary" 
+                      className="w-full" 
+                      size="lg"
+                      onClick={toggleChat}
+                    >
+                      <Bot className="h-5 w-5 mr-2" />
+                      Попитай Renovivo AI
+                    </Button>
+                    
                     <p className="text-center text-muted-foreground text-xs mt-4">
                       Пон-Пет: 8:00 - 18:00
                     </p>
