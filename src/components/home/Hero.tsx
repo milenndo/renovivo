@@ -64,7 +64,7 @@ const Hero = () => {
               className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-base px-8 py-7 h-auto rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
               <Bot className="h-5 w-5 mr-3" />
-              Получи безплатна оценка
+              Renovivo AI
             </Button>
             <Link to="/pricing">
               <Button

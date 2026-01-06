@@ -163,7 +163,7 @@ const RenovivoChat = () => {
           ) : (
             <>
               <MessageCircle className="h-5 w-5" />
-              💬 Чат с Renovivo
+              💬 Renovivo AI
             </>
           )}
         </Button>
@@ -174,9 +174,9 @@ const RenovivoChat = () => {
         <div className="fixed bottom-20 right-4 w-full max-w-md bg-background border border-border rounded-xl shadow-2xl flex flex-col overflow-hidden z-40">
           <div className="flex items-center justify-between px-4 py-3 border-b bg-gradient-to-r from-primary to-primary/80 text-primary-foreground">
             <div>
-              <p className="font-bold text-lg">🔨 Renovivo Асистент</p>
+              <p className="font-bold text-lg">🤖 Renovivo AI</p>
               <p className="text-xs text-primary-foreground/90">
-                Експерт по ремонти - Отговори за секунди
+                Вашият експерт по ремонти - Отговори за секунди
               </p>
             </div>
             <button
