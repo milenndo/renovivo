@@ -53,8 +53,8 @@ const App = () => (
               <Toaster />
               <Sonner />
               <InspectionRequestModal />
-              <RenovivoChat />
               <BrowserRouter>
+                <RenovivoChat />
                 <ScrollToTop />
                 <Suspense fallback={<PageLoader />}>
                   <Routes>
