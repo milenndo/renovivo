@@ -52,7 +52,7 @@ const PricingComfort = () => {
         <title>Renovivo Comfort - Цялостен ремонт | Renovivo</title>
         <meta 
           name="description" 
-          content="Renovivo Comfort - най-популярният пакет за цялостен ремонт на апартамент. Цени от 230-332 €/м². Нова инсталация, настилки, боядисване, 5 години гаранция." 
+          content="Renovivo Comfort - най-популярният пакет за цялостен ремонт на апартамент. Цени от 161-232 €/м². Нова инсталация, настилки, боядисване, 5 години гаранция."
         />
         <link rel="canonical" href="https://renovivo.bg/pricing/comfort" />
       </Helmet>
@@ -84,10 +84,10 @@ const PricingComfort = () => {
               <div className="flex flex-wrap gap-6 text-background/90">
                 <div className="flex items-center gap-2">
                   <Ruler className="h-5 w-5 text-primary" />
-                  <span className="text-2xl font-bold">230–332 €/м²</span>
+                  <span className="text-2xl font-bold">161–232 €/м²</span>
                 </div>
                 <div className="flex items-center gap-2 text-lg">
-                  <span className="text-muted-foreground">(450–650 лв./м²)</span>
+                  <span className="text-muted-foreground">(315–455 лв./м²)</span>
                 </div>
               </div>
               <p className="text-background/60 text-sm mt-2">(без материали)</p>
@@ -242,8 +242,8 @@ const PricingComfort = () => {
                       </div>
                       <h3 className="text-xl font-bold mb-2">Renovivo Comfort</h3>
                       <p className="text-muted-foreground mb-4">Цялостен ремонт на апартамент</p>
-                      <div className="text-3xl font-bold text-primary mb-1">230–332 €/м²</div>
-                      <div className="text-lg text-muted-foreground mb-1">(450–650 лв./м²)</div>
+                      <div className="text-3xl font-bold text-primary mb-1">161–232 €/м²</div>
+                      <div className="text-lg text-muted-foreground mb-1">(315–455 лв./м²)</div>
                       <div className="text-sm text-muted-foreground mb-6">(без материали)</div>
                       
                       <div className="space-y-3 mb-6">
@@ -291,7 +291,7 @@ const PricingComfort = () => {
                   <CardContent className="p-6">
                     <h3 className="text-xl font-bold mb-2">Renovivo Start</h3>
                     <p className="text-muted-foreground mb-4">Частичен ремонт / освежаване</p>
-                    <div className="font-bold text-primary">92–143 €/м²</div>
+                    <div className="font-bold text-primary">46–72 €/м²</div>
                   </CardContent>
                 </Card>
               </Link>
