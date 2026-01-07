@@ -23,15 +23,19 @@ const Hero = () => {
     <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden">
       {/* Background with video and dark overlay */}
       <div className="absolute inset-0 z-0">
-        {/* LCP Poster image - always visible initially, fades when video loads */}
+        {/* LCP Poster image - Critical for above-the-fold, explicit dimensions for CLS */}
         <img
           src={heroPoster}
-          alt=""
+          alt="Renovivo - професионални ремонти в София"
+          width={1920}
+          height={1080}
           fetchPriority="high"
           decoding="sync"
+          loading="eager"
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
             videoLoaded && !prefersReducedMotion ? "opacity-0" : "opacity-40"
           }`}
+          style={{ aspectRatio: '16/9' }}
         />
         {/* Video - only render if user doesn't prefer reduced motion */}
         {!prefersReducedMotion && (
@@ -40,13 +44,16 @@ const Hero = () => {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
+            width={1920}
+            height={1080}
             poster={heroPoster}
             onCanPlay={() => setVideoLoaded(true)}
             aria-label="Видео на луксозна трансформация на пентхаус интериор"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
               videoLoaded ? "opacity-40" : "opacity-0"
             }`}
+            style={{ aspectRatio: '16/9' }}
           >
             <source src="/videos/hero-background.webm" type="video/webm" />
             <source src="/videos/Magical_Penthouse_Transformation_Video.mp4" type="video/mp4" />

@@ -244,6 +244,7 @@ const Services = () => {
                           ? "h-48 md:h-auto md:w-1/2"
                           : "h-40"
                       )}
+                      style={{ aspectRatio: index === 0 && currentCategory.services.length > 2 ? '3/2' : '16/9' }}
                     >
                       <img
                         src={service.image}
@@ -253,6 +254,7 @@ const Services = () => {
                         loading="lazy"
                         decoding="async"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        style={{ aspectRatio: '3/2' }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>

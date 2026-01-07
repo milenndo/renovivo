@@ -4,12 +4,11 @@ import { cn } from "@/lib/utils";
 interface OptimizedImageProps {
   src: string;
   alt: string;
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
   className?: string;
   priority?: boolean;
   sizes?: string;
-  aspectRatio?: string;
   // Optional srcset for responsive images - array of {src, width} pairs
   srcSet?: Array<{ src: string; width: number }>;
 }
@@ -27,9 +26,11 @@ const generateSrcSet = (
 };
 
 /**
- * For Vite-bundled assets, we can't dynamically resize,
- * but we provide proper sizes attribute for browser optimization.
- * For external URLs, srcset can be provided manually.
+ * Optimized image component with:
+ * - Explicit width/height for CLS prevention
+ * - Lazy loading with IntersectionObserver
+ * - Priority loading for above-the-fold images
+ * - Responsive sizes attribute
  */
 const OptimizedImage = ({
   src,
@@ -39,12 +40,14 @@ const OptimizedImage = ({
   className,
   priority = false,
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
-  aspectRatio,
   srcSet,
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
   const imgRef = useRef<HTMLDivElement>(null);
+
+  // Calculate aspect ratio from width/height
+  const aspectRatio = width && height ? width / height : undefined;
 
   useEffect(() => {
     if (priority) {
@@ -80,9 +83,6 @@ const OptimizedImage = ({
     return undefined;
   }, [srcSet]);
 
-  // Determine if it's an imported/bundled asset
-  const isImportedAsset = src.startsWith("data:") || src.includes("/assets/");
-
   return (
     <div
       ref={imgRef}
@@ -91,8 +91,7 @@ const OptimizedImage = ({
         className
       )}
       style={{
-        width: width ? `${width}px` : undefined,
-        height: height ? `${height}px` : undefined,
+        width: '100%',
         aspectRatio: aspectRatio,
       }}
     >
@@ -112,13 +111,15 @@ const OptimizedImage = ({
             "w-full h-full object-cover transition-opacity duration-300",
             isLoaded ? "opacity-100" : "opacity-0"
           )}
+          style={{ aspectRatio }}
         />
       )}
-      {/* Placeholder while loading */}
+      {/* Placeholder while loading - prevents CLS */}
       {!isLoaded && (
         <div
-          className="absolute inset-0 bg-muted/50 animate-pulse"
+          className="absolute inset-0 bg-muted/50"
           aria-hidden="true"
+          style={{ aspectRatio }}
         />
       )}
     </div>

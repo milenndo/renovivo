@@ -170,11 +170,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://spwduzltlilwgzejjqdn.supabase.co" />
     
-    <!-- Note: LCP is the hero poster image, loaded directly in Hero component with fetchpriority="high" -->
+    <!-- LCP Critical: Preload hero poster image for mobile (above-the-fold) -->
+    <link rel="preload" as="image" href="/src/assets/images/hero-poster.jpg" fetchpriority="high" />
+    
+    <!-- Preload critical video for desktop users -->
+    <link rel="preload" as="video" href="/videos/hero-background.webm" type="video/webm" media="(min-width: 768px) and (prefers-reduced-motion: no-preference)" />
     
     <!-- Non-blocking Google Fonts loading -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" /></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" /></noscript>
     
     <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
