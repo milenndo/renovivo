@@ -68,7 +68,7 @@ const Pricing = () => {
                 <div className="bg-white rounded-lg shadow-lg p-8 h-full hover:shadow-xl transition-all hover:-translate-y-1 border-2 border-transparent hover:border-primary/20">
                   <h3 className="text-2xl font-bold mb-2">Renovivo Start</h3>
                   <p className="text-sm text-gray-600 mb-4">частичен ремонт / освежаване</p>
-                  <div className="text-2xl font-bold text-primary mb-6">92–143 €/м²<br /><span className="text-lg text-muted-foreground">(180–280 лв./м²)</span></div>
+                  <div className="text-2xl font-bold text-primary mb-6">46–72 €/м²<br /><span className="text-lg text-muted-foreground">(90–140 лв./м²)</span></div>
                   <div className="flex items-center justify-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
                     Научи повече <ArrowRight className="h-4 w-4" />
                   </div>
@@ -82,7 +82,7 @@ const Pricing = () => {
                   </div>
                   <h3 className="text-2xl font-bold mb-2">Renovivo Comfort</h3>
                   <p className="text-sm text-gray-600 mb-4">цялостен ремонт на апартамент</p>
-                  <div className="text-2xl font-bold text-primary mb-1">230–332 €/м²<br /><span className="text-lg text-muted-foreground">(450–650 лв./м²)</span></div>
+                  <div className="text-2xl font-bold text-primary mb-1">161–232 €/м²<br /><span className="text-lg text-muted-foreground">(315–455 лв./м²)</span></div>
                   <div className="text-sm text-gray-600 mb-6">(без материали)</div>
                   <div className="flex items-center justify-center gap-2 text-primary font-semibold group-hover:gap-3 transition-all">
                     Научи повече <ArrowRight className="h-4 w-4" />
