@@ -60,7 +60,7 @@ const Hero = () => {
           </video>
         )}
         {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-foreground/40" />
+        <div className="absolute inset-0 bg-foreground/60" />
       </div>
 
       {/* Centered Content */}
@@ -75,12 +75,13 @@ const Hero = () => {
           </div>
 
           {/* NEW: Transformation Headline - PSYCHOLOGICAL POWER */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-background uppercase tracking-tight leading-[1.1] mb-8">
- <span className="text-primary">РЕМОНТ БЕЗ ХАОС</span><br />
- <span className="text-background block mt-3">САМО СПОКОЙСТВИЕ</span>          </h1>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-background uppercase tracking-tight leading-[1.1] mb-8 drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
+            <span className="text-primary drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">РЕМОНТ БЕЗ ХАОС</span><br />
+            <span className="text-background block mt-3">САМО СПОКОЙСТВИЕ</span>
+          </h1>
 
           {/* NEW: Power Subheading - Addresses Main Fear */}
-          <p className="text-lg md:text-xl text-background/80 mb-12 leading-relaxed max-w-3xl mx-auto font-medium">
+          <p className="text-lg md:text-xl text-background mb-12 leading-relaxed max-w-3xl mx-auto font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
             Без нерви, без скрити такси. Само резултати с пълна гаранция.
           </p>
 
@@ -98,7 +99,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-primary/50 bg-transparent text-primary hover:bg-primary/10 font-bold text-base px-8 py-7 h-auto rounded-lg backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
+                className="border-background/60 bg-background/20 text-background hover:bg-background/30 font-bold text-base px-8 py-7 h-auto rounded-lg backdrop-blur-md transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 <Calculator className="h-5 w-5 mr-3" />
                 Вижте цени и оферти
@@ -108,7 +109,7 @@ const Hero = () => {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-background/30 bg-transparent text-background hover:bg-background/10 font-bold text-base px-8 py-7 h-auto rounded-lg backdrop-blur-sm transition-all duration-300 transform hover:scale-105"
+                className="border-background/60 bg-background/20 text-background hover:bg-background/30 font-bold text-base px-8 py-7 h-auto rounded-lg backdrop-blur-md transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 <FolderOpen className="h-5 w-5 mr-3" />
                 Преди/След проекти
