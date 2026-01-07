@@ -1,7 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import RenovivoChat from "@/components/chat/RenovivoChat";
 import CookieBanner from "@/components/CookieBanner";
 import CookieSettingsModal from "@/components/CookieSettingsModal";
 import { useCookieConsentContext } from "@/contexts/CookieConsentContext";
@@ -79,8 +78,6 @@ const Layout = ({ children }: LayoutProps) => {
         onSave={savePreferences}
       />
 
-      {/* TODO: Chat скрит временно за доизпипване на AI */}
-      {/* <RenovivoChat /> */}
     </div>
   );
 };

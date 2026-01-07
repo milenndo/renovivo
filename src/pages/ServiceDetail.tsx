@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Phone, ArrowLeft, ArrowRight, Check, Calendar, Bot } from "lucide-react";
+import { Phone, ArrowLeft, ArrowRight, Check, Calendar } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,7 +9,6 @@ import PriceTable from "@/components/PriceTable";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
-import { useChat } from "@/contexts/ChatContext";
 
 // Mapping service IDs to price category slugs
 const serviceToPriceCategoryMap: Record<string, string> = {
@@ -78,8 +77,6 @@ const ServiceDetail = () => {
   const { id } = useParams<{ id: string }>();
   const service = id ? getServiceById(id) : undefined;
   const { openModal } = useInspectionRequest();
-  const { toggleChat } = useChat();
-
   if (!service) {
     return <Navigate to="/services" replace />;
   }
@@ -469,17 +466,6 @@ const ServiceDetail = () => {
                     >
                       <Calendar className="h-5 w-5 mr-2" />
                       Заявка за оглед
-                    </Button>
-                    
-                    {/* Renovivo AI Button */}
-                    <Button 
-                      variant="secondary" 
-                      className="w-full" 
-                      size="lg"
-                      onClick={toggleChat}
-                    >
-                      <Bot className="h-5 w-5 mr-2" />
-                      Попитай Renovivo AI
                     </Button>
                     
                     <p className="text-center text-muted-foreground text-xs mt-4">
