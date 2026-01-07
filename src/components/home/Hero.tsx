@@ -48,6 +48,7 @@ const Hero = () => {
               videoLoaded ? "opacity-40" : "opacity-0"
             }`}
           >
+            <source src="/videos/hero-background.webm" type="video/webm" />
             <source src="/videos/Magical_Penthouse_Transformation_Video.mp4" type="video/mp4" />
             <track kind="captions" src="" label="Без субтитри" default />
           </video>
