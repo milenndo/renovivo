@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { Bot, Calculator, FolderOpen, CheckCircle2, Award, Shield } from "lucide-react";
+import heroPoster from "@/assets/images/hero-poster.jpg";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useChat } from "@/contexts/ChatContext";
-
-// Static path for LCP preload compatibility
-const heroPoster = "/assets/hero-poster.jpg";
 
 const Hero = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -50,7 +48,6 @@ const Hero = () => {
               videoLoaded ? "opacity-40" : "opacity-0"
             }`}
           >
-            <source src="/videos/hero-background.webm" type="video/webm" />
             <source src="/videos/Magical_Penthouse_Transformation_Video.mp4" type="video/mp4" />
             <track kind="captions" src="" label="Без субтитри" default />
           </video>
