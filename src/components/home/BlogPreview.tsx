@@ -136,8 +136,8 @@ const BlogPreview = () => {
                 key={post.id}
                 className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
-                {/* Image */}
-                <div className="relative h-40 overflow-hidden">
+                {/* Image - explicit dimensions for CLS */}
+                <div className="relative h-40 overflow-hidden" style={{ aspectRatio: '5/2' }}>
                   {postImage ? (
                     <img
                       src={postImage}
@@ -147,6 +147,7 @@ const BlogPreview = () => {
                       loading="lazy"
                       decoding="async"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      style={{ aspectRatio: '5/2' }}
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">

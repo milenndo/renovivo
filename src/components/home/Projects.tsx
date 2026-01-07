@@ -35,8 +35,8 @@ const Projects = () => {
             <Link
               key={project.id}
               to={`/portfolio/${project.id}`}
-              className="group relative overflow-hidden rounded-xl aspect-[4/5] block"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="group relative overflow-hidden rounded-xl block"
+              style={{ animationDelay: `${index * 100}ms`, aspectRatio: '4/5' }}
             >
               <img
                 src={project.mainImage}
@@ -46,6 +46,7 @@ const Projects = () => {
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                style={{ aspectRatio: '4/5' }}
               />
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
