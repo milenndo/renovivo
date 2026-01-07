@@ -222,7 +222,7 @@ const RenovivoChat = () => {
       <div className="fixed bottom-4 right-4 z-40">
         <Button
           size="lg"
-          className="rounded-full shadow-lg px-4 py-2 flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
+          className="rounded-full shadow-lg px-4 py-2 flex items-center gap-2 bg-foreground text-background hover:bg-foreground/90"
           onClick={handleToggle}
           aria-label={isOpen ? "Затвори AI чата" : "Отвори Renovivo AI чата"}
         >

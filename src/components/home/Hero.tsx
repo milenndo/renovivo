@@ -13,10 +13,14 @@ const Hero = () => {
     <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden">
       {/* Background with video and dark overlay */}
       <div className="absolute inset-0 z-0">
-        {/* Fallback gradient while video loads */}
-        <div
-          className={`absolute inset-0 bg-foreground transition-opacity duration-700 ${
-            videoLoaded ? "opacity-0" : "opacity-100"
+      {/* LCP Poster image - preloaded and high priority */}
+        <img
+          src={heroPoster}
+          alt=""
+          fetchPriority="high"
+          decoding="sync"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+            videoLoaded ? "opacity-0" : "opacity-40"
           }`}
         />
         <video
