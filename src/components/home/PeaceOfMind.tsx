@@ -1,62 +1,67 @@
 import { User, Calculator, FileText, Sparkles, Shield } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 
 const reasons = [
   {
     icon: User,
     title: "Личен Проектен Мениджър",
-    description: "Един човек отговаря за целия обект и комуникацията. Край на разваления телефон.",
+    description: "Един човек отговаря за целия обект и комуникацията.",
   },
   {
     icon: Calculator,
     title: "Фиксиран Бюджет",
-    description: "Цената по оферта е крайна. Без скрити такси и изненадващи разходи.",
+    description: "Цената по оферта е крайна. Без скрити такси.",
   },
   {
     icon: FileText,
     title: "Договор и Срокове",
-    description: "Работим с ясни неустойки при забавяне. Времето ви е ценно.",
+    description: "Работим с ясни неустойки при забавяне.",
   },
   {
     icon: Sparkles,
     title: "Чистота До Ключ",
-    description: "Професионално почистване и извозване на отпадъци след края.",
+    description: "Професионално почистване след края на ремонта.",
   },
   {
     icon: Shield,
     title: "Писмена Гаранция",
-    description: "Пълна гаранция за всяка извършена работа и материали.",
+    description: "Пълна гаранция за всяка извършена работа.",
   },
 ];
 
 const PeaceOfMind = () => {
   return (
-    <section className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            5 причини да спите спокойно, докато ние работим
+    <section className="section-padding bg-background">
+      <div className="container-custom">
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="w-12 h-px bg-primary" />
+            <span className="text-label text-muted-foreground">Защо ние</span>
+            <div className="w-12 h-px bg-primary" />
+          </div>
+          <h2 className="text-heading-lg text-foreground">
+            5 причини да спите спокойно
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        {/* Reasons Grid - Luxe minimal cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8">
           {reasons.map((reason, index) => (
-            <Card
+            <div
               key={index}
-              className="group bg-card border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+              className="group text-center p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/30 hover:shadow-luxe-lg transition-all duration-500 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <CardContent className="p-6 text-center">
-                <div className="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <reason.icon className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  {reason.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {reason.description}
-                </p>
-              </CardContent>
-            </Card>
+              <div className="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary group-hover:bg-primary/10 transition-colors duration-500">
+                <reason.icon className="w-7 h-7 text-primary" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-3">
+                {reason.title}
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                {reason.description}
+              </p>
+            </div>
           ))}
         </div>
       </div>
