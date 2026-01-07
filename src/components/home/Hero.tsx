@@ -55,7 +55,7 @@ const Hero = () => {
             }`}
             style={{ aspectRatio: '16/9' }}
           >
-            <source src="/videos/hero-background.webm" type="video/webm" />
+            <source src="/videos/hero-background.webm?v=2" type="video/webm" />
             <track kind="captions" src="" label="Без субтитри" default />
           </video>
         )}
