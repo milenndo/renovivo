@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Bot, Calculator, FolderOpen, CheckCircle2, Award, Shield } from "lucide-react";
+import heroPoster from "@/assets/images/hero-poster.jpg";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useChat } from "@/contexts/ChatContext";
@@ -24,6 +25,7 @@ const Hero = () => {
           loop
           playsInline
           preload="auto"
+          poster={heroPoster}
           onCanPlay={() => setVideoLoaded(true)}
           className={`w-full h-full object-cover transition-opacity duration-700 ${
             videoLoaded ? "opacity-40" : "opacity-0"
