@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageCircle, X, Send, Loader2, Calendar, Paperclip, Image as ImageIcon } from "lucide-react";
+import { MessageCircle, X, Send, Loader2, Calendar, Paperclip, Image as ImageIcon, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 import { useChat } from "@/contexts/ChatContext";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 type ChatMessage = {
   id: string;
@@ -22,7 +23,62 @@ const INITIAL_MESSAGE: ChatMessage = {
     "🧠 Здравейте! Аз съм **Renovivo AI** - вашият интелигентен асистент за ремонти!\n\n🔍 Мога да ви помогна с:\n• 💰 Конкретни цени от нашия ценоразпис\n• 📐 Изчисления на бюджет по квадратура\n• 📷 **Анализ на архитектурни планове** (качете снимка!)\n• 🏠 Препоръки за материали и услуги\n• 📍 Навигация в сайта\n• 📅 Записване на безплатен оглед\n\nКажете ми какво планирате или качете план/снимка! 🏗️",
 };
 
+// Parse message content and render links as buttons
+const renderMessageContent = (content: string, onNavigate: (path: string) => void) => {
+  // Match markdown links: [text](url) or plain URLs with /services/ or /pricing paths
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)|(?:https?:\/\/[^\s]+)?(\/(?:services|pricing|contact|about|portfolio|blog)[^\s]*)/g;
+  
+  const parts: (string | JSX.Element)[] = [];
+  let lastIndex = 0;
+  let match;
+  let keyIndex = 0;
+
+  while ((match = linkRegex.exec(content)) !== null) {
+    // Add text before the match
+    if (match.index > lastIndex) {
+      parts.push(content.slice(lastIndex, match.index));
+    }
+
+    const linkText = match[1] || match[3] || "Виж повече";
+    let linkPath = match[2] || match[3];
+    
+    // Extract just the path if it's a full URL
+    if (linkPath?.includes("renovivo.bg")) {
+      const urlMatch = linkPath.match(/renovivo\.bg(\/[^\s)]*)/);
+      if (urlMatch) linkPath = urlMatch[1];
+    }
+    
+    // Clean up the path
+    if (linkPath) {
+      linkPath = linkPath.replace(/[)\s]+$/, ""); // Remove trailing ) or spaces
+      
+      parts.push(
+        <Button
+          key={`link-${keyIndex++}`}
+          variant="secondary"
+          size="sm"
+          className="mx-1 my-1 inline-flex items-center gap-1 text-xs h-7 px-2"
+          onClick={() => onNavigate(linkPath)}
+        >
+          {linkText.replace(/^\[|\]$/g, "")}
+          <ExternalLink className="h-3 w-3" />
+        </Button>
+      );
+    }
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  // Add remaining text
+  if (lastIndex < content.length) {
+    parts.push(content.slice(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : content;
+};
+
 const RenovivoChat = () => {
+  const navigate = useNavigate();
   const { isOpen, toggleChat } = useChat();
   const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
   const [input, setInput] = useState("");
@@ -32,6 +88,11 @@ const RenovivoChat = () => {
   const { openModal } = useInspectionRequest();
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleNavigate = (path: string) => {
+    navigate(path);
+    toggleChat(); // Close chat after navigation
+  };
 
   useEffect(() => {
     if (!isOpen) return;
@@ -282,7 +343,9 @@ const RenovivoChat = () => {
                       />
                     </div>
                   )}
-                  {msg.content}
+                  {msg.role === "assistant" 
+                    ? renderMessageContent(msg.content, handleNavigate)
+                    : msg.content}
                 </div>
               </div>
             ))}
