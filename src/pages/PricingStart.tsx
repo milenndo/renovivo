@@ -39,7 +39,7 @@ const PricingStart = () => {
         <title>Renovivo Start - Частичен ремонт | Renovivo</title>
         <meta 
           name="description" 
-          content="Renovivo Start - идеален за освежаване и частичен ремонт. Цени от 92-143 €/м². Боядисване, козметични ремонти, бързо изпълнение." 
+          content="Renovivo Start - идеален за освежаване и частичен ремонт. Цени от 46-72 €/м². Боядисване, козметични ремонти, бързо изпълнение."
         />
         <link rel="canonical" href="https://renovivo.bg/pricing/start" />
       </Helmet>
@@ -68,10 +68,10 @@ const PricingStart = () => {
               <div className="flex flex-wrap gap-6 text-background/90">
                 <div className="flex items-center gap-2">
                   <Ruler className="h-5 w-5 text-primary" />
-                  <span className="text-2xl font-bold">92–143 €/м²</span>
+                  <span className="text-2xl font-bold">46–72 €/м²</span>
                 </div>
                 <div className="flex items-center gap-2 text-lg">
-                  <span className="text-muted-foreground">(180–280 лв./м²)</span>
+                  <span className="text-muted-foreground">(90–140 лв./м²)</span>
                 </div>
               </div>
             </div>
@@ -183,8 +183,8 @@ const PricingStart = () => {
                     <CardContent className="p-6">
                       <h3 className="text-xl font-bold mb-2">Renovivo Start</h3>
                       <p className="text-muted-foreground mb-4">Частичен ремонт / освежаване</p>
-                      <div className="text-3xl font-bold text-primary mb-1">92–143 €/м²</div>
-                      <div className="text-lg text-muted-foreground mb-6">(180–280 лв./м²)</div>
+                      <div className="text-3xl font-bold text-primary mb-1">46–72 €/м²</div>
+                      <div className="text-lg text-muted-foreground mb-6">(90–140 лв./м²)</div>
                       
                       <div className="space-y-3 mb-6">
                         <Button className="w-full" size="lg" asChild>
@@ -232,7 +232,7 @@ const PricingStart = () => {
                     <div className="text-sm text-primary font-medium mb-2">Най-популярен</div>
                     <h3 className="text-xl font-bold mb-2">Renovivo Comfort</h3>
                     <p className="text-muted-foreground mb-4">Цялостен ремонт на апартамент</p>
-                    <div className="font-bold text-primary">230–332 €/м²</div>
+                    <div className="font-bold text-primary">161–232 €/м²</div>
                   </CardContent>
                 </Card>
               </Link>
