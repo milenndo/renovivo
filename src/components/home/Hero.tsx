@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
-import { Bot, Calculator, FolderOpen, CheckCircle2, Award, Shield, ArrowRight, Sparkles } from "lucide-react";
+import { Calculator, FolderOpen, CheckCircle2, Award, Shield, Sparkles } from "lucide-react";
 import heroPoster from "@/assets/images/hero-poster.jpg";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useChat } from "@/contexts/ChatContext";
 
 const Hero = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const { openChat } = useChat();
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -95,24 +93,8 @@ const Hero = () => {
             <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-primary/60" />
           </div>
 
-          {/* Premium CTA Section */}
+          {/* CTA Section */}
           <div className="flex flex-col items-center justify-center gap-4 sm:gap-5 mb-12 sm:mb-16 px-2">
-            {/* Primary CTA - Maximum Impact */}
-            <Button
-              size="lg"
-              onClick={openChat}
-              className="group relative w-full sm:w-auto bg-gradient-to-r from-primary via-primary to-primary/90 text-primary-foreground font-bold text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 h-auto rounded-xl shadow-2xl shadow-primary/40 hover:shadow-primary/60 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 active:scale-95 overflow-hidden"
-            >
-              {/* Shimmer effect */}
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-background/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              <span className="relative flex items-center gap-3">
-                <Bot className="h-5 w-5 sm:h-6 sm:w-6" />
-                🧠 Говорете с Renovivo AI
-                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </Button>
-            
-            {/* Secondary CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
               <Link to="/pricing" className="w-full sm:w-auto">
                 <Button

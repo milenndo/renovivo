@@ -3,7 +3,6 @@ import Layout from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
 import PeaceOfMind from "@/components/home/PeaceOfMind";
 import Services from "@/components/home/Services";
-import AIConsultant from "@/components/home/AIConsultant";
 import About from "@/components/home/About";
 import Projects from "@/components/home/Projects";
 import WhyUs from "@/components/home/WhyUs";
@@ -143,8 +142,7 @@ const Index = () => {
         <Hero />
         <PeaceOfMind />
         <Services />
-     {/* TODO: AI консултант - скрит за тестване и доизпипване. Активирај със SHOW_AI_CONSULTANT флаг */}
-     {/* <AIConsultant /> */}        <About />
+        <About />
         <Projects />
         <WhyUs />
         <HowWeWork />
