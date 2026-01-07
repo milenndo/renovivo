@@ -75,46 +75,48 @@ const Hero = () => {
           </div>
 
           {/* NEW: Transformation Headline - PSYCHOLOGICAL POWER */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-background uppercase tracking-tight leading-[1.1] mb-8 drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-background uppercase tracking-tight leading-[1.1] mb-6 sm:mb-8 drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
             <span className="text-primary drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">РЕМОНТ БЕЗ ХАОС</span><br />
-            <span className="text-background block mt-3">САМО СПОКОЙСТВИЕ</span>
+            <span className="text-background block mt-2 sm:mt-3">САМО СПОКОЙСТВИЕ</span>
           </h1>
 
           {/* NEW: Power Subheading - Addresses Main Fear */}
-          <p className="text-lg md:text-xl text-background mb-12 leading-relaxed max-w-3xl mx-auto font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+          <p className="text-base sm:text-lg md:text-xl text-background mb-8 sm:mb-12 leading-relaxed max-w-3xl mx-auto font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] px-4">
             Без нерви, без скрити такси. Само резултати с пълна гаранция.
           </p>
 
-          {/* CTA Buttons - WITHOUT BRACKETS */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          {/* CTA Buttons - Mobile optimized */}
+          <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 px-2">
             <Button
               size="lg"
               onClick={openChat}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-base px-8 py-7 h-auto rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-7 h-auto rounded-lg shadow-lg hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
             >
-              <Bot className="h-5 w-5 mr-3" />
+              <Bot className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3" />
               🧠 Renovivo AI
             </Button>
-            <Link to="/pricing">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-background/60 bg-background/20 text-background hover:bg-background/30 font-bold text-base px-8 py-7 h-auto rounded-lg backdrop-blur-md transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                <Calculator className="h-5 w-5 mr-3" />
-                Вижте цени и оферти
-              </Button>
-            </Link>
-            <Link to="/portfolio">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-background/60 bg-background/20 text-background hover:bg-background/30 font-bold text-base px-8 py-7 h-auto rounded-lg backdrop-blur-md transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                <FolderOpen className="h-5 w-5 mr-3" />
-                Преди/След проекти
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+              <Link to="/pricing" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full border-background/60 bg-background/20 text-background hover:bg-background/40 font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-7 h-auto rounded-lg backdrop-blur-md transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-lg hover:shadow-xl hover:border-background"
+                >
+                  <Calculator className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3" />
+                  Вижте цени и оферти
+                </Button>
+              </Link>
+              <Link to="/portfolio" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full border-background/60 bg-background/20 text-background hover:bg-background/40 font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-7 h-auto rounded-lg backdrop-blur-md transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-lg hover:shadow-xl hover:border-background"
+                >
+                  <FolderOpen className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3" />
+                  Преди/След проекти
+                </Button>
+              </Link>
+            </div>
           </div>
 
           {/* NEW: Trust Badges - Social Proof Section */}
