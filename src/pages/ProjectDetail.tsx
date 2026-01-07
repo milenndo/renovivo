@@ -65,6 +65,11 @@ const ProjectDetail = () => {
           <img
             src={project.mainImage}
             alt={project.title}
+            width={1200}
+            height={600}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
@@ -247,6 +252,10 @@ const ProjectDetail = () => {
                         key={index}
                         src={image}
                         alt={`${project.title} ${index + 1}`}
+                        width={index === 0 ? 800 : 400}
+                        height={index === 0 ? 320 : 192}
+                        loading="lazy"
+                        decoding="async"
                         className={`w-full object-cover rounded-lg hover:opacity-90 transition-opacity ${
                           index === 0 ? "md:col-span-2 h-64 md:h-80" : "h-48"
                         }`}
@@ -320,6 +329,10 @@ const ProjectDetail = () => {
                       <img
                         src={p.mainImage}
                         alt={p.title}
+                        width={400}
+                        height={300}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />

@@ -118,6 +118,10 @@ const AboutPage = () => {
                 <img 
                   src={aboutTeamImg} 
                   alt="Екипът на Renovivo обсъжда проект" 
+                  width={600}
+                  height={400}
+                  loading="lazy"
+                  decoding="async"
                   className="rounded-2xl shadow-xl w-full" 
                 />
                 <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-primary/10 rounded-2xl -z-10" />
@@ -196,6 +200,10 @@ const AboutPage = () => {
                 <img 
                   src={qualityWorkImg} 
                   alt="Качествено изпълнение на ремонт" 
+                  width={600}
+                  height={400}
+                  loading="lazy"
+                  decoding="async"
                   className="rounded-2xl shadow-xl w-full" 
                 />
                 <div className="absolute -bottom-6 -left-6 w-48 h-48 bg-primary/10 rounded-2xl -z-10" />
