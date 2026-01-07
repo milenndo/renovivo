@@ -13,7 +13,7 @@ const Projects = () => {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
-            <span className="text-primary font-medium text-sm uppercase tracking-wider">Портфолио</span>
+            <span className="text-foreground font-semibold text-sm uppercase tracking-wider">Портфолио</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
               Нашите скорошни проекти
             </h2>

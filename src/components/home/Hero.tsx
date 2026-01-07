@@ -27,11 +27,13 @@ const Hero = () => {
           preload="auto"
           poster={heroPoster}
           onCanPlay={() => setVideoLoaded(true)}
+          aria-label="Видео на луксозна трансформация на пентхаус интериор"
           className={`w-full h-full object-cover transition-opacity duration-700 ${
             videoLoaded ? "opacity-40" : "opacity-0"
           }`}
         >
           <source src="/videos/Magical_Penthouse_Transformation_Video.mp4" type="video/mp4" />
+          <track kind="captions" src="" label="Без субтитри" default />
         </video>
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-foreground/40" />
