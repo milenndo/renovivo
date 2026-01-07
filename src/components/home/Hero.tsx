@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Bot, Calculator, FolderOpen, CheckCircle2, Award, Shield } from "lucide-react";
 import heroPoster from "@/assets/images/hero-poster.jpg";
 import { Link } from "react-router-dom";
@@ -7,38 +7,51 @@ import { useChat } from "@/contexts/ChatContext";
 
 const Hero = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const { openChat } = useChat();
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+    
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   return (
     <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden">
       {/* Background with video and dark overlay */}
       <div className="absolute inset-0 z-0">
-      {/* LCP Poster image - preloaded and high priority */}
+        {/* LCP Poster image - always visible initially, fades when video loads */}
         <img
           src={heroPoster}
           alt=""
           fetchPriority="high"
           decoding="sync"
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-            videoLoaded ? "opacity-0" : "opacity-40"
+            videoLoaded && !prefersReducedMotion ? "opacity-0" : "opacity-40"
           }`}
         />
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          poster={heroPoster}
-          onCanPlay={() => setVideoLoaded(true)}
-          aria-label="Видео на луксозна трансформация на пентхаус интериор"
-          className={`w-full h-full object-cover transition-opacity duration-700 ${
-            videoLoaded ? "opacity-40" : "opacity-0"
-          }`}
-        >
-          <source src="/videos/Magical_Penthouse_Transformation_Video.mp4" type="video/mp4" />
-          <track kind="captions" src="" label="Без субтитри" default />
-        </video>
+        {/* Video - only render if user doesn't prefer reduced motion */}
+        {!prefersReducedMotion && (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster={heroPoster}
+            onCanPlay={() => setVideoLoaded(true)}
+            aria-label="Видео на луксозна трансформация на пентхаус интериор"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+              videoLoaded ? "opacity-40" : "opacity-0"
+            }`}
+          >
+            <source src="/videos/Magical_Penthouse_Transformation_Video.mp4" type="video/mp4" />
+            <track kind="captions" src="" label="Без субтитри" default />
+          </video>
+        )}
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-foreground/40" />
       </div>
