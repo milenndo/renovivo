@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 import aboutTeamImg from "@/assets/images/about-team.jpg";
-import qualityWorkImg from "@/assets/images/quality-work.jpg";
+import qualityWorkImg from "@/assets/images/quality-work.webp";
 
 const AboutPage = () => {
   const { openModal } = useInspectionRequest();
