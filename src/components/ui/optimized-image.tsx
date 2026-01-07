@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { cn } from "@/lib/utils";
 
 interface OptimizedImageProps {
@@ -7,17 +7,29 @@ interface OptimizedImageProps {
   width?: number;
   height?: number;
   className?: string;
-  priority?: boolean; // For above-the-fold images
+  priority?: boolean;
   sizes?: string;
-  aspectRatio?: string; // e.g., "4/5", "16/9"
+  aspectRatio?: string;
+  // Optional srcset for responsive images - array of {src, width} pairs
+  srcSet?: Array<{ src: string; width: number }>;
 }
 
+// Standard breakpoints for srcset generation (1x and 2x for Retina)
+const SRCSET_WIDTHS = [320, 480, 640, 768, 1024, 1280, 1536, 1920];
+
 /**
- * Optimized image component with:
- * - Lazy loading for below-the-fold images
- * - Explicit width/height to prevent CLS
- * - Responsive sizing with srcset (when using external URLs)
- * - Priority loading for above-the-fold images
+ * Generates srcset string from an array of image sources
+ */
+const generateSrcSet = (
+  srcSet: Array<{ src: string; width: number }>
+): string => {
+  return srcSet.map(({ src, width }) => `${src} ${width}w`).join(", ");
+};
+
+/**
+ * For Vite-bundled assets, we can't dynamically resize,
+ * but we provide proper sizes attribute for browser optimization.
+ * For external URLs, srcset can be provided manually.
  */
 const OptimizedImage = ({
   src,
@@ -28,10 +40,11 @@ const OptimizedImage = ({
   priority = false,
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
   aspectRatio,
+  srcSet,
 }: OptimizedImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
-  const imgRef = useRef<HTMLImageElement>(null);
+  const imgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (priority) {
@@ -47,7 +60,7 @@ const OptimizedImage = ({
         }
       },
       {
-        rootMargin: "200px", // Start loading 200px before entering viewport
+        rootMargin: "200px",
         threshold: 0,
       }
     );
@@ -59,15 +72,22 @@ const OptimizedImage = ({
     return () => observer.disconnect();
   }, [priority]);
 
-  // Determine if it's an imported asset (starts with data: or /assets/)
+  // Generate srcset string if provided
+  const srcSetString = useMemo(() => {
+    if (srcSet && srcSet.length > 0) {
+      return generateSrcSet(srcSet);
+    }
+    return undefined;
+  }, [srcSet]);
+
+  // Determine if it's an imported/bundled asset
   const isImportedAsset = src.startsWith("data:") || src.includes("/assets/");
-  
+
   return (
     <div
       ref={imgRef}
       className={cn(
-        "overflow-hidden bg-muted/30",
-        aspectRatio && `aspect-[${aspectRatio}]`,
+        "relative overflow-hidden bg-muted/30",
         className
       )}
       style={{
@@ -85,7 +105,8 @@ const OptimizedImage = ({
           loading={priority ? "eager" : "lazy"}
           decoding={priority ? "sync" : "async"}
           fetchPriority={priority ? "high" : "auto"}
-          sizes={!isImportedAsset ? sizes : undefined}
+          sizes={sizes}
+          srcSet={srcSetString}
           onLoad={() => setIsLoaded(true)}
           className={cn(
             "w-full h-full object-cover transition-opacity duration-300",
@@ -104,4 +125,4 @@ const OptimizedImage = ({
   );
 };
 
-export { OptimizedImage };
+export { OptimizedImage, generateSrcSet, SRCSET_WIDTHS };
