@@ -57,7 +57,12 @@ const CTA = () => {
       <div className="absolute inset-0 z-0">
         <img
           src={ctaBackground}
-          alt="Background"
+          alt=""
+          width={1920}
+          height={600}
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-primary/90" />

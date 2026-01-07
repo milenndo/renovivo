@@ -22,6 +22,10 @@ const About = () => {
               <img
                 src={aboutTeamImg}
                 alt="Renovivo екип на работа"
+                width={600}
+                height={400}
+                loading="lazy"
+                decoding="async"
                 className="rounded-2xl shadow-xl w-full"
               />
             </div>

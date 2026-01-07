@@ -222,6 +222,10 @@ const InnovativeCoatings = () => {
                     <img
                       src={service.image}
                       alt={service.title}
+                      width={800}
+                      height={500}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     
@@ -388,6 +392,10 @@ const InnovativeCoatings = () => {
                   <img
                     src={img}
                     alt={`${service.title} галерия`}
+                    width={300}
+                    height={300}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-colors duration-300 flex items-center justify-center">

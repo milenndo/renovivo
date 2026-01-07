@@ -201,6 +201,11 @@ const ServiceDetail = () => {
                 <img
                   src={service.image}
                   alt={service.title}
+                  width={800}
+                  height={400}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                   className="w-full h-80 md:h-96 object-cover rounded-xl"
                 />
 

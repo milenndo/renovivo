@@ -57,6 +57,10 @@ export const BeforeAfterSlider = ({
         <img
           src={afterImage}
           alt="След"
+          width={800}
+          height={500}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
           draggable={false}
         />
@@ -69,6 +73,10 @@ export const BeforeAfterSlider = ({
           <img
             src={beforeImage}
             alt="Преди"
+            width={800}
+            height={500}
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ 
               width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '100%',

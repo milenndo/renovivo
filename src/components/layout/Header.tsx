@@ -77,6 +77,11 @@ const Header = () => {
               <img
                 src={logo}
                 alt="Renovivo - Every Detail Matters"
+                width={180}
+                height={48}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
                 className="h-12 w-auto"
               />
             </Link>
@@ -102,6 +107,11 @@ const Header = () => {
                 <img
                   src={logo}
                   alt="Renovivo - Every Detail Matters"
+                  width={180}
+                  height={48}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                   className="h-12 w-auto"
                 />
               </Link>
