@@ -29,7 +29,7 @@ const WhyUs = () => {
       <div className="container-custom">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">Защо Renovivo</span>
+          <span className="text-foreground font-semibold text-sm uppercase tracking-wider">Защо Renovivo</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
             Какво ни отличава
           </h2>
@@ -63,9 +63,9 @@ const WhyUs = () => {
 
         {/* Sofia badge */}
         <div className="mt-12 text-center">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-6 py-3 rounded-full">
-            <MapPin className="h-5 w-5" />
-            <span className="font-medium">Работим в София и района</span>
+          <div className="inline-flex items-center gap-2 bg-foreground/10 text-foreground px-6 py-3 rounded-full">
+            <MapPin className="h-5 w-5 text-primary" aria-hidden="true" />
+            <span className="font-semibold">Работим в София и района</span>
           </div>
         </div>
       </div>

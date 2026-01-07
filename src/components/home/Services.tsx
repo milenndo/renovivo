@@ -158,7 +158,7 @@ const Services = () => {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">
+          <span className="text-foreground font-semibold text-sm uppercase tracking-wider">
             Услуги
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">

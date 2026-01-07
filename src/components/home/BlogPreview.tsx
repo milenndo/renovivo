@@ -112,9 +112,9 @@ const BlogPreview = () => {
       <div className="container-custom">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
-            <BookOpen className="h-4 w-4" />
-            <span className="font-medium text-sm uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 bg-foreground/10 text-foreground px-4 py-2 rounded-full mb-4">
+            <BookOpen className="h-4 w-4" aria-hidden="true" />
+            <span className="font-semibold text-sm uppercase tracking-wider">
               Блог
             </span>
           </div>
@@ -186,9 +186,10 @@ const BlogPreview = () => {
                   <Link
                     to={`/blog/${post.slug}`}
                     className="inline-flex items-center text-primary font-medium text-sm hover:gap-2 transition-all"
+                    aria-label={`Прочетете статията: ${post.title}`}
                   >
                     Прочетете повече
-                    <ArrowRight className="h-4 w-4 ml-1" />
+                    <ArrowRight className="h-4 w-4 ml-1" aria-hidden="true" />
                   </Link>
                 </CardContent>
               </Card>

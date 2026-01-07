@@ -102,7 +102,7 @@ export default function Testimonials() {
       
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">Отзиви</span>
+          <span className="text-foreground font-semibold text-sm uppercase tracking-wider">Отзиви</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Какво казват нашите клиенти</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Стотици доволни клиенти ни се довериха за своите проекти. Ето какво споделят за работата с нас.

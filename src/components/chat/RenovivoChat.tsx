@@ -222,18 +222,19 @@ const RenovivoChat = () => {
       <div className="fixed bottom-4 right-4 z-40">
         <Button
           size="lg"
-          className="rounded-full shadow-lg px-4 py-2 flex items-center gap-2"
+          className="rounded-full shadow-lg px-4 py-2 flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
           onClick={handleToggle}
+          aria-label={isOpen ? "Затвори AI чата" : "Отвори Renovivo AI чата"}
         >
           {isOpen ? (
             <>
-              <X className="h-5 w-5" />
-              Затвори чат
+              <X className="h-5 w-5" aria-hidden="true" />
+              <span>Затвори чат</span>
             </>
           ) : (
             <>
-              <MessageCircle className="h-5 w-5" />
-              🧠 Renovivo AI
+              <MessageCircle className="h-5 w-5" aria-hidden="true" />
+              <span>🧠 Renovivo AI</span>
             </>
           )}
         </Button>

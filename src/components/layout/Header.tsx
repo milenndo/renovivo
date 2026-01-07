@@ -29,15 +29,17 @@ const Header = () => {
             <a
               href="tel:+359893712919"
               className="flex items-center gap-2 hover:text-primary transition-colors"
+              aria-label="Обадете се на +359 89 371 29 19"
             >
-              <Phone className="h-4 w-4" />
+              <Phone className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">+359 89 371 29 19</span>
             </a>
             <a
               href="mailto:office@renovivo.bg"
               className="flex items-center gap-2 hover:text-primary transition-colors"
+              aria-label="Изпратете имейл до office@renovivo.bg"
             >
-              <Mail className="h-4 w-4" />
+              <Mail className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">office@renovivo.bg</span>
             </a>
             <div className="hidden md:flex items-center gap-2">
@@ -80,7 +82,7 @@ const Header = () => {
                 width={180}
                 height={48}
                 loading="eager"
-                decoding="async"
+                decoding="sync"
                 fetchPriority="high"
                 className="h-12 w-auto"
               />
@@ -110,7 +112,7 @@ const Header = () => {
                   width={180}
                   height={48}
                   loading="eager"
-                  decoding="async"
+                  decoding="sync"
                   fetchPriority="high"
                   className="h-12 w-auto"
                 />

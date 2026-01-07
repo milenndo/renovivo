@@ -22,11 +22,12 @@ const About = () => {
               <img
                 src={aboutTeamImg}
                 alt="Renovivo екип на работа"
-                width={600}
-                height={400}
+                width={665}
+                height={499}
                 loading="lazy"
                 decoding="async"
                 className="rounded-2xl shadow-xl w-full"
+                style={{ aspectRatio: '665/499' }}
               />
             </div>
             {/* Decorative element */}
@@ -36,7 +37,7 @@ const About = () => {
 
           {/* Content Side */}
           <div>
-            <span className="text-primary font-medium text-sm uppercase tracking-wider">За нас</span>
+            <span className="text-foreground font-semibold text-sm uppercase tracking-wider">За нас</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-6">
               Вашият надежден партньор за ремонт в София
             </h2>

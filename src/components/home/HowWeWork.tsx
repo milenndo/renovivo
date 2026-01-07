@@ -56,7 +56,7 @@ const HowWeWork = () => {
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                     <step.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <span className="text-4xl font-bold text-primary/20">{step.number}</span>
+                  <span className="text-4xl font-bold text-foreground/20">{step.number}</span>
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">
                   {step.title}

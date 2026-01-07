@@ -21,7 +21,8 @@ const Footer = () => {
               height={40}
               loading="lazy"
               decoding="async"
-              className="h-10 w-auto brightness-0 invert" 
+              className="h-10 w-auto brightness-0 invert"
+              style={{ aspectRatio: '160/40' }}
             />
             <p className="text-background/70 text-sm leading-relaxed">
               Професионални ремонтни услуги с внимание към всеки детайл. Трансформираме вашите пространства в мечтани
