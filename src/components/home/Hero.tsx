@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Bot, Calculator, FolderOpen, CheckCircle2, Award, Shield } from "lucide-react";
+import { Bot, Calculator, FolderOpen, CheckCircle2, Award, Shield, ArrowRight, Sparkles } from "lucide-react";
 import heroPoster from "@/assets/images/hero-poster.jpg";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -59,50 +59,68 @@ const Hero = () => {
             <track kind="captions" src="" label="Без субтитри" default />
           </video>
         )}
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-foreground/60" />
+        {/* Premium dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/50 to-foreground/80" />
+        {/* Subtle vignette effect */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
       </div>
 
       {/* Centered Content */}
       <div className="container-custom relative z-10 py-20 text-center">
         <div className="max-w-5xl mx-auto animate-fade-in-up">
-          {/* Badge - Psychological Hook */}
-          <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm px-4 py-2 rounded-full mb-8 border border-primary/30">
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-primary text-sm font-medium tracking-wide">
+          {/* Premium Badge */}
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/30 to-primary/10 backdrop-blur-md px-5 py-2.5 rounded-full mb-8 border border-primary/40 shadow-lg shadow-primary/10">
+            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+            <span className="text-primary text-sm font-semibold tracking-wider uppercase">
               Цялостни ремонти в София и района
             </span>
           </div>
 
-          {/* NEW: Transformation Headline - PSYCHOLOGICAL POWER */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-background uppercase tracking-tight leading-[1.1] mb-6 sm:mb-8 drop-shadow-[0_4px_8px_rgba(0,0,0,0.5)]">
-            <span className="text-primary drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">РЕМОНТ БЕЗ ХАОС</span><br />
-            <span className="text-background block mt-2 sm:mt-3">САМО СПОКОЙСТВИЕ</span>
+          {/* Premium Headline with elegant typography */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase tracking-tight leading-[1.05] mb-6 sm:mb-8">
+            <span className="text-primary drop-shadow-[0_0_30px_rgba(212,175,55,0.3)] block">
+              РЕМОНТ БЕЗ ХАОС
+            </span>
+            <span className="text-background drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] block mt-2 sm:mt-4">
+              САМО СПОКОЙСТВИЕ
+            </span>
           </h1>
 
-          {/* NEW: Power Subheading - Addresses Main Fear */}
-          <p className="text-base sm:text-lg md:text-xl text-background mb-8 sm:mb-12 leading-relaxed max-w-3xl mx-auto font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] px-4">
-            Без нерви, без скрити такси. Само резултати с пълна гаранция.
-          </p>
+          {/* Elegant subheading with separator */}
+          <div className="flex items-center justify-center gap-4 mb-8 sm:mb-10">
+            <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-primary/60" />
+            <p className="text-base sm:text-lg md:text-xl text-background/90 font-medium tracking-wide">
+              Без нерви. Без скрити такси. Само резултати.
+            </p>
+            <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-primary/60" />
+          </div>
 
-          {/* CTA Buttons - Mobile optimized */}
-          <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 px-2">
+          {/* Premium CTA Section */}
+          <div className="flex flex-col items-center justify-center gap-4 sm:gap-5 mb-12 sm:mb-16 px-2">
+            {/* Primary CTA - Maximum Impact */}
             <Button
               size="lg"
               onClick={openChat}
-              className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-7 h-auto rounded-lg shadow-lg hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95"
+              className="group relative w-full sm:w-auto bg-gradient-to-r from-primary via-primary to-primary/90 text-primary-foreground font-bold text-base sm:text-lg px-8 sm:px-12 py-6 sm:py-8 h-auto rounded-xl shadow-2xl shadow-primary/40 hover:shadow-primary/60 transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 active:scale-95 overflow-hidden"
             >
-              <Bot className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3" />
-              🧠 Renovivo AI
+              {/* Shimmer effect */}
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-background/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              <span className="relative flex items-center gap-3">
+                <Bot className="h-5 w-5 sm:h-6 sm:w-6" />
+                🧠 Говорете с Renovivo AI
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </span>
             </Button>
+            
+            {/* Secondary CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
               <Link to="/pricing" className="w-full sm:w-auto">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full border-background/60 bg-background/20 text-background hover:bg-background/40 font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-7 h-auto rounded-lg backdrop-blur-md transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-lg hover:shadow-xl hover:border-background"
+                  className="group w-full border-2 border-primary/50 bg-foreground/30 text-background hover:bg-primary hover:text-primary-foreground hover:border-primary font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 h-auto rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-xl"
                 >
-                  <Calculator className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3" />
+                  <Calculator className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 group-hover:rotate-12 transition-transform" />
                   Вижте цени и оферти
                 </Button>
               </Link>
@@ -110,56 +128,58 @@ const Hero = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="w-full border-background/60 bg-background/20 text-background hover:bg-background/40 font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-7 h-auto rounded-lg backdrop-blur-md transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-lg hover:shadow-xl hover:border-background"
+                  className="group w-full border-2 border-background/40 bg-foreground/20 text-background hover:bg-background hover:text-foreground hover:border-background font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 h-auto rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-xl"
                 >
-                  <FolderOpen className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3" />
+                  <FolderOpen className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 group-hover:scale-110 transition-transform" />
                   Преди/След проекти
                 </Button>
               </Link>
             </div>
           </div>
 
-          {/* NEW: Trust Badges - Social Proof Section */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 py-8 bg-background/5 rounded-xl backdrop-blur-sm border border-background/10">
+          {/* Premium Trust Badges */}
+          <div className="grid grid-cols-3 gap-4 sm:gap-8 px-2 sm:px-4 py-6 sm:py-8 bg-gradient-to-r from-background/5 via-background/10 to-background/5 rounded-2xl backdrop-blur-md border border-background/20 shadow-2xl">
             {/* Badge 1 */}
-            <div className="flex flex-col items-center">
-              <div className="flex items-center gap-2 mb-2">
-                <CheckCircle2 className="h-6 w-6 text-primary" />
-                <span className="text-3xl font-bold text-primary">127</span>
+            <div className="flex flex-col items-center group">
+              <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
+                <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:scale-110 transition-transform" />
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">127</span>
               </div>
-              <p className="text-background/70 text-sm font-medium">Завършени проекти</p>
+              <p className="text-background/80 text-xs sm:text-sm font-medium">Завършени проекти</p>
             </div>
 
             {/* Badge 2 */}
-            <div className="flex flex-col items-center">
-              <div className="flex items-center gap-2 mb-2">
-                <Award className="h-6 w-6 text-primary" />
-                <span className="text-3xl font-bold text-primary">94%</span>
+            <div className="flex flex-col items-center group">
+              <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
+                <Award className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:scale-110 transition-transform" />
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">94%</span>
               </div>
-              <p className="text-background/70 text-sm font-medium">Препоръчват нас</p>
+              <p className="text-background/80 text-xs sm:text-sm font-medium">Препоръчват нас</p>
             </div>
 
             {/* Badge 3 */}
-            <div className="flex flex-col items-center">
-              <div className="flex items-center gap-2 mb-2">
-                <Shield className="h-6 w-6 text-primary" />
-                <span className="text-3xl font-bold text-primary">5 години</span>
+            <div className="flex flex-col items-center group">
+              <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
+                <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:scale-110 transition-transform" />
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">5 год.</span>
               </div>
-              <p className="text-background/70 text-sm font-medium">Гаранция</p>
+              <p className="text-background/80 text-xs sm:text-sm font-medium">Гаранция</p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
+      {/* Premium bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent z-10 pointer-events-none" />
       
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-        <div className="text-primary/60 text-xs font-medium mb-2">Скролирайте за още</div>
-        <svg className="w-6 h-6 text-primary/60 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
+      {/* Elegant Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity cursor-pointer group">
+          <span className="text-primary text-xs font-medium tracking-widest uppercase">Скролирайте</span>
+          <div className="w-6 h-10 rounded-full border-2 border-primary/50 flex justify-center pt-2">
+            <div className="w-1.5 h-3 bg-primary rounded-full animate-bounce" />
+          </div>
+        </div>
       </div>
     </section>
   );
