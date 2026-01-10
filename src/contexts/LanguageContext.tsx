@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+      import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type Language = 'bg' | 'en';
 
@@ -155,7 +155,8 @@ const translations: Record<Language, Record<string, string>> = {
     'blog.viewAll': 'Вижте всички статии',
     
     // Testimonials
-    'testimonials.title': 'Отзиви от клиенти',
+    '270
+      ': 'Отзиви от клиенти',
   },
   en: {
     // Navigation
@@ -303,7 +304,156 @@ const translations: Record<Language, Record<string, string>> = {
     'blog.viewAll': 'View all articles',
     
     // Testimonials
-    'testimonials.title': 'Client Testimonials',
+    '330
+      ': 'Client Testimonials',
+    
+    // Pricing
+    'pricing.title': 'Our Pricing',
+    'pricing.subtitle': 'Transparent pricing tailored to your renovation needs',
+    'pricing.start': 'Start',
+    'pricing.comfort': 'Comfort',
+    'pricing.premium': 'Premium',
+    'pricing.from': 'From',
+    'pricing.m2': 'per m²',
+    'pricing.features': 'This package includes',
+    'pricing.select': 'Select Package',
+    'pricing.popular': 'Most Popular',
+    'pricing.bestValue': 'Best Value',
+    'pricing.consultation': 'Free consultation included',
+    'pricing.guarantee': '5-year warranty',
+    'pricing.payment': 'Flexible payment plans available',
+    
+    // Contact
+    'contact.title': 'Get in Touch',
+    'contact.subtitle': 'Have questions? We\'d love to hear from you. Send us a message and we\'ll respond as soon as possible.',
+    'contact.form.name': 'Your Name',
+    'contact.form.email': 'Your Email',
+    'contact.form.phone': 'Phone Number',
+    'contact.form.address': 'Property Address',
+    'contact.form.message': 'Tell us about your project',
+    'contact.form.send': 'Send Message',
+    'contact.form.sent': 'Message sent successfully!',
+    'contact.form.error': 'Error sending message. Please try again.',
+    'contact.info.title': 'Contact Information',
+    'contact.info.phone': '+359 (0) 2 XXXX XXXX',
+    'contact.info.email': 'info@renovivo.bg',
+    'contact.info.address': 'Sofia, Bulgaria',
+    'contact.info.hours': 'Mon - Fri: 08:00 - 18:00',
+    
+    // About Page Extended
+    'about.mission.title': 'Our Mission',
+    'about.mission.desc': 'We transform living spaces into dream homes with meticulous attention to detail and unwavering commitment to quality.',
+    'about.vision.title': 'Our Vision',
+    'about.vision.desc': 'To be Sofia\'s most trusted renovation partner, known for excellence, reliability, and exceeding client expectations.',
+    'about.values.title': 'Our Values',
+    'about.values.integrity': 'Integrity & Transparency',
+    'about.values.quality': 'Quality & Expertise',
+    'about.values.respect': 'Respect & Professionalism',
+    'about.values.innovation': 'Innovation & Continuous Improvement',
+    
+    // Services Page Extended
+    'services.full.details': 'From initial design consultation to final handover, we manage every aspect of your renovation project.',
+    'services.full.process': 'Our process includes site assessment, design planning, material selection, and professional execution.',
+    'services.bath.features': 'Waterproofing, tiling, fixtures, modern design',
+    'services.kitchen.features': 'Custom cabinetry, appliance integration, modern layouts',
+    'services.coatings.title': 'Specialized Coatings & Finishes',
+    'services.coatings.desc': 'Premium finishes that protect and beautify your surfaces',
+    
+    // Portfolio/Projects
+    'portfolio.title': 'Our Completed Projects',
+    'portfolio.filter.all': 'All Projects',
+    'portfolio.filter.residential': 'Residential',
+    'portfolio.filter.commercial': 'Commercial',
+    'portfolio.projectCount': 'projects completed',
+    'portfolio.viewProject': 'View Project Details',
+    'portfolio.beforeAfter': 'Before & After',
+    'portfolio.timeline': 'Timeline',
+    'portfolio.budget': 'Project Budget',
+    'portfolio.scope': 'Project Scope',
+    'portfolio.testimonial': 'Client Testimonial',
+    
+    // Blog & Articles
+    'blog.featured': 'Featured Articles',
+    'blog.latestUpdates': 'Latest Tips & Updates',
+    'blog.category.design': 'Design Tips',
+    'blog.category.maintenance': 'Maintenance',
+    'blog.category.trends': 'Trends',
+    'blog.category.guide': 'Guides',
+    'blog.readMore': 'Read More',
+    'blog.readTime': 'min read',
+    'blog.author': 'By Renovivo Team',
+    'blog.date': 'Published',
+    'blog.tags': 'Tags',
+    'blog.relatedArticles': 'Related Articles',
+    'blog.noArticles': 'No articles found',
+    
+    // Interior Design
+    'interior.title': 'Interior Design Services',
+    'interior.subtitle': 'Expert design consultation to bring your vision to life',
+    'interior.consultation': '3D Design Consultation',
+    'interior.colorScheme': 'Color Scheme Selection',
+    'interior.materials': 'Material & Finish Selection',
+    'interior.styling': 'Space Planning & Styling',
+    'interior.budget': 'Budget-Friendly Options Available',
+    'interior.gallery': 'Design Gallery',
+    'interior.viewDesign': 'View Full Design',
+    
+    // Innovative Coatings
+    'coatings.microcement.full': 'Microcement - Modern Industrial Aesthetic',
+    'coatings.terrazzo.full': 'Terrazzo - Classic Elegance',
+    'coatings.flakefloor.full': 'Flake Floor - Durable Beauty',
+    'coatings.stoneCarpet.full': 'Stone Carpet - Natural Appeal',
+    'coatings.benefits': 'Benefits',
+    'coatings.durable': 'Long-lasting durability',
+    'coatings.easyClean': 'Easy to clean and maintain',
+    'coatings.waterproof': 'Water resistant',
+    'coatings.aesthetic': 'Modern aesthetic appeal',
+    'coatings.seamless': 'Seamless installation',
+    'coatings.warranty': 'Extended warranty coverage',
+    
+    // Common Actions
+    'action.viewMore': 'View More',
+    'action.learnMore': 'Learn More',
+    'action.getQuote': 'Get Quote',
+    'action.bookConsultation': 'Book Consultation',
+    'action.contactUs': 'Contact Us',
+    'action.download': 'Download',
+    'action.share': 'Share',
+    'action.filter': 'Filter',
+    'action.search': 'Search',
+    'action.submit': 'Submit',
+    'action.cancel': 'Cancel',
+    'action.back': 'Back',
+    'action.next': 'Next',
+    'action.previous': 'Previous',
+    
+    // Messages & Responses
+    'message.success': 'Success!',
+    'message.error': 'Error',
+    'message.warning': 'Warning',
+    'message.loading': 'Loading...',
+    'message.noResults': 'No results found',
+    'message.comingSoon': 'Coming Soon',
+    'message.underConstruction': 'This page is under construction',
+    
+    // Meta & SEO
+    'meta.description': 'Professional renovation and remodeling services in Sofia, Bulgaria. Complete home renovations with guaranteed quality and fixed budgets.',
+    'meta.keywords': 'renovation, remodeling, interior design, Sofia, Bulgaria, microcement, terrazzo, bathroom, kitchen',
+    
+    // FAQ
+    'faq.title': 'Frequently Asked Questions',
+    'faq.q1': 'How long does a typical renovation project take?',
+    'faq.a1': 'Project duration depends on scope and complexity. A bathroom renovation typically takes 3-5 weeks, while full home renovations can take 2-6 months. We provide detailed timelines during consultation.',
+    'faq.q2': 'Do you offer payment plans?',
+    'faq.a2': 'Yes, we offer flexible payment plans to accommodate your budget. Typically, we request 30% deposit to begin, with the remaining balance due upon completion.',
+    'faq.q3': 'Are your prices fixed or can they change?',
+    'faq.a3': 'Our quoted prices are fixed. We guarantee no hidden costs or surprise charges. Everything is detailed in the contract.',
+    'faq.q4': 'What warranty do you provide?',
+    'faq.a4': 'We provide a 5-year comprehensive warranty on all workmanship and materials. Our warranty covers any defects in materials and installation.',
+    'faq.q5': 'Can you work with my existing designer?',
+    'faq.a5': 'Absolutely! We work seamlessly with external designers and architects. Collaboration ensures your vision is perfectly executed.',
+    'faq.q6': 'How do I get a free consultation?',
+    'faq.a6': 'Simply contact us through this website or call us directly. We\'ll schedule a convenient time to visit your property and discuss your project.',
   }
 };
 
@@ -350,3 +500,4 @@ export const useLanguage = () => {
 };
 
 export default LanguageContext;
+455
