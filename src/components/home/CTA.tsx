@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 import ctaBackground from "@/assets/images/cta-background.jpg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Hand-drawn sketchy arrow SVG component
 const SketchyArrow = () => (
@@ -50,6 +51,7 @@ const SketchyArrow = () => (
 
 const CTA = () => {
   const { openModal } = useInspectionRequest();
+  const { t } = useLanguage();
 
   return (
     <section className="relative py-20 overflow-hidden">
@@ -71,11 +73,10 @@ const CTA = () => {
       {/* Content */}
       <div className="container-custom relative z-10 text-center">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
-          Готови ли сте да започнете?
+          {t('cta.title')}
         </h2>
         <p className="text-primary-foreground/90 text-lg max-w-2xl mx-auto mb-8">
-          Свържете се с нас днес за безплатен оглед и оферта в София и района. 
-          Нашият екип е готов да превърне вашите идеи в реалност.
+          {t('cta.subtitle')}
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           {/* Button with hand-drawn arrow pointing to it */}
@@ -87,12 +88,12 @@ const CTA = () => {
               className="bg-background text-foreground hover:bg-background/90 font-semibold"
             >
               <Phone className="h-5 w-5 mr-2" aria-hidden="true" />
-              Заяви оглед
+              {t('cta.inspection')}
             </Button>
           </div>
           <Link to="/contact">
             <Button size="lg" variant="outline" className="border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 font-semibold">
-              Изпратете запитване
+              {t('cta.inquiry')}
               <ArrowRight className="h-5 w-5 ml-2" aria-hidden="true" />
             </Button>
           </Link>

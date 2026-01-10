@@ -1,41 +1,43 @@
 import { Users, Focus, MessageSquare, Calculator, MapPin } from "lucide-react";
-
-const reasons = [
-  {
-    icon: Users,
-    title: "Специализирани експерти",
-    description: "Тясно специализирани професионалисти във всяко звено на ремонтните дейности.",
-  },
-  {
-    icon: Focus,
-    title: "Фокус върху детайла",
-    description: "Координация на целия процес с внимание към всеки детайл от началото до края.",
-  },
-  {
-    icon: MessageSquare,
-    title: "Ясна комуникация",
-    description: "Един контакт за клиента. Без излишни посредници, директна и прозрачна връзка.",
-  },
-  {
-    icon: Calculator,
-    title: "Предвидим бюджет",
-    description: "Ясно ценообразуване и спазване на договорените срокове без неприятни изненади.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const WhyUs = () => {
+  const { t } = useLanguage();
+
+  const reasons = [
+    {
+      icon: Users,
+      titleKey: 'whyUs.experts.title',
+      descKey: 'whyUs.experts.desc',
+    },
+    {
+      icon: Focus,
+      titleKey: 'whyUs.detail.title',
+      descKey: 'whyUs.detail.desc',
+    },
+    {
+      icon: MessageSquare,
+      titleKey: 'whyUs.communication.title',
+      descKey: 'whyUs.communication.desc',
+    },
+    {
+      icon: Calculator,
+      titleKey: 'whyUs.budget.title',
+      descKey: 'whyUs.budget.desc',
+    },
+  ];
+
   return (
     <section className="section-padding">
       <div className="container-custom">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-foreground font-semibold text-sm uppercase tracking-wider">Защо Renovivo</span>
+          <span className="text-foreground font-semibold text-sm uppercase tracking-wider">{t('whyUs.label')}</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
-            Какво ни отличава
+            {t('whyUs.title')}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Избирайки Renovivo, вие избирате партньор, който се грижи за вашия проект 
-            като за свой собствен. Работим основно в София и района.
+            {t('whyUs.subtitle')}
           </p>
         </div>
 
@@ -43,7 +45,7 @@ const WhyUs = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, index) => (
             <div
-              key={reason.title}
+              key={reason.titleKey}
               className="text-center group"
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -53,9 +55,9 @@ const WhyUs = () => {
               </div>
               
               {/* Content */}
-              <h3 className="text-xl font-semibold mb-3">{reason.title}</h3>
+              <h3 className="text-xl font-semibold mb-3">{t(reason.titleKey)}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                {reason.description}
+                {t(reason.descKey)}
               </p>
             </div>
           ))}
@@ -65,7 +67,7 @@ const WhyUs = () => {
         <div className="mt-12 text-center">
           <div className="inline-flex items-center gap-2 bg-foreground/10 text-foreground px-6 py-3 rounded-full">
             <MapPin className="h-5 w-5 text-primary" aria-hidden="true" />
-            <span className="font-semibold">Работим в София и района</span>
+            <span className="font-semibold">{t('whyUs.location')}</span>
           </div>
         </div>
       </div>

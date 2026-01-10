@@ -1,41 +1,44 @@
 import { User, Calculator, FileText, Sparkles, Shield } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-
-const reasons = [
-  {
-    icon: User,
-    title: "Личен Проектен Мениджър",
-    description: "Един човек отговаря за целия обект и комуникацията. Край на разваления телефон.",
-  },
-  {
-    icon: Calculator,
-    title: "Фиксиран Бюджет",
-    description: "Цената по оферта е крайна. Без скрити такси и изненадващи разходи.",
-  },
-  {
-    icon: FileText,
-    title: "Договор и Срокове",
-    description: "Работим с ясни неустойки при забавяне. Времето ви е ценно.",
-  },
-  {
-    icon: Sparkles,
-    title: "Чистота До Ключ",
-    description: "Професионално почистване и извозване на отпадъци след края.",
-  },
-  {
-    icon: Shield,
-    title: "Писмена Гаранция",
-    description: "Пълна гаранция за всяка извършена работа и материали.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const PeaceOfMind = () => {
+  const { t } = useLanguage();
+
+  const reasons = [
+    {
+      icon: User,
+      titleKey: 'peace.manager.title',
+      descKey: 'peace.manager.desc',
+    },
+    {
+      icon: Calculator,
+      titleKey: 'peace.budget.title',
+      descKey: 'peace.budget.desc',
+    },
+    {
+      icon: FileText,
+      titleKey: 'peace.contract.title',
+      descKey: 'peace.contract.desc',
+    },
+    {
+      icon: Sparkles,
+      titleKey: 'peace.clean.title',
+      descKey: 'peace.clean.desc',
+    },
+    {
+      icon: Shield,
+      titleKey: 'peace.warranty.title',
+      descKey: 'peace.warranty.desc',
+    },
+  ];
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            5 причини да спите спокойно, докато ние работим
+            {t('peace.title')}
           </h2>
         </div>
 
@@ -50,10 +53,10 @@ const PeaceOfMind = () => {
                   <reason.icon className="w-7 h-7 text-primary" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">
-                  {reason.title}
+                  {t(reason.titleKey)}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {reason.description}
+                  {t(reason.descKey)}
                 </p>
               </CardContent>
             </Card>

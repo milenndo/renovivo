@@ -1,42 +1,45 @@
 import { Eye, FileText, Hammer, ShieldCheck } from "lucide-react";
-
-const steps = [
-  {
-    icon: Eye,
-    number: "01",
-    title: "Оглед и разговор",
-    description: "Посещаваме обекта, изслушваме вашите желания и оценяваме обема на работа."
-  },
-  {
-    icon: FileText,
-    number: "02",
-    title: "Предложение и бюджет",
-    description: "Изготвяме детайлна оферта с ясни срокове и прозрачно ценообразуване."
-  },
-  {
-    icon: Hammer,
-    number: "03",
-    title: "Изпълнение по график",
-    description: "Работим по съгласуван план с редовна комуникация за напредъка."
-  },
-  {
-    icon: ShieldCheck,
-    number: "04",
-    title: "Финален преглед и гаранция",
-    description: "Приемане на обекта с детайлна проверка и гаранция за извършената работа."
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HowWeWork = () => {
+  const { t } = useLanguage();
+
+  const steps = [
+    {
+      icon: Eye,
+      number: "01",
+      titleKey: 'howWeWork.step1.title',
+      descKey: 'howWeWork.step1.desc',
+    },
+    {
+      icon: FileText,
+      number: "02",
+      titleKey: 'howWeWork.step2.title',
+      descKey: 'howWeWork.step2.desc',
+    },
+    {
+      icon: Hammer,
+      number: "03",
+      titleKey: 'howWeWork.step3.title',
+      descKey: 'howWeWork.step3.desc',
+    },
+    {
+      icon: ShieldCheck,
+      number: "04",
+      titleKey: 'howWeWork.step4.title',
+      descKey: 'howWeWork.step4.desc',
+    },
+  ];
+
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Как работим
+            {t('howWeWork.title')}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Прозрачен и организиран процес от първия контакт до завършването на проекта
+            {t('howWeWork.subtitle')}
           </p>
         </div>
 
@@ -59,10 +62,10 @@ const HowWeWork = () => {
                   <span className="text-4xl font-bold text-muted-foreground/50" aria-hidden="true">{step.number}</span>
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">
-                  {step.title}
+                  {t(step.titleKey)}
                 </h3>
                 <p className="text-muted-foreground text-sm">
-                  {step.description}
+                  {t(step.descKey)}
                 </p>
               </div>
             </div>

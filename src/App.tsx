@@ -8,6 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { HelmetProvider } from "react-helmet-async";
 import { InspectionRequestProvider } from "./contexts/InspectionRequestContext";
 import { CookieConsentProvider } from "./contexts/CookieConsentContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import InspectionRequestModal from "./components/InspectionRequestModal";
 
 // Critical path - loaded immediately
@@ -45,8 +46,9 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <CookieConsentProvider>
-          <InspectionRequestProvider>
+        <LanguageProvider>
+          <CookieConsentProvider>
+            <InspectionRequestProvider>
             <Toaster />
             <Sonner />
             <InspectionRequestModal />
@@ -75,8 +77,9 @@ const App = () => (
                 </Routes>
               </Suspense>
             </BrowserRouter>
-          </InspectionRequestProvider>
-        </CookieConsentProvider>
+            </InspectionRequestProvider>
+          </CookieConsentProvider>
+        </LanguageProvider>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>

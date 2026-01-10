@@ -10,8 +10,10 @@ import HowWeWork from "@/components/home/HowWeWork";
 import BlogPreview from "@/components/home/BlogPreview";
 import CTA from "@/components/home/CTA";
 import Testimonials from "@/components/Testimonials";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Index = () => {
+  const { language } = useLanguage();
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -116,25 +118,31 @@ const Index = () => {
     }
   };
 
+  const seoContent = language === 'en' ? {
+    title: "Renovivo | Complete Apartment Renovations in Sofia and Region",
+    description: "Renovivo - complete renovations in Sofia and the region. Highly specialized experts, one team from A to Z. Request a free inspection and quote.",
+    keywords: "renovation Sofia, complete apartment renovation, bathroom renovation Sofia, kitchen renovation Sofia, renovation company Sofia, construction services Sofia",
+  } : {
+    title: "Renovivo | Цялостен ремонт на апартаменти в София и района",
+    description: "Renovivo - цялостни ремонти в София и района. Тясно специализирани експерти, един екип от А до Я. Поискайте безплатен оглед и оферта.",
+    keywords: "ремонт София, цялостен ремонт на апартамент, ремонт на баня София, ремонт на кухня София, ремонтна фирма София, строителни услуги София",
+  };
+
   return (
     <>
       <Helmet>
-        <title>Renovivo | Цялостен ремонт на апартаменти в София и района</title>
-        <meta
-          name="description"
-          content="Renovivo - цялостни ремонти в София и района. Тясно специализирани експерти, един екип от А до Я. Поискайте безплатен оглед и оферта."
-        />
-        <meta
-          name="keywords"
-          content="ремонт София, цялостен ремонт на апартамент, ремонт на баня София, ремонт на кухня София, ремонтна фирма София, строителни услуги София"
-        />
+        <html lang={language} />
+        <title>{seoContent.title}</title>
+        <meta name="description" content={seoContent.description} />
+        <meta name="keywords" content={seoContent.keywords} />
         <link rel="canonical" href="https://renovivo.bg" />
-        <meta property="og:title" content="Renovivo | Цялостен ремонт в София и района" />
-        <meta
-          property="og:description"
-          content="Цялостни ремонти в София. Тясно специализирани експерти, един екип от А до Я."
-        />
+        <link rel="alternate" hrefLang="bg" href="https://renovivo.bg" />
+        <link rel="alternate" hrefLang="en" href="https://renovivo.bg" />
+        <link rel="alternate" hrefLang="x-default" href="https://renovivo.bg" />
+        <meta property="og:title" content={seoContent.title} />
+        <meta property="og:description" content={seoContent.description} />
         <meta property="og:url" content="https://renovivo.bg" />
+        <meta property="og:locale" content={language === 'en' ? 'en_US' : 'bg_BG'} />
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(localBusinessSchema)}</script>
       </Helmet>
