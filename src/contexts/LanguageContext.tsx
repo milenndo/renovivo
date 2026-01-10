@@ -155,7 +155,7 @@ const translations: Record<Language, Record<string, string>> = {
     'blog.viewAll': 'Вижте всички статии',
     
     // Testimonials
-    '270
+'testimonials.title': 'Отзиви от клиенти',
       ': 'Отзиви от клиенти',
   },
   en: {
@@ -304,8 +304,7 @@ const translations: Record<Language, Record<string, string>> = {
     'blog.viewAll': 'View all articles',
     
     // Testimonials
-    '330
-      ': 'Client Testimonials',
+'testimonials.title': 'Client Testimonials',
     
     // Pricing
     'pricing.title': 'Our Pricing',
