@@ -2,16 +2,20 @@ import { Check, Users, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import aboutTeamImg from "@/assets/images/about-team.jpg";
-
-const features = [
-  "Тясно специализирани експерти",
-  "Фокус върху детайла",
-  "Ясна комуникация",
-  "Предвидимост на бюджета",
-  "Спазване на сроковете",
-"Разумни цени"];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const About = () => {
+  const { t } = useLanguage();
+
+  const features = [
+    'about.feature1',
+    'about.feature2',
+    'about.feature3',
+    'about.feature4',
+    'about.feature5',
+    'about.feature6',
+  ];
+
   return (
     <section className="section-padding">
       <div className="container-custom">
@@ -21,7 +25,7 @@ const About = () => {
             <div className="relative z-10">
               <img
                 src={aboutTeamImg}
-                alt="Renovivo екип на работа"
+                alt="Renovivo team at work"
                 width={665}
                 height={499}
                 loading="lazy"
@@ -37,29 +41,25 @@ const About = () => {
 
           {/* Content Side */}
           <div>
-            <span className="text-foreground font-semibold text-sm uppercase tracking-wider">За нас</span>
+            <span className="text-foreground font-semibold text-sm uppercase tracking-wider">{t('about.label')}</span>
             <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-6">
-              Вашият надежден партньор за ремонт в София
+              {t('about.title')}
             </h2>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              Renovivo е вашият партньор за цялостни ремонти в София и района. 
-              Със страст към детайлите и стремеж към качество, ние трансформираме 
-              вашите идеи в реалност – от първия оглед до последния щрих.
+              {t('about.p1')}
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              Нашият екип от тясно специализирани експерти във всяко звено на ремонтните 
-              дейности работи координирано, за да гарантира резултати, които надминават 
-              вашите очаквания.
+              {t('about.p2')}
             </p>
 
             {/* Features list */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-              {features.map((feature) => (
-                <div key={feature} className="flex items-center gap-3">
+              {features.map((featureKey) => (
+                <div key={featureKey} className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Check className="h-3 w-3 text-primary" />
                   </div>
-                  <span className="text-sm">{feature}</span>
+                  <span className="text-sm">{t(featureKey)}</span>
                 </div>
               ))}
             </div>
@@ -69,22 +69,22 @@ const About = () => {
               <div className="flex items-center gap-3">
                 <Users className="h-8 w-8 text-primary" />
                 <div>
-                  <span className="font-semibold block">127 завършени проекта</span>
-                  <span className="text-sm text-muted-foreground">94% ни препоръчват</span>
+                  <span className="font-semibold block">127 {t('about.projects')}</span>
+                  <span className="text-sm text-muted-foreground">94% {t('about.recommend')}</span>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Shield className="h-8 w-8 text-primary" />
                 <div>
-                  <span className="font-semibold block">5 години гаранция</span>
-                  <span className="text-sm text-muted-foreground">На всички услуги</span>
+                  <span className="font-semibold block">5 {t('about.warranty')}</span>
+                  <span className="text-sm text-muted-foreground">{t('about.warrantyAll')}</span>
                 </div>
               </div>
             </div>
 
             <Link to="/about">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
-                Научете повече за нас
+                {t('about.cta')}
               </Button>
             </Link>
           </div>

@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Service images
 import fullRenovationImg from "@/assets/images/services/full-renovation.jpg";
@@ -28,129 +29,130 @@ import flooringImg from "@/assets/images/services/flooring.jpg";
 import electricalImg from "@/assets/images/services/electrical.jpg";
 import plumbingImg from "@/assets/images/services/plumbing.jpg";
 
-const categories = [
-  {
-    id: "full-renovations",
-    title: "Цялостни ремонти",
-    bgClass: "bg-background",
-    services: [
-      {
-        id: "full-renovation",
-        path: "/services/full-renovation",
-        icon: Home,
-        title: "Цялостен Ремонт",
-        description: "Пълна трансформация на жилища - от проект до реализация с фиксиран бюджет.",
-        image: fullRenovationImg,
-      },
-      {
-        id: "bathroom",
-        path: "/services/bathroom",
-        icon: Droplets,
-        title: "Ремонт на Баня",
-        description: "Комплексно изпълнение с хидроизолация и професионален монтаж.",
-        image: bathroomImg,
-      },
-      {
-        id: "kitchen",
-        path: "/services/kitchen",
-        icon: Grid3X3,
-        title: "Ремонт на Кухня",
-        description: "Цялостна изработка на кухни по поръчка, съобразени с вашето помещение.",
-        image: kitchenImg,
-      },
-    ],
-  },
-  {
-    id: "specialized-coatings",
-    title: "Специализирани покрития",
-    bgClass: "bg-muted/30",
-    services: [
-      {
-        id: "microcement",
-        path: "/services/microcement",
-        icon: Layers,
-        title: "Микроцимент",
-        description: "Безфугово покритие за стени и подове с модерен индустриален вид.",
-        image: microcementImg,
-      },
-      {
-        id: "terrazzo",
-        path: "/services/terrazzo",
-        icon: Layers,
-        title: "Terrazzo",
-        description: "Класическа елегантност с мраморни фрагменти в съвременно изпълнение.",
-        image: terrazzoImg,
-      },
-      {
-        id: "flake-floor",
-        path: "/services/flake-floor",
-        icon: Layers,
-        title: "Flake Floor",
-        description: "Декоративни подове с флейк ефект - издръжливи и естетични.",
-        image: flakeFloorImg,
-      },
-      {
-        id: "stone-carpet",
-        path: "/services/stone-carpet",
-        icon: Layers,
-        title: "Каменен Килим",
-        description: "Естествена красота от речни камъчета за външни и вътрешни пространства.",
-        image: stoneCarpetImg,
-      },
-    ],
-  },
-  {
-    id: "preparation-finishing",
-    title: "Подготовка и довършване",
-    bgClass: "bg-secondary/20",
-    services: [
-      {
-        id: "demolition",
-        path: "/services/demolition",
-        icon: Hammer,
-        title: "Къртене",
-        description: "Професионално къртене и демонтаж с изнасяне на отпадъци.",
-        image: karteneImg,
-      },
-      {
-        id: "painting",
-        path: "/services/shpaklovka",
-        icon: Paintbrush,
-        title: "Шпакловка и боя",
-        description: "Перфектно гладки стени и безупречно боядисване.",
-        image: paintingImg,
-      },
-      {
-        id: "flooring",
-        path: "/services/flooring",
-        icon: Grid3X3,
-        title: "Настилки",
-        description: "Ламинат, винил, паркет и плочки с прецизен монтаж.",
-        image: flooringImg,
-      },
-      {
-        id: "electrical",
-        path: "/services/electrical",
-        icon: Zap,
-        title: "Електро услуги",
-        description: "Нови инсталации и ремонт от сертифицирани специалисти.",
-        image: electricalImg,
-      },
-      {
-        id: "plumbing",
-        path: "/services/plumbing",
-        icon: Wrench,
-        title: "ВиК услуги",
-        description: "Водопровод и канализация с гаранция за качество.",
-        image: plumbingImg,
-      },
-    ],
-  },
-];
-
 const Services = () => {
-  const [activeCategory, setActiveCategory] = useState(categories[0].id);
+  const { t } = useLanguage();
 
+  const categories = [
+    {
+      id: "full-renovations",
+      titleKey: "services.category.full",
+      bgClass: "bg-background",
+      services: [
+        {
+          id: "full-renovation",
+          path: "/services/full-renovation",
+          icon: Home,
+          titleKey: "service.fullRenovation.title",
+          descKey: "service.fullRenovation.desc",
+          image: fullRenovationImg,
+        },
+        {
+          id: "bathroom",
+          path: "/services/bathroom",
+          icon: Droplets,
+          titleKey: "service.bathroom.title",
+          descKey: "service.bathroom.desc",
+          image: bathroomImg,
+        },
+        {
+          id: "kitchen",
+          path: "/services/kitchen",
+          icon: Grid3X3,
+          titleKey: "service.kitchen.title",
+          descKey: "service.kitchen.desc",
+          image: kitchenImg,
+        },
+      ],
+    },
+    {
+      id: "specialized-coatings",
+      titleKey: "services.category.coatings",
+      bgClass: "bg-muted/30",
+      services: [
+        {
+          id: "microcement",
+          path: "/services/microcement",
+          icon: Layers,
+          titleKey: "service.microcement.title",
+          descKey: "service.microcement.desc",
+          image: microcementImg,
+        },
+        {
+          id: "terrazzo",
+          path: "/services/terrazzo",
+          icon: Layers,
+          titleKey: "service.terrazzo.title",
+          descKey: "service.terrazzo.desc",
+          image: terrazzoImg,
+        },
+        {
+          id: "flake-floor",
+          path: "/services/flake-floor",
+          icon: Layers,
+          titleKey: "service.flakeFloor.title",
+          descKey: "service.flakeFloor.desc",
+          image: flakeFloorImg,
+        },
+        {
+          id: "stone-carpet",
+          path: "/services/stone-carpet",
+          icon: Layers,
+          titleKey: "service.stoneCarpet.title",
+          descKey: "service.stoneCarpet.desc",
+          image: stoneCarpetImg,
+        },
+      ],
+    },
+    {
+      id: "preparation-finishing",
+      titleKey: "services.category.finishing",
+      bgClass: "bg-secondary/20",
+      services: [
+        {
+          id: "demolition",
+          path: "/services/demolition",
+          icon: Hammer,
+          titleKey: "service.demolition.title",
+          descKey: "service.demolition.desc",
+          image: karteneImg,
+        },
+        {
+          id: "painting",
+          path: "/services/shpaklovka",
+          icon: Paintbrush,
+          titleKey: "service.painting.title",
+          descKey: "service.painting.desc",
+          image: paintingImg,
+        },
+        {
+          id: "flooring",
+          path: "/services/flooring",
+          icon: Grid3X3,
+          titleKey: "service.flooring.title",
+          descKey: "service.flooring.desc",
+          image: flooringImg,
+        },
+        {
+          id: "electrical",
+          path: "/services/electrical",
+          icon: Zap,
+          titleKey: "service.electrical.title",
+          descKey: "service.electrical.desc",
+          image: electricalImg,
+        },
+        {
+          id: "plumbing",
+          path: "/services/plumbing",
+          icon: Wrench,
+          titleKey: "service.plumbing.title",
+          descKey: "service.plumbing.desc",
+          image: plumbingImg,
+        },
+      ],
+    },
+  ];
+
+  const [activeCategory, setActiveCategory] = useState(categories[0].id);
   const currentCategory = categories.find((c) => c.id === activeCategory) || categories[0];
 
   return (
@@ -159,13 +161,13 @@ const Services = () => {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <span className="text-foreground font-semibold text-sm uppercase tracking-wider">
-            Услуги
+            {t('services.label')}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
-            Какво можем да направим за вас
+            {t('services.title')}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Изберете категория, за да разгледате нашите услуги
+            {t('services.subtitle')}
           </p>
         </div>
 
@@ -193,7 +195,7 @@ const Services = () => {
                         : "group-hover:text-primary"
                     )}
                   >
-                    {category.title}
+                    {t(category.titleKey)}
                   </span>
                   <span
                     className={cn(
@@ -203,7 +205,7 @@ const Services = () => {
                         : "text-muted-foreground"
                     )}
                   >
-                    {category.services.length} услуги
+                    {category.services.length} {t('services.count')}
                   </span>
                 </button>
               ))}
@@ -213,7 +215,7 @@ const Services = () => {
           {/* Content Panel */}
           <div className={cn("flex-1 rounded-2xl p-6 md:p-8", currentCategory.bgClass)}>
             <h3 className="text-2xl font-bold mb-6 text-foreground">
-              {currentCategory.title}
+              {t(currentCategory.titleKey)}
             </h3>
 
             {/* Services Grid - Asymmetric Layout */}
@@ -248,7 +250,7 @@ const Services = () => {
                     >
                       <img
                         src={service.image}
-                        alt={service.title}
+                        alt={t(service.titleKey)}
                         width={600}
                         height={400}
                         loading="lazy"
@@ -273,14 +275,14 @@ const Services = () => {
                           <service.icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
                         </div>
                         <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                          {service.title}
+                          {t(service.titleKey)}
                         </h4>
                       </div>
                       <p className="text-muted-foreground text-sm leading-relaxed">
-                        {service.description}
+                        {t(service.descKey)}
                       </p>
                       <div className="mt-4 flex items-center text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">
-                        <span>Научете повече</span>
+                        <span>{t('services.learnMore')}</span>
                         <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
@@ -295,7 +297,7 @@ const Services = () => {
         <div className="text-center mt-12">
           <Link to="/services">
             <Button variant="outline" size="lg" className="font-semibold">
-              Разгледайте всички услуги
+              {t('services.viewAll')}
               <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
           </Link>

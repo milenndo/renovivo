@@ -1,24 +1,30 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Mail, Clock, Menu, X, Facebook, Instagram } from "lucide-react";
+import { Phone, Mail, Clock, Menu, X, Facebook, Instagram, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/Renovivo_logover.2.svg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { language, setLanguage, t } = useLanguage();
 
   const navLinks = [
-    { name: "Начало", path: "/" },
-    { name: "Услуги", path: "/services" },
-        { name: "Цени", path: "/pricing" },
-    { name: "Портфолио", path: "/portfolio" },
-    { name: "Полезно", path: "/blog" },
-    { name: "За нас", path: "/about" },
-    { name: "Контакти", path: "/contact" },
+    { key: 'nav.home', path: "/" },
+    { key: 'nav.services', path: "/services" },
+    { key: 'nav.pricing', path: "/pricing" },
+    { key: 'nav.portfolio', path: "/portfolio" },
+    { key: 'nav.blog', path: "/blog" },
+    { key: 'nav.about', path: "/about" },
+    { key: 'nav.contact', path: "/contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'bg' ? 'en' : 'bg');
+  };
 
   return (
     <header className="w-full">
@@ -29,7 +35,7 @@ const Header = () => {
             <a
               href="tel:+359893712919"
               className="flex items-center gap-2 hover:text-primary transition-colors"
-              aria-label="Обадете се на +359 89 371 29 19"
+              aria-label="Call +359 89 371 29 19"
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">+359 89 371 29 19</span>
@@ -37,23 +43,32 @@ const Header = () => {
             <a
               href="mailto:office@renovivo.bg"
               className="flex items-center gap-2 hover:text-primary transition-colors"
-              aria-label="Изпратете имейл до office@renovivo.bg"
+              aria-label="Email office@renovivo.bg"
             >
               <Mail className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">office@renovivo.bg</span>
             </a>
             <div className="hidden md:flex items-center gap-2">
               <Clock className="h-4 w-4" />
-              <span>Пон - Пет: 08:00 - 18:00</span>
+              <span>{t('nav.workingHours')}</span>
             </div>
           </div>
           <div className="flex items-center gap-4">
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 hover:text-primary transition-colors font-medium"
+              aria-label={`Switch to ${language === 'bg' ? 'English' : 'Bulgarian'}`}
+            >
+              <Globe className="h-4 w-4" aria-hidden="true" />
+              <span>{t('lang.switch')}</span>
+            </button>
             <a
               href="https://www.facebook.com/share/17eRc268rh/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
-              aria-label="Последвайте ни във Facebook"
+              aria-label="Follow us on Facebook"
             >
               <Facebook className="h-4 w-4" aria-hidden="true" />
             </a>
@@ -62,7 +77,7 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-primary transition-colors"
-              aria-label="Последвайте ни в Instagram"
+              aria-label="Follow us on Instagram"
             >
               <Instagram className="h-4 w-4" aria-hidden="true" />
             </a>
@@ -103,7 +118,7 @@ const Header = () => {
 
           {/* Desktop / Tablet Layout */}
           <div className="hidden lg:flex items-center py-2">
-            {/* Лого вляво – ~30% по-голямо */}
+            {/* Logo left */}
             <div className="flex items-center shrink-0">
               <Link to="/" className="flex items-center">
                 <img
@@ -119,7 +134,7 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Навигация – центрирана между ляво и дясно */}
+            {/* Navigation - centered */}
             <nav className="flex-1 flex justify-center items-center">
               <div className="flex items-center gap-6">
                 {navLinks.map((link) => (
@@ -134,13 +149,13 @@ const Header = () => {
                       isActive(link.path) ? "after:scale-x-100" : ""
                     }`}
                   >
-                    {link.name}
+                    {t(link.key)}
                   </Link>
                 ))}
               </div>
             </nav>
 
-            {/* Телефон вдясно, на един ред */}
+            {/* Phone right */}
             <div className="flex items-center shrink-0">
               <a
                 href="tel:+359893712919"
@@ -166,13 +181,13 @@ const Header = () => {
                     isActive(link.path) ? "text-primary" : "text-foreground"
                   }`}
                 >
-                  {link.name}
+                  {t(link.key)}
                 </Link>
               ))}
               <a href="tel:+359893712919" className="mt-4">
                 <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
                   <Phone className="h-4 w-4 mr-2" aria-hidden="true" />
-                  Обадете се
+                  {t('nav.callUs')}
                 </Button>
               </a>
             </nav>

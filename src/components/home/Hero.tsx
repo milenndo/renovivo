@@ -3,10 +3,12 @@ import { Calculator, FolderOpen, CheckCircle2, Award, Shield, Sparkles } from "l
 import heroPoster from "@/assets/images/hero-poster.jpg";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -24,7 +26,7 @@ const Hero = () => {
         {/* LCP Poster image - Critical for above-the-fold, explicit dimensions for CLS */}
         <img
           src={heroPoster}
-          alt="Renovivo - професионални ремонти в София"
+          alt="Renovivo - professional renovations in Sofia"
           width={1920}
           height={1080}
           fetchPriority="high"
@@ -47,14 +49,14 @@ const Hero = () => {
             height={1080}
             poster={heroPoster}
             onCanPlay={() => setVideoLoaded(true)}
-            aria-label="Видео на луксозна трансформация на пентхаус интериор"
+            aria-label="Luxury penthouse interior transformation video"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
               videoLoaded ? "opacity-40" : "opacity-0"
             }`}
             style={{ aspectRatio: '16/9' }}
           >
             <source src="/videos/hero-background.webm?v=2" type="video/webm" />
-            <track kind="captions" src="" label="Без субтитри" default />
+            <track kind="captions" src="" label="No subtitles" default />
           </video>
         )}
         {/* Premium dark gradient overlay */}
@@ -70,17 +72,17 @@ const Hero = () => {
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/30 to-primary/10 backdrop-blur-md px-5 py-2.5 rounded-full mb-8 border border-primary/40 shadow-lg shadow-primary/10">
             <Sparkles className="w-4 h-4 text-primary animate-pulse" />
             <span className="text-primary text-sm font-semibold tracking-wider uppercase">
-              Цялостни ремонти в София и района
+              {t('hero.badge')}
             </span>
           </div>
 
           {/* Premium Headline with elegant typography */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase tracking-tight leading-[1.05] mb-6 sm:mb-8">
             <span className="text-primary drop-shadow-[0_0_30px_rgba(212,175,55,0.3)] block">
-              РЕМОНТ БЕЗ ХАОС
+              {t('hero.title1')}
             </span>
             <span className="text-background drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] block mt-2 sm:mt-4">
-              САМО СПОКОЙСТВИЕ
+              {t('hero.title2')}
             </span>
           </h1>
 
@@ -88,7 +90,7 @@ const Hero = () => {
           <div className="flex items-center justify-center gap-4 mb-8 sm:mb-10">
             <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-primary/60" />
             <p className="text-base sm:text-lg md:text-xl text-background/90 font-medium tracking-wide">
-              Без нерви. Без скрити такси. Само резултати.
+              {t('hero.subtitle')}
             </p>
             <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-primary/60" />
           </div>
@@ -103,7 +105,7 @@ const Hero = () => {
                   className="group w-full border-2 border-primary/50 bg-foreground/30 text-background hover:bg-primary hover:text-primary-foreground hover:border-primary font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 h-auto rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-xl"
                 >
                   <Calculator className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 group-hover:rotate-12 transition-transform" />
-                  Вижте цени и оферти
+                  {t('hero.cta.pricing')}
                 </Button>
               </Link>
               <Link to="/portfolio" className="w-full sm:w-auto">
@@ -113,7 +115,7 @@ const Hero = () => {
                   className="group w-full border-2 border-background/40 bg-foreground/20 text-background hover:bg-background hover:text-foreground hover:border-background font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 h-auto rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-xl"
                 >
                   <FolderOpen className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 group-hover:scale-110 transition-transform" />
-                  Преди/След проекти
+                  {t('hero.cta.portfolio')}
                 </Button>
               </Link>
             </div>
@@ -127,7 +129,7 @@ const Hero = () => {
                 <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:scale-110 transition-transform" />
                 <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">127</span>
               </div>
-              <p className="text-background/80 text-xs sm:text-sm font-medium">Завършени проекти</p>
+              <p className="text-background/80 text-xs sm:text-sm font-medium">{t('hero.stats.projects')}</p>
             </div>
 
             {/* Badge 2 */}
@@ -136,16 +138,16 @@ const Hero = () => {
                 <Award className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:scale-110 transition-transform" />
                 <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">94%</span>
               </div>
-              <p className="text-background/80 text-xs sm:text-sm font-medium">Препоръчват нас</p>
+              <p className="text-background/80 text-xs sm:text-sm font-medium">{t('hero.stats.recommend')}</p>
             </div>
 
             {/* Badge 3 */}
             <div className="flex flex-col items-center group">
               <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
                 <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:scale-110 transition-transform" />
-                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">5 год.</span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">5</span>
               </div>
-              <p className="text-background/80 text-xs sm:text-sm font-medium">Гаранция</p>
+              <p className="text-background/80 text-xs sm:text-sm font-medium">{t('hero.stats.warranty')}</p>
             </div>
           </div>
         </div>
@@ -157,7 +159,7 @@ const Hero = () => {
       {/* Elegant Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
         <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity cursor-pointer group">
-          <span className="text-primary text-xs font-medium tracking-widest uppercase">Скролирайте</span>
+          <span className="text-primary text-xs font-medium tracking-widest uppercase">{t('hero.scroll')}</span>
           <div className="w-6 h-10 rounded-full border-2 border-primary/50 flex justify-center pt-2">
             <div className="w-1.5 h-3 bg-primary rounded-full animate-bounce" />
           </div>
