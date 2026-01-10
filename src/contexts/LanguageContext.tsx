@@ -156,7 +156,6 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Testimonials
 'testimonials.title': 'Отзиви от клиенти',
-      ': 'Отзиви от клиенти',
   },
   en: {
     // Navigation
