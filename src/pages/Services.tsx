@@ -1,133 +1,104 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Home, Bath, ChefHat, Paintbrush, Layers, Wrench, Sparkles, Timer, Sofa, Frame, DoorOpen } from "lucide-react";
+import { Phone, ArrowRight, Home, Paintbrush, Wrench, Sparkles } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import PriceTable from "@/components/PriceTable";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
-
-// Service categories restructured per user specifications
-const serviceCategories = [
-  {
-    id: "finishing-works",
-    title: "Цялостни довършителни работи",
-    description: "Ново строителство - готови към обитаване",
-    icon: Paintbrush,
-    items: [
-      { name: "Довършителни работи", path: "/services/finishing-works", description: "Пълен цикъл от грубо строителство до завършен дом" },
-      { name: "Сухо строителство", path: "/services/drywall-construction", description: "Гипсокартон, окачени тавани, преградни стени" },
-      { name: "Мебели по поръчка", path: "/services/custom-furniture", description: "Изработка по индивидуални размери и специфики" },
-      { name: "Смяна на дограма", path: "/services/windows-doors", description: "Демонтаж и монтаж на прозорци и врати" },
-      { name: "Монтаж на врати", path: "/services/doors-installation", description: "Интериорни, плъзгащи и входни врати" },
-    ]
-  },
-  {
-    id: "full-renovation",
-    title: "Основен ремонт",
-    description: "Пълна реновация на жилища \"Старо строителство\"",
-    icon: Home,
-    items: [
-      { name: "Апартамент (ЕПК, панел, тухла)", path: "/services/apartment-renovation", description: "Специализиран подход според типа конструкция" },
-      { name: "Къща", path: "/services/house-renovation", description: "Цялостна реновация на еднофамилни къщи" },
-    ]
-  },
-  {
-    id: "partial-renovations",
-    title: "Частични ремонти",
-    description: "Целеви решения за отделни помещения и зони",
-    icon: Wrench,
-    items: [
-      { name: "Ремонт на баня", path: "/services/bathroom", description: "Модернизиране на санитарни помещения" },
-      { name: "Ремонт на кухня", path: "/services/kitchen", description: "Функционални и стилни кухненски пространства" },
-      { name: "Ремонт на всекидневна", path: "/services/living-room", description: "Трансформация на жилищни зони" },
-      { name: "Бърз освежителен ремонт", path: "/services/quick-refresh", description: "До 1 седмица - боядисване, настилки, малки корекции" },
-    ]
-  },
-  {
-    id: "innovation",
-    title: "Специални иновативни решения",
-    description: "Висок клас финишни покрития и умни технологии",
-    icon: Sparkles,
-    items: [
-      { name: "Микроцимент", path: "/services/microcement", description: "Безшевно покритие с минималистичен дизайн" },
-      { name: "Terrazzo", path: "/services/terrazzo", description: "Класически мозаечни подове с модерен облик" },
-      { name: "Flake Floor", path: "/services/flake-floor", description: "Декоративна и устойчива настилка" },
-      { name: "Каменен килим", path: "/services/stone-carpet", description: "За външни зони и басейни" },
-      { name: "Смарт инсталации 2025", path: "/services/smart-installations", description: "Умен дом с Matter протокол и автоматизация" },
-    ]
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ServicesPage = () => {
-  const servicesSchema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Ремонтни услуги",
-    "description": "Професионални ремонтни услуги в София",
-    "itemListElement": serviceCategories.flatMap((category, catIndex) =>
-      category.items.map((item, itemIndex) => ({
-        "@type": "ListItem",
-        "position": catIndex * 10 + itemIndex + 1,
-        "item": {
-          "@type": "Service",
-          "name": item.name,
-          "description": item.description,
-          "url": `https://renovivo.bg${item.path}`,
-          "provider": {
-            "@type": "LocalBusiness",
-            "name": "Renovivo"
-          },
-          "areaServed": {
-            "@type": "City",
-            "name": "София"
-          }
-        }
-      }))
-    )
-  };
+  const { t, language } = useLanguage();
+
+  const serviceCategories = [
+    {
+      id: "finishing-works",
+      title: t('services.cat.finishing'),
+      description: t('services.cat.finishing.desc'),
+      icon: Paintbrush,
+      items: [
+        { name: t('services.item.finishingWorks'), path: "/services/finishing-works", description: t('services.item.finishingWorks.desc') },
+        { name: t('services.item.drywall'), path: "/services/drywall-construction", description: t('services.item.drywall.desc') },
+        { name: t('services.item.furniture'), path: "/services/custom-furniture", description: t('services.item.furniture.desc') },
+        { name: t('services.item.windows'), path: "/services/windows-doors", description: t('services.item.windows.desc') },
+        { name: t('services.item.doorsInstall'), path: "/services/doors-installation", description: t('services.item.doorsInstall.desc') },
+      ]
+    },
+    {
+      id: "full-renovation",
+      title: t('services.cat.renovation'),
+      description: t('services.cat.renovation.desc'),
+      icon: Home,
+      items: [
+        { name: t('services.item.apartment'), path: "/services/apartment-renovation", description: t('services.item.apartment.desc') },
+        { name: t('services.item.house'), path: "/services/house-renovation", description: t('services.item.house.desc') },
+      ]
+    },
+    {
+      id: "partial-renovations",
+      title: t('services.cat.partial'),
+      description: t('services.cat.partial.desc'),
+      icon: Wrench,
+      items: [
+        { name: t('services.item.bathroom'), path: "/services/bathroom", description: t('services.item.bathroom.desc') },
+        { name: t('services.item.kitchen'), path: "/services/kitchen", description: t('services.item.kitchen.desc') },
+        { name: t('services.item.livingRoom'), path: "/services/living-room", description: t('services.item.livingRoom.desc') },
+        { name: t('services.item.quickRefresh'), path: "/services/quick-refresh", description: t('services.item.quickRefresh.desc') },
+      ]
+    },
+    {
+      id: "innovation",
+      title: t('services.cat.innovation'),
+      description: t('services.cat.innovation.desc'),
+      icon: Sparkles,
+      items: [
+        { name: t('services.item.microcement'), path: "/services/microcement", description: t('services.item.microcement.desc') },
+        { name: t('services.item.terrazzo'), path: "/services/terrazzo", description: t('services.item.terrazzo.desc') },
+        { name: t('services.item.flakeFloor'), path: "/services/flake-floor", description: t('services.item.flakeFloor.desc') },
+        { name: t('services.item.stoneCarpet'), path: "/services/stone-carpet", description: t('services.item.stoneCarpet.desc') },
+        { name: t('services.item.smart'), path: "/services/smart-installations", description: t('services.item.smart.desc') },
+      ]
+    },
+  ];
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Начало", "item": "https://renovivo.bg" },
-      { "@type": "ListItem", "position": 2, "name": "Услуги", "item": "https://renovivo.bg/services" }
+      { "@type": "ListItem", "position": 1, "name": t('breadcrumb.home'), "item": "https://renovivo.bg" },
+      { "@type": "ListItem", "position": 2, "name": t('services.page.title'), "item": "https://renovivo.bg/services" }
     ]
   };
 
   return (
     <>
       <Helmet>
-        <title>Ремонтни услуги София | Renovivo - Цялостен ремонт, бани, кухни, иновативни покрития</title>
+        <title>{language === 'bg' ? 'Ремонтни услуги София | Renovivo' : 'Renovation Services Sofia | Renovivo'}</title>
         <meta 
           name="description" 
-          content="Професионални ремонтни услуги в София - цялостен ремонт на апартаменти, частични ремонти, довършителни работи, микроцимент, terrazzo, flake floor. Гаранция за качество!" 
+          content={language === 'bg' 
+            ? "Професионални ремонтни услуги в София - цялостен ремонт на апартаменти, частични ремонти, довършителни работи, микроцимент, terrazzo, flake floor."
+            : "Professional renovation services in Sofia - complete apartment renovations, partial renovations, finishing works, microcement, terrazzo, flake floor."
+          } 
         />
-        <meta name="keywords" content="ремонтни услуги София, цялостен ремонт апартамент, ремонт баня, ремонт кухня, микроцимент, terrazzo, flake floor, смарт дом" />
         <link rel="canonical" href="https://renovivo.bg/services" />
-        <meta property="og:title" content="Ремонтни услуги София | Renovivo" />
-        <meta property="og:description" content="Цялостен ремонт, частични ремонти, иновативни покрития - превърнете вашия дом в идеално място за живот." />
-        <meta property="og:url" content="https://renovivo.bg/services" />
-        <script type="application/ld+json">{JSON.stringify(servicesSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
       <Layout>
         {/* Hero */}
         <section className="relative py-20 bg-foreground">
           <div className="container-custom relative z-10">
-            {/* Breadcrumb */}
             <VisualBreadcrumb 
-              items={[{ label: "Услуги" }]} 
+              items={[{ label: t('services.page.title') }]} 
               className="mb-6 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
             />
             <div className="max-w-2xl">
-              <span className="text-primary font-medium text-sm uppercase tracking-wider">Каталог услуги</span>
+              <span className="text-primary font-medium text-sm uppercase tracking-wider">{t('services.page.catalog')}</span>
               <h1 className="text-4xl md:text-5xl font-bold text-background mt-3 mb-6">
-                Всички услуги
+                {t('services.page.allServices')}
               </h1>
               <p className="text-background/80 text-lg">
-                Разгледайте пълния спектър от ремонтни решения - от довършителни работи до специализирани иновативни покрития.
+                {t('services.page.description')}
               </p>
             </div>
           </div>
@@ -139,7 +110,6 @@ const ServicesPage = () => {
             <div className="grid gap-12">
               {serviceCategories.map((category) => (
                 <div key={category.id} className="space-y-6">
-                  {/* Category Header */}
                   <div className="flex items-center gap-4 border-b border-border pb-4">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                       <category.icon className="h-6 w-6 text-primary" />
@@ -149,14 +119,9 @@ const ServicesPage = () => {
                       <p className="text-muted-foreground">{category.description}</p>
                     </div>
                   </div>
-                  {/* Category Items */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     {category.items.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.path}
-                        className="group"
-                      >
+                      <Link key={item.name} to={item.path} className="group">
                         <Card className="h-full border hover:border-primary hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                           <CardContent className="p-5">
                             <div className="flex items-start justify-between">
@@ -185,10 +150,10 @@ const ServicesPage = () => {
         <section className="py-16 bg-primary">
           <div className="container-custom text-center">
             <h2 className="text-3xl font-bold text-primary-foreground mb-4">
-              Имате въпроси?
+              {t('services.page.cta.title')}
             </h2>
             <p className="text-primary-foreground/90 mb-8 max-w-xl mx-auto">
-              Свържете се с нас за безплатна консултация и индивидуална оферта за вашия проект.
+              {t('services.page.cta.description')}
             </p>
             <a href="tel:+359893712919">
               <Button size="lg" className="bg-background text-foreground hover:bg-background/90 font-semibold">
