@@ -4,13 +4,15 @@ import { Phone, ArrowLeft, ArrowRight, MapPin, Clock, Maximize, Check, Star, Tre
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getProjectById, projects, categories } from "@/data/projects";
+import { getProjectById, projects } from "@/data/projects";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
   const project = id ? getProjectById(id) : undefined;
+  const { language, t } = useLanguage();
 
   if (!project) {
     return <Navigate to="/portfolio" replace />;
@@ -55,7 +57,7 @@ const ProjectDetail = () => {
     <>
       <Helmet>
         <title>{project.title} | Renovivo - Case Study</title>
-        <meta name="description" content={`${project.description} Вижте как решихме предизвикателството: ${project.challenge}`} />
+        <meta name="description" content={`${project.description} ${language === 'bg' ? 'Вижте как решихме предизвикателството:' : 'See how we solved the challenge:'} ${project.challenge}`} />
         <link rel="canonical" href={`https://renovivo.bg/portfolio/${id}`} />
         <script type="application/ld+json">{JSON.stringify(caseStudySchema)}</script>
       </Helmet>
@@ -77,7 +79,7 @@ const ProjectDetail = () => {
             {/* Breadcrumb */}
             <VisualBreadcrumb 
               items={[
-                { label: "Портфолио", href: "/portfolio" },
+                { label: t('projectDetail.breadcrumb'), href: "/portfolio" },
                 { label: project.title }
               ]} 
               className="mb-4 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
@@ -117,7 +119,7 @@ const ProjectDetail = () => {
               <div className="lg:col-span-2 space-y-12">
                 {/* Description */}
                 <div>
-                  <h2 className="text-2xl font-bold mb-4">За проекта</h2>
+                  <h2 className="text-2xl font-bold mb-4">{t('projectDetail.about')}</h2>
                   <p className="text-muted-foreground leading-relaxed">
                     {project.description}
                   </p>
@@ -135,7 +137,7 @@ const ProjectDetail = () => {
                 <div className="space-y-6">
                   <h2 className="text-2xl font-bold flex items-center gap-2">
                     <TrendingUp className="h-6 w-6 text-primary" />
-                    Проблем → Решение → Резултат
+                    {t('projectDetail.problemSolutionResult')}
                   </h2>
                   
                   <div className="grid grid-cols-1 gap-4">
@@ -144,7 +146,7 @@ const ProjectDetail = () => {
                       <CardContent className="p-6">
                         <h3 className="font-bold text-lg mb-3 text-destructive flex items-center gap-2">
                           <span className="w-8 h-8 rounded-full bg-destructive/10 flex items-center justify-center text-sm font-bold">1</span>
-                          Предизвикателство
+                          {t('projectDetail.challenge')}
                         </h3>
                         <p className="text-muted-foreground">{project.challenge}</p>
                       </CardContent>
@@ -155,7 +157,7 @@ const ProjectDetail = () => {
                       <CardContent className="p-6">
                         <h3 className="font-bold text-lg mb-3 text-primary flex items-center gap-2">
                           <span className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold">2</span>
-                          Нашето решение
+                          {t('projectDetail.solution')}
                         </h3>
                         <p className="text-muted-foreground">{project.solution}</p>
                       </CardContent>
@@ -168,7 +170,7 @@ const ProjectDetail = () => {
                           <h3 className="font-bold text-lg mb-3 text-green-600 dark:text-green-400 flex items-center gap-2">
                             <span className="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center text-sm font-bold">3</span>
                             <Trophy className="h-5 w-5" />
-                            Резултат
+                            {t('projectDetail.result')}
                           </h3>
                           <p className="text-muted-foreground mb-4">{project.result.summary}</p>
                           
@@ -185,7 +187,7 @@ const ProjectDetail = () => {
                           {/* Client Satisfaction */}
                           {project.result.clientSatisfaction && (
                             <div className="flex items-center justify-center gap-2 mt-4 pt-4 border-t">
-                              <span className="text-sm text-muted-foreground">Клиентска оценка:</span>
+                              <span className="text-sm text-muted-foreground">{t('projectDetail.clientRating')}:</span>
                               <div className="flex gap-0.5">
                                 {[...Array(5)].map((_, i) => (
                                   <Star 
@@ -205,7 +207,7 @@ const ProjectDetail = () => {
                 {/* Project Stages - Storytelling */}
                 {project.stages && project.stages.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold mb-6">Етапи на изпълнение</h2>
+                    <h2 className="text-2xl font-bold mb-6">{t('projectDetail.stages')}</h2>
                     <div className="relative">
                       {/* Timeline line */}
                       <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-primary/20" />
@@ -232,7 +234,7 @@ const ProjectDetail = () => {
 
                 {/* Features */}
                 <div>
-                  <h2 className="text-2xl font-bold mb-6">Основни характеристики</h2>
+                  <h2 className="text-2xl font-bold mb-6">{t('projectDetail.features')}</h2>
                   <div className="flex flex-wrap gap-3">
                     {project.features.map((feature) => (
                       <div key={feature} className="flex items-center gap-2 px-4 py-2 bg-secondary rounded-full">
@@ -245,7 +247,7 @@ const ProjectDetail = () => {
 
                 {/* Gallery */}
                 <div>
-                  <h2 className="text-2xl font-bold mb-6">Галерия</h2>
+                  <h2 className="text-2xl font-bold mb-6">{t('projectDetail.gallery')}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {project.gallery.map((image, index) => (
                       <img
@@ -270,19 +272,19 @@ const ProjectDetail = () => {
                 {/* CTA Card */}
                 <Card className="border-0 shadow-lg sticky top-24">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-4">Харесва ви този проект?</h3>
+                    <h3 className="text-xl font-bold mb-4">{t('projectDetail.cta.title')}</h3>
                     <p className="text-muted-foreground text-sm mb-6">
-                      Свържете се с нас, за да обсъдим как можем да реализираме вашата идея.
+                      {t('projectDetail.cta.desc')}
                     </p>
                     <a href="tel:+359893712919" className="block mb-4">
                       <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold">
                         <Phone className="h-4 w-4 mr-2" />
-                        Обадете се
+                        {t('projectDetail.cta.call')}
                       </Button>
                     </a>
                     <Link to="/contact">
                       <Button variant="outline" className="w-full">
-                        Изпратете запитване
+                        {t('projectDetail.cta.inquiry')}
                       </Button>
                     </Link>
                   </CardContent>
@@ -291,22 +293,22 @@ const ProjectDetail = () => {
                 {/* Project Details */}
                 <Card className="border-0 shadow-lg">
                   <CardContent className="p-6">
-                    <h3 className="font-bold mb-4">Детайли</h3>
+                    <h3 className="font-bold mb-4">{t('projectDetail.details')}</h3>
                     <div className="space-y-4">
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground text-sm">Категория</span>
+                        <span className="text-muted-foreground text-sm">{t('projectDetail.details.category')}</span>
                         <span className="font-medium text-sm">{project.category}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground text-sm">Локация</span>
+                        <span className="text-muted-foreground text-sm">{t('projectDetail.details.location')}</span>
                         <span className="font-medium text-sm">{project.location}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground text-sm">Продължителност</span>
+                        <span className="text-muted-foreground text-sm">{t('projectDetail.details.duration')}</span>
                         <span className="font-medium text-sm">{project.duration}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground text-sm">Площ</span>
+                        <span className="text-muted-foreground text-sm">{t('projectDetail.details.area')}</span>
                         <span className="font-medium text-sm">{project.area}</span>
                       </div>
                     </div>
@@ -318,7 +320,7 @@ const ProjectDetail = () => {
             {/* Related Projects */}
             {relatedProjects.length > 0 && (
               <div className="mt-16 pt-8 border-t">
-                <h2 className="text-2xl font-bold mb-8">Подобни проекти</h2>
+                <h2 className="text-2xl font-bold mb-8">{t('projectDetail.related')}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {relatedProjects.map((p) => (
                     <Link
@@ -357,7 +359,7 @@ const ProjectDetail = () => {
                 >
                   <ArrowLeft className="h-4 w-4" />
                   <span className="text-sm hidden sm:inline">{prevProject.title}</span>
-                  <span className="text-sm sm:hidden">Предишен</span>
+                  <span className="text-sm sm:hidden">{t('projectDetail.nav.prev')}</span>
                 </Link>
               ) : (
                 <div />
@@ -368,7 +370,7 @@ const ProjectDetail = () => {
                   className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
                 >
                   <span className="text-sm hidden sm:inline">{nextProject.title}</span>
-                  <span className="text-sm sm:hidden">Следващ</span>
+                  <span className="text-sm sm:hidden">{t('projectDetail.nav.next')}</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               )}

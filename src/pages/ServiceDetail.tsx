@@ -9,6 +9,7 @@ import PriceTable from "@/components/PriceTable";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Mapping service IDs to price category slugs
 const serviceToPriceCategoryMap: Record<string, string> = {
@@ -77,6 +78,8 @@ const ServiceDetail = () => {
   const { id } = useParams<{ id: string }>();
   const service = id ? getServiceById(id) : undefined;
   const { openModal } = useInspectionRequest();
+  const { language, t } = useLanguage();
+  
   if (!service) {
     return <Navigate to="/services" replace />;
   }
@@ -167,7 +170,7 @@ const ServiceDetail = () => {
             {/* Breadcrumb */}
             <VisualBreadcrumb 
               items={[
-                { label: "Услуги", href: "/services" },
+                { label: t('serviceDetail.breadcrumb'), href: "/services" },
                 { label: service.title }
               ]} 
               className="mb-6 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
@@ -209,7 +212,7 @@ const ServiceDetail = () => {
                 {/* Description - use custom content if available */}
                 <div>
                   <h2 className="text-2xl font-bold mb-4">
-                    {customContent?.title || "Описание"}
+                    {customContent?.title || t('serviceDetail.description')}
                   </h2>
                   <div className="text-muted-foreground leading-relaxed whitespace-pre-line">
                     {customContent?.content || service.fullDescription}
@@ -219,7 +222,7 @@ const ServiceDetail = () => {
                 {/* Color Variants - only for services with color options */}
                 {service.colorVariants && (
                   <div>
-                    <h2 className="text-2xl font-bold mb-6">Цветови варианти</h2>
+                    <h2 className="text-2xl font-bold mb-6">{t('serviceDetail.colorVariants')}</h2>
                     <p className="text-muted-foreground mb-4 text-sm">
                       Съчетаването на пигменти и естествени камъни дава безкрайни възможности за цвят и дизайн, 
                       като същевременно добавят визуален ефект и характер на проекта.
@@ -244,7 +247,7 @@ const ServiceDetail = () => {
 
                 {/* Features */}
                 <div>
-                  <h2 className="text-2xl font-bold mb-6">Какво включва</h2>
+                  <h2 className="text-2xl font-bold mb-6">{t('serviceDetail.includes')}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {service.features.map((feature) => (
                       <div key={feature} className="flex items-center gap-3 p-3 bg-secondary/50 rounded-lg">
@@ -259,7 +262,7 @@ const ServiceDetail = () => {
 
                 {/* Process */}
                 <div>
-                  <h2 className="text-2xl font-bold mb-6">Нашият процес</h2>
+                  <h2 className="text-2xl font-bold mb-6">{t('serviceDetail.process')}</h2>
                   <div className="space-y-6">
                     {service.process.map((step, index) => (
                       <div key={step.step} className="flex gap-4">
@@ -283,13 +286,13 @@ const ServiceDetail = () => {
                 {/* VS Tiles Comparison - only for innovative services */}
                 {service.vsTiles && (
                   <div className="space-y-8">
-                    <h2 className="text-2xl font-bold">Защо да изберете {service.title} вместо плочки?</h2>
+                    <h2 className="text-2xl font-bold">{t('serviceDetail.vsTiles.title')} {service.title} {t('serviceDetail.vsTiles.instead')}</h2>
                     
                     {/* Advantages */}
                     <div className="bg-green-50 dark:bg-green-950/20 rounded-xl p-6">
                       <h3 className="font-bold text-green-700 dark:text-green-400 mb-4 flex items-center gap-2">
                         <Check className="h-5 w-5" />
-                        Предимства пред плочките
+                        {t('serviceDetail.vsTiles.advantages')}
                       </h3>
                       <ul className="space-y-2">
                         {service.vsTiles.advantages.map((adv, i) => (
@@ -303,7 +306,7 @@ const ServiceDetail = () => {
 
                     {/* Disadvantages */}
                     <div className="bg-amber-50 dark:bg-amber-950/20 rounded-xl p-6">
-                      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-4">Какво да имате предвид</h3>
+                      <h3 className="font-bold text-amber-700 dark:text-amber-400 mb-4">{t('serviceDetail.vsTiles.considerations')}</h3>
                       <ul className="space-y-2">
                         {service.vsTiles.disadvantages.map((dis, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm">
@@ -344,7 +347,7 @@ const ServiceDetail = () => {
                 {/* FAQ Section */}
                 {faq && faq.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-bold mb-6">Често задавани въпроси</h2>
+                    <h2 className="text-2xl font-bold mb-6">{t('serviceDetail.faq')}</h2>
                     <Accordion type="single" collapsible className="w-full">
                       {faq.map((item, index) => (
                         <AccordionItem key={index} value={`faq-${index}`}>
@@ -362,7 +365,7 @@ const ServiceDetail = () => {
 
                 {/* Gallery */}
                 <div>
-                  <h2 className="text-2xl font-bold mb-6">Галерия</h2>
+                  <h2 className="text-2xl font-bold mb-6">{t('projectDetail.gallery')}</h2>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {service.gallery.map((image, index) => (
                       <img
@@ -382,7 +385,7 @@ const ServiceDetail = () => {
                 {showPriceTable && (
                   <PriceTable 
                     categorySlug={serviceToPriceCategoryMap[id!]} 
-                    title="Ориентировъчни цени"
+                    title={t('serviceDetail.pricing')}
                     limit={8}
                   />
                 )}
@@ -424,7 +427,7 @@ const ServiceDetail = () => {
                 {(id === "full-renovation" || customContent?.showRelated) && (
                   <Card className="border-0 shadow-lg">
                     <CardContent className="p-6">
-                      <h3 className="font-bold mb-4">Свързани услуги</h3>
+                      <h3 className="font-bold mb-4">{t('serviceDetail.related')}</h3>
                       <div className="space-y-3">
                         {relatedServicesForFullRenovation.map((service) => (
                           <Link
@@ -444,16 +447,16 @@ const ServiceDetail = () => {
                 {/* CTA Card */}
                 <Card className="border-0 shadow-lg sticky top-24">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-bold mb-4">Имате нужда от тази услуга?</h3>
+                    <h3 className="text-xl font-bold mb-4">{t('serviceDetail.cta.title')}</h3>
                     <p className="text-muted-foreground text-sm mb-6">
-                      Свържете се с нас за безплатна консултация и индивидуална оферта.
+                      {t('serviceDetail.cta.desc')}
                     </p>
                     
                     {/* Phone Button */}
                     <a href="tel:+359893712919" className="block mb-3">
                       <Button className="w-full" size="lg">
                         <Phone className="h-5 w-5 mr-2" />
-                        Обадете се сега
+                        {t('serviceDetail.cta.contact')}
                       </Button>
                     </a>
                     
@@ -465,7 +468,7 @@ const ServiceDetail = () => {
                       onClick={openModal}
                     >
                       <Calendar className="h-5 w-5 mr-2" />
-                      Заявка за оглед
+                      {t('serviceDetail.cta.inspection')}
                     </Button>
                     
                     <p className="text-center text-muted-foreground text-xs mt-4">

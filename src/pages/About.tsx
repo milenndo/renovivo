@@ -7,50 +7,64 @@ import { useInspectionRequest } from "@/contexts/InspectionRequestContext";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 import aboutTeamImg from "@/assets/images/about-team.jpg";
 import qualityWorkImg from "@/assets/images/quality-work.webp";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const AboutPage = () => {
   const { openModal } = useInspectionRequest();
+  const { language, t } = useLanguage();
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Начало", item: "https://renovivo.bg" },
-      { "@type": "ListItem", position: 2, name: "За нас", item: "https://renovivo.bg/about" },
+      { "@type": "ListItem", position: 1, name: t('breadcrumb.home'), item: "https://renovivo.bg" },
+      { "@type": "ListItem", position: 2, name: t('aboutPage.breadcrumb'), item: "https://renovivo.bg/about" },
     ],
   };
 
   const aboutSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    name: "За Renovivo",
-    description: "Ремонтна фирма в София с фокус върху доверие, спокойствие и отговорност. 127 завършени проекта, 94% препоръки, 5 години гаранция.",
+    name: language === 'bg' ? "За Renovivo" : "About Renovivo",
+    description: t('aboutPage.metaDesc'),
     mainEntity: {
       "@type": "Organization",
       name: "Renovivo",
       foundingDate: "2025",
-      slogan: "Ремонт без хаос. Само спокойствие.",
+      slogan: language === 'bg' ? "Ремонт без хаос. Само спокойствие." : "Renovation without chaos. Just peace of mind.",
     },
   };
+
+  const approachItems = [
+    { icon: MessageSquare, text: t('aboutPage.approach.item1') },
+    { icon: Clock, text: t('aboutPage.approach.item2') },
+    { icon: Handshake, text: t('aboutPage.approach.item3') },
+  ];
+
+  const valueItems = [
+    t('aboutPage.values.item1'),
+    t('aboutPage.values.item2'),
+    t('aboutPage.values.item3'),
+    t('aboutPage.values.item4'),
+    t('aboutPage.values.item5'),
+    t('aboutPage.values.item6'),
+  ];
 
   return (
     <>
       <Helmet>
-        <title>За нас | Renovivo - Ремонт без хаос, само спокойствие</title>
-        <meta
-          name="description"
-          content="Renovivo е ремонтна фирма в София, създадена с една цел - да ви спестим притесненията. 127 завършени проекта, 94% препоръки, 5 години гаранция."
-        />
+        <title>{t('aboutPage.title')}</title>
+        <meta name="description" content={t('aboutPage.metaDesc')} />
         <meta
           name="keywords"
-          content="ремонтна фирма София, Renovivo, ремонти без стрес, надеждни майстори, ремонти с гаранция София"
+          content={language === 'bg' 
+            ? "ремонтна фирма София, Renovivo, ремонти без стрес, надеждни майстори, ремонти с гаранция София"
+            : "renovation company Sofia, Renovivo, stress-free renovations, reliable contractors, renovations with warranty Sofia"
+          }
         />
         <link rel="canonical" href="https://renovivo.bg/about" />
-        <meta property="og:title" content="За нас | Renovivo - Ремонт без хаос" />
-        <meta
-          property="og:description"
-          content="127 завършени проекта. 94% препоръки. 5 години гаранция. Ремонт без стрес."
-        />
+        <meta property="og:title" content={t('aboutPage.title')} />
+        <meta property="og:description" content={t('aboutPage.metaDesc')} />
         <meta property="og:url" content="https://renovivo.bg/about" />
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(aboutSchema)}</script>
@@ -61,20 +75,19 @@ const AboutPage = () => {
           <div className="container-custom relative z-10">
             {/* Breadcrumb */}
             <VisualBreadcrumb 
-              items={[{ label: "За нас" }]} 
+              items={[{ label: t('aboutPage.breadcrumb') }]} 
               className="mb-6 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
             />
             <div className="max-w-3xl">
-              <span className="text-primary font-medium text-sm uppercase tracking-wider">За нас</span>
+              <span className="text-primary font-medium text-sm uppercase tracking-wider">{t('aboutPage.hero.label')}</span>
               <h1 className="text-3xl md:text-4xl font-bold text-background mt-3 mb-6">
-                Ремонтът не трябва да бъде стресиращ
+                {t('aboutPage.hero.title')}
               </h1>
               <p className="text-background/90 text-lg leading-relaxed mb-4">
-                Знаем колко притеснително може да бъде да поверите дома си на непознати. 
-                Точно затова създадохме Renovivo - за да имате партньор, на когото можете да разчитате.
+                {t('aboutPage.hero.p1')}
               </p>
               <p className="text-background/80 text-lg leading-relaxed font-medium">
-                Не обещаваме чудеса. Обещаваме честност, редовна комуникация и спазване на думата ни.
+                {t('aboutPage.hero.p2')}
               </p>
             </div>
           </div>
@@ -89,21 +102,21 @@ const AboutPage = () => {
                   <CheckCircle2 className="h-6 w-6 text-primary" />
                   <span className="text-3xl font-bold text-primary">127</span>
                 </div>
-                <p className="text-muted-foreground text-sm font-medium">Завършени проекти</p>
+                <p className="text-muted-foreground text-sm font-medium">{t('aboutPage.stats.projects')}</p>
               </div>
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-2 mb-2">
                   <Award className="h-6 w-6 text-primary" />
                   <span className="text-3xl font-bold text-primary">94%</span>
                 </div>
-                <p className="text-muted-foreground text-sm font-medium">Препоръчват ни</p>
+                <p className="text-muted-foreground text-sm font-medium">{t('aboutPage.stats.recommend')}</p>
               </div>
               <div className="flex flex-col items-center">
                 <div className="flex items-center gap-2 mb-2">
                   <Shield className="h-6 w-6 text-primary" />
-                  <span className="text-3xl font-bold text-primary">5 години</span>
+                  <span className="text-3xl font-bold text-primary">{language === 'bg' ? '5 години' : '5 years'}</span>
                 </div>
-                <p className="text-muted-foreground text-sm font-medium">Гаранция</p>
+                <p className="text-muted-foreground text-sm font-medium">{t('aboutPage.stats.warranty')}</p>
               </div>
             </div>
           </div>
@@ -117,7 +130,7 @@ const AboutPage = () => {
               <div className="relative">
                 <img 
                   src={aboutTeamImg} 
-                  alt="Екипът на Renovivo обсъжда проект" 
+                  alt={t('aboutPage.imgAlt.team')} 
                   width={600}
                   height={400}
                   loading="lazy"
@@ -129,25 +142,19 @@ const AboutPage = () => {
 
               {/* Content */}
               <div>
-                <span className="text-primary font-medium text-sm uppercase tracking-wider">Нашият подход</span>
+                <span className="text-primary font-medium text-sm uppercase tracking-wider">{t('aboutPage.approach.label')}</span>
                 <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-6">
-                  Спокойствие за вас, отговорност за нас
+                  {t('aboutPage.approach.title')}
                 </h2>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Вярваме, че добрият ремонт започва с добра комуникация. Затова от първия ден 
-                  ще имате ясна представа какво, кога и как ще се случи. Без изненади, без скрити разходи.
+                  {t('aboutPage.approach.p1')}
                 </p>
                 <p className="text-muted-foreground mb-8 leading-relaxed">
-                  Всеки член от екипа ни е специалист в своята област. Координираме се помежду си, 
-                  за да не се налага вие да правите това. Вашата единствена работа е да ни кажете какво искате.
+                  {t('aboutPage.approach.p2')}
                 </p>
 
                 <div className="space-y-4">
-                  {[
-                    { icon: MessageSquare, text: "Редовни ъпдейти - знаете какво се случва" },
-                    { icon: Clock, text: "Спазваме сроковете - ценим времето ви" },
-                    { icon: Handshake, text: "Държим на думата си - това, което обещаем, изпълняваме" },
-                  ].map((item) => (
+                  {approachItems.map((item) => (
                     <div key={item.text} className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                         <item.icon className="h-5 w-5 text-primary" />
@@ -167,24 +174,16 @@ const AboutPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               {/* Content */}
               <div className="order-2 lg:order-1">
-                <span className="text-primary font-medium text-sm uppercase tracking-wider">Нашите ценности</span>
+                <span className="text-primary font-medium text-sm uppercase tracking-wider">{t('aboutPage.values.label')}</span>
                 <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-6">
-                  Доверие се гради с действия
+                  {t('aboutPage.values.title')}
                 </h2>
                 <p className="text-muted-foreground mb-8 leading-relaxed">
-                  Не вярваме в празните обещания. Вярваме, че доверието се печели проект след проект, 
-                  клиент след клиент. Всеки завършен ремонт е доказателство за това, на което сме способни.
+                  {t('aboutPage.values.p1')}
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {[
-                    "Прозрачно ценообразуване",
-                    "Никакви скрити такси",
-                    "Почистване след работа",
-                    "Отзивчив екип",
-                    "Гаранция 5 години",
-                    "Безплатна консултация",
-                  ].map((item) => (
+                  {valueItems.map((item) => (
                     <div key={item} className="flex items-center gap-3">
                       <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
                         <Check className="h-3 w-3 text-primary-foreground" />
@@ -199,7 +198,7 @@ const AboutPage = () => {
               <div className="relative order-1 lg:order-2">
                 <img 
                   src={qualityWorkImg} 
-                  alt="Качествено изпълнение на ремонт" 
+                  alt={t('aboutPage.imgAlt.quality')} 
                   width={600}
                   height={400}
                   loading="lazy"
@@ -218,11 +217,10 @@ const AboutPage = () => {
             <div className="max-w-2xl mx-auto">
               <Heart className="h-10 w-10 text-primary mx-auto mb-6" />
               <p className="text-background/70 text-base mb-4 leading-relaxed">
-                Чували сме достатъчно истории за лош опит с ремонти. Нашата цел е да покажем, 
-                че може и по друг начин - с уважение, отговорност и внимание към детайла.
+                {t('aboutPage.cta.p1')}
               </p>
               <h2 className="text-3xl md:text-5xl font-bold mb-8 text-primary">
-                Ако това резонира с вас, нека поговорим.
+                {t('aboutPage.cta.title')}
               </h2>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button
@@ -231,7 +229,7 @@ const AboutPage = () => {
                   className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-lg px-8 py-6"
                 >
                   <Phone className="h-5 w-5 mr-2" />
-                  Заявете безплатен оглед
+                  {t('aboutPage.cta.button')}
                 </Button>
                 <Link to="/portfolio">
                   <Button 
@@ -239,7 +237,7 @@ const AboutPage = () => {
                     variant="outline" 
                     className="border-background/30 bg-transparent text-background hover:bg-background/10 font-semibold px-8 py-6"
                   >
-                    Вижте нашите проекти
+                    {t('aboutPage.cta.portfolio')}
                   </Button>
                 </Link>
               </div>

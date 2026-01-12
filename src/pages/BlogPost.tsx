@@ -10,10 +10,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { planningRenovationPost, microcementPost } from "@/data/blog-posts-local";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
-
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { language, t } = useLanguage();
 
   const { data: post, isLoading } = useQuery({
     queryKey: ["blog-post", slug],
@@ -51,7 +52,7 @@ const BlogPost = () => {
   });
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("bg-BG", {
+    return new Date(dateString).toLocaleDateString(language === 'bg' ? "bg-BG" : "en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -169,14 +170,14 @@ const BlogPost = () => {
       <Layout>
         <div className="container-custom py-16 text-center">
           <BookOpen className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold mb-4">Статията не е намерена</h1>
+          <h1 className="text-2xl font-bold mb-4">{t('blogPost.notFound.title')}</h1>
           <p className="text-muted-foreground mb-6">
-            Статията, която търсите, не съществува или е била премахната.
+            {t('blogPost.notFound.desc')}
           </p>
           <Link to="/blog">
             <Button>
               <ArrowLeft className="h-4 w-4 mr-2" />
-              Към блога
+              {t('blogPost.notFound.button')}
             </Button>
           </Link>
         </div>
@@ -191,13 +192,13 @@ const BlogPost = () => {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Начало",
+        name: t('breadcrumb.home'),
         item: "https://renovivo.bg",
       },
       {
         "@type": "ListItem",
         position: 2,
-        name: "Блог",
+        name: t('blogPost.breadcrumb'),
         item: "https://renovivo.bg/blog",
       },
       {
@@ -236,7 +237,7 @@ const BlogPost = () => {
         />
         <meta
           name="keywords"
-          content={post.tags?.join(", ") || "ремонти, съвети"}
+          content={post.tags?.join(", ") || (language === 'bg' ? "ремонти, съвети" : "renovations, tips")}
         />
         <link rel="canonical" href={`https://renovivo.bg/blog/${post.slug}`} />
         <meta property="og:title" content={post.title} />
@@ -260,7 +261,7 @@ const BlogPost = () => {
             {/* Breadcrumb */}
             <VisualBreadcrumb 
               items={[
-                { label: "Полезно", href: "/blog" },
+                { label: t('blogPost.breadcrumb'), href: "/blog" },
                 { label: post.title }
               ]} 
               className="mb-6"
@@ -281,9 +282,9 @@ const BlogPost = () => {
               </span>
               <span className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                {post.reading_time} мин. четене
+                {post.reading_time} {t('blogPost.readTime')}
               </span>
-              <span>от {post.author}</span>
+              <span>{t('blogPost.by')} {post.author}</span>
             </div>
           </div>
         </section>
@@ -308,11 +309,10 @@ const BlogPost = () => {
                 <Card className="bg-primary/5 border-primary/20">
                   <CardContent className="p-6">
                     <h3 className="text-lg font-semibold mb-3">
-                      Нуждаете се от помощ?
+                      {t('blogPost.sidebar.help')}
                     </h3>
                     <p className="text-muted-foreground text-sm mb-4">
-                      Екипът на Renovivo е готов да помогне с вашия ремонт.
-                      Обадете се за безплатна консултация.
+                      {t('blogPost.sidebar.helpDesc')}
                     </p>
                     <a
                       href="tel:+359893712919"
@@ -327,7 +327,7 @@ const BlogPost = () => {
                 {/* Tags */}
                 {post.tags && post.tags.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">Тагове</h3>
+                    <h3 className="text-lg font-semibold mb-3">{t('blogPost.sidebar.tags')}</h3>
                     <div className="flex flex-wrap gap-2">
                       {post.tags.map((tag: string) => (
                         <Badge key={tag} variant="secondary">
@@ -342,7 +342,7 @@ const BlogPost = () => {
                 {relatedPosts && relatedPosts.length > 0 && (
                   <div>
                     <h3 className="text-lg font-semibold mb-4">
-                      Свързани статии
+                      {t('blogPost.sidebar.related')}
                     </h3>
                     <div className="space-y-4">
                       {relatedPosts.map((related) => (
@@ -355,7 +355,7 @@ const BlogPost = () => {
                             {related.title}
                           </h4>
                           <p className="text-sm text-muted-foreground mt-1">
-                            {related.reading_time} мин. четене
+                            {related.reading_time} {t('blogPost.readTime')}
                           </p>
                         </Link>
                       ))}
