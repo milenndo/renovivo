@@ -221,6 +221,10 @@ const translations: Record<Language, Record<string, string>> = {
     'services.item.stoneCarpet.desc': 'За външни зони и басейни',
     'services.item.smart': 'Смарт инсталации 2025',
     'services.item.smart.desc': 'Умен дом с Matter протокол и автоматизация',
+    'services.cat.digital': 'Дигитални услуги',
+    'services.cat.digital.desc': '3D сканиране, виртуални турове и BIM',
+    'services.item.virtualTours': '3D Сканиране & Виртуални турове',
+    'services.item.virtualTours.desc': '360° виртуални обиколки и дигитални близнаци',
     
     // Pricing Page
     'pricing.page.title': 'Ремонт на апартамент без изненади, с ясен бюджет и контрол',
@@ -605,6 +609,10 @@ const translations: Record<Language, Record<string, string>> = {
     'services.item.stoneCarpet.desc': 'For outdoor areas and pools',
     'services.item.smart': 'Smart Installations 2025',
     'services.item.smart.desc': 'Smart home with Matter protocol and automation',
+    'services.cat.digital': 'Digital Services',
+    'services.cat.digital.desc': '3D scanning, virtual tours and BIM',
+    'services.item.virtualTours': '3D Scanning & Virtual Tours',
+    'services.item.virtualTours.desc': '360° virtual tours and digital twins',
     
     // Pricing Page
     'pricing.page.title': 'Apartment renovation without surprises, with clear budget and control',

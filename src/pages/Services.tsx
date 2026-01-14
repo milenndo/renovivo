@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight, Home, Paintbrush, Wrench, Sparkles } from "lucide-react";
+import { Phone, ArrowRight, Home, Paintbrush, Wrench, Sparkles, Scan } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -57,6 +57,15 @@ const ServicesPage = () => {
         { name: t('services.item.flakeFloor'), path: "/services/flake-floor", description: t('services.item.flakeFloor.desc') },
         { name: t('services.item.stoneCarpet'), path: "/services/stone-carpet", description: t('services.item.stoneCarpet.desc') },
         { name: t('services.item.smart'), path: "/services/smart-installations", description: t('services.item.smart.desc') },
+      ]
+    },
+    {
+      id: "digital-services",
+      title: t('services.cat.digital'),
+      description: t('services.cat.digital.desc'),
+      icon: Scan,
+      items: [
+        { name: t('services.item.virtualTours'), path: "/3d-scanning", description: t('services.item.virtualTours.desc') },
       ]
     },
   ];

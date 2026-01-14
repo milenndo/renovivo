@@ -27,6 +27,7 @@ const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
 const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const InnovativeCoatings = lazy(() => import("./pages/InnovativeCoatings"));
+const VirtualTours = lazy(() => import("./pages/VirtualTours"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const Admin = lazy(() => import("./pages/Admin"));
@@ -61,6 +62,7 @@ const App = () => (
                   <Route path="/services/interior-design" element={<InteriorDesign />} />
                   <Route path="/services/:id" element={<ServiceDetail />} />
                   <Route path="/innovative-coatings" element={<InnovativeCoatings />} />
+                  <Route path="/3d-scanning" element={<VirtualTours />} />
                   <Route path="/portfolio" element={<Portfolio />} />
                   <Route path="/pricing" element={<Pricing />} />
                   <Route path="/pricing/start" element={<PricingStart />} />
