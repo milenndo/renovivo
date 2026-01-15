@@ -360,8 +360,252 @@ const VirtualTours = () => {
         </div>
       </section>
 
+      {/* Demo Section - Matterport Showcase */}
+      <section className="py-24 bg-slate-950">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <Badge className="mb-4 px-6 py-2 bg-primary/10 text-primary border-primary/30">
+              <Play className="w-4 h-4 mr-2" />
+              {language === 'bg' ? 'Демонстрация' : 'Live Demo'}
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-50 mb-4">
+              {language === 'bg' ? 'Вижте на живо' : 'See It Live'}
+            </h2>
+            <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+              {language === 'bg' 
+                ? 'Разгледайте реален виртуален тур. Навигирайте свободно в пространството и изпитайте технологията.'
+                : 'Explore a real virtual tour. Navigate freely in the space and experience the technology.'}
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-2 md:p-4 shadow-2xl">
+              {/* Browser mockup header */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-slate-800/50 rounded-t-2xl border-b border-slate-700/50">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                </div>
+                <div className="flex-1 mx-4">
+                  <div className="bg-slate-700/50 rounded-lg px-4 py-1.5 text-sm text-slate-400 text-center max-w-md mx-auto">
+                    my.matterport.com/show
+                  </div>
+                </div>
+              </div>
+              
+              {/* Matterport iframe */}
+              <div className="aspect-video rounded-b-2xl overflow-hidden">
+                <iframe
+                  src="https://my.matterport.com/show/?m=v7p9gNck42P&play=1"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  allow="fullscreen; vr"
+                  className="w-full h-full"
+                  title={language === 'bg' ? 'Виртуален тур демо' : 'Virtual tour demo'}
+                />
+              </div>
+            </div>
+            
+            <p className="text-center text-slate-500 mt-6 text-sm">
+              {language === 'bg' 
+                ? 'Използвайте мишката или докоснете екрана за навигация. Натиснете бутона за цял екран за по-добро изживяване.'
+                : 'Use mouse or touch to navigate. Click fullscreen button for better experience.'}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-24 bg-gradient-to-b from-slate-950 to-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <Badge variant="outline" className="mb-4 px-4 py-2 border-primary/30 text-primary">
+              {language === 'bg' ? 'Ценообразуване' : 'Pricing'}
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              {language === 'bg' ? 'Изберете пакет' : 'Choose a Package'}
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              {language === 'bg' 
+                ? 'Гъвкави решения за всеки проект. Цените са без ДДС.'
+                : 'Flexible solutions for every project. Prices are VAT exclusive.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Basic Package */}
+            <Card className="relative bg-card/50 backdrop-blur border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-8">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">Basic</h3>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    {language === 'bg' ? 'За малки пространства' : 'For small spaces'}
+                  </p>
+                  <div className="flex items-baseline justify-center gap-1">
+                    <span className="text-5xl font-bold text-primary">1.5</span>
+                    <span className="text-xl text-muted-foreground">€/m²</span>
+                  </div>
+                </div>
+                
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? '360° виртуален тур' : '360° virtual tour'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'Уеб линк за споделяне' : 'Web link for sharing'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'HD снимки' : 'HD photos'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'До 500 m²' : 'Up to 500 m²'}</span>
+                  </li>
+                </ul>
+                
+                <Button variant="outline" className="w-full py-6" asChild>
+                  <a href="tel:+359893712919">
+                    <Phone className="mr-2 h-4 w-4" />
+                    {language === 'bg' ? 'Свържете се' : 'Contact Us'}
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Pro Package - Featured */}
+            <Card className="relative bg-gradient-to-b from-primary/10 to-card border-primary/50 hover:border-primary transition-all duration-300 hover:-translate-y-2 shadow-xl shadow-primary/10">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                <Badge className="bg-primary text-primary-foreground px-4 py-1">
+                  {language === 'bg' ? 'Популярен' : 'Popular'}
+                </Badge>
+              </div>
+              <CardContent className="p-8 pt-10">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">Pro</h3>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    {language === 'bg' ? 'За професионалисти' : 'For professionals'}
+                  </p>
+                  <div className="flex items-baseline justify-center gap-1">
+                    <span className="text-5xl font-bold text-primary">2.5</span>
+                    <span className="text-xl text-muted-foreground">€/m²</span>
+                  </div>
+                </div>
+                
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'Всичко от Basic' : 'Everything in Basic'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? '3D модел (.obj, .fbx)' : '3D model (.obj, .fbx)'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? '4K HDR снимки' : '4K HDR photos'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'Схематичен план' : 'Schematic floor plan'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'До 500 m²' : 'Up to 500 m²'}</span>
+                  </li>
+                </ul>
+                
+                <Button className="w-full py-6" asChild>
+                  <a href="tel:+359893712919">
+                    <Phone className="mr-2 h-4 w-4" />
+                    {language === 'bg' ? 'Свържете се' : 'Contact Us'}
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Enterprise Package */}
+            <Card className="relative bg-card/50 backdrop-blur border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-2">
+              <CardContent className="p-8">
+                <div className="text-center mb-8">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">Enterprise</h3>
+                  <p className="text-muted-foreground text-sm mb-6">
+                    {language === 'bg' ? 'Пълен пакет' : 'Full package'}
+                  </p>
+                  <div className="flex items-baseline justify-center gap-1">
+                    <span className="text-5xl font-bold text-primary">4</span>
+                    <span className="text-xl text-muted-foreground">€/m²</span>
+                  </div>
+                </div>
+                
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'Всичко от Pro' : 'Everything in Pro'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'Point Cloud данни' : 'Point Cloud data'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'CAD чертежи (DWG)' : 'CAD drawings (DWG)'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'BIM модел (Revit)' : 'BIM model (Revit)'}</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-muted-foreground">{language === 'bg' ? 'До 500 m²' : 'Up to 500 m²'}</span>
+                  </li>
+                </ul>
+                
+                <Button variant="outline" className="w-full py-6" asChild>
+                  <a href="tel:+359893712919">
+                    <Phone className="mr-2 h-4 w-4" />
+                    {language === 'bg' ? 'Свържете се' : 'Contact Us'}
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Over 500m² notice */}
+          <div className="mt-12 text-center">
+            <Card className="inline-block bg-muted/30 border-border/50">
+              <CardContent className="p-6 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Building2 className="w-6 h-6 text-primary" />
+                </div>
+                <div className="text-left">
+                  <h4 className="font-semibold text-foreground">
+                    {language === 'bg' ? 'Над 500 m²?' : 'Over 500 m²?'}
+                  </h4>
+                  <p className="text-muted-foreground text-sm">
+                    {language === 'bg' 
+                      ? 'Цената е по договаряне. Свържете се с нас за индивидуална оферта.'
+                      : 'Price is negotiable. Contact us for a custom quote.'}
+                  </p>
+                </div>
+                <Button size="sm" variant="outline" asChild>
+                  <a href="tel:+359893712919">
+                    <Phone className="mr-2 h-4 w-4" />
+                    {language === 'bg' ? 'Обадете се' : 'Call Us'}
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Process Section */}
-      <section className="py-24 bg-gradient-to-b from-background to-slate-950">
+      <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2">
