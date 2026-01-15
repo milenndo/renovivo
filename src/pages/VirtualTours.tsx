@@ -397,7 +397,7 @@ const VirtualTours = () => {
               {/* Matterport iframe */}
               <div className="aspect-video rounded-b-2xl overflow-hidden">
                 <iframe
-                  src="https://my.matterport.com/show/?m=v7p9gNck42P&play=1"
+                  src="https://my.matterport.com/show/?m=v7p9gNck42P&play=1&mls=2"
                   width="100%"
                   height="100%"
                   frameBorder="0"
