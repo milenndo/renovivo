@@ -1,4 +1,22 @@
-export const planningRenovationPost = {
+import type { Language } from '@/contexts/LanguageContext';
+
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  category: string;
+  tags: string[];
+  author: string;
+  reading_time: number;
+  meta_title: string;
+  meta_description: string;
+  created_at: string;
+}
+
+// Bulgarian version
+const planningRenovationPostBG: BlogPost = {
   id: 'planning-renovation-2026',
   title: 'Как да планирате ремонт на апартамент – Пълен наръчник 2026',
   slug: 'kak-da-planirate-remont-step-by-step-2026',
@@ -117,7 +135,127 @@ export const planningRenovationPost = {
   created_at: new Date().toISOString(),
 };
 
-export const microcementPost = {
+// English version
+const planningRenovationPostEN: BlogPost = {
+  id: 'planning-renovation-2026',
+  title: 'How to Plan an Apartment Renovation – Complete Guide 2026',
+  slug: 'how-to-plan-apartment-renovation-step-by-step-2026',
+  excerpt: 'Apartment renovation doesn\'t start with demolition, choosing tiles, or finding contractors. It starts with planning. Most problems, costs, and disappointments are not the result of poor execution, but of a lack of clear strategy from the beginning.',
+  content: `### How to Plan an Apartment Renovation – Complete Guide 2026
+
+Apartment renovation doesn't start with demolition, choosing tiles, or finding contractors. It starts with planning. In our practice over recent years, we see the same pattern – most problems, costs, and disappointments are not the result of poor execution, but of a lack of clear strategy from the beginning.
+
+This guide is created to provide a comprehensive framework for planning an apartment renovation in 2026 – whether it's a partial renovation or a complete overhaul.
+
+## 1. Start with a Clear Goal, Not Solutions
+
+The first and most often underestimated step is formulating the renovation goal. Not "I want a new bathroom" or "I want a more modern apartment," but specifically:
+
+- For living or for investment
+- For short-term or long-term use
+- For a family, single person, or rental
+- For maximum aesthetics or minimal maintenance
+
+These answers determine all subsequent decisions – from materials to budget and timelines. Without a clearly defined goal, the renovation starts to be driven by impulsive choices that often contradict each other.
+
+## 2. Realistic Budget: More Than "How Much Money I Have"
+
+In 2026, apartment renovation is no longer just a sum of square meters times prices. The real budget must include:
+
+- construction and renovation activities
+- materials (basic and finishing)
+- hidden costs (corrections, rework, additions)
+- reserve of at least 10–15%
+
+One of the most common mistakes is planning the budget "to the last penny." In real renovation, there are almost always unforeseen factors – old installations, uneven bases, incompatible solutions from previous stages.
+
+## 3. The Project Is Not a Luxury, But a Control Tool
+
+Whether we're talking about an interior design project or a technical specification, the project is what keeps the renovation under control.
+
+The project doesn't serve to "look beautiful," but to:
+
+- coordinate different stages
+- avoid conflicts between systems
+- make decisions in advance, not on site
+
+**Example:** openings for interior doors, transitions between flooring, drain heights, lighting positions – these are details that, if not resolved in advance, inevitably involve the client in technical problems that are not their responsibility.
+
+## 4. Renovation Sequence Is Critical
+
+A well-planned renovation follows clear logic. Skipping stages almost always leads to going back.
+
+**Typical sequence:**
+
+1. Demolition and breaking
+2. Rough installations (plumbing, electrical)
+3. Leveling bases and screeds
+4. Waterproofing
+5. Flooring and tiling
+6. Painting and finishing work
+7. Installation and final adjustments
+
+When this sequence is not followed, compromises begin – not because someone can't do it, but because it's already too late.
+
+## 5. Coordination Between Different Activities
+
+In real renovation, rarely only one company participates. Doors, kitchens, furniture, lighting, air conditioning – they all come at different times.
+
+**The key question is:** Who thinks about the connections between them?
+
+When there's no central control, the client becomes the coordinator – and this is exactly where the feeling arises that "someone missed something." A professional renovation company must take this responsibility and think of the entire process as a system.
+
+## 6. Materials – Compatibility, Not Just Appearance
+
+In 2026, the choice of materials is huge, but that doesn't mean everything works well together.
+
+It's important to consider:
+
+- operating conditions
+- maintenance over time
+- compatibility between systems
+- actual load
+
+Modern solutions are not a problem when used correctly. The problem comes when the material is chosen for itself, without thinking about the context.
+
+## 7. Timelines and Real Expectations
+
+A well-planned renovation has timelines, but also buffers. Promises of "express renovations" often mean compromises or chaotic execution.
+
+Better to have:
+
+- clear schedule
+- realistic timelines
+- phased handover
+- transparent communication
+
+Renovation should not be a source of constant stress, but a process with clear structure.
+
+## 8. The Client's Role: Informed, But Not Involved
+
+The best scenario is when the client:
+
+- knows what will happen
+- understands why decisions are made
+- but is not forced to solve technical problems
+
+When the renovation is well planned, the client participates strategically, not operationally.
+
+### Conclusion: Good Renovation Is the Result of Thinking, Not Demolition
+
+Apartment renovation in 2026 requires more than skills – it requires systematic thinking, coordination, and responsibility. When these elements are in place, the result is not just a renovated home, but a process that proceeds clearly, predictably, and in a controlled manner.
+
+At Renovivo, we believe that good renovation starts long before the first tool and ends long after the last detail.`,
+  category: 'tips',
+  tags: ['renovation planning', 'renovation tips 2026', 'renovation budget', 'apartment renovation', 'renovation organization'],
+  author: 'Renovivo',
+  reading_time: 8,
+  meta_title: 'How to Plan an Apartment Renovation – Complete Guide 2026 | Renovivo',
+  meta_description: 'Comprehensive guide for planning an apartment renovation in 2026. Learn about budgeting, stages, coordination, and how to avoid common mistakes.',
+  created_at: new Date().toISOString(),
+};
+
+const microcementPostBG: BlogPost = {
   id: 'microcement-bath-2026',
   title: 'Ремонт на баня с микроцимент – процес, контрол и дълготраен резултат',
   slug: 'mikrociment-moderno-reshenie-steni-podove',
@@ -198,3 +336,98 @@ export const microcementPost = {
   meta_description: 'Професионален ремонт на баня с микроцимент в София. Процес, подготовка, предимства и реални примери за безфугови покрития.',
   created_at: new Date().toISOString(),
 };
+
+const microcementPostEN: BlogPost = {
+  id: 'microcement-bath-2026',
+  title: 'Bathroom Renovation with Microcement – Process, Control and Long-lasting Result',
+  slug: 'microcement-modern-solution-walls-floors',
+  excerpt: 'Why microcement is an increasingly common solution for bathroom renovation in 2026. Learn about the work process, preparation, and advantages of seamless coatings.',
+  content: `### Bathroom Renovation with Microcement – Process, Control and Long-lasting Result
+
+Why is microcement an increasingly common solution for bathroom renovation? In 2026, microcement is no longer exotic or a design experiment. It's an established solution for mid to high-end bathroom renovations when seeking seamless coating, clean aesthetics, and controlled results. At Renovivo, we use it not as a "modern effect," but as a working system that requires precise preparation and disciplined execution.
+
+Its main advantage is that it allows complete bathroom renovation without traditional tile laying, while providing water resistance, durability, and easy maintenance.
+
+## Is Microcement Suitable for Every Bathroom?
+
+The short answer is: **no.** And this is important to state clearly. Microcement works excellently when:
+- the base is stable or can be corrected
+- there's possibility for quality waterproofing
+- the bathroom is well ventilated
+- a long-lasting solution is sought, not the lowest price
+
+We don't recommend it for compromised floors, chronic moisture, or when the budget doesn't allow systematic execution. In these cases, classic solutions are often more reliable.
+
+## How Does Bathroom Renovation with Microcement Work at Renovivo?
+
+For us, microcement is the last stage, not the first. The real renovation starts much earlier.
+
+**1. Inspection and Technical Assessment**
+We check the bases, slopes, drains, moisture, existing coatings, and installations. At this stage, we decide whether microcement is even suitable.
+
+**2. Preparation and Waterproofing**
+This is the critical phase. Without quality waterproofing, microcement has no place in the bathroom. We only work with systematic solutions suitable for wet rooms.
+
+**3. Reinforcement and Leveling**
+We prepare surfaces so that microcement works structurally, not just decoratively.
+
+**4. Microcement Application**
+Applied manually, in several layers, with control over texture and uniformity.
+
+**5. Sealing and Protection**
+The final lacquer determines durability over time. No compromises are made here.
+
+## Real Example: Bathroom Renovation with Microcement – Sofia
+
+**Property type:** apartment, new construction
+**Goal:** modern bathroom without joints, easy maintenance
+**Challenge:** slight deviations in levels and unstable screed
+
+**The Solution:**
+- base correction
+- complete waterproofing system
+- microcement on floors and walls
+- accent zone in shower area
+
+**The Result:**
+A bathroom with clean aesthetics, no joints, clearly defined zones, and durable coating that allows daily use without compromises.
+
+## Advantages and Real Expectations
+
+**Advantages:**
+- seamless coating
+- modern and timeless aesthetics
+- easy maintenance
+- suitable for floors and walls
+
+**Reality:**
+- not the cheapest solution
+- requires time and control
+- quality depends entirely on execution
+
+### Our Philosophy When Working with Microcement
+
+At Renovivo, we don't sell materials, we sell results. Microcement is a tool we use only when it solves a real problem and fits the project. Every bathroom renovation starts with analysis, not promises.
+
+If you're looking for a renovation that looks good not only in photos but also after years – the approach is more important than the material.`,
+  category: 'bathrooms',
+  tags: ['bathroom renovation with microcement', 'microcement bathroom', 'bathroom renovation Sofia', 'seamless bathroom coatings'],
+  author: 'Renovivo',
+  reading_time: 4,
+  meta_title: 'Bathroom Renovation with Microcement | Renovivo',
+  meta_description: 'Professional bathroom renovation with microcement in Sofia. Process, preparation, advantages, and real examples of seamless coatings.',
+  created_at: new Date().toISOString(),
+};
+
+// Export functions to get posts by language
+export const getPlanningRenovationPost = (language: Language): BlogPost => {
+  return language === 'bg' ? planningRenovationPostBG : planningRenovationPostEN;
+};
+
+export const getMicrocementPost = (language: Language): BlogPost => {
+  return language === 'bg' ? microcementPostBG : microcementPostEN;
+};
+
+// Legacy exports for backward compatibility
+export const planningRenovationPost = planningRenovationPostBG;
+export const microcementPost = microcementPostBG;

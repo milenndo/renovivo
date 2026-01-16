@@ -1,4 +1,5 @@
 import { Home, Bath, ChefHat, Paintbrush, Layers, Wrench, Zap, Droplets, Square, Sparkles, Hexagon, Mountain, Lightbulb, DoorOpen, Sofa, Hammer, Timer, Frame } from "lucide-react";
+import type { Language } from '@/contexts/LanguageContext';
 
 export const getServiceById = (id: string): Service | undefined => {
   return services.find(service => service.id === id);
@@ -49,8 +50,8 @@ export interface Service {
   faq?: { question: string; answer: string }[];
 }
 
-// FAQ данни за различните услуги
-export const serviceFAQs: Record<string, { question: string; answer: string }[]> = {
+// FAQ данни за различните услуги - Bulgarian
+const serviceFAQsBG: Record<string, { question: string; answer: string }[]> = {
   "full-renovation": [
     { question: "Колко време отнема цялостен ремонт на апартамент?", answer: "Цялостният ремонт обикновено отнема от 2 до 4 месеца, в зависимост от площта и сложността на проекта. За 80 кв.м. апартамент, стандартният срок е около 2.5-3 месеца." },
     { question: "Какво включва цената за цялостен ремонт?", answer: "Цената включва всички довършителни работи: шпакловка, замазка, настилки, боядисване, ел. и ВиК инсталации, монтаж на врати и санитария. Материалите се калкулират отделно или по договореност." },
@@ -85,10 +86,53 @@ export const serviceFAQs: Record<string, { question: string; answer: string }[]>
   ]
 };
 
-export const services: Service[] = [
+// FAQ data for different services - English
+const serviceFAQsEN: Record<string, { question: string; answer: string }[]> = {
+  "full-renovation": [
+    { question: "How long does a complete apartment renovation take?", answer: "Complete renovation usually takes 2 to 4 months, depending on the area and project complexity. For an 80 sq.m. apartment, the standard timeframe is around 2.5-3 months." },
+    { question: "What does the price for complete renovation include?", answer: "The price includes all finishing works: plastering, screed, flooring, painting, electrical and plumbing installations, door and sanitary ware installation. Materials are calculated separately or by agreement." },
+    { question: "Do I need to be present during the renovation?", answer: "Not necessary. We provide a personal project manager who coordinates everything and keeps you regularly informed. You can visit the site anytime." },
+    { question: "Do you provide warranty for the work?", answer: "Yes, we offer warranty for all work performed. The term varies depending on the type of work - from 2 to 10 years for different elements." }
+  ],
+  "bathroom": [
+    { question: "How long does a bathroom renovation take?", answer: "Standard bathroom renovation takes 2-3 weeks. For more complex projects with plumbing relocation or expansion - up to 4 weeks." },
+    { question: "Is waterproofing included in the price?", answer: "Yes, professional waterproofing is a mandatory stage and always included. We use a multi-layer system with 10-year warranty." },
+    { question: "Can you install underfloor heating in the bathroom?", answer: "Yes, we install electric underfloor heating, which is ideal for bathrooms. It adds comfort and is energy efficient." }
+  ],
+  "kitchen": [
+    { question: "Do you make custom kitchens?", answer: "Yes, we work with leading manufacturers of custom kitchen furniture. We offer full service - from 3D design to installation and appliance connection." },
+    { question: "How much does a kitchen renovation cost?", answer: "The price depends on the area, selected materials and appliances. The average price for a 12-15 sq.m. kitchen is between 8,000 and 20,000 BGN with furniture." }
+  ],
+  "microcement": [
+    { question: "How long does microcement last?", answer: "With proper application and maintenance, microcement lasts over 20 years. It's resistant to wear, water and UV rays." },
+    { question: "Can it be applied over old tiles?", answer: "Yes, microcement can be applied directly over old tiles, laminate or concrete, without the need for demolition." },
+    { question: "Is it suitable for bathroom and kitchen?", answer: "Absolutely. With proper sealing, microcement is completely waterproof and ideal for wet rooms." }
+  ],
+  "terrazzo": [
+    { question: "What's the difference between terrazzo and microcement?", answer: "Terrazzo contains natural stones and marble, which are ground to a mirror shine. It lasts 75+ years and is more luxurious, but also more expensive than microcement." },
+    { question: "Can we choose the stone design?", answer: "Yes, we offer a wide range of stones, colors and sizes. You can create a unique design tailored to your interior." }
+  ],
+  "electrical": [
+    { question: "Do you work with smart home projects?", answer: "Yes, we install smart home systems - smart lighting, thermostats, blinds and centralized control." },
+    { question: "Do you issue a certificate for electrical installation?", answer: "Yes, after completion we issue an electrical measurement protocol, which is required for property registration." }
+  ],
+  "plumbing": [
+    { question: "Do you work with underfloor heating?", answer: "Yes, we install water and electric underfloor heating. We offer a complete solution - from design to commissioning." },
+    { question: "How much does plumbing replacement cost?", answer: "The price depends on the length of pipes and complexity. Approximately - from 1,500 to 4,000 BGN for a standard apartment." }
+  ]
+};
+
+export const getServiceFAQs = (language: Language): Record<string, { question: string; answer: string }[]> => {
+  return language === 'bg' ? serviceFAQsBG : serviceFAQsEN;
+};
+
+// Legacy export for backward compatibility
+export const serviceFAQs = serviceFAQsBG;
+
+const servicesBG: Service[] = [
   // ========== ЦЯЛОСТНИ ДОВЪРШИТЕЛНИ РАБОТИ ==========
   // Ново строителство - готови към обитаване
-  
+
   {
     id: "finishing-works",
     icon: Paintbrush,
@@ -571,3 +615,349 @@ export const services: Service[] = [
     isInnovative: true
   }
 ];
+
+// English services data
+const servicesEN: Service[] = [
+  // ========== COMPLETE FINISHING WORKS ==========
+  {
+    id: "finishing-works",
+    icon: Paintbrush,
+    title: "Complete Finishing Works",
+    category: "finishing-work",
+    shortDescription: "We transform newly built homes into ready-to-move-in homes with attention to every detail.",
+    fullDescription: "Finishing works are the final stage that transforms raw construction into a finished home. Our team takes on the entire process - from initial surface preparation to final installation of doors and accessories. We work with proven materials and modern technologies to guarantee durability and flawless aesthetics. Each project is executed according to an individual plan, tailored to your requirements and budget.",
+    features: [
+      "Plastering and priming of walls and ceilings",
+      "Installation of floor coverings - laminate, parquet, tiles",
+      "Painting with high-quality paints",
+      "Installation of suspended ceilings and lighting",
+      "Construction of drywall structures",
+      "Installation of doors and baseboards",
+      "Installation of sanitary equipment"
+    ],
+    process: [
+      { step: 1, title: "Inspection and planning", description: "Site visit and preparation of detailed work plan." },
+      { step: 2, title: "Surface preparation", description: "Plastering, priming and preparation of walls and ceilings." },
+      { step: 3, title: "Flooring and tiling", description: "Installation of floor coverings and wall coatings." },
+      { step: 4, title: "Installation", description: "Placement of doors, sanitary ware and electrical accessories." },
+      { step: 5, title: "Finalization", description: "Painting, cleaning and handover of the property." }
+    ],
+    image: paintingImg,
+    gallery: [paintingImg, flooringImg],
+    isInnovative: false
+  },
+
+  {
+    id: "drywall-construction",
+    icon: Layers,
+    title: "Drywall Construction",
+    category: "finishing-work",
+    shortDescription: "Drywall, suspended ceilings and partition walls - fast and clean construction of interior elements.",
+    fullDescription: "Drywall construction is a modern technology for fast and efficient construction of interior walls, ceilings and decorative elements without using wet processes. Drywall structures allow easy concealment of installations, improved sound insulation and creation of unique architectural forms. Key advantages include: speed of execution (up to 3 times faster than masonry), cleanliness of the work process, easy subsequent modifications and perfect surface geometry. We work with quality Knauf profiles and boards with different characteristics - standard, moisture-resistant, fire-resistant and sound-insulating.",
+    features: [
+      "Drywall partition walls",
+      "Suspended ceilings - smooth and multi-level",
+      "Wall cladding for concealing installations",
+      "Decorative niches and shelves",
+      "Hidden lighting and LED strips",
+      "Sound and thermal insulation",
+      "Moisture-resistant solutions for bathrooms"
+    ],
+    process: [
+      { step: 1, title: "Consultation", description: "Discussion of ideas and technical possibilities." },
+      { step: 2, title: "Construction", description: "Installation of metal structure and cladding." },
+      { step: 3, title: "Insulation", description: "Installation of insulation material if needed." },
+      { step: 4, title: "Finishing", description: "Joint plastering and preparation for painting." }
+    ],
+    image: drywallImg,
+    gallery: [drywallImg],
+    isInnovative: false
+  },
+
+  {
+    id: "custom-furniture",
+    icon: Sofa,
+    title: "Custom Furniture",
+    category: "finishing-work",
+    shortDescription: "Custom furniture made to individual sizes and specifications - kitchens, wardrobes, cabinets.",
+    fullDescription: "Custom furniture is the perfect solution for maximum utilization of every centimeter of your space. We work with experienced furniture makers who create functional and beautiful products tailored to your needs and style. From kitchen furniture through built-in wardrobes to special solutions for non-standard niches - everything is made with precision and attention to detail.",
+    features: [
+      "Kitchen furniture according to individual project",
+      "Built-in wardrobes and closets",
+      "Bathroom and hallway cabinets",
+      "Furniture for non-standard spaces",
+      "Choice of multiple materials and finishes",
+      "3D visualization before production",
+      "Delivery and installation by our team"
+    ],
+    process: [
+      { step: 1, title: "Measurement", description: "Precise measurement of the space." },
+      { step: 2, title: "Design", description: "Preparation of project and 3D visualization." },
+      { step: 3, title: "Production", description: "Manufacturing in furniture workshop according to approved project." },
+      { step: 4, title: "Installation", description: "Delivery and professional on-site installation." }
+    ],
+    image: kitchenImg,
+    gallery: [kitchenImg],
+    isInnovative: false
+  },
+
+  {
+    id: "windows-doors",
+    icon: Frame,
+    title: "Window Replacement",
+    category: "finishing-work",
+    shortDescription: "Removal of old windows and installation of new windows and doors with professional treatment.",
+    fullDescription: "Window replacement is an investment in comfort and energy efficiency. New windows can reduce heat loss by up to 40%, which directly affects heating bills. We remove old windows and install new PVC or aluminum windows and doors with precise treatment of openings. We ensure proper hydro and thermal insulation, joint filling and finishing of interior and exterior sills. We work with leading brands such as Rehau, Salamander, Veka and Schüco, guaranteeing durability and aesthetics.",
+    features: [
+      "Removal of old windows",
+      "Preparation and correction of openings",
+      "Installation of PVC or aluminum windows",
+      "Hydro and thermal insulation along the perimeter",
+      "Installation of interior sills",
+      "Fabrication of exterior sills",
+      "Adjustment and tuning of mechanisms"
+    ],
+    process: [
+      { step: 1, title: "Measurement", description: "Precise measurement of openings." },
+      { step: 2, title: "Removal", description: "Careful removal of old windows." },
+      { step: 3, title: "Installation", description: "Professional placement and leveling." },
+      { step: 4, title: "Finishing", description: "Insulation, sills and final adjustment." }
+    ],
+    image: windowsImg,
+    gallery: [windowsImg],
+    isInnovative: false
+  },
+
+  {
+    id: "doors-installation",
+    icon: DoorOpen,
+    title: "Interior and Entrance Door Installation",
+    category: "finishing-work",
+    shortDescription: "Professional installation of interior, sliding and entrance doors with perfect treatment.",
+    fullDescription: "Doors are an important element of the interior that combines functionality and aesthetics. Proper installation is critical for silent opening, tight closing and durability. We offer professional installation of all types of doors - from standard interior through hidden systems with concealed hinges to sliding doors in the wall and solid entrance doors with biometric locking. We work with different brands and models, ensuring precise leveling (up to 1mm tolerance), proper frame treatment and flawless finish with baseboards.",
+    features: [
+      "Installation of interior doors",
+      "Sliding and hidden systems",
+      "Entrance doors - steel and aluminum",
+      "Glass doors and partition systems",
+      "Precise frame treatment",
+      "Installation of baseboards and moldings",
+      "Adjustment and tuning"
+    ],
+    process: [
+      { step: 1, title: "Measurement", description: "Exact dimensions for proper door selection." },
+      { step: 2, title: "Preparation", description: "Opening correction if necessary." },
+      { step: 3, title: "Installation", description: "Placement of frames and leaves." },
+      { step: 4, title: "Finishing", description: "Baseboards, silicone and final adjustment." }
+    ],
+    image: doorsImg,
+    gallery: [doorsImg],
+    isInnovative: false
+  },
+
+  // ========== MAJOR RENOVATION ==========
+  {
+    id: "apartment-renovation",
+    icon: Home,
+    title: "Major Apartment Renovation",
+    category: "full-renovation",
+    shortDescription: "Complete renovation of apartments in panel, brick and EPK buildings - old construction.",
+    fullDescription: "Major apartment renovation in old construction is a complex process requiring specialized approach according to construction type. Panel buildings have their specifics - thin walls (12-16 cm), specific distribution of installations in channels, limited possibilities for moving plumbing points. Brick buildings offer more possibilities for restructuring, but often have uneven walls and floors. EPK structures require attention when working with load-bearing elements and thermal insulation. For all types of old construction we recommend complete replacement of installations (average age 40+ years), modern electrical solutions (minimum 10kW input power), contemporary plumbing system with PPR pipes and professional waterproofing.",
+    features: [
+      "Demolition and removal of old flooring and tiling",
+      "Replacement of plumbing installations",
+      "Replacement of electrical installation",
+      "Leveling of walls and floors",
+      "Waterproofing of wet rooms",
+      "Installation of new flooring",
+      "Painting and finishing works"
+    ],
+    process: [
+      { step: 1, title: "Inspection and assessment", description: "Analysis of condition and construction type." },
+      { step: 2, title: "Planning", description: "Preparation of budget and schedule." },
+      { step: 3, title: "Demolition", description: "Breaking and preparation for new installations." },
+      { step: 4, title: "Installations", description: "Replacement of plumbing, electrical and heating systems." },
+      { step: 5, title: "Finishing", description: "Flooring, plastering, painting and installation." }
+    ],
+    image: apartmentRenovationImg,
+    gallery: [apartmentRenovationImg, bathroomImg],
+    isInnovative: false
+  },
+
+  {
+    id: "house-renovation",
+    icon: Home,
+    title: "Major House Renovation",
+    category: "full-renovation",
+    shortDescription: "Complete renovation of single-family houses - from foundations to roof.",
+    fullDescription: "House renovation is a large-scale project requiring coordination of multiple activities - from structural reinforcement to roof structure replacement. We work with old houses, which often require facade renovation, replacement of wooden structures and modernization of heating systems. Our team has experience with different architectural styles and materials characteristic of Bulgarian construction.",
+    features: [
+      "Assessment of structural condition",
+      "Reinforcement if necessary",
+      "Replacement of roof structure",
+      "Renovation and thermal insulation",
+      "Replacement of all installations",
+      "Interior finishing works",
+      "Improvement of energy efficiency"
+    ],
+    process: [
+      { step: 1, title: "Expertise", description: "Assessment of load-bearing structure and condition." },
+      { step: 2, title: "Design", description: "Renovation plan and necessary permits." },
+      { step: 3, title: "Structural works", description: "Reinforcement, roof, facade." },
+      { step: 4, title: "Installations", description: "New plumbing, electrical and heating systems." },
+      { step: 5, title: "Finishing", description: "Interior works and completion." }
+    ],
+    image: fullRenovationImg,
+    gallery: [fullRenovationImg],
+    isInnovative: false
+  },
+
+  // ========== PARTIAL RENOVATIONS ==========
+  {
+    id: "bathroom",
+    icon: Bath,
+    title: "Bathroom Renovation",
+    category: "partial-renovation",
+    shortDescription: "Complete bathroom transformation - from waterproofing to final details.",
+    fullDescription: "The bathroom is one of the most heavily used rooms in the home and requires an uncompromising approach to quality. We perform comprehensive execution: removal of old tiles, replacement of installations, professional waterproofing with warranty, installation of structures for built-in cistern, linear drains and luxury sanitary ware. We specialize in complex executions such as miter cutting of tiles (45 degrees), creation of niches and concealment of pipes.",
+    features: [
+      "Removal of old coatings and sanitary ware",
+      "Replacement of plumbing installations",
+      "Multi-layer waterproofing with warranty",
+      "Structures for built-in cistern",
+      "Linear drains and floor drainage",
+      "Miter cutting of tiles (45°)",
+      "Installation of shower cabins and bathtubs"
+    ],
+    process: [
+      { step: 1, title: "Demolition", description: "Careful removal of old elements." },
+      { step: 2, title: "Installations", description: "New plumbing points according to project." },
+      { step: 3, title: "Waterproofing", description: "Multi-layer protection against moisture." },
+      { step: 4, title: "Tiling", description: "Precise tile installation." },
+      { step: 5, title: "Installation", description: "Sanitary ware, accessories and final details." }
+    ],
+    image: bathroomImg,
+    gallery: [bathroomImg],
+    isInnovative: false
+  },
+
+  {
+    id: "kitchen",
+    icon: ChefHat,
+    title: "Kitchen Renovation",
+    category: "partial-renovation",
+    shortDescription: "Modernization of kitchen space with attention to functionality and style.",
+    fullDescription: "The kitchen is the heart of the home and requires uncompromising planning. We don't offer standard solutions, but complete kitchen design tailored to ergonomics and specifics of your space. We take on the entire process: from demolition and correction of plumbing and electrical installations to precise installation of furniture and appliances. We create spaces that combine practicality with aesthetics.",
+    features: [
+      "Removal of old kitchen",
+      "Relocation of plumbing and electrical points",
+      "Preparation of walls and floors",
+      "Installation of kitchen furniture",
+      "Built-in appliances",
+      "Tiling or other protection",
+      "Installation of lighting and accessories"
+    ],
+    process: [
+      { step: 1, title: "Planning", description: "Measurement and design of new kitchen." },
+      { step: 2, title: "Demolition", description: "Removal of old furniture and appliances." },
+      { step: 3, title: "Installations", description: "Correction of plumbing and electricity." },
+      { step: 4, title: "Finishing", description: "Surface preparation and tiling." },
+      { step: 5, title: "Installation", description: "Placement of furniture and appliances." }
+    ],
+    image: kitchenImg,
+    gallery: [kitchenImg],
+    isInnovative: false
+  },
+
+  {
+    id: "living-room",
+    icon: Sofa,
+    title: "Living Room Renovation",
+    category: "partial-renovation",
+    shortDescription: "Transformation of living space into cozy and functional relaxation area.",
+    fullDescription: "The living room is where the family spends the most time together - an average of 4-5 hours daily. That's why it's extremely important for this space to combine comfort with elegance and practicality. We work on all aspects - from flooring replacement (parquet, laminate, boards) through construction of decorative drywall elements (TV walls, niches, hidden lighting) to painting and installation of multi-point lighting. We pay special attention to acoustics (important for home cinema), proper space zoning and ergonomics for maximum comfort.",
+    features: [
+      "Replacement of floor coverings",
+      "Plastering and painting of walls",
+      "Decorative drywall elements",
+      "Suspended ceilings with hidden lighting",
+      "Installation of electrical elements",
+      "Construction of niches for equipment",
+      "Installation of climate systems"
+    ],
+    process: [
+      { step: 1, title: "Concept", description: "Discussion of vision and functional needs." },
+      { step: 2, title: "Preparation", description: "Removal of old elements and preparation." },
+      { step: 3, title: "Execution", description: "Flooring, walls, ceilings." },
+      { step: 4, title: "Details", description: "Lighting, accessories, finishing." }
+    ],
+    image: livingRoomImg,
+    gallery: [livingRoomImg],
+    isInnovative: false
+  },
+
+  {
+    id: "quick-refresh",
+    icon: Timer,
+    title: "Quick Refresh",
+    category: "partial-renovation",
+    shortDescription: "Quick interior renewal up to 1 week - painting, flooring replacement, minor corrections.",
+    fullDescription: "Sometimes the home needs a quick refresh without major renovation. Our refresh renovation is ideal for tenants, owners before sale or simply for interior renewal. Within up to 1 week we can paint walls and ceilings, replace old flooring, refresh joints and silicone in bathroom, replace electrical switches and outlets, install new lighting fixtures.",
+    features: [
+      "Painting of walls and ceilings",
+      "Replacement or renovation of flooring",
+      "Refreshing joints and silicone",
+      "Replacement of switches and outlets",
+      "Installation of lighting fixtures",
+      "Minor repairs and corrections",
+      "Cleaning after renovation"
+    ],
+    process: [
+      { step: 1, title: "Inspection", description: "Quick assessment and scope determination." },
+      { step: 2, title: "Preparation", description: "Protection of furniture and surfaces." },
+      { step: 3, title: "Execution", description: "Fast and efficient renewal." },
+      { step: 4, title: "Handover", description: "Cleaning and ready-to-use home." }
+    ],
+    image: paintingImg,
+    gallery: [paintingImg],
+    isInnovative: false
+  },
+
+  // ========== SPECIAL INNOVATIVE SOLUTIONS ==========
+  {
+    id: "smart-installations",
+    icon: Lightbulb,
+    title: "Smart Installations 2025",
+    category: "special-solutions",
+    shortDescription: "Home automation with Matter protocol - intelligent control of the entire home.",
+    fullDescription: "Smart installations from 2025 turn your home into an intelligent ecosystem with Matter standard - the new universal protocol supported by Apple, Google, Amazon and Samsung. This means all devices work seamlessly together, regardless of manufacturer. Artificial intelligence learns your habits - when you wake up, when you leave home, when you return - and automatically optimizes climate and lighting. 5G connectivity ensures instant response without delay. Biometric security includes facial recognition and fingerprint for entrance door. Real savings of 15-30% on energy costs through intelligent heating and air conditioning management.",
+    features: [
+      "Matter protocol - universal compatibility",
+      "AI control - learns your habits",
+      "5G connectivity - instant response",
+      "Biometric security - facial recognition and fingerprint",
+      "Voice control - Google Assistant, Alexa, Siri",
+      "Real-time energy optimization",
+      "Integration with solar and renewable sources",
+      "Predictive diagnostics and maintenance"
+    ],
+    process: [
+      { step: 1, title: "Home analysis", description: "Assessment of architecture and integration with Matter devices." },
+      { step: 2, title: "Device selection", description: "Recommendation of Matter-compatible devices." },
+      { step: 3, title: "Installation", description: "Professional installation of hub, sensors and actuators." },
+      { step: 4, title: "Configuration", description: "Programming of automation scenarios." },
+      { step: 5, title: "Training", description: "Training for use and continuous support." }
+    ],
+    image: smartHomeImg,
+    gallery: [smartHomeImg],
+    isInnovative: true
+  }
+];
+
+// Export function to get services by language
+export const getServices = (language: Language): Service[] => {
+  return language === 'bg' ? servicesBG : servicesEN;
+};
+
+// Legacy export for backward compatibility
+export const services = servicesBG;

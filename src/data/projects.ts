@@ -1,4 +1,5 @@
 // Import images - използваме различни снимки за всеки проект
+import type { Language } from '@/contexts/LanguageContext';
 import fullRenovationImg from "@/assets/images/services/full-renovation.jpg";
 import bathroomImg from "@/assets/images/services/bathroom.jpg";
 import kitchenImg from "@/assets/images/services/minimalistchna_byala_kuhniya.png";
@@ -47,7 +48,7 @@ export interface Project {
   processImages?: { image: string; caption: string }[];
 }
 
-export const categories = [
+const categoriesBG = [
   { id: "all", name: "Всички" },
   { id: "full", name: "Цялостен ремонт" },
   { id: "bathroom", name: "Баня" },
@@ -57,7 +58,25 @@ export const categories = [
   { id: "innovative", name: "Иновативни покрития" },
 ];
 
-export const projects: Project[] = [
+const categoriesEN = [
+  { id: "all", name: "All" },
+  { id: "full", name: "Complete Renovation" },
+  { id: "bathroom", name: "Bathroom" },
+  { id: "kitchen", name: "Kitchen" },
+  { id: "bedroom", name: "Bedroom" },
+  { id: "living", name: "Living Room" },
+  { id: "innovative", name: "Innovative Coatings" },
+];
+
+export const getCategories = (language: Language) => {
+  return language === 'bg' ? categoriesBG : categoriesEN;
+};
+
+// Legacy export for backward compatibility
+export const categories = categoriesBG;
+
+// Bulgarian projects data
+const projectsBG: Project[] = [
   // ========== ИНОВАТИВНИ ПОКРИТИЯ ==========
   {
     id: "terrazzo-living-room",
@@ -402,3 +421,216 @@ export const projects: Project[] = [
 export const getProjectById = (id: string): Project | undefined => {
   return projects.find((project) => project.id === id);
 };
+// English projects data - to be appended to projects.ts
+
+const projectsEN: Project[] = [
+    // ========== INNOVATIVE COATINGS ==========
+    {
+        id: "terrazzo-living-room",
+        title: "Terrazzo Floor in Living Room",
+        category: "Innovative Coatings",
+        categoryId: "innovative",
+        location: "Sofia, Vitosha District",
+        duration: "2 weeks",
+        area: "45 sq.m.",
+        description: "Luxury Terrazzo floor in a spacious living room with natural stones in warm tones. Unique design that turns the floor into a work of art with 75+ years of durability.",
+        challenge: "The client wanted a floor that would be a central element in the interior and last for decades without wear.",
+        solution: "We applied authentic Terrazzo technique with carefully selected natural stones. Multi-stage diamond grinding for mirror smoothness.",
+        mainImage: terrazzoImg,
+        gallery: [terrazzoImg, terrazzoBathroomImg, livingRoomImg],
+        features: ["Natural stones", "75+ years durability", "UV resistance", "Unique design", "Mirror smoothness"],
+        stages: [
+            { title: "Design consultation", description: "Selection of stones and color composition." },
+            { title: "Preparation", description: "Leveling the base to perfect flatness." },
+            { title: "Mixing", description: "Precise combination of stones and binding agent." },
+            { title: "Application", description: "Manual spreading with expert technique." },
+            { title: "Grinding", description: "Multi-stage diamond grinding for shine." }
+        ],
+        result: {
+            summary: "The client received a unique floor that became the central element of the interior. The floor is easy to maintain and will last for generations.",
+            metrics: [
+                { label: "Timeline", value: "Completed on time" },
+                { label: "Durability", value: "75+ years" },
+                { label: "Maintenance", value: "Minimal" }
+            ],
+            clientSatisfaction: 5
+        }
+    },
+    {
+        id: "flake-floor-terrace",
+        title: "Flake Floor on Terrace",
+        category: "Innovative Coatings",
+        categoryId: "innovative",
+        location: "Sofia, Dragalevtsi District",
+        duration: "3 days",
+        area: "28 sq.m.",
+        description: "Decorative Flake Floor coating on outdoor terrace with waterproofing and UV protection. Modern solution combining aesthetics with functionality for outdoor spaces.",
+        challenge: "The terrace had problems with cracking of old flooring during freezing and needed waterproofing.",
+        solution: "We applied Flake Floor system that is frost-resistant and water-repellent. Colored particles create an attractive decorative effect.",
+        mainImage: flakeFloorImg,
+        gallery: [flakeFloorImg, flakeFloorShowroomImg, stoneCarpetImg],
+        features: ["Waterproofing", "Frost resistance", "UV stability", "Decorative effect", "Quick installation"],
+        stages: [
+            { title: "Assessment", description: "Consultation and color scheme selection." },
+            { title: "Preparation", description: "Cleaning and priming the base." },
+            { title: "Coating", description: "Application of elastic base." },
+            { title: "Decoration", description: "Sprinkling colored Flake particles." },
+            { title: "Protection", description: "Final UV protective treatment." }
+        ]
+    },
+    {
+        id: "stone-carpet-pool",
+        title: "Stone Carpet Around Pool",
+        category: "Innovative Coatings",
+        categoryId: "innovative",
+        location: "Boyana, Sofia",
+        duration: "5 days",
+        area: "65 sq.m.",
+        description: "Stone carpet around private pool with anti-slip surface and drainage. Natural pebbles in beige tones that don't heat up from the sun.",
+        challenge: "The pool area was slippery and water was pooling, creating danger and discomfort.",
+        solution: "We applied stone carpet with 100% water permeability. Anti-slip texture guarantees safety, and natural pebbles stay cool.",
+        mainImage: stoneCarpetPoolImg,
+        gallery: [stoneCarpetPoolImg, stoneCarpetImg, flakeFloorImg],
+        features: ["100% water permeability", "Anti-slip surface", "Frost resistance", "Cool to touch", "Natural appearance"],
+        stages: [
+            { title: "Consultation", description: "Selection of pebble size and color." },
+            { title: "Preparation", description: "Ensuring drainage and priming." },
+            { title: "Application", description: "Manual spreading of pebbles." },
+            { title: "Shaping", description: "Precise treatment around pool edge." },
+            { title: "Curing", description: "24-48 hours for complete curing." }
+        ]
+    },
+    {
+        id: "microcement-entire-apartment",
+        title: "Microcement Throughout Apartment",
+        category: "Innovative Coatings",
+        categoryId: "innovative",
+        location: "Sofia, Lozenets District",
+        duration: "10 days",
+        area: "85 sq.m.",
+        description: "Complete microcement coating on floors and walls in modern apartment. Seamless elegance in anthracite color creating a sense of space and luxury.",
+        challenge: "Client wanted a completely seamless interior without traditional tiles and joints throughout the apartment.",
+        solution: "We applied microcement on all surfaces - floors and partial walls. Unified color creates visual harmony and sense of more space.",
+        mainImage: microcementImg,
+        gallery: [microcementImg, microcementKitchenImg, livingRoomAfterImg],
+        features: ["Completely seamless", "Floors and walls", "Water resistant", "Easy maintenance", "Modern look"],
+        stages: [
+            { title: "Planning", description: "Color selection and coverage zones." },
+            { title: "Preparation", description: "Priming all surfaces." },
+            { title: "Base layer", description: "Application of first microcement layer." },
+            { title: "Decorative layer", description: "Finish layer with selected color." },
+            { title: "Protection", description: "Polyurethane lacquer for durability." }
+        ]
+    },
+    {
+        id: "stone-carpet-balcony",
+        title: "Stone Carpet on Balcony",
+        category: "Innovative Coatings",
+        categoryId: "innovative",
+        location: "Plovdiv",
+        duration: "2 days",
+        area: "12 sq.m.",
+        description: "Stone carpet on balcony with perfect drainage and aesthetic appearance. Solution to the problem of puddles and freezing in winter.",
+        challenge: "Balcony had old tiles that cracked every winter and retained water.",
+        solution: "We applied stone carpet directly over old tiles. Water drains instantly, and the coating withstands extreme temperatures.",
+        mainImage: stoneCarpetImg,
+        gallery: [stoneCarpetImg, stoneCarpetPoolImg, flakeFloorImg],
+        features: ["Directly over old tiles", "Perfect drainage", "Frost resistance", "Natural pebbles", "Minimal maintenance"],
+        stages: [
+            { title: "Inspection", description: "Assessment of old tile condition." },
+            { title: "Preparation", description: "Cleaning and priming." },
+            { title: "Application", description: "Stone carpet application." },
+            { title: "Finishing", description: "Edge and threshold shaping." }
+        ]
+    },
+
+    // ========== COMPLETE RENOVATION ==========
+    {
+        id: "modern-apartment-sofia",
+        title: "Modern Apartment in Sofia",
+        category: "Complete Renovation",
+        categoryId: "full",
+        location: "Sofia, Lozenets District",
+        duration: "3 months",
+        area: "120 sq.m.",
+        description: "Complete renovation of three-room apartment with modern minimalist design. Project includes full replacement of installations, new bathroom and kitchen, and living area restructuring.",
+        challenge: "Old apartment had outdated layout with small closed rooms. Client wanted open space with contemporary look.",
+        solution: "We removed unnecessary partition walls, created open-space living room with kitchen and added modern LED lighting. Used neutral color palette with wood accents.",
+        mainImage: fullRenovationImg,
+        gallery: [fullRenovationImg, livingRoomImg, kitchenImg, bathroomImg],
+        features: ["Open-space living room", "New bathroom", "Modern kitchen", "LED lighting", "Underfloor heating"],
+        stages: [
+            { title: "Demolition", description: "Removal of old flooring, tiles and partition walls. Preparation for new installations." },
+            { title: "Installations", description: "Complete replacement of plumbing and electrical according to new project." },
+            { title: "Masonry and plastering", description: "Construction of new walls, plastering and priming." },
+            { title: "Flooring", description: "Installation of laminate flooring and tiles in wet rooms." },
+            { title: "Finishing", description: "Installation of doors, sanitary ware, lighting and final painting." }
+        ],
+        result: {
+            summary: "We transformed an outdated apartment into a modern, bright and functional home. Client gained 40% more usable space thanks to open layout.",
+            metrics: [
+                { label: "Timeline", value: "Exactly 3 months" },
+                { label: "Budget", value: "Within limits" },
+                { label: "Additional space", value: "+40%" }
+            ],
+            clientSatisfaction: 5
+        }
+    },
+    {
+        id: "luxury-marble-bathroom",
+        title: "Luxury Bathroom with Marble",
+        category: "Bathroom",
+        categoryId: "bathroom",
+        location: "Sofia, Vitosha District",
+        duration: "3 weeks",
+        area: "12 sq.m.",
+        description: "Luxury bathroom with marble tiles, rain shower system and free-standing bathtub. Project includes underfloor heating and LED lighting.",
+        challenge: "Small space that needed to become a spa-like experience without looking cluttered.",
+        solution: "We used mirrors for optical illusion of more space, built-in niches for storage and minimalist design with focus on quality materials.",
+        mainImage: terrazzoBathroomImg,
+        gallery: [terrazzoBathroomImg, bathroomImg, plumbingImg],
+        features: ["Marble tiles", "Rain shower", "Free-standing bathtub", "Underfloor heating", "LED mirror"],
+        stages: [
+            { title: "Demolition", description: "Careful removal of old sanitary ware and tiles." },
+            { title: "Waterproofing", description: "Multi-layer waterproofing with 10-year warranty." },
+            { title: "Plumbing installation", description: "New pipes and preparation for rain shower and bathtub." },
+            { title: "Tiling", description: "Precise installation of marble tiles with miter cutting." },
+            { title: "Installation", description: "Placement of sanitary ware, faucets and accessories." }
+        ]
+    },
+    {
+        id: "minimalist-white-kitchen",
+        title: "Minimalist White Kitchen",
+        category: "Kitchen",
+        categoryId: "kitchen",
+        location: "Sofia, Mladost District",
+        duration: "2 weeks",
+        area: "18 sq.m.",
+        description: "Modern white kitchen with integrated appliances, stone countertop and LED lighting under cabinets. Functional design with maximum use of space.",
+        challenge: "Client wanted maximum clean and minimalist look, but with lots of storage space.",
+        solution: "We designed ceiling-height kitchen with push-to-open mechanisms without visible handles. Integrated all appliances and added hidden LED lighting.",
+        mainImage: kitchenImg,
+        gallery: [kitchenImg, microcementKitchenImg, livingRoomImg],
+        features: ["White handleless facades", "Stone countertop", "Integrated appliances", "LED lighting", "Push-to-open"],
+        stages: [
+            { title: "Measurement", description: "Precise measurements and 3D kitchen design." },
+            { title: "Demolition", description: "Removal of old kitchen and surface preparation." },
+            { title: "Installations", description: "Relocation of plumbing and electrical points according to project." },
+            { title: "Installation", description: "Placement of kitchen cabinets and countertop." },
+            { title: "Finalization", description: "Built-in appliances and mechanism adjustment." }
+        ]
+    }
+];
+
+// Export functions to get projects by language
+export const getProjects = (language: Language): Project[] => {
+    return language === 'bg' ? projectsBG : projectsEN;
+};
+
+export const getProjectByIdWithLanguage = (id: string, language: Language): Project | undefined => {
+    const projectList = language === 'bg' ? projectsBG : projectsEN;
+    return projectList.find((project) => project.id === id);
+};
+
+// Legacy export for backward compatibility
+export const projects = projectsBG;
