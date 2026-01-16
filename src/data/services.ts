@@ -959,5 +959,10 @@ export const getServices = (language: Language): Service[] => {
   return language === 'bg' ? servicesBG : servicesEN;
 };
 
+export const getServiceByIdWithLanguage = (id: string, language: Language): Service | undefined => {
+  const serviceList = language === 'bg' ? servicesBG : servicesEN;
+  return serviceList.find(service => service.id === id);
+};
+
 // Legacy export for backward compatibility
 export const services = servicesBG;

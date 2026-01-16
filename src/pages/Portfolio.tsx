@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Eye } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { projects, categories } from "@/data/projects";
+import { getProjects, getCategories } from "@/data/projects";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -12,8 +12,11 @@ const PortfolioPage = () => {
   const { t, language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("all");
 
-  const filteredProjects = activeCategory === "all" 
-    ? projects 
+  const projects = getProjects(language);
+  const categories = getCategories(language);
+
+  const filteredProjects = activeCategory === "all"
+    ? projects
     : projects.filter(p => p.categoryId === activeCategory);
 
   const breadcrumbSchema = {
@@ -37,12 +40,12 @@ const PortfolioPage = () => {
     <>
       <Helmet>
         <title>{language === 'bg' ? 'Портфолио | Renovivo - Завършени ремонти София' : 'Portfolio | Renovivo - Completed Renovations Sofia'}</title>
-        <meta 
-          name="description" 
-          content={language === 'bg' 
-            ? "Разгледайте 127 завършени ремонти в София - бани, кухни, апартаменти. Снимки преди и след ремонт." 
+        <meta
+          name="description"
+          content={language === 'bg'
+            ? "Разгледайте 127 завършени ремонти в София - бани, кухни, апартаменти. Снимки преди и след ремонт."
             : "Browse 127 completed renovations in Sofia - bathrooms, kitchens, apartments. Before and after photos."
-          } 
+          }
         />
         <link rel="canonical" href="https://renovivo.bg/portfolio" />
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
@@ -52,8 +55,8 @@ const PortfolioPage = () => {
         {/* Hero */}
         <section className="relative py-20 bg-foreground">
           <div className="container-custom relative z-10">
-            <VisualBreadcrumb 
-              items={[{ label: t('portfolio.page.title') }]} 
+            <VisualBreadcrumb
+              items={[{ label: t('portfolio.page.title') }]}
               className="mb-6 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
             />
             <div className="max-w-2xl">
@@ -113,7 +116,7 @@ const PortfolioPage = () => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
-                  
+
                   <div className="absolute inset-0 p-6 flex flex-col justify-end">
                     <span className="text-primary text-sm font-medium mb-2">
                       {project.category}

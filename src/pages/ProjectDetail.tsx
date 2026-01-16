@@ -4,15 +4,16 @@ import { Phone, ArrowLeft, ArrowRight, MapPin, Clock, Maximize, Check, Star, Tre
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getProjectById, projects } from "@/data/projects";
+import { getProjectByIdWithLanguage, getProjects } from "@/data/projects";
 import { BeforeAfterSlider } from "@/components/BeforeAfterSlider";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const project = id ? getProjectById(id) : undefined;
   const { language, t } = useLanguage();
+  const project = id ? getProjectByIdWithLanguage(id, language) : undefined;
+  const projects = getProjects(language);
 
   if (!project) {
     return <Navigate to="/portfolio" replace />;
@@ -77,11 +78,11 @@ const ProjectDetail = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 container-custom pb-12">
             {/* Breadcrumb */}
-            <VisualBreadcrumb 
+            <VisualBreadcrumb
               items={[
                 { label: t('projectDetail.breadcrumb'), href: "/portfolio" },
                 { label: project.title }
-              ]} 
+              ]}
               className="mb-4 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
             />
             <span className="block text-primary font-medium text-sm mb-2">{project.category}</span>
@@ -139,7 +140,7 @@ const ProjectDetail = () => {
                     <TrendingUp className="h-6 w-6 text-primary" />
                     {t('projectDetail.problemSolutionResult')}
                   </h2>
-                  
+
                   <div className="grid grid-cols-1 gap-4">
                     {/* Problem Card */}
                     <Card className="border-l-4 border-l-destructive shadow-md">
@@ -151,7 +152,7 @@ const ProjectDetail = () => {
                         <p className="text-muted-foreground">{project.challenge}</p>
                       </CardContent>
                     </Card>
-                    
+
                     {/* Solution Card */}
                     <Card className="border-l-4 border-l-primary shadow-md">
                       <CardContent className="p-6">
@@ -162,7 +163,7 @@ const ProjectDetail = () => {
                         <p className="text-muted-foreground">{project.solution}</p>
                       </CardContent>
                     </Card>
-                    
+
                     {/* Result Card - Only if result data exists */}
                     {project.result && (
                       <Card className="border-l-4 border-l-green-500 shadow-md bg-green-50/50 dark:bg-green-950/20">
@@ -173,7 +174,7 @@ const ProjectDetail = () => {
                             {t('projectDetail.result')}
                           </h3>
                           <p className="text-muted-foreground mb-4">{project.result.summary}</p>
-                          
+
                           {/* Metrics */}
                           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-4">
                             {project.result.metrics.map((metric, idx) => (
@@ -183,16 +184,16 @@ const ProjectDetail = () => {
                               </div>
                             ))}
                           </div>
-                          
+
                           {/* Client Satisfaction */}
                           {project.result.clientSatisfaction && (
                             <div className="flex items-center justify-center gap-2 mt-4 pt-4 border-t">
                               <span className="text-sm text-muted-foreground">{t('projectDetail.clientRating')}:</span>
                               <div className="flex gap-0.5">
                                 {[...Array(5)].map((_, i) => (
-                                  <Star 
-                                    key={i} 
-                                    className={`h-4 w-4 ${i < project.result!.clientSatisfaction! ? 'fill-primary text-primary' : 'text-muted'}`} 
+                                  <Star
+                                    key={i}
+                                    className={`h-4 w-4 ${i < project.result!.clientSatisfaction! ? 'fill-primary text-primary' : 'text-muted'}`}
                                   />
                                 ))}
                               </div>
@@ -211,7 +212,7 @@ const ProjectDetail = () => {
                     <div className="relative">
                       {/* Timeline line */}
                       <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-primary/20" />
-                      
+
                       <div className="space-y-6">
                         {project.stages.map((stage, index) => (
                           <div key={index} className="relative pl-12">
@@ -258,9 +259,8 @@ const ProjectDetail = () => {
                         height={index === 0 ? 320 : 192}
                         loading="lazy"
                         decoding="async"
-                        className={`w-full object-cover rounded-lg hover:opacity-90 transition-opacity ${
-                          index === 0 ? "md:col-span-2 h-64 md:h-80" : "h-48"
-                        }`}
+                        className={`w-full object-cover rounded-lg hover:opacity-90 transition-opacity ${index === 0 ? "md:col-span-2 h-64 md:h-80" : "h-48"
+                          }`}
                       />
                     ))}
                   </div>

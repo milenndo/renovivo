@@ -4,7 +4,7 @@ import { Phone, ArrowLeft, ArrowRight, Check, Calendar } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { getServiceById, services, serviceFAQs } from "@/data/services";
+import { getServiceByIdWithLanguage, getServices, getServiceFAQs } from "@/data/services";
 import PriceTable from "@/components/PriceTable";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
@@ -34,7 +34,7 @@ const serviceToPriceCategoryMap: Record<string, string> = {
 // Services that should NOT show price tables (individual projects)
 const servicesWithoutPrices = [
   "full-renovation",
-  "bathroom", 
+  "bathroom",
   "kitchen",
   "interior-design",
   "gipsokarton-design",
@@ -76,10 +76,13 @@ const relatedServicesForFullRenovation = [
 
 const ServiceDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const service = id ? getServiceById(id) : undefined;
   const { openModal } = useInspectionRequest();
   const { language, t } = useLanguage();
-  
+
+  const service = id ? getServiceByIdWithLanguage(id, language) : undefined;
+  const services = getServices(language);
+  const serviceFAQs = getServiceFAQs(language);
+
   if (!service) {
     return <Navigate to="/services" replace />;
   }
@@ -139,10 +142,10 @@ const ServiceDetail = () => {
     }))
   } : null;
 
-  const seoTitle = service.isInnovative 
+  const seoTitle = service.isInnovative
     ? `${service.title} София | Renovivo - Модерни покрития`
     : `${service.title} София | Renovivo - Професионални услуги`;
-  
+
   const seoDescription = `${service.shortDescription} Професионално изпълнение в София. Гаранция за качество. ☎️ Безплатна консултация!`;
 
   const customContent = id ? customServiceContent[id] : null;
@@ -168,11 +171,11 @@ const ServiceDetail = () => {
         <section className="relative py-20 bg-foreground">
           <div className="container-custom relative z-10">
             {/* Breadcrumb */}
-            <VisualBreadcrumb 
+            <VisualBreadcrumb
               items={[
                 { label: t('serviceDetail.breadcrumb'), href: "/services" },
                 { label: service.title }
-              ]} 
+              ]}
               className="mb-6 [&_a]:text-background/70 [&_a:hover]:text-primary [&_span[role=link]]:text-background [&_svg]:text-background/50"
             />
             <div className="flex items-start gap-6">
@@ -224,13 +227,13 @@ const ServiceDetail = () => {
                   <div>
                     <h2 className="text-2xl font-bold mb-6">{t('serviceDetail.colorVariants')}</h2>
                     <p className="text-muted-foreground mb-4 text-sm">
-                      Съчетаването на пигменти и естествени камъни дава безкрайни възможности за цвят и дизайн, 
+                      Съчетаването на пигменти и естествени камъни дава безкрайни възможности за цвят и дизайн,
                       като същевременно добавят визуален ефект и характер на проекта.
                     </p>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {service.colorVariants.map((variant) => (
-                        <div 
-                          key={variant.name} 
+                        <div
+                          key={variant.name}
                           className="p-4 bg-secondary/50 rounded-lg border border-border/50 hover:border-primary/30 transition-colors"
                         >
                           <h4 className="font-semibold text-sm mb-1">{variant.name}</h4>
@@ -239,7 +242,7 @@ const ServiceDetail = () => {
                       ))}
                     </div>
                     <p className="text-xs text-muted-foreground mt-4 italic">
-                      * Действителните цветове може да се различават от представените. 
+                      * Действителните цветове може да се различават от представените.
                       Съветваме ви да видите физическа цветна мостра, за да потвърдите избора си.
                     </p>
                   </div>
@@ -287,7 +290,7 @@ const ServiceDetail = () => {
                 {service.vsTiles && (
                   <div className="space-y-8">
                     <h2 className="text-2xl font-bold">{t('serviceDetail.vsTiles.title')} {service.title} {t('serviceDetail.vsTiles.instead')}</h2>
-                    
+
                     {/* Advantages */}
                     <div className="bg-green-50 dark:bg-green-950/20 rounded-xl p-6">
                       <h3 className="font-bold text-green-700 dark:text-green-400 mb-4 flex items-center gap-2">
@@ -383,8 +386,8 @@ const ServiceDetail = () => {
               <div className="space-y-6">
                 {/* Price Table - only for services with pricing */}
                 {showPriceTable && (
-                  <PriceTable 
-                    categorySlug={serviceToPriceCategoryMap[id!]} 
+                  <PriceTable
+                    categorySlug={serviceToPriceCategoryMap[id!]}
                     title={t('serviceDetail.pricing')}
                     limit={8}
                   />
@@ -451,7 +454,7 @@ const ServiceDetail = () => {
                     <p className="text-muted-foreground text-sm mb-6">
                       {t('serviceDetail.cta.desc')}
                     </p>
-                    
+
                     {/* Phone Button */}
                     <a href="tel:+359893712919" className="block mb-3">
                       <Button className="w-full" size="lg">
@@ -459,18 +462,18 @@ const ServiceDetail = () => {
                         {t('serviceDetail.cta.contact')}
                       </Button>
                     </a>
-                    
+
                     {/* Inspection Request Button */}
-                    <Button 
-                      variant="outline" 
-                      className="w-full mb-3" 
+                    <Button
+                      variant="outline"
+                      className="w-full mb-3"
                       size="lg"
                       onClick={openModal}
                     >
                       <Calendar className="h-5 w-5 mr-2" />
                       {t('serviceDetail.cta.inspection')}
                     </Button>
-                    
+
                     <p className="text-center text-muted-foreground text-xs mt-4">
                       Пон-Пет: 8:00 - 18:00
                     </p>
