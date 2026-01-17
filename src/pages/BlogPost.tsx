@@ -38,7 +38,7 @@ const BlogPost = () => {
   });
 
   const { data: relatedPosts } = useQuery({
-    queryKey: ["related-posts", post?.category],
+    queryKey: ["related-posts", post?.category, language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
