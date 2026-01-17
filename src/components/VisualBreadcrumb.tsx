@@ -9,6 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export interface BreadcrumbItem {
   label: string;
@@ -21,14 +22,15 @@ interface VisualBreadcrumbProps {
 }
 
 const VisualBreadcrumb = ({ items, className = "" }: VisualBreadcrumbProps) => {
+  const { t } = useLanguage();
   // Generate BreadcrumbList Schema.org structured data
   const baseUrl = "https://renovivo.bg";
-  
+
   const schemaItems = [
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Начало",
+      "name": t('breadcrumb.home'),
       "item": baseUrl
     },
     ...items.map((item, index) => ({
@@ -59,11 +61,11 @@ const VisualBreadcrumb = ({ items, className = "" }: VisualBreadcrumbProps) => {
             <BreadcrumbLink asChild>
               <Link to="/" className="flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
                 <Home className="h-4 w-4" />
-                <span className="sr-only sm:not-sr-only">Начало</span>
+                <span className="sr-only sm:not-sr-only">{t('breadcrumb.home')}</span>
               </Link>
             </BreadcrumbLink>
           </BreadcrumbItemUI>
-          
+
           {items.map((item, index) => (
             <span key={item.label} className="contents">
               <BreadcrumbSeparator>

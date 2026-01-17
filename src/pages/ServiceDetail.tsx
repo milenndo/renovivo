@@ -475,7 +475,7 @@ const ServiceDetail = () => {
                     </Button>
 
                     <p className="text-center text-muted-foreground text-xs mt-4">
-                      Пон-Пет: 8:00 - 18:00
+                      {t('contact.info.hoursValue')}
                     </p>
                   </CardContent>
                 </Card>

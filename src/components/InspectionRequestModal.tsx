@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { z } from "zod";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Project types for qualifying form
 const projectTypes = [
@@ -72,6 +73,7 @@ const inspectionSchema = z.object({
 const SITE_KEY = "f0f49628-5bd2-4a88-853e-db5a9758c6f2";
 
 const InspectionRequestModal = () => {
+  const { t } = useLanguage();
   const { isOpen, closeModal } = useInspectionRequest();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -430,7 +432,7 @@ const InspectionRequestModal = () => {
                   </a>
                   <p className="text-primary-foreground/70 text-sm mt-1">
                     <Clock className="h-3 w-3 inline mr-1" />
-                    Пон-Пет: 8:00 - 18:00
+                    {t('contact.info.hoursValue')}
                   </p>
                 </div>
               </div>
