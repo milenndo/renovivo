@@ -139,7 +139,7 @@ const planningRenovationPostBG: BlogPost = {
 const planningRenovationPostEN: BlogPost = {
   id: 'planning-renovation-2026',
   title: 'How to Plan an Apartment Renovation – Complete Guide 2026',
-  slug: 'how-to-plan-apartment-renovation-step-by-step-2026',
+  slug: 'kak-da-planirate-remont-step-by-step-2026',
   excerpt: 'Apartment renovation doesn\'t start with demolition, choosing tiles, or finding contractors. It starts with planning. Most problems, costs, and disappointments are not the result of poor execution, but of a lack of clear strategy from the beginning.',
   content: `### How to Plan an Apartment Renovation – Complete Guide 2026
 
@@ -340,7 +340,7 @@ const microcementPostBG: BlogPost = {
 const microcementPostEN: BlogPost = {
   id: 'microcement-bath-2026',
   title: 'Bathroom Renovation with Microcement – Process, Control and Long-lasting Result',
-  slug: 'microcement-modern-solution-walls-floors',
+  slug: 'mikrociment-moderno-reshenie-steni-podove',
   excerpt: 'Why microcement is an increasingly common solution for bathroom renovation in 2026. Learn about the work process, preparation, and advantages of seamless coatings.',
   content: `### Bathroom Renovation with Microcement – Process, Control and Long-lasting Result
 
