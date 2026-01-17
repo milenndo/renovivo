@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
-import { planningRenovationPost, microcementPost } from "@/data/blog-posts-local";
+import { getPlanningRenovationPost, getMicrocementPost } from "@/data/blog-posts-local";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -34,9 +34,9 @@ const blogImages: Record<string, string> = {
 
 const Blog = () => {
   const { t, language } = useLanguage();
-  
+
   const { data: posts, isLoading } = useQuery({
-    queryKey: ["blog-posts"],
+    queryKey: ["blog-posts", language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
@@ -46,11 +46,14 @@ const Blog = () => {
       if (error) throw error;
       const allPosts = data || [];
       const existingSlugs = new Set(allPosts.map((p: any) => p.slug));
-      if (!existingSlugs.has(planningRenovationPost.slug)) {
-        allPosts.push(planningRenovationPost as any);
+      const planningPost = getPlanningRenovationPost(language);
+      const microcementPostData = getMicrocementPost(language);
+
+      if (!existingSlugs.has(planningPost.slug)) {
+        allPosts.push(planningPost as any);
       }
-      if (!existingSlugs.has(microcementPost.slug)) {
-        allPosts.push(microcementPost as any);
+      if (!existingSlugs.has(microcementPostData.slug)) {
+        allPosts.push(microcementPostData as any);
       }
       return allPosts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     },
@@ -106,7 +109,7 @@ const Blog = () => {
         <title>{language === 'bg' ? 'Полезно | Съвети и информация за ремонти | Renovivo' : 'Useful Tips | Renovation Advice | Renovivo'}</title>
         <meta
           name="description"
-          content={language === 'bg' 
+          content={language === 'bg'
             ? "Полезни статии и съвети за ремонт на апартаменти, бани и кухни в София. Научете за цени, материали и как да планирате успешен ремонт през 2026 г."
             : "Helpful articles and tips for apartment, bathroom and kitchen renovations in Sofia. Learn about prices, materials and how to plan a successful renovation."
           }
@@ -120,8 +123,8 @@ const Blog = () => {
         {/* Hero Section */}
         <section className="bg-gradient-to-b from-secondary/50 to-background py-16 md:py-24">
           <div className="container-custom">
-            <VisualBreadcrumb 
-              items={[{ label: t('blog.page.title') }]} 
+            <VisualBreadcrumb
+              items={[{ label: t('blog.page.title') }]}
               className="mb-8"
             />
             <div className="max-w-3xl mx-auto text-center">

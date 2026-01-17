@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
-import { planningRenovationPost, microcementPost } from "@/data/blog-posts-local";
+import { getPlanningRenovationPost, getMicrocementPost } from "@/data/blog-posts-local";
 import VisualBreadcrumb from "@/components/VisualBreadcrumb";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -17,7 +17,7 @@ const BlogPost = () => {
   const { language, t } = useLanguage();
 
   const { data: post, isLoading } = useQuery({
-    queryKey: ["blog-post", slug],
+    queryKey: ["blog-post", slug, language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
@@ -27,8 +27,10 @@ const BlogPost = () => {
 
       if (error) throw error;
       if (!data) {
-        if (slug === planningRenovationPost.slug) return planningRenovationPost as any;
-        if (slug === microcementPost.slug) return microcementPost as any;
+        const planningPost = getPlanningRenovationPost(language);
+        const microcementPostData = getMicrocementPost(language);
+        if (slug === planningPost.slug) return planningPost as any;
+        if (slug === microcementPostData.slug) return microcementPostData as any;
       }
       return data;
     },
@@ -259,11 +261,11 @@ const BlogPost = () => {
         <section className="bg-gradient-to-b from-secondary/50 to-background py-12 md:py-16">
           <div className="container-custom">
             {/* Breadcrumb */}
-            <VisualBreadcrumb 
+            <VisualBreadcrumb
               items={[
                 { label: t('blogPost.breadcrumb'), href: "/blog" },
                 { label: post.title }
-              ]} 
+              ]}
               className="mb-6"
             />
 
