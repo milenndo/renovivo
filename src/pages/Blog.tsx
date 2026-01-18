@@ -87,12 +87,16 @@ const Blog = () => {
   };
 
   const getCategoryColor = (category: string) => {
-    switch (category) {
+    const cat = category.toLowerCase();
+    switch (cat) {
       case "съвети":
+      case "tips":
         return "bg-blue-100 text-blue-700";
       case "бани":
+      case "bathrooms":
         return "bg-cyan-100 text-cyan-700";
       case "иновации":
+      case "innovations":
         return "bg-primary/20 text-primary";
       default:
         return "bg-muted text-muted-foreground";
