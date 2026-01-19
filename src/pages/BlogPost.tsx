@@ -38,7 +38,7 @@ const BlogPost = () => {
   });
 
   const { data: relatedPosts } = useQuery({
-    queryKey: ["related-posts", post?.category],
+    queryKey: ["related-posts", post?.category, language],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("blog_posts")
@@ -62,12 +62,16 @@ const BlogPost = () => {
   };
 
   const getCategoryColor = (category: string) => {
-    switch (category) {
+    const cat = category.toLowerCase();
+    switch (cat) {
       case "съвети":
+      case "tips":
         return "bg-blue-100 text-blue-700";
       case "бани":
+      case "bathrooms":
         return "bg-cyan-100 text-cyan-700";
       case "иновации":
+      case "innovations":
         return "bg-amber-100 text-amber-700";
       default:
         return "bg-muted text-muted-foreground";
