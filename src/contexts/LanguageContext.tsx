@@ -1,4 +1,4 @@
-      import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type Language = 'bg' | 'en';
 
@@ -20,7 +20,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.contact': 'Контакти',
     'nav.callUs': 'Обадете се',
     'nav.workingHours': 'Пон - Пет: 08:00 - 18:00',
-    
+
     // Hero
     'hero.badge': 'Цялостни ремонти в София и района',
     'hero.title1': 'РЕМОНТ БЕЗ ХАОС',
@@ -32,7 +32,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.stats.recommend': 'Препоръчват нас',
     'hero.stats.warranty': 'Гаранция',
     'hero.scroll': 'Скролирайте',
-    
+
     // Peace of Mind
     'peace.title': '5 причини да спите спокойно, докато ние работим',
     'peace.manager.title': 'Личен Проектен Мениджър',
@@ -45,7 +45,7 @@ const translations: Record<Language, Record<string, string>> = {
     'peace.clean.desc': 'Професионално почистване и извозване на отпадъци след края.',
     'peace.warranty.title': 'Писмена Гаранция',
     'peace.warranty.desc': 'Пълна гаранция за всяка извършена работа и материали.',
-    
+
     // Services
     'services.label': 'Услуги',
     'services.title': 'Какво можем да направим за вас',
@@ -56,7 +56,7 @@ const translations: Record<Language, Record<string, string>> = {
     'services.count': 'услуги',
     'services.learnMore': 'Научете повече',
     'services.viewAll': 'Разгледайте всички услуги',
-    
+
     // Service items
     'service.fullRenovation.title': 'Цялостен Ремонт',
     'service.fullRenovation.desc': 'Пълна трансформация на жилища - от проект до реализация с фиксиран бюджет.',
@@ -82,7 +82,7 @@ const translations: Record<Language, Record<string, string>> = {
     'service.electrical.desc': 'Нови инсталации и ремонт от сертифицирани специалисти.',
     'service.plumbing.title': 'ВиК услуги',
     'service.plumbing.desc': 'Водопровод и канализация с гаранция за качество.',
-    
+
     // About
     'about.label': 'За нас',
     'about.title': 'Вашият надежден партньор за ремонт в София',
@@ -99,7 +99,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.warranty': 'години гаранция',
     'about.warrantyAll': 'На всички услуги',
     'about.cta': 'Научете повече за нас',
-    
+
     // Why Us
     'whyUs.label': 'Защо Renovivo',
     'whyUs.title': 'Какво ни отличава',
@@ -113,7 +113,7 @@ const translations: Record<Language, Record<string, string>> = {
     'whyUs.budget.title': 'Предвидим бюджет',
     'whyUs.budget.desc': 'Ясно ценообразуване и спазване на договорените срокове без неприятни изненади.',
     'whyUs.location': 'Работим в София и района',
-    
+
     // How We Work
     'howWeWork.title': 'Как работим',
     'howWeWork.subtitle': 'Прозрачен и организиран процес от първия контакт до завършването на проекта',
@@ -125,13 +125,13 @@ const translations: Record<Language, Record<string, string>> = {
     'howWeWork.step3.desc': 'Работим по съгласуван план с редовна комуникация за напредъка.',
     'howWeWork.step4.title': 'Финален преглед и гаранция',
     'howWeWork.step4.desc': 'Приемане на обекта с детайлна проверка и гаранция за извършената работа.',
-    
+
     // CTA
     'cta.title': 'Готови ли сте да започнете?',
     'cta.subtitle': 'Свържете се с нас днес за безплатен оглед и оферта в София и района. Нашият екип е готов да превърне вашите идеи в реалност.',
     'cta.inspection': 'Заяви оглед',
     'cta.inquiry': 'Изпратете запитване',
-    
+
     // Footer
     'footer.description': 'Професионални ремонтни услуги с внимание към всеки детайл. Трансформираме вашите пространства в мечтани домове.',
     'footer.quickLinks': 'Бързи връзки',
@@ -139,21 +139,21 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.address': 'гр. София, България',
     'footer.copyright': 'Всички права запазени.',
     'footer.cookieSettings': 'Настройки на бисквитките',
-    
+
     // Language
     'lang.switch': 'EN',
     'lang.current': 'BG',
-    
+
     // Projects section
     'projects.label': 'Портфолио',
     'projects.title': 'Нашите проекти',
     'projects.viewAll': 'Вижте всички проекти',
-    
+
     // Blog preview
     'blog.label': 'Блог',
     'blog.title': 'Полезни статии',
     'blog.viewAll': 'Вижте всички статии',
-    
+
     // Blog Page
     'blog.page.title': 'Полезно',
     'blog.page.subtitle': 'Полезни съвети за вашия ремонт',
@@ -162,14 +162,14 @@ const translations: Record<Language, Record<string, string>> = {
     'blog.page.cta.description': 'Екипът на Renovivo е на разположение за безплатен оглед и оферта. Обадете се днес!',
     'blog.page.empty': 'Все още няма публикувани статии.',
     'blog.page.min': 'мин.',
-    
+
     // Portfolio Page
     'portfolio.page.title': 'Портфолио',
     'portfolio.page.subtitle': 'Нашите проекти',
     'portfolio.page.description': 'Разгледайте някои от нашите завършени проекти и се убедете в качеството на нашата работа.',
     'portfolio.page.noResults': 'Няма намерени проекти в тази категория.',
     'portfolio.filter.all': 'Всички',
-    
+
     // Services Page
     'services.page.title': 'Услуги',
     'services.page.catalog': 'Каталог услуги',
@@ -177,7 +177,7 @@ const translations: Record<Language, Record<string, string>> = {
     'services.page.description': 'Разгледайте пълния спектър от ремонтни решения - от довършителни работи до специализирани иновативни покрития.',
     'services.page.cta.title': 'Имате въпроси?',
     'services.page.cta.description': 'Свържете се с нас за безплатна консултация и индивидуална оферта за вашия проект.',
-    
+
     // Services Categories
     'services.cat.finishing': 'Цялостни довършителни работи',
     'services.cat.finishing.desc': 'Ново строителство - готови към обитаване',
@@ -187,7 +187,7 @@ const translations: Record<Language, Record<string, string>> = {
     'services.cat.partial.desc': 'Целеви решения за отделни помещения и зони',
     'services.cat.innovation': 'Специални иновативни решения',
     'services.cat.innovation.desc': 'Висок клас финишни покрития и умни технологии',
-    
+
     // Service items
     'services.item.finishingWorks': 'Довършителни работи',
     'services.item.finishingWorks.desc': 'Пълен цикъл от грубо строителство до завършен дом',
@@ -225,7 +225,7 @@ const translations: Record<Language, Record<string, string>> = {
     'services.cat.digital.desc': '3D сканиране, виртуални турове и BIM',
     'services.item.virtualTours': '3D Сканиране & Виртуални турове',
     'services.item.virtualTours.desc': '360° виртуални обиколки и дигитални близнаци',
-    
+
     // Pricing Page
     'pricing.page.title': 'Ремонт на апартамент без изненади, с ясен бюджет и контрол',
     'pricing.page.subtitle': 'В Renovivo не продаваме „шпакловка и боя", а спокойствие, предвидимост и напълно завършен резултат в договорения срок.',
@@ -261,7 +261,7 @@ const translations: Record<Language, Record<string, string>> = {
     'pricing.page.exactPrice.desc': 'Една среща и оглед са достатъчни, за да превърнем диапазоните в конкретна оферта с ясен обхват, срок и очакван резултат.',
     'pricing.page.bookInspection': 'Заяви оглед',
     'pricing.page.freeConsultation': 'Безплатна консултация',
-    
+
     // Contact Page
     'contact.page.title': 'Контакти',
     'contact.page.subtitle': 'Свържете се с нас',
@@ -292,10 +292,10 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.error': 'Грешка при изпращане',
     'contact.form.errorDesc': 'Моля, опитайте отново или се свържете по телефона.',
     'contact.required': '*',
-    
+
     // Breadcrumbs
     'breadcrumb.home': 'Начало',
-    
+
     // About Page
     'aboutPage.breadcrumb': 'За нас',
     'aboutPage.title': 'За нас | Renovivo - Ремонт без хаос, само спокойствие',
@@ -329,7 +329,7 @@ const translations: Record<Language, Record<string, string>> = {
     'aboutPage.cta.portfolio': 'Вижте нашите проекти',
     'aboutPage.imgAlt.team': 'Екипът на Renovivo обсъжда проект',
     'aboutPage.imgAlt.quality': 'Качествено изпълнение на ремонт',
-    
+
     // BlogPost Page
     'blogPost.notFound.title': 'Статията не е намерена',
     'blogPost.notFound.desc': 'Статията, която търсите, не съществува или е била премахната.',
@@ -341,7 +341,7 @@ const translations: Record<Language, Record<string, string>> = {
     'blogPost.sidebar.helpDesc': 'Екипът на Renovivo е готов да помогне с вашия ремонт. Обадете се за безплатна консултация.',
     'blogPost.sidebar.tags': 'Тагове',
     'blogPost.sidebar.related': 'Свързани статии',
-    
+
     // ServiceDetail Page
     'serviceDetail.breadcrumb': 'Услуги',
     'serviceDetail.description': 'Описание',
@@ -368,7 +368,7 @@ const translations: Record<Language, Record<string, string>> = {
     'serviceDetail.next': 'Следваща',
     'serviceDetail.seeMore': 'Вижте',
     'serviceDetail.priceNote': 'Цените са ориентировъчни и могат да варират в зависимост от сложността на проекта.',
-    
+
     // ProjectDetail Page
     'projectDetail.breadcrumb': 'Портфолио',
     'projectDetail.about': 'За проекта',
@@ -393,9 +393,9 @@ const translations: Record<Language, Record<string, string>> = {
     'projectDetail.nav.prev': 'Предишен',
     'projectDetail.nav.next': 'Следващ',
     'projectDetail.clientRating': 'Клиентска оценка',
-    
+
     // Testimonials
-'testimonials.title': 'Отзиви от клиенти',
+    'testimonials.title': 'Отзиви от клиенти',
   },
   en: {
     // Navigation
@@ -408,7 +408,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.contact': 'Contact',
     'nav.callUs': 'Call Us',
     'nav.workingHours': 'Mon - Fri: 08:00 - 18:00',
-    
+
     // Hero
     'hero.badge': 'Complete renovations in Sofia and the region',
     'hero.title1': 'RENOVATION WITHOUT CHAOS',
@@ -420,7 +420,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.stats.recommend': 'Recommend us',
     'hero.stats.warranty': 'Warranty',
     'hero.scroll': 'Scroll',
-    
+
     // Peace of Mind
     'peace.title': '5 reasons to sleep peacefully while we work',
     'peace.manager.title': 'Personal Project Manager',
@@ -433,7 +433,7 @@ const translations: Record<Language, Record<string, string>> = {
     'peace.clean.desc': 'Professional cleaning and waste removal after completion.',
     'peace.warranty.title': 'Written Warranty',
     'peace.warranty.desc': 'Full warranty for all work performed and materials.',
-    
+
     // Services
     'services.label': 'Services',
     'services.title': 'What we can do for you',
@@ -444,7 +444,7 @@ const translations: Record<Language, Record<string, string>> = {
     'services.count': 'services',
     'services.learnMore': 'Learn more',
     'services.viewAll': 'View all services',
-    
+
     // Service items
     'service.fullRenovation.title': 'Complete Renovation',
     'service.fullRenovation.desc': 'Full home transformation - from design to completion with a fixed budget.',
@@ -470,7 +470,7 @@ const translations: Record<Language, Record<string, string>> = {
     'service.electrical.desc': 'New installations and repairs by certified specialists.',
     'service.plumbing.title': 'Plumbing Services',
     'service.plumbing.desc': 'Water supply and sewage with quality guarantee.',
-    
+
     // About
     'about.label': 'About Us',
     'about.title': 'Your reliable renovation partner in Sofia',
@@ -487,7 +487,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.warranty': 'years warranty',
     'about.warrantyAll': 'On all services',
     'about.cta': 'Learn more about us',
-    
+
     // Why Us
     'whyUs.label': 'Why Renovivo',
     'whyUs.title': 'What sets us apart',
@@ -501,7 +501,7 @@ const translations: Record<Language, Record<string, string>> = {
     'whyUs.budget.title': 'Predictable Budget',
     'whyUs.budget.desc': 'Clear pricing and adherence to agreed deadlines without unpleasant surprises.',
     'whyUs.location': 'We work in Sofia and the region',
-    
+
     // How We Work
     'howWeWork.title': 'How we work',
     'howWeWork.subtitle': 'Transparent and organized process from first contact to project completion',
@@ -513,13 +513,13 @@ const translations: Record<Language, Record<string, string>> = {
     'howWeWork.step3.desc': 'We work according to an agreed plan with regular progress updates.',
     'howWeWork.step4.title': 'Final Review & Warranty',
     'howWeWork.step4.desc': 'Acceptance of the site with detailed inspection and warranty for the work done.',
-    
+
     // CTA
     'cta.title': 'Ready to get started?',
     'cta.subtitle': 'Contact us today for a free inspection and quote in Sofia and the region. Our team is ready to turn your ideas into reality.',
     'cta.inspection': 'Request inspection',
     'cta.inquiry': 'Send inquiry',
-    
+
     // Footer
     'footer.description': 'Professional renovation services with attention to every detail. We transform your spaces into dream homes.',
     'footer.quickLinks': 'Quick Links',
@@ -527,37 +527,37 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.address': 'Sofia, Bulgaria',
     'footer.copyright': 'All rights reserved.',
     'footer.cookieSettings': 'Cookie Settings',
-    
+
     // Language
     'lang.switch': 'BG',
     'lang.current': 'EN',
-    
+
     // Projects section
     'projects.label': 'Portfolio',
     'projects.title': 'Our Projects',
     'projects.viewAll': 'View all projects',
-    
+
     // Blog preview
     'blog.label': 'Blog',
     'blog.title': 'Helpful Articles',
     'blog.viewAll': 'View all articles',
-    
+
     // Blog Page
-    'blog.page.title': 'Useful Tips',
+    'blog.page.title': 'Blog',
     'blog.page.subtitle': 'Helpful tips for your renovation',
     'blog.page.description': 'Articles, guides and practical tips from our experts. Learn how to plan a successful renovation and avoid common mistakes.',
     'blog.page.cta.title': 'Need professional advice?',
     'blog.page.cta.description': 'The Renovivo team is available for a free inspection and quote. Call us today!',
     'blog.page.empty': 'No articles published yet.',
     'blog.page.min': 'min.',
-    
+
     // Portfolio Page
     'portfolio.page.title': 'Portfolio',
     'portfolio.page.subtitle': 'Our Projects',
     'portfolio.page.description': 'Browse some of our completed projects and see the quality of our work.',
     'portfolio.page.noResults': 'No projects found in this category.',
     'portfolio.filter.all': 'All',
-    
+
     // Services Page
     'services.page.title': 'Services',
     'services.page.catalog': 'Service Catalog',
@@ -565,7 +565,7 @@ const translations: Record<Language, Record<string, string>> = {
     'services.page.description': 'Explore our full range of renovation solutions - from finishing works to specialized innovative coatings.',
     'services.page.cta.title': 'Have questions?',
     'services.page.cta.description': 'Contact us for a free consultation and personalized quote for your project.',
-    
+
     // Services Categories
     'services.cat.finishing': 'Complete Finishing Works',
     'services.cat.finishing.desc': 'New construction - ready to move in',
@@ -575,7 +575,7 @@ const translations: Record<Language, Record<string, string>> = {
     'services.cat.partial.desc': 'Targeted solutions for individual rooms and areas',
     'services.cat.innovation': 'Special Innovative Solutions',
     'services.cat.innovation.desc': 'High-end finishes and smart technologies',
-    
+
     // Service items
     'services.item.finishingWorks': 'Finishing Works',
     'services.item.finishingWorks.desc': 'Full cycle from rough construction to finished home',
@@ -613,7 +613,7 @@ const translations: Record<Language, Record<string, string>> = {
     'services.cat.digital.desc': '3D scanning, virtual tours and BIM',
     'services.item.virtualTours': '3D Scanning & Virtual Tours',
     'services.item.virtualTours.desc': '360° virtual tours and digital twins',
-    
+
     // Pricing Page
     'pricing.page.title': 'Apartment renovation without surprises, with clear budget and control',
     'pricing.page.subtitle': 'At Renovivo we don\'t sell "plastering and paint", but peace of mind, predictability and a fully finished result within the agreed timeframe.',
@@ -649,7 +649,7 @@ const translations: Record<Language, Record<string, string>> = {
     'pricing.page.exactPrice.desc': 'One meeting and inspection are enough to turn the ranges into a specific offer with clear scope, deadline and expected result.',
     'pricing.page.bookInspection': 'Request inspection',
     'pricing.page.freeConsultation': 'Free consultation',
-    
+
     // Contact Page
     'contact.page.title': 'Contact',
     'contact.page.subtitle': 'Get in touch',
@@ -680,10 +680,10 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.form.error': 'Error sending message',
     'contact.form.errorDesc': 'Please try again or contact us by phone.',
     'contact.required': '*',
-    
+
     // Breadcrumbs
     'breadcrumb.home': 'Home',
-    
+
     // About Page
     'aboutPage.breadcrumb': 'About Us',
     'aboutPage.title': 'About Us | Renovivo - Renovation without chaos, just peace of mind',
@@ -717,7 +717,7 @@ const translations: Record<Language, Record<string, string>> = {
     'aboutPage.cta.portfolio': 'View our projects',
     'aboutPage.imgAlt.team': 'The Renovivo team discussing a project',
     'aboutPage.imgAlt.quality': 'Quality renovation work',
-    
+
     // BlogPost Page
     'blogPost.notFound.title': 'Article not found',
     'blogPost.notFound.desc': 'The article you\'re looking for doesn\'t exist or has been removed.',
@@ -729,7 +729,7 @@ const translations: Record<Language, Record<string, string>> = {
     'blogPost.sidebar.helpDesc': 'The Renovivo team is ready to help with your renovation. Call for a free consultation.',
     'blogPost.sidebar.tags': 'Tags',
     'blogPost.sidebar.related': 'Related articles',
-    
+
     // ServiceDetail Page
     'serviceDetail.breadcrumb': 'Services',
     'serviceDetail.description': 'Description',
@@ -756,7 +756,7 @@ const translations: Record<Language, Record<string, string>> = {
     'serviceDetail.next': 'Next',
     'serviceDetail.seeMore': 'See',
     'serviceDetail.priceNote': 'Prices are indicative and may vary depending on project complexity.',
-    
+
     // ProjectDetail Page
     'projectDetail.breadcrumb': 'Portfolio',
     'projectDetail.about': 'About the project',
@@ -781,10 +781,10 @@ const translations: Record<Language, Record<string, string>> = {
     'projectDetail.nav.prev': 'Previous',
     'projectDetail.nav.next': 'Next',
     'projectDetail.clientRating': 'Client rating',
-    
+
     // Testimonials
-'testimonials.title': 'Client Testimonials',
-    
+    'testimonials.title': 'Client Testimonials',
+
     // Pricing
     'pricing.title': 'Our Pricing',
     'pricing.subtitle': 'Transparent pricing tailored to your renovation needs',
@@ -800,11 +800,11 @@ const translations: Record<Language, Record<string, string>> = {
     'pricing.consultation': 'Free consultation included',
     'pricing.guarantee': '5-year warranty',
     'pricing.payment': 'Flexible payment plans available',
-    
+
     // Contact (legacy - use contact.page.* instead)
     'contact.title': 'Get in Touch',
     'contact.subtitle': 'Have questions? We\'d love to hear from you.',
-    
+
     // About Page Extended
     'about.mission.title': 'Our Mission',
     'about.mission.desc': 'We transform living spaces into dream homes with meticulous attention to detail and unwavering commitment to quality.',
@@ -815,7 +815,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.values.quality': 'Quality & Expertise',
     'about.values.respect': 'Respect & Professionalism',
     'about.values.innovation': 'Innovation & Continuous Improvement',
-    
+
     // Services Page Extended
     'services.full.details': 'From initial design consultation to final handover, we manage every aspect of your renovation project.',
     'services.full.process': 'Our process includes site assessment, design planning, material selection, and professional execution.',
@@ -823,7 +823,7 @@ const translations: Record<Language, Record<string, string>> = {
     'services.kitchen.features': 'Custom cabinetry, appliance integration, modern layouts',
     'services.coatings.title': 'Specialized Coatings & Finishes',
     'services.coatings.desc': 'Premium finishes that protect and beautify your surfaces',
-    
+
     // Portfolio/Projects (legacy - use portfolio.page.* instead)
     'portfolio.title': 'Our Completed Projects',
     'portfolio.filter.residential': 'Residential',
@@ -835,7 +835,7 @@ const translations: Record<Language, Record<string, string>> = {
     'portfolio.budget': 'Project Budget',
     'portfolio.scope': 'Project Scope',
     'portfolio.testimonial': 'Client Testimonial',
-    
+
     // Blog & Articles
     'blog.featured': 'Featured Articles',
     'blog.latestUpdates': 'Latest Tips & Updates',
@@ -850,7 +850,7 @@ const translations: Record<Language, Record<string, string>> = {
     'blog.tags': 'Tags',
     'blog.relatedArticles': 'Related Articles',
     'blog.noArticles': 'No articles found',
-    
+
     // Interior Design
     'interior.title': 'Interior Design Services',
     'interior.subtitle': 'Expert design consultation to bring your vision to life',
@@ -861,7 +861,7 @@ const translations: Record<Language, Record<string, string>> = {
     'interior.budget': 'Budget-Friendly Options Available',
     'interior.gallery': 'Design Gallery',
     'interior.viewDesign': 'View Full Design',
-    
+
     // Innovative Coatings
     'coatings.microcement.full': 'Microcement - Modern Industrial Aesthetic',
     'coatings.terrazzo.full': 'Terrazzo - Classic Elegance',
@@ -874,7 +874,7 @@ const translations: Record<Language, Record<string, string>> = {
     'coatings.aesthetic': 'Modern aesthetic appeal',
     'coatings.seamless': 'Seamless installation',
     'coatings.warranty': 'Extended warranty coverage',
-    
+
     // Common Actions
     'action.viewMore': 'View More',
     'action.learnMore': 'Learn More',
@@ -890,7 +890,7 @@ const translations: Record<Language, Record<string, string>> = {
     'action.back': 'Back',
     'action.next': 'Next',
     'action.previous': 'Previous',
-    
+
     // Messages & Responses
     'message.success': 'Success!',
     'message.error': 'Error',
@@ -899,11 +899,11 @@ const translations: Record<Language, Record<string, string>> = {
     'message.noResults': 'No results found',
     'message.comingSoon': 'Coming Soon',
     'message.underConstruction': 'This page is under construction',
-    
+
     // Meta & SEO
     'meta.description': 'Professional renovation and remodeling services in Sofia, Bulgaria. Complete home renovations with guaranteed quality and fixed budgets.',
     'meta.keywords': 'renovation, remodeling, interior design, Sofia, Bulgaria, microcement, terrazzo, bathroom, kitchen',
-    
+
     // FAQ
     'faq.title': 'Frequently Asked Questions',
     'faq.q1': 'How long does a typical renovation project take?',
