@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Calculator, FolderOpen, CheckCircle2, Award, Shield, Sparkles } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Calculator, FolderOpen, CheckCircle2, Award, Shield, Sparkles, ChevronDown } from "lucide-react";
 import heroPoster from "@/assets/images/hero-poster.jpg";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const Hero = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -16,14 +18,27 @@ const Hero = () => {
     
     const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
     mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
+    
+    // Trigger animations after mount
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    
+    return () => {
+      mediaQuery.removeEventListener("change", handler);
+      clearTimeout(timer);
+    };
   }, []);
 
+  const stats = [
+    { icon: CheckCircle2, value: "127", labelKey: 'hero.stats.projects' },
+    { icon: Award, value: "94%", labelKey: 'hero.stats.recommend' },
+    { icon: Shield, value: "5", labelKey: 'hero.stats.warranty' },
+  ];
+
   return (
-    <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden">
-      {/* Background with video and dark overlay */}
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Animated Background Layers */}
       <div className="absolute inset-0 z-0">
-        {/* LCP Poster image - Critical for above-the-fold, explicit dimensions for CLS */}
+        {/* LCP Poster image */}
         <img
           src={heroPoster}
           alt="Renovivo - professional renovations in Sofia"
@@ -32,12 +47,13 @@ const Hero = () => {
           fetchPriority="high"
           decoding="sync"
           loading="eager"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-            videoLoaded && !prefersReducedMotion ? "opacity-0" : "opacity-40"
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${
+            videoLoaded && !prefersReducedMotion ? "opacity-0 scale-105" : "opacity-50"
           }`}
           style={{ aspectRatio: '16/9' }}
         />
-        {/* Video - only render if user doesn't prefer reduced motion */}
+        
+        {/* Video with enhanced reveal */}
         {!prefersReducedMotion && (
           <video
             autoPlay
@@ -50,8 +66,8 @@ const Hero = () => {
             poster={heroPoster}
             onCanPlay={() => setVideoLoaded(true)}
             aria-label="Luxury penthouse interior transformation video"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-              videoLoaded ? "opacity-40" : "opacity-0"
+            className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ${
+              videoLoaded ? "opacity-50 scale-100" : "opacity-0 scale-110"
             }`}
             style={{ aspectRatio: '16/9' }}
           >
@@ -59,111 +75,185 @@ const Hero = () => {
             <track kind="captions" src="" label="No subtitles" default />
           </video>
         )}
-        {/* Premium dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-foreground/70 via-foreground/50 to-foreground/80" />
-        {/* Subtle vignette effect */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
+        
+        {/* Premium Multi-layer Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-foreground/80 via-foreground/40 to-foreground/90" />
+        
+        {/* Radial spotlight effect */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_40%,transparent_20%,rgba(0,0,0,0.6)_100%)]" />
+        
+        {/* Animated gradient orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] animate-pulse" />
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-primary/15 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '1s' }} />
+        
+        {/* Subtle grid pattern overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]" 
+          style={{ 
+            backgroundImage: `linear-gradient(hsl(var(--primary) / 0.3) 1px, transparent 1px),
+                              linear-gradient(90deg, hsl(var(--primary) / 0.3) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px'
+          }} 
+        />
       </div>
 
-      {/* Centered Content */}
+      {/* Floating particles effect */}
+      <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-primary/40 rounded-full animate-float"
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${4 + i}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main Content */}
       <div className="container-custom relative z-10 py-20 text-center">
-        <div className="max-w-5xl mx-auto animate-fade-in-up">
-          {/* Premium Badge */}
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/30 to-primary/10 backdrop-blur-md px-5 py-2.5 rounded-full mb-8 border border-primary/40 shadow-lg shadow-primary/10">
-            <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-            <span className="text-primary text-sm font-semibold tracking-wider uppercase">
+        <div className="max-w-6xl mx-auto">
+          {/* Premium Badge with Shine Effect */}
+          <div 
+            className={`inline-flex items-center gap-2.5 bg-gradient-to-r from-primary/20 via-primary/30 to-primary/20 backdrop-blur-xl px-6 py-3 rounded-full mb-10 border border-primary/40 shadow-2xl shadow-primary/20 relative overflow-hidden transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            {/* Shine effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/30 to-transparent -translate-x-full animate-shimmer" />
+            <Sparkles className="w-5 h-5 text-primary animate-pulse" />
+            <span className="text-primary text-sm font-bold tracking-widest uppercase relative z-10">
               {t('hero.badge')}
             </span>
           </div>
 
-          {/* Premium Headline with elegant typography */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold uppercase tracking-tight leading-[1.05] mb-6 sm:mb-8">
-            <span className="text-primary drop-shadow-[0_0_30px_rgba(212,175,55,0.3)] block">
-              {t('hero.title1')}
+          {/* Epic Headline with Staggered Animation */}
+          <h1 className="mb-8 sm:mb-10">
+            <span 
+              className={`block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black uppercase tracking-tighter leading-[0.9] transition-all duration-1000 delay-200 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
+            >
+              <span className="text-primary drop-shadow-[0_0_60px_rgba(212,175,55,0.5)] relative">
+                {t('hero.title1')}
+                {/* Glowing underline */}
+                <span className="absolute -bottom-2 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full" />
+              </span>
             </span>
-            <span className="text-background drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)] block mt-2 sm:mt-4">
-              {t('hero.title2')}
+            <span 
+              className={`block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black uppercase tracking-tighter leading-[0.9] mt-4 transition-all duration-1000 delay-400 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
+            >
+              <span className="text-background drop-shadow-[0_6px_20px_rgba(0,0,0,0.8)] bg-clip-text">
+                {t('hero.title2')}
+              </span>
             </span>
           </h1>
 
-          {/* Elegant subheading with separator */}
-          <div className="flex items-center justify-center gap-4 mb-8 sm:mb-10">
-            <div className="h-px w-12 sm:w-20 bg-gradient-to-r from-transparent to-primary/60" />
-            <p className="text-base sm:text-lg md:text-xl text-background/90 font-medium tracking-wide">
+          {/* Elegant Subtitle with Decorative Lines */}
+          <div 
+            className={`flex items-center justify-center gap-6 mb-12 transition-all duration-1000 delay-600 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <div className="hidden sm:block h-[2px] w-24 bg-gradient-to-r from-transparent via-primary/60 to-primary" />
+            <p className="text-lg sm:text-xl md:text-2xl text-background/90 font-medium tracking-wide max-w-lg">
               {t('hero.subtitle')}
             </p>
-            <div className="h-px w-12 sm:w-20 bg-gradient-to-l from-transparent to-primary/60" />
+            <div className="hidden sm:block h-[2px] w-24 bg-gradient-to-l from-transparent via-primary/60 to-primary" />
           </div>
 
-          {/* CTA Section */}
-          <div className="flex flex-col items-center justify-center gap-4 sm:gap-5 mb-12 sm:mb-16 px-2">
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-              <Link to="/pricing" className="w-full sm:w-auto">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="group w-full border-2 border-primary/50 bg-foreground/30 text-background hover:bg-primary hover:text-primary-foreground hover:border-primary font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 h-auto rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-xl"
-                >
-                  <Calculator className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 group-hover:rotate-12 transition-transform" />
-                  {t('hero.cta.pricing')}
-                </Button>
-              </Link>
-              <Link to="/portfolio" className="w-full sm:w-auto">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="group w-full border-2 border-background/40 bg-foreground/20 text-background hover:bg-background hover:text-foreground hover:border-background font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 h-auto rounded-xl backdrop-blur-lg transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 active:scale-95 shadow-xl"
-                >
-                  <FolderOpen className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 group-hover:scale-110 transition-transform" />
-                  {t('hero.cta.portfolio')}
-                </Button>
-              </Link>
-            </div>
+          {/* CTA Buttons with Premium Styling */}
+          <div 
+            className={`flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 mb-16 transition-all duration-1000 delay-700 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <Link to="/pricing" className="w-full sm:w-auto group">
+              <Button
+                size="lg"
+                className="relative w-full overflow-hidden bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 h-auto rounded-2xl shadow-2xl shadow-primary/30 transition-all duration-500 hover:shadow-primary/50 hover:scale-105 hover:-translate-y-1"
+              >
+                {/* Button shine effect */}
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-primary-foreground/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <Calculator className="h-5 w-5 sm:h-6 sm:w-6 mr-3 group-hover:rotate-12 transition-transform relative z-10" />
+                <span className="relative z-10">{t('hero.cta.pricing')}</span>
+              </Button>
+            </Link>
+            
+            <Link to="/portfolio" className="w-full sm:w-auto group">
+              <Button
+                size="lg"
+                variant="outline"
+                className="relative w-full overflow-hidden border-2 border-background/50 bg-background/10 text-background hover:bg-background hover:text-foreground font-bold text-base sm:text-lg px-8 sm:px-10 py-6 sm:py-7 h-auto rounded-2xl backdrop-blur-xl shadow-2xl transition-all duration-500 hover:scale-105 hover:-translate-y-1 hover:border-background"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-background/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                <FolderOpen className="h-5 w-5 sm:h-6 sm:w-6 mr-3 group-hover:scale-110 transition-transform relative z-10" />
+                <span className="relative z-10">{t('hero.cta.portfolio')}</span>
+              </Button>
+            </Link>
           </div>
 
-          {/* Premium Trust Badges */}
-          <div className="grid grid-cols-3 gap-4 sm:gap-8 px-2 sm:px-4 py-6 sm:py-8 bg-gradient-to-r from-background/5 via-background/10 to-background/5 rounded-2xl backdrop-blur-md border border-background/20 shadow-2xl">
-            {/* Badge 1 */}
-            <div className="flex flex-col items-center group">
-              <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
-                <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:scale-110 transition-transform" />
-                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">127</span>
+          {/* Premium Stats Cards */}
+          <div 
+            className={`grid grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto transition-all duration-1000 delay-[800ms] ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+          >
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="group relative p-5 sm:p-8 rounded-2xl bg-gradient-to-br from-background/10 via-background/5 to-transparent backdrop-blur-xl border border-background/20 hover:border-primary/50 transition-all duration-500 hover:scale-105 overflow-hidden"
+              >
+                {/* Card shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <stat.icon className="h-5 w-5 sm:h-7 sm:w-7 text-primary group-hover:scale-110 transition-transform" />
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-black text-primary tabular-nums">
+                      {stat.value}
+                    </span>
+                  </div>
+                  <p className="text-background/70 group-hover:text-background/90 text-xs sm:text-sm font-medium tracking-wide transition-colors">
+                    {t(stat.labelKey)}
+                  </p>
+                </div>
               </div>
-              <p className="text-background/80 text-xs sm:text-sm font-medium">{t('hero.stats.projects')}</p>
-            </div>
-
-            {/* Badge 2 */}
-            <div className="flex flex-col items-center group">
-              <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
-                <Award className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:scale-110 transition-transform" />
-                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">94%</span>
-              </div>
-              <p className="text-background/80 text-xs sm:text-sm font-medium">{t('hero.stats.recommend')}</p>
-            </div>
-
-            {/* Badge 3 */}
-            <div className="flex flex-col items-center group">
-              <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
-                <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:scale-110 transition-transform" />
-                <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">5</span>
-              </div>
-              <p className="text-background/80 text-xs sm:text-sm font-medium">{t('hero.stats.warranty')}</p>
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Premium bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background via-background/50 to-transparent z-10 pointer-events-none" />
+      {/* Bottom Gradient Fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/70 to-transparent z-10 pointer-events-none" />
       
-      {/* Elegant Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex flex-col items-center gap-2 opacity-70 hover:opacity-100 transition-opacity cursor-pointer group">
-          <span className="text-primary text-xs font-medium tracking-widest uppercase">{t('hero.scroll')}</span>
-          <div className="w-6 h-10 rounded-full border-2 border-primary/50 flex justify-center pt-2">
-            <div className="w-1.5 h-3 bg-primary rounded-full animate-bounce" />
+      {/* Animated Scroll Indicator */}
+      <div 
+        className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 transition-all duration-1000 delay-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+        }`}
+      >
+        <button 
+          onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
+          className="flex flex-col items-center gap-3 group cursor-pointer"
+          aria-label={t('hero.scroll')}
+        >
+          <span className="text-primary text-xs font-semibold tracking-[0.2em] uppercase opacity-70 group-hover:opacity-100 transition-opacity">
+            {t('hero.scroll')}
+          </span>
+          <div className="relative w-7 h-12 rounded-full border-2 border-primary/40 group-hover:border-primary/70 transition-colors flex justify-center overflow-hidden">
+            <div className="w-1.5 h-3 bg-primary rounded-full mt-2 animate-bounce" />
           </div>
-        </div>
+          <ChevronDown className="h-5 w-5 text-primary/60 group-hover:text-primary animate-bounce transition-colors" style={{ animationDelay: '0.2s' }} />
+        </button>
       </div>
     </section>
   );
