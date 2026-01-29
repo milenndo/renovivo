@@ -4,95 +4,89 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Renovivo Design System - Inspired by premium renovation brands */
+/* Renovivo Design System - Silent Luxury */
 
 @layer base {
   :root {
-    /* Primary - Golden Yellow from logo (#F5B335) */
- --primary: 42 87% 53%;    --primary-foreground: 0 0% 100%;
+    /* Primary - Vibrant Gold (#F5BE32) */
+    --primary: 43 91% 58%;
+    --primary-foreground: 240 2% 10%; /* Dark text on gold */
 
-    /* Background & Foreground */
-    --background: 0 0% 100%;
-    --foreground: 210 11% 25%;
+    /* Secondary - Muted Gold (#D4AF37) */
+    --secondary: 46 65% 52%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Card */
-    --card: 0 0% 100%;
-    --card-foreground: 210 11% 25%;
+    /* Backgrounds - Warm Linen (#F9F8F6) & Soft Stone (#F2F0ED) */
+    --background: 40 14% 97%;
+    --card: 36 14% 94%; /* Soft Stone for cards */
+    --card-foreground: 240 2% 10%;
+    
+    --popover: 40 14% 97%;
+    --popover-foreground: 240 2% 10%;
 
-    /* Popover */
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 11% 25%;
-
-    /* Secondary - Light gray */
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 210 11% 25%;
+    /* Foreground - Deep Charcoal (#1A1A1B) */
+    --foreground: 240 2% 10%;
 
     /* Muted */
-    --muted: 210 20% 96%;
-    --muted-foreground: 210 11% 45%;
+    --muted: 36 14% 94%;
+    --muted-foreground: 240 2% 40%;
 
-    /* Accent - Warm orange for hover states */
-    --accent: 35 100% 50%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent - Gold Glow */
+    --accent: 43 91% 58%;
+    --accent-foreground: 240 2% 10%;
 
     /* Destructive */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Border & Input */
-    --border: 210 20% 90%;
-    --input: 210 20% 90%;
- --ring: 42 87% 53%;
+    /* Border - Muted structure */
+    --border: 46 20% 80%; /* Softer gold/gray for borders */
+    --input: 46 20% 80%;
+    --ring: 43 91% 58%;
     --radius: 0.5rem;
 
     /* Sidebar */
-    --sidebar-background: 210 11% 15%;
-    --sidebar-foreground: 0 0% 98%;
- --sidebar-primary: 42 87% 53%;    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 11% 20%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 210 11% 25%;
- --sidebar-ring: 42 87% 53%;
-    /* Custom colors for Renovivo */
- --gold-dark: 42 87% 43%;    --charcoal: 210 11% 25%;
-    --charcoal-light: 210 11% 45%;
-    --warm-gray: 30 10% 96%;
+    --sidebar-background: 240 2% 10%;
+    --sidebar-foreground: 40 14% 97%;
+    --sidebar-primary: 43 91% 58%;
+    --sidebar-primary-foreground: 240 2% 10%;
+    --sidebar-accent: 240 2% 15%;
+    --sidebar-accent-foreground: 40 14% 97%;
+    --sidebar-border: 240 2% 20%;
+    --sidebar-ring: 43 91% 58%;
   }
 
   .dark {
-    --background: 210 11% 10%;
-    --foreground: 0 0% 98%;
+    /* Dark mode overrides if needed - sticking to "Silent Luxury" usually implies light/warm, 
+       but here is a dark variant foundation */
+    --background: 240 2% 10%;
+    --foreground: 40 14% 97%;
 
-    --card: 210 11% 15%;
-    --card-foreground: 0 0% 98%;
+    --card: 240 2% 12%;
+    --card-foreground: 40 14% 97%;
 
-    --popover: 210 11% 15%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 240 2% 12%;
+    --popover-foreground: 40 14% 97%;
 
- --primary: 42 87% 53%;    --primary-foreground: 210 11% 10%;
+    --primary: 43 91% 58%;
+    --primary-foreground: 240 2% 10%;
 
-    --secondary: 210 11% 20%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 46 65% 52%;
+    --secondary-foreground: 240 2% 10%;
 
-    --muted: 210 11% 20%;
-    --muted-foreground: 210 11% 60%;
+    --muted: 240 2% 15%;
+    --muted-foreground: 240 2% 60%;
 
-    --accent: 35 100% 50%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 43 91% 58%;
+    --accent-foreground: 240 2% 10%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 11% 25%;
-    --input: 210 11% 25%;
- --ring: 42 87% 53%;
-    --sidebar-background: 210 11% 8%;
-    --sidebar-foreground: 0 0% 98%;
- --sidebar-primary: 42 87% 53%;    --sidebar-primary-foreground: 210 11% 10%;
-    --sidebar-accent: 210 11% 15%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 210 11% 20%;
- --sidebar-ring: 42 87% 53%;  }
+    --border: 240 2% 20%;
+    --input: 240 2% 20%;
+    --ring: 43 91% 58%;
+  }
 }
 
 @layer base {
@@ -102,142 +96,56 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Poppins', sans-serif;
+    font-feature-settings: "cv11", "ss01";
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif;
+  h1, h2, h3 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+@layer components {
+  /* Global UI Elements */
+  
+  .premium-card {
+    @apply bg-white/50 backdrop-blur-sm border border-gold-muted/20 
+           shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .luxury-button {
+    @apply relative overflow-hidden border border-gold text-foreground 
+           transition-all duration-300 hover:text-white;
+  }
+  
+  .luxury-button::after {
+    content: '';
+    @apply absolute inset-0 bg-gold origin-left scale-x-0 transition-transform duration-300 -z-10;
+  }
+  
+  .luxury-button:hover::after {
+    @apply scale-x-100;
+  }
+  
+  .hero-text-shadow {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
 }
 
 @layer utilities {
-  /* Smooth scroll */
-  html {
-    scroll-behavior: smooth;
+  .text-balance {
+    text-wrap: balance;
   }
-
-  /* Animation utilities */
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
+  
+  /* Animation Utilities */
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-500 { animation-delay: 500ms; }
+  .animate-delay-700 { animation-delay: 700ms; }
+  .animate-delay-1000 { animation-delay: 1000ms; }
+  
+  .glass-panel {
+    @apply bg-opacity-40 backdrop-blur-[12px] border border-gold-muted/20;
+    background-color: rgba(26, 26, 27, 0.4); /* Fallback/Specific override */
   }
-
-  .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
-  }
-
-  .animate-slide-in-left {
-    animation: slideInLeft 0.6s ease-out forwards;
-  }
-
-  .animate-slide-in-right {
-    animation: slideInRight 0.6s ease-out forwards;
-  }
-
-  /* Shimmer animation for buttons */
-  .animate-shimmer {
-    animation: shimmer 2.5s infinite;
-  }
-
-  /* Floating animation for particles */
-  .animate-float {
-    animation: float 4s ease-in-out infinite;
-  }
-
-  /* Hover scale effect */
-  .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105;
-  }
-
-  /* Text gradient */
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
-  }
-
-  /* Section padding */
-  .section-padding {
-    @apply py-16 md:py-24;
-  }
-
-  /* Container max width */
-  .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) translateX(0);
-    opacity: 0.4;
-  }
-  25% {
-    transform: translateY(-20px) translateX(10px);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translateY(-10px) translateX(-5px);
-    opacity: 0.6;
-  }
-  75% {
-    transform: translateY(-25px) translateX(5px);
-    opacity: 0.9;
-  }
-}
-
-/* Скриване на белия правоъгълник зад hero бутоните */
-.hero-cta-button::before,
-.hero-cta-button::after {
-  content: none !important;
-  border: 0 !important;
-  box-shadow: none !important;
 }
