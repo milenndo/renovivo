@@ -116,41 +116,7 @@
     scroll-behavior: smooth;
   }
 
-  /* ============================================
-     PREMIUM ANIMATION UTILITIES
-     Interior Design Gorgeous Aesthetic
-     ============================================ */
-
-  /* Elegant Fade - slower, more refined */
-  .animate-elegant-fade {
-    animation: elegantFade 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* Slide Reveal - from sides */
-  .animate-slide-reveal-left {
-    animation: slideRevealLeft 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  .animate-slide-reveal-right {
-    animation: slideRevealRight 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  }
-
-  /* Golden Shimmer - premium button effect */
-  .animate-golden-shimmer {
-    animation: goldenShimmer 2.5s ease-in-out infinite;
-  }
-
-  /* Float Gentle - for decorative elements */
-  .animate-float-gentle {
-    animation: floatGentle 6s ease-in-out infinite;
-  }
-
-  /* Golden Glow Pulse */
-  .animate-golden-pulse {
-    animation: goldenPulse 3s ease-in-out infinite;
-  }
-
-  /* Basic animations (existing) */
+  /* Animation utilities */
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
   }
@@ -167,30 +133,19 @@
     animation: slideInRight 0.6s ease-out forwards;
   }
 
+  /* Shimmer animation for buttons */
   .animate-shimmer {
     animation: shimmer 2.5s infinite;
   }
 
+  /* Floating animation for particles */
   .animate-float {
     animation: float 4s ease-in-out infinite;
   }
 
-  /* ============================================
-     PREMIUM UI UTILITIES
-     ============================================ */
-
-  /* Hover scale with golden glow */
+  /* Hover scale effect */
   .hover-scale {
     @apply transition-transform duration-300 hover:scale-105;
-  }
-
-  .hover-golden-glow {
-    @apply transition-all duration-500;
-  }
-
-  .hover-golden-glow:hover {
-    box-shadow: 0 0 40px hsl(var(--primary) / 0.3),
-                0 0 80px hsl(var(--primary) / 0.15);
   }
 
   /* Text gradient */
@@ -198,170 +153,14 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
   }
 
-  .text-gradient-gold {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--gold-dark)) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Premium Card Styles */
-  .card-premium {
-    @apply relative overflow-hidden rounded-2xl backdrop-blur-xl;
-    @apply border border-border/20 bg-card/80;
-    @apply transition-all duration-500;
-  }
-
-  .card-premium:hover {
-    @apply border-primary/30 scale-[1.02];
-    box-shadow: 0 25px 50px -12px hsl(var(--primary) / 0.15),
-                0 0 0 1px hsl(var(--primary) / 0.1);
-  }
-
-  .card-premium::before {
-    content: '';
-    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, transparent 50%);
-  }
-
-  .card-premium:hover::before {
-    @apply opacity-100;
-  }
-
-  /* Golden Border Accent */
-  .golden-border {
-    @apply border border-primary/20;
-    box-shadow: inset 0 0 0 1px hsl(var(--primary) / 0.1);
-  }
-
-  .golden-border:hover {
-    @apply border-primary/40;
-    box-shadow: inset 0 0 0 1px hsl(var(--primary) / 0.2),
-                0 0 30px hsl(var(--primary) / 0.1);
-  }
-
   /* Section padding */
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-16 md:py-24;
   }
 
   /* Container max width */
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  /* Typography - Editorial Style */
-  .heading-display {
-    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl;
-    @apply font-black tracking-tight leading-[0.95];
-  }
-
-  .heading-section {
-    @apply text-3xl sm:text-4xl md:text-5xl;
-    @apply font-bold tracking-tight leading-tight;
-  }
-
-  .text-elegant {
-    @apply text-lg md:text-xl leading-relaxed text-muted-foreground;
-  }
-
-  /* Decorative Line */
-  .line-golden {
-    @apply h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent;
-  }
-
-  /* Link with animated underline */
-  .link-underline {
-    @apply relative inline-block;
-  }
-
-  .link-underline::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-full h-0.5;
-    @apply bg-primary scale-x-0 origin-right;
-    @apply transition-transform duration-300;
-  }
-
-  .link-underline:hover::after {
-    @apply scale-x-100 origin-left;
-  }
-}
-
-/* ============================================
-   KEYFRAME ANIMATIONS
-   ============================================ */
-
-@keyframes elegantFade {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideRevealLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-    clip-path: inset(0 100% 0 0);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes slideRevealRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-    clip-path: inset(0 0 0 100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-@keyframes goldenShimmer {
-  0%, 100% {
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.3),
-                0 0 40px hsl(var(--primary) / 0.1);
-  }
-  50% {
-    box-shadow: 0 0 40px hsl(var(--primary) / 0.5),
-                0 0 80px hsl(var(--primary) / 0.2);
-  }
-}
-
-@keyframes floatGentle {
-  0%, 100% {
-    transform: translateY(0) translateX(0);
-  }
-  25% {
-    transform: translateY(-15px) translateX(8px);
-  }
-  50% {
-    transform: translateY(-8px) translateX(-5px);
-  }
-  75% {
-    transform: translateY(-20px) translateX(5px);
-  }
-}
-
-@keyframes goldenPulse {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
   }
 }
 
@@ -435,7 +234,7 @@
   }
 }
 
-/* Hero button overrides */
+/* Скриване на белия правоъгълник зад hero бутоните */
 .hero-cta-button::before,
 .hero-cta-button::after {
   content: none !important;
