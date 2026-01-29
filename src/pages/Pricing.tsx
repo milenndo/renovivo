@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "lucide-react";
@@ -94,7 +95,7 @@ const Pricing = () => {
               </Link>
 
               <Link to="/pricing/premium" className="group">
-                <div className="bg-background rounded-lg shadow-lg p-8 h-full hover:shadow-xl transition-all hover:-translate-y-1 border-2 border-transparent hover:border-amber-300">
+                <div className="bg-background rounded-lg shadow-lg p-8 h-full hover:shadow-xl transition-all hover:-translate-y-1 border-2 border-transparent hover:border-primary/40">
                   <h3 className="text-2xl font-bold mb-2">{t('pricing.package.premium')}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{t('pricing.package.premium.desc')}</p>
                   <div className="text-2xl font-bold text-primary mb-6">332–460+ €/m²<br /><span className="text-lg text-muted-foreground">(650–900+ {language === 'bg' ? 'лв.' : 'BGN'}/m²)</span></div>
