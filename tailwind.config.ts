@@ -70,8 +70,8 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        serif: ["Cormorant Garamond", "serif"],
-        sans: ["Inter", "Montserrat", "sans-serif"],
+        serif: ["Tenor Sans", "serif"],
+        sans: ["Plus Jakarta Sans", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
