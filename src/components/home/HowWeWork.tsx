@@ -52,7 +52,7 @@ const HowWeWork = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="relative pt-20 pb-12 md:pt-28 md:pb-20 bg-muted/30 overflow-hidden">
+    <section ref={sectionRef} className="relative pt-20 pb-12 md:pt-28 md:pb-16 bg-muted/30 overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 opacity-[0.02]"
         style={{
