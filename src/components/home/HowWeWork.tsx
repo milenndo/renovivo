@@ -52,9 +52,9 @@ const HowWeWork = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="relative pt-20 pb-12 md:pt-28 md:pb-16 bg-muted/30 overflow-hidden">
+    <section ref={sectionRef} className="relative py-20 md:py-28 bg-muted/30 overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute inset-0 opacity-[0.02]"
+      <div className="absolute inset-0 opacity-[0.02]" 
         style={{
           backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px),
                             linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)`,
@@ -63,12 +63,13 @@ const HowWeWork = () => {
       />
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -translate-y-1/2" />
       <div className="absolute top-1/2 right-0 w-80 h-80 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2" />
-
+      
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div
-          className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
+        <div 
+          className={`text-center mb-16 transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
         >
           <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
             <Hammer className="w-4 h-4 text-primary" />
@@ -85,39 +86,42 @@ const HowWeWork = () => {
         {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
           {steps.map((step, index) => (
-            <div
-              key={index}
-              className={`relative group transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}
+            <div 
+              key={index} 
+              className={`relative group transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               {/* Connector line for desktop */}
               {index < steps.length - 1 && (
                 <div className="hidden lg:flex absolute top-14 left-[55%] w-[90%] items-center">
-                  <div
-                    className={`h-0.5 bg-gradient-to-r from-primary/50 to-border flex-grow transition-all duration-1000 ${isVisible ? 'scale-x-100' : 'scale-x-0'
-                      }`}
-                    style={{
+                  <div 
+                    className={`h-0.5 bg-gradient-to-r from-primary/50 to-border flex-grow transition-all duration-1000 ${
+                      isVisible ? 'scale-x-100' : 'scale-x-0'
+                    }`}
+                    style={{ 
                       transformOrigin: 'left',
                       transitionDelay: `${(index + 1) * 200}ms`
                     }}
                   />
-                  <ArrowRight
-                    className={`h-4 w-4 text-primary/50 flex-shrink-0 transition-all duration-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-                      }`}
+                  <ArrowRight 
+                    className={`h-4 w-4 text-primary/50 flex-shrink-0 transition-all duration-500 ${
+                      isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+                    }`}
                     style={{ transitionDelay: `${(index + 1) * 200 + 300}ms` }}
                   />
                 </div>
               )}
-
+              
               {/* Card */}
               <div className="relative bg-card rounded-2xl p-6 shadow-lg border border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 overflow-hidden h-full">
                 {/* Shine effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-
+                
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
+                
                 <div className="relative z-10">
                   {/* Number & Icon Row */}
                   <div className="flex items-center justify-between mb-5">
@@ -132,7 +136,7 @@ const HowWeWork = () => {
                       {step.number}
                     </span>
                   </div>
-
+                  
                   <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                     {t(step.titleKey)}
                   </h3>

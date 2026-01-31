@@ -113,20 +113,21 @@ export default function Testimonials() {
   };
 
   return (
-    <section ref={sectionRef} className="relative pt-10 pb-20 md:pt-16 md:pb-28 bg-secondary/30 overflow-hidden text-balance">
+    <section ref={sectionRef} className="relative py-20 md:py-28 bg-secondary/30 overflow-hidden">
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(reviewSchema)}</script>
       </Helmet>
-
+      
       {/* Background decorations */}
       <div className="absolute top-1/4 left-0 w-80 h-80 bg-primary/5 rounded-full blur-[100px]" />
       <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[120px]" />
-
+      
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div
-          className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
+        <div 
+          className={`text-center mb-16 transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
         >
           <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-6">
             <MessageCircle className="w-4 h-4 text-primary" />
@@ -136,7 +137,7 @@ export default function Testimonials() {
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Стотици доволни клиенти ни се довериха за своите проекти. Ето какво споделят за работата с нас.
           </p>
-
+          
           {/* Aggregate Rating Display */}
           <div className="flex items-center justify-center gap-3 mt-6 p-4 bg-card rounded-2xl shadow-lg inline-flex border border-border/50">
             <div className="flex gap-1">
@@ -152,31 +153,32 @@ export default function Testimonials() {
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
-            <Card
-              key={testimonial.id}
-              className={`group relative border-0 shadow-lg hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 overflow-hidden ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}
+            <Card 
+              key={testimonial.id} 
+              className={`group relative border-0 shadow-lg hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 overflow-hidden ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               {/* Shine effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-
+              
               {/* Gradient accent on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
+              
               <CardContent className="relative z-10 p-6">
                 <Quote className="h-10 w-10 text-primary/20 mb-4 group-hover:text-primary/40 transition-colors" />
-
+                
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-primary text-primary" />
                   ))}
                 </div>
-
+                
                 <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-4 group-hover:line-clamp-none transition-all">
                   "{testimonial.text}"
                 </p>
-
+                
                 <div className="border-t border-border/50 pt-4 flex items-center gap-4">
                   {/* Avatar placeholder */}
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center flex-shrink-0">
