@@ -1,3 +1,4 @@
+import Metra from "@/components/home/Metra";
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/layout/Layout";
 import Hero from "@/components/home/Hero";
@@ -152,6 +153,7 @@ const Index = () => {
         <Services />
         <About />
         <Projects />
+        <Metra />
         <WhyUs />
         <HowWeWork />
         <BlogPreview />
